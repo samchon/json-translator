@@ -1,0 +1,18 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "outDir": "../bin",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@samchon/translate-json": ["../src/index.ts"],
+      "@samchon/translate-json/lib/*": ["../src/*"],
+    },
+    "plugins": [
+      { "transform": "typescript-transform-paths" },
+    ]
+  },
+  "include": ["../src", "../test"]
+}
