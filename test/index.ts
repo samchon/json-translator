@@ -1,5 +1,5 @@
 import { DynamicExecutor } from "@nestia/e2e";
-import { JsonTranslator } from "@samchon/translate-json";
+import { JsonTranslator } from "@samchon/json-translator";
 import chalk from "chalk";
 import dotenv from "dotenv";
 import dotenvExpand from "dotenv-expand";
