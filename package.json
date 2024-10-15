@@ -1,6 +1,6 @@
 {
   "name": "@samchon/json-translator",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -36,6 +36,7 @@
     "dotenv": "^16.4.5",
     "dotenv-expand": "^11.0.6",
     "prettier": "^3.3.3",
+    "rimraf": "^6.0.1",
     "source-map-support": "^0.5.21",
     "ts-node": "^10.9.2",
     "ts-patch": "^3.2.1",
