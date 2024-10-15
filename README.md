@@ -4,44 +4,57 @@
 [![Downloads](https://img.shields.io/npm/dm/@samchon/json-translator.svg)](https://www.npmjs.com/package/@samchon/json-translator)
 [![Build Status](https://github.com/samchon/json-translator/workflows/build/badge.svg)](https://github.com/samchon/json-translator/actions?query=workflow%3Abuild)
 
+```bash
+npm install @samchon/json-translate 
+```
+
 Translate JSON file via Google Translate API.
 
-`@samchon/json-translate` is a wrapper library that translates JSON files using the Google Translate API. It provides a more convenient way to translate JSON data, including optimization strategies recuding the cost and elapsed time of the translation by minimizing the number of the API calls.
+`@samchon/json-translate` is a wrapper library that translates JSON files through the Google Translate API. 
 
-Here is an example code translating `swagger.json` file.
+`@samchon/json-translate` provides a more convenient way to translate JSON data, including optimization strategies reducing the cost and diminishing elapsed time of the translation just by minimizing the number of the Google Translate API calls.
+
+
+
+
+## How to use
+Just import `JsonTranslator` class and construct with credential information.
+
+After that, call the `JsonTranslator.translate()` function with JSON `input` value and `target` language.
+
+If you want to filter some specific values to translate, compose the `filter` function.
+
+Here is an example code utilizing the `JsonTranslator` class to translate OpenAPI document.
 
 ```typescript
 import { OpenApi } from "@samchon/openapi";
 import { JsonTranslator } from "@samchon/json-translator";
 
-const fetchOpenApiDocument = async (): Promise<OpenApi.IDocument> => {
-  const response: Response = await fetch(
-    "https://raw.githubusercontent.com/samchon/shopping-backend/refs/heads/master/packages/api/swagger.json",
-  );
-  return response.json();
-}
-
 const main = async (): Promise<void> => {
   const translator: JsonTranslator = new JsonTranslator({
-    credentials: { ... },
+    credentials: {... },
   });
-  const input: OpenApi.IDocument = await fetchOpenApiDocument();
+  const input: OpenApi.IDocument = { ... };
   const output: OpenApi.IDocument = await translator.translate({
     input, // JSON input data to translate
     target: "ko", // target language to translate
     // source: "en", // current language, but not essential
     filter: (explore) =>
-      explore.key === "title" ||
-      explore.key === "description" ||
-      explore.key === "summary" ||
-      explore.key === "x-wrtn-placeholder",
+      explore.object !== null &&
+      explore.index === null &&
+      (
+        explore.key === "title" ||
+        explore.key === "description" ||
+        explore.key === "summary" ||
+        explore.key === "x-wrtn-placeholder"
+      )
   });
   console.log(output);
 };
 main().catch(console.error);
 ```
 
-Also, you can see some example cases:
+Also, below is the list of example result files of such translation.
 
 English (source) | Korean | Japanese | Arabic
 --------|--------|----------|--------
