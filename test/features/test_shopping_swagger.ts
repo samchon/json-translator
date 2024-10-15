@@ -5,7 +5,7 @@ import typia from "typia";
 
 import input from "../../assets/input/shopping.swagger.json";
 
-export const test_connector_swagger = async (
+export const test_shopping_swagger = async (
   translator: JsonTranslator,
 ): Promise<void> => {
   typia.assertGuard<OpenApi.IDocument>(input);

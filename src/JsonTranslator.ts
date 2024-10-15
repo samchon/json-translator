@@ -1,5 +1,7 @@
 import { Translate } from "@google-cloud/translate/build/src/v2";
 
+import { JsonTranslateExecutor } from "./internal/JsonTranslateExecutor";
+
 /**
  * JSON Translator.
  *
@@ -23,14 +25,29 @@ export class JsonTranslator {
   /**
    * Translate JSON data.
    *
+   * `JsonTranslate.translate()` translates JSON input data into another language.
+   *
+   * If you want to filter some specific values to translate, fill the
+   * {@link JsonTranslator.IProps.filter} function.
+   *
+   * Also, if you do not fill the {@link JsonTranslator.IProps.source} value,
+   * the source language would be detected through the {@link JsonTranslator.detect}
+   * method with the longest text. Otherwise you assign the `null` value to the
+   * {@link JsonTranslator.IProps.source}, the translation would be executed without
+   * the source language.
+   *
+   * @template T The type of the JSON input data.
    * @param props Properties for the translation.
    * @returns The translated JSON data.
    */
   public async translate<T>(props: JsonTranslator.IProps<T>): Promise<T> {
-    const collection: ICollection = prepareCollection(props);
+    const collection: JsonTranslateExecutor.ICollection =
+      JsonTranslateExecutor.prepare(props);
     const translated: string[] = [];
     const from: string | undefined =
-      props.source ?? (await this.detect(collection.raw));
+      props.source === null
+        ? undefined
+        : (props.source ?? (await this.detect(collection.raw)));
 
     let queue: Array<IPiece> = [];
     let bytes: number = 0;
@@ -106,8 +123,16 @@ export namespace JsonTranslator {
 
     /**
      * Source language code.
+     *
+     * If not specified (`undefined`), the source language would be detected
+     * through the {@link JsonTranslator.detect} method with the longest text.
+     *
+     * Otherwise `null` value assigned, the source language would be skipped,
+     * so that the translation would be executed without the source language.
+     * Therefore, if your JSON value contains multiple languages, you should
+     * assign the `null` value to prevent the source language specification.
      */
-    source?: string;
+    source?: string | null | undefined;
 
     /**
      * Target language code.
@@ -144,6 +169,12 @@ export namespace JsonTranslator {
 
     /**
      * Accessor path to the {@link value}.
+     *
+     * It starts from the `["$input"]` array value, and each element
+     * would be the property key or the index number.
+     *
+     * For example, if there's an access expression `$input.a[0].b`,
+     * the accessor would be `["$input", "a", "0", "b"]`.
      */
     accessor: string[];
 
@@ -159,79 +190,3 @@ interface IPiece {
   length: number;
 }
 const SEPARATOR = " //|-0-|\\ ";
-
-interface ICollection {
-  output: any;
-  raw: string[];
-  setters: Array<Setter<string>>;
-}
-type Setter<T> = (input: T) => void;
-
-const prepareCollection = (props: JsonTranslator.IProps<any>): ICollection => {
-  const collection: ICollection = {
-    output: JSON.parse(JSON.stringify(props.input)),
-    raw: [],
-    setters: [],
-  };
-  visitCollectionData({
-    filter: props.filter,
-    collection,
-    setter: (x) => (collection.output = x),
-    value: collection.output,
-    explore: {
-      object: null,
-      key: null,
-      index: null,
-      accessor: ["$input"],
-    },
-  });
-  return collection;
-};
-
-const visitCollectionData = (next: {
-  filter: JsonTranslator.IProps<any>["filter"];
-  collection: ICollection;
-  setter: Setter<any>;
-  value: any;
-  explore: Omit<JsonTranslator.IExplore, "value">;
-}): void => {
-  if (typeof next.value === "string" && next.value.trim().length !== 0) {
-    if (
-      next.filter &&
-      !next.filter({
-        ...next.explore,
-        value: next.value,
-      })
-    )
-      return;
-    next.collection.raw.push(next.value);
-    next.collection.setters.push(next.setter);
-  } else if (Array.isArray(next.value))
-    next.value.forEach((elem, i) =>
-      visitCollectionData({
-        ...next,
-        explore: {
-          ...next.explore,
-          index: i,
-          accessor: [...next.explore.accessor, i.toString()],
-        },
-        setter: (x) => (next.value[i] = x),
-        value: elem,
-      }),
-    );
-  else if (typeof next.value === "object" && next.value !== null)
-    Object.entries(next.value).forEach(([key, elem]) =>
-      visitCollectionData({
-        ...next,
-        explore: {
-          ...next.explore,
-          object: next.value,
-          key,
-          index: null,
-          accessor: [...next.explore.accessor, key],
-        },
-        setter: (x) => (next.value[key] = x),
-        value: elem,
-      }),
-    );
-};

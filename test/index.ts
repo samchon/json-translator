@@ -15,6 +15,11 @@ const main = async (): Promise<void> => {
   });
 
   // DO TEST
+  const include: string[] | null = (() => {
+    const index: number = process.argv.indexOf("--include");
+    if (index === -1) return null;
+    return process.argv.slice(index + 1);
+  })();
   const report: DynamicExecutor.IReport = await DynamicExecutor.validate({
     prefix: "test_",
     location: __dirname + "/features",
@@ -29,6 +34,8 @@ const main = async (): Promise<void> => {
         trace(`${chalk.yellow(elapsed.toLocaleString())} ms`);
       } else trace(chalk.red(exec.error.name));
     },
+    filter: (name) =>
+      include === null ? true : include.some((str) => name.includes(str)),
   });
 
   // REPORT EXCEPTIONS
