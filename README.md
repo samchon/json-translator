@@ -37,8 +37,8 @@ const main = async (): Promise<void> => {
   const input: OpenApi.IDocument = { ... };
   const output: OpenApi.IDocument = await translator.translate({
     input, // JSON input data to translate
-    target: "ko", // target language to translate
-    // source: "en", // current language, but not essential
+    target: "ko", // target language code to translate
+    // source: "en", // current language code, but not essential
     filter: (explore) =>
       explore.object !== null &&
       explore.index === null &&
@@ -47,7 +47,10 @@ const main = async (): Promise<void> => {
         explore.key === "description" ||
         explore.key === "summary" ||
         explore.key === "x-wrtn-placeholder"
-      )
+      ),
+    // dictionary: {
+    //   "Primary Key": "식별자 ID",
+    // }, // pre-defined translation dictionary
   });
   console.log(output);
 };

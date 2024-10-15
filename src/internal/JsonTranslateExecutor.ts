@@ -7,7 +7,7 @@ export namespace JsonTranslateExecutor {
   export interface ICollection {
     output: any;
     raw: string[];
-    setters: Array<Setter<string>>;
+    setters: Setter<string>[];
   }
   export type Setter<T> = (input: T) => void;
 
@@ -16,12 +16,13 @@ export namespace JsonTranslateExecutor {
       value: JSON.parse(JSON.stringify(props.input)),
     };
     const raw: string[] = [];
-    const dict: Map<string, Setter<string>> = new Map();
+    const setters: Map<string, Setter<string>> = new Map();
     visit({
       filter: props.filter,
       raw,
-      dict,
-      setter: (x) => (ptr.value = x),
+      setters,
+      set: (x) => (ptr.value = x),
+      dictionary: props.dictionary ?? null,
       value: ptr.value,
       explore: {
         object: null,
@@ -33,15 +34,16 @@ export namespace JsonTranslateExecutor {
     return {
       output: ptr.value,
       raw,
-      setters: Array.from(dict.values()),
+      setters: Array.from(setters.values()),
     };
   };
 
   const visit = (next: {
     filter: JsonTranslator.IProps<any>["filter"];
+    dictionary: Record<string, string> | null;
     raw: string[];
-    dict: Map<string, Setter<string>>;
-    setter: Setter<any>;
+    setters: Map<string, Setter<string>>;
+    set: Setter<any>;
     value: any;
     explore: Omit<JsonTranslator.IExplore, "value">;
   }): void => {
@@ -54,15 +56,19 @@ export namespace JsonTranslateExecutor {
         })
       )
         return;
-      const found: Setter<string> | undefined = next.dict.get(next.value);
-      if (found !== undefined) {
-        next.dict.set(next.value, (str) => {
-          next.setter(str);
-          found(str);
-        });
-      } else {
-        next.raw.push(next.value);
-        next.dict.set(next.value, next.setter);
+      else if (next.dictionary && next.dictionary[next.value])
+        next.set(next.dictionary[next.value]);
+      else {
+        const found: Setter<string> | undefined = next.setters.get(next.value);
+        if (found !== undefined) {
+          next.setters.set(next.value, (str) => {
+            next.set(str);
+            found(str);
+          });
+        } else {
+          next.raw.push(next.value);
+          next.setters.set(next.value, next.set);
+        }
       }
     } else if (Array.isArray(next.value))
       next.value.forEach((elem, i) =>
@@ -73,7 +79,7 @@ export namespace JsonTranslateExecutor {
             index: i,
             accessor: [...next.explore.accessor, i.toString()],
           },
-          setter: (x) => (next.value[i] = x),
+          set: (x) => (next.value[i] = x),
           value: elem,
         }),
       );
@@ -88,7 +94,7 @@ export namespace JsonTranslateExecutor {
             index: null,
             accessor: [...next.explore.accessor, key],
           },
-          setter: (x) => (next.value[key] = x),
+          set: (x) => (next.value[key] = x),
           value: elem,
         }),
       );

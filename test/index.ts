@@ -7,6 +7,15 @@ import dotenvExpand from "dotenv-expand";
 const EXTENSION = __filename.substring(0, __filename.length - 2);
 if (EXTENSION === "js") require("source-map-support").install();
 
+const getArguments = (type: string): string[] => {
+  const from: number = process.argv.indexOf(`--${type}`) + 1;
+  if (from === 0) return [];
+  const to: number = process.argv
+    .slice(from)
+    .findIndex((str) => str.startsWith("--"), from);
+  return process.argv.slice(from, to === -1 ? process.argv.length : to + from);
+};
+
 const main = async (): Promise<void> => {
   // PREPARE ASSETS
   dotenvExpand.expand(dotenv.config());
@@ -15,11 +24,8 @@ const main = async (): Promise<void> => {
   });
 
   // DO TEST
-  const include: string[] | null = (() => {
-    const index: number = process.argv.indexOf("--include");
-    if (index === -1) return null;
-    return process.argv.slice(index + 1);
-  })();
+  const include: string[] = getArguments("include");
+  const exclude: string[] = getArguments("exclude");
   const report: DynamicExecutor.IReport = await DynamicExecutor.validate({
     prefix: "test_",
     location: __dirname + "/features",
@@ -35,7 +41,8 @@ const main = async (): Promise<void> => {
       } else trace(chalk.red(exec.error.name));
     },
     filter: (name) =>
-      include === null ? true : include.some((str) => name.includes(str)),
+      (include.length ? include.some((str) => name.includes(str)) : true) &&
+      (exclude.length ? exclude.every((str) => !name.includes(str)) : true),
   });
 
   // REPORT EXCEPTIONS

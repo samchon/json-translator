@@ -1,6 +1,6 @@
 {
   "name": "@samchon/json-translator",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "JSON Translator via Google Translation API with optimization strategies",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
