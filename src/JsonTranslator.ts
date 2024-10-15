@@ -1,5 +1,18 @@
 import { Translate } from "@google-cloud/translate/build/src/v2";
 
+/**
+ * JSON Translator.
+ *
+ * `JsonTranslator` is a class translating JSON data into another language.
+ *
+ * It wraps the `@google-cloud/translate` module and provides
+ * a more convenient way to translate JSON data, including optimization
+ * strategy reducing the cost and elapsed time of the translation by
+ * minimizing the number of the API calls.
+ *
+ * @reference
+ * @author Jeongho Nam - https://github.com/samchon
+ */
 export class JsonTranslator {
   private readonly service_: Translate;
 
@@ -7,11 +20,17 @@ export class JsonTranslator {
     this.service_ = new Translate(options);
   }
 
+  /**
+   * Translate JSON data.
+   *
+   * @param props Properties for the translation.
+   * @returns The translated JSON data.
+   */
   public async translate<T>(props: JsonTranslator.IProps<T>): Promise<T> {
     const collection: ICollection = prepareCollection(props);
     const translated: string[] = [];
     const from: string | undefined =
-      props.from ?? (await this.detect(collection.raw));
+      props.source ?? (await this.detect(collection.raw));
 
     let queue: Array<IPiece> = [];
     let bytes: number = 0;
@@ -21,7 +40,7 @@ export class JsonTranslator {
           queue.map((p) => p.text),
           {
             from,
-            to: props.to,
+            to: props.target,
           },
         );
         translated.push(...response);
@@ -57,6 +76,12 @@ export class JsonTranslator {
     return collection.output;
   }
 
+  /**
+   * Detect the language of the texts.
+   *
+   * @param texts Texts to detect the language.
+   * @returns The detected language or `undefined` if the language is unknown.
+   */
   public async detect(texts: string[]): Promise<string | undefined> {
     if (texts.length === 0) return undefined;
     const [response] = await this.service_.detect(
@@ -70,17 +95,61 @@ export class JsonTranslator {
   }
 }
 export namespace JsonTranslator {
+  /**
+   * Properties for the translation.
+   */
   export interface IProps<T> {
+    /**
+     * The JSON input data to translate.
+     */
     input: T;
-    from?: string;
-    to: string;
+
+    /**
+     * Source language code.
+     */
+    source?: string;
+
+    /**
+     * Target language code.
+     */
+    target: string;
+
+    /**
+     * Filter function specifying which data to translate.
+     *
+     * @param explore Information about the data to explore.
+     * @returns `true` if the data should be translated; otherwise, `false`.
+     */
     filter?: (explore: IExplore) => boolean;
   }
+
+  /**
+   * Exploration information used in the {@link IProps.filter} function.
+   */
   export interface IExplore {
+    /**
+     * The parent object instance.
+     */
     object: object | null;
+
+    /**
+     * The property key containing the {@link value}
+     */
     key: string | null;
+
+    /**
+     * Index number if the {@link value} is an array element.
+     */
     index: number | null;
+
+    /**
+     * Accessor path to the {@link value}.
+     */
     accessor: string[];
+
+    /**
+     * The string value to translate.
+     */
     value: string;
   }
 }
@@ -158,6 +227,7 @@ const visitCollectionData = (next: {
           ...next.explore,
           object: next.value,
           key,
+          index: null,
           accessor: [...next.explore.accessor, key],
         },
         setter: (x) => (next.value[key] = x),

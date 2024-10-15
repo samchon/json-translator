@@ -12,7 +12,7 @@ export const test_bbs_article = async (
       JSON.stringify(
         await translator.translate({
           input,
-          to: lang,
+          target: lang,
           filter: ({ key }) => key === "title" || key === "body",
         }),
         null,
