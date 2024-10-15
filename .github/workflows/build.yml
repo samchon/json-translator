@@ -25,6 +25,6 @@ jobs:
       - name: Build
         run: npm run build
       - name: Test
-        run: npm run test
+        run: npm run test -- --include duplicated
         env:
           CREDENTIALS: ${{ secrets.CREDENTIALS }}
