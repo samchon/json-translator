@@ -7,11 +7,12 @@
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "paths": {
-      "@samchon/translate-json": ["../src/index.ts"],
-      "@samchon/translate-json/lib/*": ["../src/*"],
+      "@samchon/json-translator": ["../src/index.ts"],
+      "@samchon/json-translator/lib/*": ["../src/*"],
     },
     "plugins": [
       { "transform": "typescript-transform-paths" },
+      { "transform": "typia/lib/transform" },
     ]
   },
   "include": ["../src", "../test"]

@@ -1,23 +1,32 @@
-import { JsonTranslator } from "@samchon/translate-json";
+import { JsonTranslator } from "@samchon/json-translator";
 import fs from "fs";
+import typia, { tags } from "typia";
 
 import input from "../../assets/input/bbs.article.json";
 
 export const test_bbs_article = async (
   translator: JsonTranslator,
 ): Promise<void> => {
-  for (const lang of ["ko", "ja", "ar"])
+  typia.assertGuard<IBbsArticle>(input);
+  for (const lang of ["ko", "ja", "ar"]) {
+    const output: IBbsArticle = await translator.translate({
+      input,
+      target: lang,
+      // filter: ({ key }) => key === "title" || key === "body",
+    });
+    typia.assert(output);
     await fs.promises.writeFile(
       `${__dirname}/../../../assets/output/bbs.article.${lang}.json`,
-      JSON.stringify(
-        await translator.translate({
-          input,
-          target: lang,
-          filter: ({ key }) => key === "title" || key === "body",
-        }),
-        null,
-        2,
-      ),
+      JSON.stringify(output, null, 2),
       "utf8",
     );
+  }
 };
+
+interface IBbsArticle {
+  id: string & tags.Format<"uuid">;
+  title: string;
+  body: string;
+  created_at: string & tags.Format<"date-time">;
+  updated_at: string & tags.Format<"date-time">;
+}
