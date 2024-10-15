@@ -12,7 +12,7 @@ export const test_connector_swagger = async (
       JSON.stringify(
         await translator.translate({
           input,
-          to: lang,
+          target: lang,
           filter: (explore) =>
             explore.key === "title" ||
             explore.key === "description" ||
