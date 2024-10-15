@@ -145,7 +145,7 @@ export namespace JsonTranslator {
      * @param explore Information about the data to explore.
      * @returns `true` if the data should be translated; otherwise, `false`.
      */
-    filter?: (explore: IExplore) => boolean;
+    filter?: ((explore: IExplore) => boolean) | null | undefined;
 
     /**
      * Reserved dictionary of pre-translated values.
@@ -158,7 +158,7 @@ export namespace JsonTranslator {
      * the dictionary's key, the dictionary's value would be used instead of
      * calling the Google Translate API.
      */
-    dictionary?: Record<string, string> | undefined | null;
+    dictionary?: Record<string, string> | null | undefined;
   }
 
   /**
