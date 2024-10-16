@@ -1,5 +1,5 @@
 import { TestValidator } from "@nestia/e2e";
-import { JsonTranslateExecutor } from "@samchon/json-translator/lib/internal/JsonTranslateExecutor";
+import { JsonTranslateComposer } from "@samchon/json-translator/lib/internal/JsonTranslateComposer";
 
 export const test_duplicated = (): void => {
   const nested: INested = {
@@ -13,8 +13,8 @@ export const test_duplicated = (): void => {
     nested,
     instances: new Array(5).fill(nested),
   };
-  const collection: JsonTranslateExecutor.ICollection =
-    JsonTranslateExecutor.prepare({
+  const collection: JsonTranslateComposer.ICollection =
+    JsonTranslateComposer.composeCollection({
       input,
       target: "ko",
     });

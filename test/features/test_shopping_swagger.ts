@@ -17,6 +17,7 @@ export const test_shopping_swagger = async (
         explore.key === "title" ||
         explore.key === "description" ||
         explore.key === "summary" ||
+        explore.key === "termsOfService" ||
         explore.key === "x-wrtn-placeholder",
     });
     typia.assert(output);

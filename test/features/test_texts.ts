@@ -1,5 +1,5 @@
 import { TestValidator } from "@nestia/e2e";
-import { JsonTranslateExecutor } from "@samchon/json-translator/lib/internal/JsonTranslateExecutor";
+import { JsonTranslateComposer } from "@samchon/json-translator/lib/internal/JsonTranslateComposer";
 
 export const test_texts = (): void => {
   const input = {
@@ -24,7 +24,7 @@ export const test_texts = (): void => {
       },
     ],
   };
-  const texts: string[] = JsonTranslateExecutor.getTexts({
+  const texts: string[] = JsonTranslateComposer.composeTexts({
     input,
     filter: (explore) => explore.key !== "exceptional",
     dictionary: {

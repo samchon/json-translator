@@ -1,11 +1,12 @@
 import { TestValidator } from "@nestia/e2e";
-import { JsonTranslateExecutor } from "@samchon/json-translator/lib/internal/JsonTranslateExecutor";
+import { JsonTranslateComposer } from "@samchon/json-translator/lib/internal/JsonTranslateComposer";
 
-export const test_dictionary = (): void => {
+export const test_reserved_dictionary = (): void => {
   const nested: INested = {
     x: "hello",
     y: "brothers",
     z: "sisters",
+    ancestors: "ancestors",
     array: ["hello", "brothers", "sisters", "descendants"],
   };
   const input: IData = {
@@ -13,8 +14,8 @@ export const test_dictionary = (): void => {
     nested,
     instances: new Array(5).fill(nested),
   };
-  const collection: JsonTranslateExecutor.ICollection =
-    JsonTranslateExecutor.prepare({
+  const collection: JsonTranslateComposer.ICollection =
+    JsonTranslateComposer.composeCollection({
       input,
       target: "ko",
       dictionary: {
@@ -22,6 +23,9 @@ export const test_dictionary = (): void => {
         sisters: "자매님들",
         descendants: "후손님들",
       },
+      filter: (explore) =>
+        explore.key !== "ancestors" &&
+        !(explore.key === "array" && explore.index === 3),
     });
   collection.setters[0]("안녕하세요");
 
@@ -29,7 +33,8 @@ export const test_dictionary = (): void => {
     x: "안녕하세요",
     y: "형제님들",
     z: "자매님들",
-    array: ["안녕하세요", "형제님들", "자매님들", "후손님들"],
+    ancestors: "ancestors",
+    array: ["안녕하세요", "형제님들", "자매님들", "descendants"],
   };
   TestValidator.equals("collection.output")(collection.output)({
     ...translatedNested,
@@ -46,5 +51,6 @@ interface INested {
   x: string;
   y: string;
   z: string;
+  ancestors: string;
   array: string[];
 }

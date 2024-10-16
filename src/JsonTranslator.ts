@@ -1,6 +1,6 @@
 import { Translate } from "@google-cloud/translate/build/src/v2";
 
-import { JsonTranslateExecutor } from "./internal/JsonTranslateExecutor";
+import { JsonTranslateComposer } from "./internal/JsonTranslateComposer";
 
 /**
  * JSON Translator.
@@ -41,8 +41,8 @@ export class JsonTranslator {
    * @returns The translated JSON data.
    */
   public async translate<T>(props: JsonTranslator.IProps<T>): Promise<T> {
-    const collection: JsonTranslateExecutor.ICollection =
-      JsonTranslateExecutor.prepare(props);
+    const collection: JsonTranslateComposer.ICollection =
+      JsonTranslateComposer.composeCollection(props);
     const translated: string[] = [];
     const from: string | undefined =
       props.source === null
@@ -100,18 +100,39 @@ export class JsonTranslator {
    * through the Google Translate API, with the similar properties like the
    * {@link JsonTranslator.translate} method.
    *
-   * Therefore, if you want to filter some specific values to participate in
-   * the language detection, fill the {@link JsonTranslator.IProps.filter}
+   * Therefore, if you want to filter out some specific values to participate in
+   * the language detection, fill the {@link JsonTranslator.IDetectProps.filter}
    * function.
    *
    * @param input Properties for language detection.
    * @returns The detected language or `undefined` if the language is unknown.
    */
   public async detect<T>(
-    props: Omit<JsonTranslator.IProps<T>, "source" | "target">,
+    props: JsonTranslator.IDetectProps<T>,
   ): Promise<string | undefined> {
-    const texts: string[] = JsonTranslateExecutor.getTexts(props);
+    const texts: string[] = JsonTranslateComposer.composeTexts(props);
     return this._Detect_language(texts);
+  }
+
+  /**
+   * Compose dictionary from translated.
+   *
+   * Compose dictionary between original JSON input data and its translated
+   * output data. The dictionary is a key-value pair object containing the
+   * original value and its translated value.
+   *
+   * If you've composed {@link JsonTranslator.IProps.filter} function in
+   * the {@link JsonTranslator.translate} method, don't forget to re-apply
+   * the filter function to the {@link JsonTranslator.IDictionaryProps.filter}
+   * property.
+   *
+   * @param props Properties for the dictionary composition.
+   * @returns Composed dictionary
+   */
+  public dictionary<T>(
+    props: JsonTranslator.IDictionaryProps<T>,
+  ): Record<string, string> {
+    return JsonTranslateComposer.composeDictionary(props);
   }
 
   /**
@@ -130,6 +151,8 @@ export class JsonTranslator {
 export namespace JsonTranslator {
   /**
    * Properties for the translation.
+   *
+   * Keyworded properties used in the {@link JsonTranslator.translate} method.
    */
   export interface IProps<T> {
     /**
@@ -178,6 +201,61 @@ export namespace JsonTranslator {
   }
 
   /**
+   * Properties for the language detection.
+   *
+   * Keyworded properties used in the {@link JsonTranslator.detect} method.
+   */
+  export interface IDetectProps<T> {
+    /**
+     * The JSON input data to detect language.
+     */
+    input: T;
+
+    /**
+     * Filter function specifying which data to translate.
+     *
+     * @param explore Information about the data to explore.
+     * @returns `true` if the data should be translated; otherwise, `false`.
+     */
+    filter?: ((explore: IExplore) => boolean) | null | undefined;
+
+    /**
+     * Reserved dictionary of pre-translated values.
+     *
+     * The dictionary is a key-value pair object containing the pre-translated
+     * values. The key means the original value, and the value means the
+     * pre-translated value.
+     *
+     * If this dictionary has been configured and a JSON input value matches to
+     * the dictionary's key, the dictionary's value would be used instead of
+     * calling the Google Translate API.
+     */
+    dictionary?: Record<string, string> | null | undefined;
+  }
+
+  /**
+   * Properties for the dictionary composition.
+   *
+   * Keyworded properties used in nthe {@link JsonTranslator.dictionary} method.
+   */
+  export interface IDictionaryProps<T> {
+    /**
+     * Input JSON, the original data.
+     */
+    input: T;
+
+    /**
+     * Output JSON, the translated data.
+     */
+    output: T;
+
+    /**
+     * Filter function specifying which data be translated.
+     */
+    filter?: ((explore: IExplore) => boolean) | null | undefined;
+  }
+
+  /**
    * Exploration information used in the {@link IProps.filter} function.
    */
   export interface IExplore {
@@ -214,8 +292,15 @@ export namespace JsonTranslator {
   }
 }
 
+/**
+ * @internal
+ */
 interface IPiece {
   text: string;
   length: number;
 }
+
+/**
+ * @internal
+ */
 const SEPARATOR = " //|-0-|\\ ";
