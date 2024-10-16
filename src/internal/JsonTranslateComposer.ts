@@ -3,7 +3,7 @@ import { JsonTranslator } from "../JsonTranslator";
 /**
  * @internal
  */
-export namespace JsonTranslateExecutor {
+export namespace JsonTranslateComposer {
   /* -----------------------------------------------------------
     PREPARE COLLECTION
   ----------------------------------------------------------- */
@@ -14,16 +14,20 @@ export namespace JsonTranslateExecutor {
   }
   export type Setter<T> = (input: T) => void;
 
-  export const prepare = (props: JsonTranslator.IProps<any>): ICollection => {
+  export const composeCollection = (
+    props: JsonTranslator.IProps<any>,
+  ): ICollection => {
     const ptr = {
       value: JSON.parse(JSON.stringify(props.input)),
     };
     const raw: string[] = [];
     const setters: Map<string, Setter<string>> = new Map();
-    visit({
+    visitCollection({
       filter: props.filter,
-      raw,
-      setters,
+      container: {
+        raw,
+        setters,
+      },
       set: (x) => (ptr.value = x),
       dictionary: props.dictionary ?? null,
       value: ptr.value,
@@ -41,11 +45,13 @@ export namespace JsonTranslateExecutor {
     };
   };
 
-  const visit = (next: {
+  const visitCollection = (next: {
+    container: {
+      raw: string[];
+      setters: Map<string, Setter<string>>;
+    };
     filter: JsonTranslator.IProps<any>["filter"];
     dictionary: Record<string, string> | null;
-    raw: string[];
-    setters: Map<string, Setter<string>>;
     set: Setter<any>;
     value: any;
     explore: Omit<JsonTranslator.IExplore, "value">;
@@ -67,24 +73,26 @@ export namespace JsonTranslateExecutor {
         next.set(next.dictionary[next.value]);
         return;
       }
-      const found: Setter<string> | undefined = next.setters.get(next.value);
+      const found: Setter<string> | undefined = next.container.setters.get(
+        next.value,
+      );
       if (found !== undefined) {
-        next.setters.set(next.value, (str) => {
+        next.container.setters.set(next.value, (str) => {
           next.set(str);
           found(str);
         });
       } else {
-        next.raw.push(next.value);
-        next.setters.set(next.value, next.set);
+        next.container.raw.push(next.value);
+        next.container.setters.set(next.value, next.set);
       }
     } else if (Array.isArray(next.value))
       next.value.forEach((elem, i) =>
-        visit({
+        visitCollection({
           ...next,
           explore: {
             ...next.explore,
-            index: i,
             accessor: [...next.explore.accessor, i.toString()],
+            index: i,
           },
           set: (x) => (next.value[i] = x),
           value: elem,
@@ -92,14 +100,14 @@ export namespace JsonTranslateExecutor {
       );
     else if (typeof next.value === "object" && next.value !== null)
       Object.entries(next.value).forEach(([key, elem]) =>
-        visit({
+        visitCollection({
           ...next,
           explore: {
             ...next.explore,
+            accessor: [...next.explore.accessor, key],
             object: next.value,
             key,
             index: null,
-            accessor: [...next.explore.accessor, key],
           },
           set: (x) => (next.value[key] = x),
           value: elem,
@@ -110,15 +118,15 @@ export namespace JsonTranslateExecutor {
   /* -----------------------------------------------------------
     LIST UP TEXTS
   ----------------------------------------------------------- */
-  export const getTexts = (
-    props: Omit<JsonTranslator.IProps<any>, "source" | "target">,
+  export const composeTexts = (
+    props: JsonTranslator.IDetectProps<any>,
   ): string[] => {
     const output: Set<string> = new Set();
     const visited: WeakSet<object> = new WeakSet();
     visitTexts({
       filter: props.filter,
       dictionary: props.dictionary ?? null,
-      output,
+      container: output,
       visited,
       value: props.input,
       explore: {
@@ -132,9 +140,9 @@ export namespace JsonTranslateExecutor {
   };
 
   const visitTexts = (next: {
-    filter: JsonTranslator.IProps<any>["filter"];
+    container: Set<string>;
+    filter: JsonTranslator.IDetectProps<any>["filter"];
     dictionary: Record<string, string> | null;
-    output: Set<string>;
     visited: WeakSet<object>;
     value: any;
     explore: Omit<JsonTranslator.IExplore, "value">;
@@ -154,24 +162,36 @@ export namespace JsonTranslateExecutor {
         typeof next.dictionary[next.value] === "string"
       )
         return;
-      else next.output.add(next.value);
-    } else if (Array.isArray(next.value))
+      else next.container.add(next.value);
+    } else if (
+      Array.isArray(next.value) &&
+      next.visited.has(next.value) === false
+    ) {
+      next.visited.add(next.value);
       next.value.forEach((elem, i) =>
         visitTexts({
           ...next,
           value: elem,
           explore: {
             ...next.explore,
+            accessor: [...next.explore.accessor, i.toString()],
             index: i,
           },
         }),
       );
-    else if (typeof next.value === "object" && next.value !== null)
+    } else if (
+      typeof next.value === "object" &&
+      next.value !== null &&
+      Array.isArray(next.value) === false &&
+      next.visited.has(next.value) === false
+    ) {
+      next.visited.add(next.value);
       Object.entries(next.value).forEach(([key, value]) =>
         visitTexts({
           ...next,
           explore: {
             ...next.explore,
+            accessor: [...next.explore.accessor, key],
             object: next.value,
             key,
             index: null,
@@ -179,5 +199,93 @@ export namespace JsonTranslateExecutor {
           value,
         }),
       );
+    }
+  };
+
+  /* -----------------------------------------------------------
+    DICTIONARY FROM THE TRANSLATED
+  ----------------------------------------------------------- */
+  export const composeDictionary = (
+    props: JsonTranslator.IDictionaryProps<any>,
+  ): Record<string, string> => {
+    const output: Record<string, string> = {};
+    const visited: WeakSet<object> = new WeakSet();
+    visitDictionary({
+      filter: props.filter,
+      container: output,
+      input: props.input,
+      output: props.output,
+      visited,
+      explore: {
+        object: null,
+        key: null,
+        index: null,
+        accessor: ["$input"],
+      },
+    });
+    return output;
+  };
+
+  const visitDictionary = (next: {
+    container: Record<string, string>;
+    visited: WeakSet<object>;
+    filter: JsonTranslator.IDictionaryProps<any>["filter"];
+    input: any;
+    output: any;
+    explore: Omit<JsonTranslator.IExplore, "value">;
+  }): void => {
+    if (typeof next.input !== typeof next.output) return;
+    else if (typeof next.input === "string") {
+      if (next.input.trim().length === 0) return;
+      else if (
+        next.filter &&
+        next.filter({
+          ...next.explore,
+          value: next.input,
+        }) === false
+      )
+        return;
+      next.container[next.input] = next.output as string;
+    } else if (
+      Array.isArray(next.input) &&
+      Array.isArray(next.output) &&
+      next.visited.has(next.input) === false
+    ) {
+      next.visited.add(next.input);
+      next.input.forEach((x, i) =>
+        visitDictionary({
+          ...next,
+          input: x,
+          output: next.output[i],
+          explore: {
+            ...next.explore,
+            accessor: [...next.explore.accessor, i.toString()],
+            index: i,
+          },
+        }),
+      );
+    } else if (
+      typeof next.input === "object" &&
+      next.input !== null &&
+      next.output !== null &&
+      Array.isArray(next.input) === false &&
+      next.visited.has(next.input) === false
+    ) {
+      next.visited.add(next.input);
+      Object.entries(next.input).forEach(([key, x]) =>
+        visitDictionary({
+          ...next,
+          input: x,
+          output: next.output[key],
+          explore: {
+            ...next.explore,
+            accessor: [...next.explore.accessor, key],
+            object: next.input,
+            key,
+            index: null,
+          },
+        }),
+      );
+    }
   };
 }
