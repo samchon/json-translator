@@ -47,7 +47,7 @@ export class JsonTranslator {
     const from: string | undefined =
       props.source === null
         ? undefined
-        : (props.source ?? (await this.detect(collection.raw)));
+        : (props.source ?? (await this._Detect_language(collection.raw)));
 
     let queue: Array<IPiece> = [];
     let bytes: number = 0;
@@ -94,19 +94,35 @@ export class JsonTranslator {
   }
 
   /**
-   * Detect the language of the texts.
+   * Detect the language of JSON data.
    *
-   * @param texts Texts to detect the language.
+   * Pick the longest text from the JSON input data and detect the language
+   * through the Google Translate API, with the similar properties like the
+   * {@link JsonTranslator.translate} method.
+   *
+   * Therefore, if you want to filter some specific values to participate in
+   * the language detection, fill the {@link JsonTranslator.IProps.filter}
+   * function.
+   *
+   * @param input Properties for language detection.
    * @returns The detected language or `undefined` if the language is unknown.
    */
-  public async detect(texts: string[]): Promise<string | undefined> {
-    if (texts.length === 0) return undefined;
-    const [response] = await this.service_.detect(
-      texts
-        .slice()
-        .sort((a, b) => b.length - a.length)
-        .at(0)!,
-    );
+  public async detect<T>(
+    props: Omit<JsonTranslator.IProps<T>, "source" | "target">,
+  ): Promise<string | undefined> {
+    const texts: string[] = JsonTranslateExecutor.getTexts(props);
+    return this._Detect_language(texts);
+  }
+
+  /**
+   * @internal
+   */
+  private async _Detect_language(texts: string[]): Promise<string | undefined> {
+    let longest: string | undefined = undefined;
+    for (const str of texts)
+      if (str.length > (longest?.length ?? 0)) longest = str;
+    if (longest === undefined) return undefined;
+    const [response] = await this.service_.detect(longest);
     const res: string | undefined = response.language ?? undefined;
     return res === "und" ? undefined : res;
   }
