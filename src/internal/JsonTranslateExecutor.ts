@@ -4,6 +4,9 @@ import { JsonTranslator } from "../JsonTranslator";
  * @internal
  */
 export namespace JsonTranslateExecutor {
+  /* -----------------------------------------------------------
+    PREPARE COLLECTION
+  ----------------------------------------------------------- */
   export interface ICollection {
     output: any;
     raw: string[];
@@ -47,8 +50,9 @@ export namespace JsonTranslateExecutor {
     value: any;
     explore: Omit<JsonTranslator.IExplore, "value">;
   }): void => {
-    if (typeof next.value === "string" && next.value.trim().length !== 0) {
-      if (
+    if (typeof next.value === "string") {
+      if (next.value.trim().length === 0) return;
+      else if (
         next.filter &&
         !next.filter({
           ...next.explore,
@@ -56,19 +60,22 @@ export namespace JsonTranslateExecutor {
         })
       )
         return;
-      else if (next.dictionary && next.dictionary[next.value])
+      else if (
+        next.dictionary &&
+        typeof next.dictionary[next.value] === "string"
+      ) {
         next.set(next.dictionary[next.value]);
-      else {
-        const found: Setter<string> | undefined = next.setters.get(next.value);
-        if (found !== undefined) {
-          next.setters.set(next.value, (str) => {
-            next.set(str);
-            found(str);
-          });
-        } else {
-          next.raw.push(next.value);
-          next.setters.set(next.value, next.set);
-        }
+        return;
+      }
+      const found: Setter<string> | undefined = next.setters.get(next.value);
+      if (found !== undefined) {
+        next.setters.set(next.value, (str) => {
+          next.set(str);
+          found(str);
+        });
+      } else {
+        next.raw.push(next.value);
+        next.setters.set(next.value, next.set);
       }
     } else if (Array.isArray(next.value))
       next.value.forEach((elem, i) =>
@@ -96,6 +103,80 @@ export namespace JsonTranslateExecutor {
           },
           set: (x) => (next.value[key] = x),
           value: elem,
+        }),
+      );
+  };
+
+  /* -----------------------------------------------------------
+    LIST UP TEXTS
+  ----------------------------------------------------------- */
+  export const getTexts = (
+    props: Omit<JsonTranslator.IProps<any>, "source" | "target">,
+  ): string[] => {
+    const output: Set<string> = new Set();
+    const visited: WeakSet<object> = new WeakSet();
+    visitTexts({
+      filter: props.filter,
+      dictionary: props.dictionary ?? null,
+      output,
+      visited,
+      value: props.input,
+      explore: {
+        object: null,
+        key: null,
+        index: null,
+        accessor: ["$input"],
+      },
+    });
+    return Array.from(output);
+  };
+
+  const visitTexts = (next: {
+    filter: JsonTranslator.IProps<any>["filter"];
+    dictionary: Record<string, string> | null;
+    output: Set<string>;
+    visited: WeakSet<object>;
+    value: any;
+    explore: Omit<JsonTranslator.IExplore, "value">;
+  }): void => {
+    if (typeof next.value === "string") {
+      if (next.value.length === 0) return;
+      else if (
+        next.filter &&
+        !next.filter({
+          ...next.explore,
+          value: next.value,
+        })
+      )
+        return;
+      else if (
+        next.dictionary &&
+        typeof next.dictionary[next.value] === "string"
+      )
+        return;
+      else next.output.add(next.value);
+    } else if (Array.isArray(next.value))
+      next.value.forEach((elem, i) =>
+        visitTexts({
+          ...next,
+          value: elem,
+          explore: {
+            ...next.explore,
+            index: i,
+          },
+        }),
+      );
+    else if (typeof next.value === "object" && next.value !== null)
+      Object.entries(next.value).forEach(([key, value]) =>
+        visitTexts({
+          ...next,
+          explore: {
+            ...next.explore,
+            object: next.value,
+            key,
+            index: null,
+          },
+          value,
         }),
       );
   };

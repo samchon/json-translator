@@ -63,3 +63,135 @@ English (source) | Korean | Japanese | Arabic
 --------|--------|----------|--------
 [bbs.article.json](https://github.com/samchon/json-translator/blob/master/assets/input/bbs.article.json) | [bbs.ko.json](https://github.com/samchon/json-translator/blob/master/assets/output/bbs.article.ko.json) | [bbs.ja.json](https://github.com/samchon/json-translator/blob/master/assets/output/bbs.article.ja.json) | [bbs.ar.json](https://github.com/samchon/json-translator/blob/master/assets/output/bbs.article.ar.json)
 [shopping.swagger.json](https://github.com/samchon/json-translator/blob/master/assets/input/shopping.swagger.json) | [shopping.ko.json](https://github.com/samchon/json-translator/blob/master/assets/output/shopping.swagger.ko.json) | [shopping.ja.json](https://github.com/samchon/json-translator/blob/master/assets/output/shopping.swagger.ja.json) | [shopping.ar.json](https://github.com/samchon/json-translator/blob/master/assets/output/shopping.swagger.ar.json)
+
+
+
+
+## API
+```typescript
+export class JsonTranslator {
+  /**
+   * Translate JSON data.
+   *
+   * `JsonTranslate.translate()` translates JSON input data into another language.
+   *
+   * If you want to filter some specific values to translate, fill the
+   * {@link JsonTranslator.IProps.filter} function.
+   *
+   * Also, if you do not fill the {@link JsonTranslator.IProps.source} value,
+   * the source language would be detected through the {@link JsonTranslator.detect}
+   * method with the longest text. Otherwise you assign the `null` value to the
+   * {@link JsonTranslator.IProps.source}, the translation would be executed without
+   * the source language.
+   *
+   * @template T The type of the JSON input data.
+   * @param props Properties for the translation.
+   * @returns The translated JSON data.
+   */
+  public translate<T>(props: JsonTranslator.IProps<T>): Promise<T>;
+
+  /**
+   * Detect the language of JSON data.
+   *
+   * Pick the longest text from the JSON input data and detect the language
+   * through the Google Translate API, with the similar properties like the
+   * {@link JsonTranslator.translate} method.
+   *
+   * Therefore, if you want to filter some specific values to participate in
+   * the language detection, fill the {@link JsonTranslator.IProps.filter}
+   * function.
+   *
+   * @param input Properties for language detection.
+   * @returns The detected language or `undefined` if the language is unknown.
+   */
+  public detect<T>(
+    props: Omit<JsonTranslator.IProps<T>, "source" | "target">,
+  ): Promise<string | undefined>;
+}
+export namespace JsonTranslator {
+  /**
+   * Properties for the translation.
+   */
+  export interface IProps<T> {
+    /**
+     * The JSON input data to translate.
+     */
+    input: T;
+
+    /**
+     * Source language code.
+     *
+     * If not specified (`undefined`), the source language would be detected
+     * through the {@link JsonTranslator.detect} method with the longest text.
+     *
+     * Otherwise `null` value assigned, the source language would be skipped,
+     * so that the translation would be executed without the source language.
+     * Therefore, if your JSON value contains multiple languages, you should
+     * assign the `null` value to prevent the source language specification.
+     */
+    source?: string | null | undefined;
+
+    /**
+     * Target language code.
+     */
+    target: string;
+
+    /**
+     * Filter function specifying which data to translate.
+     *
+     * @param explore Information about the data to explore.
+     * @returns `true` if the data should be translated; otherwise, `false`.
+     */
+    filter?: ((explore: IExplore) => boolean) | null | undefined;
+
+    /**
+     * Reserved dictionary of pre-translated values.
+     *
+     * The dictionary is a key-value pair object containing the pre-translated
+     * values. The key means the original value, and the value means the
+     * pre-translated value.
+     *
+     * If this dictionary has been configured and a JSON input value matches to
+     * the dictionary's key, the dictionary's value would be used instead of
+     * calling the Google Translate API.
+     */
+    dictionary?: Record<string, string> | null | undefined;
+  }
+
+  /**
+   * Exploration information used in the {@link IProps.filter} function.
+   */
+  export interface IExplore {
+    /**
+     * The parent object instance.
+     */
+    object: object | null;
+
+    /**
+     * The property key containing the {@link value}
+     */
+    key: string | null;
+
+    /**
+     * Index number if the {@link value} is an array element.
+     */
+    index: number | null;
+
+    /**
+     * Accessor path to the {@link value}.
+     *
+     * It starts from the `["$input"]` array value, and each element
+     * would be the property key or the index number.
+     *
+     * For example, if there's an access expression `$input.a[0].b`,
+     * the accessor would be `["$input", "a", "0", "b"]`.
+     */
+    accessor: string[];
+
+    /**
+     * The string value to translate.
+     */
+    value: string;
+  }
+}
+```
