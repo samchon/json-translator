@@ -5,14 +5,14 @@
 [![Build Status](https://github.com/samchon/json-translator/workflows/build/badge.svg)](https://github.com/samchon/json-translator/actions?query=workflow%3Abuild)
 
 ```bash
-npm install @samchon/json-translate 
+npm install @samchon/json-translator
 ```
 
 Translate JSON file via Google Translate API.
 
-`@samchon/json-translate` is a wrapper library that translates JSON files through the Google Translate API. 
+`@samchon/json-translator` is a wrapper library that translates JSON files through the Google Translate API. 
 
-`@samchon/json-translate` provides a more convenient way to translate JSON data, including optimization strategies reducing the cost and diminishing elapsed time of the translation just by minimizing the number of the Google Translate API calls.
+`@samchon/json-translator` provides a more convenient way to translate JSON data, including optimization strategies reducing the cost and diminishing elapsed time of the translation just by minimizing the number of the Google Translate API calls.
 
 
 
