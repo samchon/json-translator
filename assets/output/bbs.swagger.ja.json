@@ -1,0 +1,1663 @@
+{
+  "openapi": "3.1.0",
+  "servers": [
+    {
+      "url": "http://localhost:37001",
+      "description": "ローカルサーバー"
+    }
+  ],
+  "info": {
+    "version": "2.1.0",
+    "title": "@samchon/bbs-バックエンド",
+    "description": "BBS のバックエンド",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "paths": {
+    "/bbs/articles": {
+      "patch": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "ページネーションと検索オプションに関する情報をリクエストする.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticle.IRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "ページ分けされた要約記事.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IPageIBbsArticle.ISummary"
+                }
+              }
+            }
+          }
+        },
+        "summary": "要約された記事をすべてリストアップする",
+        "description": "要約された記事をすべて一覧表示します。ページ付けと検索オプションを使用して要約された記事をすべて一覧表示します。."
+      },
+      "post": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "作成する記事情報.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticle.ICreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "新しく作成された記事.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBbsArticle"
+                }
+              }
+            }
+          }
+        },
+        "summary": "新しい記事を作成する",
+        "description": "新しい記事を作成します。最初の {@link IBbsArticle.ISnapshot スナップショット} で新しい記事を作成します。."
+      }
+    },
+    "/bbs/articles/abridges": {
+      "patch": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "ページネーションと検索オプションに関する情報をリクエストする.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticle.IRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "ページ分けされた要約記事.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IPageIBbsArticle.IAbridge"
+                }
+              }
+            }
+          }
+        },
+        "summary": "すべての要約記事を一覧表示する",
+        "description": "すべての要約記事を一覧表示します。ページ付けと検索オプションを使用してすべての要約記事を一覧表示します。."
+      }
+    },
+    "/bbs/articles/{id}": {
+      "get": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "対象記事の",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "記事情報",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBbsArticle"
+                }
+              }
+            }
+          }
+        },
+        "summary": "個別の記事を読む",
+        "description": "個々の記事を読みます。記事をそのすべての {@link IBbsArticle.ISnapshot スナップショットとともに読み取ります}."
+      },
+      "put": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "対象記事の",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "更新する記事情報.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticle.IUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "新たに蓄積されたスナップショット情報.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBbsArticle.ISnapshot"
+                }
+              }
+            }
+          }
+        },
+        "summary": "記事を更新する",
+        "description": "記事を更新します。記事に新しい {@link IBbsArticle.ISnapshot スナップショット} レコードを蓄積します。."
+      },
+      "delete": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "対象記事の",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "記事のパスワード.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticle.IErase"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "記事を消去する",
+        "description": "記事を消去します。記事に対してソフト削除を実行します."
+      }
+    },
+    "/bbs/articles/{articleId}/comments": {
+      "patch": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "ページネーションと検索オプションに関する情報をリクエストする.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticleComment.IRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "ページ分けされた要約コメント.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IPageIBbsArticleComment"
+                }
+              }
+            }
+          }
+        },
+        "summary": "要約されたコメントをすべて一覧表示する",
+        "description": "要約されたコメントをすべて一覧表示します。ページ区切りと検索オプションを使用して、要約されたコメントをすべて一覧表示します。."
+      },
+      "post": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "所属記事",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "作成するコメント情報.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticleComment.ICreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "新しく作成されたコメント.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBbsArticleComment"
+                }
+              }
+            }
+          }
+        },
+        "summary": "新しいコメントを作成する",
+        "description": "新しいコメントを作成します。最初の {@link IBbsArticleComment.ISnapshot スナップショット} で新しいコメントを作成します."
+      }
+    },
+    "/bbs/articles/{articleId}/comments/{id}": {
+      "get": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "所属記事",
+            "required": true
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "ターゲットコメントの",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "コメント情報",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBbsArticleComment"
+                }
+              }
+            }
+          }
+        },
+        "summary": "個別のコメントを読む",
+        "description": "個々のコメントを読みます。コメントをそのすべての {@link IBbsArticleComment.ISnapshot スナップショットとともに読み取ります}."
+      },
+      "put": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "所属記事",
+            "required": true
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "ターゲットコメントの",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "更新するコメント情報.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticleComment.IUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "新たに蓄積されたスナップショット情報.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBbsArticleComment.ISnapshot"
+                }
+              }
+            }
+          }
+        },
+        "summary": "コメントを更新する",
+        "description": "コメントを更新します。コメントに新しい{@link IBbsArticleComment.ISnapshotスナップショット}レコードを蓄積します。."
+      },
+      "delete": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "所属記事",
+            "required": true
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "ターゲットコメントの",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "コメントのパスワード.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticleComment.IErase"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "コメントを消去",
+        "description": "コメントを消去します。コメントのソフト削除を実行します."
+      }
+    },
+    "/monitors/health": {
+      "get": {
+        "tags": [
+          "Monitor"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "ヘルスチェックAPI",
+        "description": "ヘルスチェックAPI."
+      }
+    },
+    "/monitors/performance": {
+      "get": {
+        "tags": [
+          "Monitor"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "パフォーマンス情報",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IPerformance"
+                }
+              }
+            }
+          }
+        },
+        "summary": "パフォーマンス情報を取得する",
+        "description": "パフォーマンス情報を取得します。CPU、メモリ、リソースの使用状況で構成されたパフォーマンス情報を取得します。."
+      }
+    },
+    "/monitors/system": {
+      "get": {
+        "tags": [
+          "Monitor"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "システム情報",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISystem"
+                }
+              }
+            }
+          }
+        },
+        "summary": "システム情報を取得する",
+        "description": "システム情報を取得します。コミットとパッケージ情報を含むシステム情報を取得します。."
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "IBbsArticle.IRequest": {
+        "type": "object",
+        "properties": {
+          "search": {
+            "$ref": "#/components/schemas/IBbsArticle.IRequest.ISearch",
+            "title": "検索条件",
+            "description": "検索条件."
+          },
+          "sort": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "const": "-writer"
+                },
+                {
+                  "const": "-title"
+                },
+                {
+                  "const": "-created_at"
+                },
+                {
+                  "const": "-updated_at"
+                },
+                {
+                  "const": "+writer"
+                },
+                {
+                  "const": "+title"
+                },
+                {
+                  "const": "+created_at"
+                },
+                {
+                  "const": "+updated_at"
+                }
+              ]
+            },
+            "title": "並べ替え条件",
+            "description": "並べ替え条件."
+          },
+          "page": {
+            "type": "integer",
+            "title": "ページ番号",
+            "description": "ページ番号."
+          },
+          "limit": {
+            "type": "integer",
+            "default": 100,
+            "title": "1ページあたりのレコード数の制限",
+            "description": "1ページあたりのレコード数の制限."
+          }
+        }
+      },
+      "IBbsArticle.IRequest.ISearch": {
+        "type": "object",
+        "properties": {
+          "writer": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "title_or_body": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "to": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "description": "検査結果."
+      },
+      "IPageIBbsArticle.ISummary": {
+        "type": "object",
+        "properties": {
+          "pagination": {
+            "$ref": "#/components/schemas/IPage.IPagination",
+            "title": "ページ情報",
+            "description": "ページ情報."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IBbsArticle.ISummary"
+            },
+            "title": "記録一覧",
+            "description": "記録一覧."
+          }
+        },
+        "required": [
+          "pagination",
+          "data"
+        ],
+        "description": "ページ。ページ番号情報を含むレコードのコレクション."
+      },
+      "IPage.IPagination": {
+        "type": "object",
+        "properties": {
+          "current": {
+            "type": "integer",
+            "title": "現在のページ番号",
+            "description": "現在のページ番号."
+          },
+          "limit": {
+            "type": "integer",
+            "default": 100,
+            "title": "1ページあたりのレコード数の制限",
+            "description": "1ページあたりのレコード数の制限."
+          },
+          "records": {
+            "type": "integer",
+            "title": "データベース内のレコード総数",
+            "description": "データベース内のレコード総数."
+          },
+          "pages": {
+            "type": "integer",
+            "title": "総ページ数",
+            "description": "合計ページ数。上限は {@link records } / {@link limit } に等しい."
+          }
+        },
+        "required": [
+          "current",
+          "limit",
+          "records",
+          "pages"
+        ],
+        "description": "ページ情報."
+      },
+      "IBbsArticle.ISummary": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "主キー",
+            "description": "主キー."
+          },
+          "writer": {
+            "type": "string",
+            "title": "記事の著者",
+            "description": "記事の著者."
+          },
+          "title": {
+            "type": "string",
+            "title": "最後のスナップショットのタイトル",
+            "description": "最後のスナップショットのタイトル."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "記事の作成時間",
+            "description": "記事の作成時間."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "記事の修正日時",
+            "description": "記事の変更時刻。つまり、最後のスナップショットが作成された時刻です。."
+          }
+        },
+        "required": [
+          "id",
+          "writer",
+          "title",
+          "created_at",
+          "updated_at"
+        ],
+        "description": "記事の要約情報."
+      },
+      "IPageIBbsArticle.IAbridge": {
+        "type": "object",
+        "properties": {
+          "pagination": {
+            "$ref": "#/components/schemas/IPage.IPagination",
+            "title": "ページ情報",
+            "description": "ページ情報."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IBbsArticle.IAbridge"
+            },
+            "title": "記録一覧",
+            "description": "記録一覧."
+          }
+        },
+        "required": [
+          "pagination",
+          "data"
+        ],
+        "description": "ページ。ページ番号情報を含むレコードのコレクション."
+      },
+      "IBbsArticle.IAbridge": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "主キー",
+            "description": "主キー."
+          },
+          "writer": {
+            "type": "string",
+            "title": "記事の著者",
+            "description": "記事の著者."
+          },
+          "title": {
+            "type": "string",
+            "title": "最後のスナップショットのタイトル",
+            "description": "最後のスナップショットのタイトル."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "記事の作成時間",
+            "description": "記事の作成時間."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "記事の修正日時",
+            "description": "記事の変更時刻。つまり、最後のスナップショットが作成された時刻です。."
+          },
+          "format": {
+            "$ref": "#/components/schemas/IBbsArticle.Format",
+            "title": "本文の形式",
+            "description": "本文のフォーマット。`html`、`md`、`txt` などの拡張子と同じ意味です。."
+          },
+          "body": {
+            "type": "string",
+            "title": "記事の内容本文",
+            "description": "記事の内容本文."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IAttachmentFile.ICreate"
+            },
+            "title": "添付ファイルのリスト",
+            "description": "添付ファイルのリスト."
+          }
+        },
+        "required": [
+          "id",
+          "writer",
+          "title",
+          "created_at",
+          "updated_at",
+          "format",
+          "body",
+          "files"
+        ],
+        "description": "記事の要約情報."
+      },
+      "IBbsArticle.Format": {
+        "oneOf": [
+          {
+            "const": "txt"
+          },
+          {
+            "const": "md"
+          },
+          {
+            "const": "html"
+          }
+        ]
+      },
+      "IAttachmentFile.ICreate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 255,
+            "title": "拡張子を除くファイル名",
+            "description": "拡張子を除くファイル名."
+          },
+          "extension": {
+            "oneOf": [
+              {
+                "type": "string",
+                "maxLength": 8,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "拡大",
+            "description": "拡張子。`README` のように省略可能."
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "contentMediaType": "application/octet-stream",
+            "title": "実際のファイルのURLパス",
+            "description": "実際のファイルのURLパス."
+          }
+        },
+        "required": [
+          "name",
+          "extension",
+          "url"
+        ]
+      },
+      "IBbsArticle": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "主キー",
+            "description": "主キー.",
+            "x-special-description": "Sommetimes made by database automatically."
+          },
+          "writer": {
+            "type": "string",
+            "title": "記事の著者",
+            "description": "記事の著者."
+          },
+          "snapshots": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IBbsArticle.ISnapshot"
+            },
+            "minItems": 1,
+            "title": "スナップショットの内容一覧",
+            "description": "スナップショットの内容の一覧。記事作成時に初めて作成され、記事が変更されるたびに蓄積されます。."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "記事作成時間",
+            "description": "記事作成時間."
+          }
+        },
+        "required": [
+          "id",
+          "writer",
+          "snapshots",
+          "created_at"
+        ],
+        "description": "記事エンティティ。 `IBbsArticle* は、現在のバックエンドシステムにあるあらゆる種類の記事のスーパータイプのエンティティであり、文字通り掲示板の個々の記事を形作っています。 そして、ご覧のとおり、記事に必ず存在しなければならない要素、たとえば `title` や `body` は `IBbsArticle` には存在せず、補助エンティティである {@link IBbsArticle.ISnapshot } に 1:N の関係で存在します。 これは、記事が変更されるたびに新しいスナップショットレコードが公開されるためです。 記事が変更されるたびに新しいスナップショットレコードが公開される理由は、証拠を保存するためです。 e-コミュニティの性質上、参加者の間で紛争が発生する可能性は常にあります。 そして、記事や {@link IBbsArticleComment コメント} を通じて紛争が発生する可能性があり、既存の記事を変更して状況を操作するなどの行為を防ぐために、記事はこのような構造に設計されています。 つまり、証拠を保存し、詐欺を防止するためです。."
+      },
+      "IBbsArticle.ISnapshot": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "主キー",
+            "description": "主キー."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "スナップショットレコードの作成時刻",
+            "description": "スナップショットレコードの作成時刻。つまり、作成時刻または更新時刻または記事."
+          },
+          "format": {
+            "$ref": "#/components/schemas/IBbsArticle.Format",
+            "title": "本文の形式",
+            "description": "本文のフォーマット。`html`、`md`、`txt` などの拡張子と同じ意味です。."
+          },
+          "body": {
+            "type": "string",
+            "title": "記事の内容本文",
+            "description": "記事の内容本文."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IAttachmentFile.ICreate"
+            },
+            "title": "添付ファイルのリスト",
+            "description": "添付ファイルのリスト."
+          },
+          "title": {
+            "type": "string",
+            "title": "記事のタイトル",
+            "description": "記事のタイトル."
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "format",
+          "body",
+          "files",
+          "title"
+        ],
+        "description": "記事のスナップショット。 `IBbsArticle.ISnapshot` は記事の内容を含むスナップショットエンティティです。{@link IBbsArticle } で述べたように、記事の内容は証拠を保存し、不正を防ぐために記事レコードから分離されています。."
+      },
+      "IBbsArticle.ICreate": {
+        "type": "object",
+        "properties": {
+          "writer": {
+            "type": "string"
+          },
+          "format": {
+            "oneOf": [
+              {
+                "const": "txt"
+              },
+              {
+                "const": "md"
+              },
+              {
+                "const": "html"
+              }
+            ],
+            "title": "本文の形式",
+            "description": "本文のフォーマット。`html`、`md`、`txt` などの拡張子と同じ意味です。."
+          },
+          "title": {
+            "type": "string",
+            "title": "記事のタイトル",
+            "description": "記事のタイトル."
+          },
+          "body": {
+            "type": "string",
+            "title": "記事の内容本文",
+            "description": "記事の内容本文."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IAttachmentFile.ICreate"
+            },
+            "title": "添付ファイルのリスト",
+            "description": "添付ファイルのリスト."
+          },
+          "password": {
+            "type": "string",
+            "title": "変更用パスワード",
+            "description": "変更用パスワード."
+          }
+        },
+        "required": [
+          "writer",
+          "format",
+          "title",
+          "body",
+          "files",
+          "password"
+        ],
+        "description": "記事のコンテンツタイプを保存する."
+      },
+      "IBbsArticle.IUpdate": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "oneOf": [
+              {
+                "const": "txt"
+              },
+              {
+                "const": "md"
+              },
+              {
+                "const": "html"
+              }
+            ],
+            "title": "本文の形式",
+            "description": "本文のフォーマット。`html`、`md`、`txt` などの拡張子と同じ意味です。."
+          },
+          "title": {
+            "type": "string",
+            "title": "記事のタイトル",
+            "description": "記事のタイトル."
+          },
+          "body": {
+            "type": "string",
+            "title": "記事の内容本文",
+            "description": "記事の内容本文."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IAttachmentFile.ICreate"
+            },
+            "title": "添付ファイルのリスト",
+            "description": "添付ファイルのリスト."
+          },
+          "password": {
+            "type": "string",
+            "title": "変更用パスワード",
+            "description": "変更用パスワード."
+          }
+        },
+        "required": [
+          "format",
+          "title",
+          "body",
+          "files",
+          "password"
+        ]
+      },
+      "IBbsArticle.IErase": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "password"
+        ]
+      },
+      "IBbsArticleComment.IRequest": {
+        "type": "object",
+        "properties": {
+          "search": {
+            "$ref": "#/components/schemas/IBbsArticleComment.IRequest.ISearch"
+          },
+          "sort": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "const": "-writer"
+                },
+                {
+                  "const": "-created_at"
+                },
+                {
+                  "const": "+writer"
+                },
+                {
+                  "const": "+created_at"
+                }
+              ]
+            }
+          },
+          "page": {
+            "type": "integer",
+            "title": "ページ番号",
+            "description": "ページ番号."
+          },
+          "limit": {
+            "type": "integer",
+            "default": 100,
+            "title": "1ページあたりのレコード数の制限",
+            "description": "1ページあたりのレコード数の制限."
+          }
+        }
+      },
+      "IBbsArticleComment.IRequest.ISearch": {
+        "type": "object",
+        "properties": {
+          "writer": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          }
+        }
+      },
+      "IPageIBbsArticleComment": {
+        "type": "object",
+        "properties": {
+          "pagination": {
+            "$ref": "#/components/schemas/IPage.IPagination",
+            "title": "ページ情報",
+            "description": "ページ情報."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IBbsArticleComment"
+            },
+            "title": "記録一覧",
+            "description": "記録一覧."
+          }
+        },
+        "required": [
+          "pagination",
+          "data"
+        ],
+        "description": "ページ。ページ番号情報を含むレコードのコレクション."
+      },
+      "IBbsArticleComment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "主キー",
+            "description": "主キー."
+          },
+          "parent_id": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "親コメントのID",
+            "description": "親コメントのID."
+          },
+          "writer": {
+            "type": "string",
+            "title": "コメントの投稿者",
+            "description": "コメントの投稿者."
+          },
+          "snapshots": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IBbsArticleComment.ISnapshot"
+            },
+            "minItems": 1,
+            "title": "スナップショットの内容一覧",
+            "description": "スナップショットの内容のリスト。コメントの作成時に初めて作成され、コメントが変更されるたびに蓄積されます。."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "コメントの作成時間",
+            "description": "コメントの作成時間."
+          }
+        },
+        "required": [
+          "id",
+          "parent_id",
+          "writer",
+          "snapshots",
+          "created_at"
+        ],
+        "description": "記事に書き込まれたコメント。`IBbsArticleComment` は記事に書き込まれたコメントを形作るエンティティです。そしてこのコメントは、前述の {@link IBbsArticle } と {@link IBbsArticle.ISnapshot } の関係と同様に、コメントのコンテンツ本体は証拠主義のためにサブ {@link IBbsArticleComment.ISnapshot } テーブルに格納され、コメントが変更されるたびに新しいスナップショットレコードが発行されます。また、`IBbsArticleComment` は {@link IBbsArticleComment.parent_id } 属性を通じて階層的な返信構造の関係を表現しています。."
+      },
+      "IBbsArticleComment.ISnapshot": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "主キー",
+            "description": "主キー."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "スナップショットレコードの作成時刻",
+            "description": "スナップショットレコードの作成時刻。つまり、作成時刻、更新時刻、コメント."
+          },
+          "format": {
+            "$ref": "#/components/schemas/IBbsArticleComment.Format",
+            "title": "本文の形式",
+            "description": "本文のフォーマット。`html`、`md`、`txt` などの拡張子と同じ意味です。."
+          },
+          "body": {
+            "type": "string",
+            "title": "コメントの内容本文",
+            "description": "コメントの内容本文."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IAttachmentFile.ICreate"
+            },
+            "title": "添付ファイルのリスト",
+            "description": "添付ファイルのリスト."
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "format",
+          "body",
+          "files"
+        ],
+        "description": "コメントのスナップショット。`IBbsArticleComment.ISnapshot` はコメントの内容を含むスナップショットエンティティです。{@link IBbsArticleComment } で述べたように、証拠を保存し、不正行為を防止するように設計されています。."
+      },
+      "IBbsArticleComment.Format": {
+        "oneOf": [
+          {
+            "const": "txt"
+          },
+          {
+            "const": "md"
+          },
+          {
+            "const": "html"
+          }
+        ]
+      },
+      "IBbsArticleComment.ICreate": {
+        "type": "object",
+        "properties": {
+          "writer": {
+            "type": "string",
+            "title": "コメントの投稿者",
+            "description": "コメントの投稿者."
+          },
+          "format": {
+            "oneOf": [
+              {
+                "const": "txt"
+              },
+              {
+                "const": "md"
+              },
+              {
+                "const": "html"
+              }
+            ],
+            "title": "本文の形式",
+            "description": "本文のフォーマット。`html`、`md`、`txt` などの拡張子と同じ意味です。."
+          },
+          "body": {
+            "type": "string",
+            "title": "コメントの内容本文",
+            "description": "コメントの内容本文."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IAttachmentFile.ICreate"
+            },
+            "title": "添付ファイルのリスト",
+            "description": "添付ファイルのリスト."
+          },
+          "password": {
+            "type": "string",
+            "title": "変更用パスワード",
+            "description": "変更用パスワード."
+          }
+        },
+        "required": [
+          "writer",
+          "format",
+          "body",
+          "files",
+          "password"
+        ]
+      },
+      "IBbsArticleComment.IUpdate": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "oneOf": [
+              {
+                "const": "txt"
+              },
+              {
+                "const": "md"
+              },
+              {
+                "const": "html"
+              }
+            ],
+            "title": "本文の形式",
+            "description": "本文のフォーマット。`html`、`md`、`txt` などの拡張子と同じ意味です。."
+          },
+          "body": {
+            "type": "string",
+            "title": "コメントの内容本文",
+            "description": "コメントの内容本文."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IAttachmentFile.ICreate"
+            },
+            "title": "添付ファイルのリスト",
+            "description": "添付ファイルのリスト."
+          },
+          "password": {
+            "type": "string",
+            "title": "変更用パスワード",
+            "description": "変更用パスワード."
+          }
+        },
+        "required": [
+          "format",
+          "body",
+          "files",
+          "password"
+        ]
+      },
+      "IBbsArticleComment.IErase": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "password"
+        ]
+      },
+      "IPerformance": {
+        "type": "object",
+        "properties": {
+          "cpu": {
+            "$ref": "#/components/schemas/process.global.NodeJS.CpuUsage"
+          },
+          "memory": {
+            "$ref": "#/components/schemas/process.global.NodeJS.MemoryUsage"
+          },
+          "resource": {
+            "$ref": "#/components/schemas/process.global.NodeJS.ResourceUsage"
+          }
+        },
+        "required": [
+          "cpu",
+          "memory",
+          "resource"
+        ]
+      },
+      "process.global.NodeJS.CpuUsage": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "number"
+          },
+          "system": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "user",
+          "system"
+        ]
+      },
+      "process.global.NodeJS.MemoryUsage": {
+        "type": "object",
+        "properties": {
+          "rss": {
+            "type": "number"
+          },
+          "heapTotal": {
+            "type": "number"
+          },
+          "heapUsed": {
+            "type": "number"
+          },
+          "external": {
+            "type": "number"
+          },
+          "arrayBuffers": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "rss",
+          "heapTotal",
+          "heapUsed",
+          "external",
+          "arrayBuffers"
+        ]
+      },
+      "process.global.NodeJS.ResourceUsage": {
+        "type": "object",
+        "properties": {
+          "fsRead": {
+            "type": "number"
+          },
+          "fsWrite": {
+            "type": "number"
+          },
+          "involuntaryContextSwitches": {
+            "type": "number"
+          },
+          "ipcReceived": {
+            "type": "number"
+          },
+          "ipcSent": {
+            "type": "number"
+          },
+          "majorPageFault": {
+            "type": "number"
+          },
+          "maxRSS": {
+            "type": "number"
+          },
+          "minorPageFault": {
+            "type": "number"
+          },
+          "sharedMemorySize": {
+            "type": "number"
+          },
+          "signalsCount": {
+            "type": "number"
+          },
+          "swappedOut": {
+            "type": "number"
+          },
+          "systemCPUTime": {
+            "type": "number"
+          },
+          "unsharedDataSize": {
+            "type": "number"
+          },
+          "unsharedStackSize": {
+            "type": "number"
+          },
+          "userCPUTime": {
+            "type": "number"
+          },
+          "voluntaryContextSwitches": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "fsRead",
+          "fsWrite",
+          "involuntaryContextSwitches",
+          "ipcReceived",
+          "ipcSent",
+          "majorPageFault",
+          "maxRSS",
+          "minorPageFault",
+          "sharedMemorySize",
+          "signalsCount",
+          "swappedOut",
+          "systemCPUTime",
+          "unsharedDataSize",
+          "unsharedStackSize",
+          "userCPUTime",
+          "voluntaryContextSwitches"
+        ]
+      },
+      "ISystem": {
+        "type": "object",
+        "properties": {
+          "uid": {
+            "type": "number",
+            "title": "ランダムなユニークID",
+            "description": "ランダムなユニークID."
+          },
+          "arguments": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "プロセス",
+            "description": "`プロセス.argv`"
+          },
+          "commit": {
+            "$ref": "#/components/schemas/ISystem.ICommit",
+            "title": "Gitコミット情報",
+            "description": "Gitコミット情報."
+          },
+          "package": {
+            "$ref": "#/components/schemas/ISystem.IPackage",
+            "title": "`パッケージ",
+            "description": "`package.json`"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "このサーバーの作成時間",
+            "description": "このサーバーの作成時間."
+          }
+        },
+        "required": [
+          "uid",
+          "arguments",
+          "commit",
+          "package",
+          "created_at"
+        ],
+        "description": "システム情報."
+      },
+      "ISystem.ICommit": {
+        "type": "object",
+        "properties": {
+          "shortHash": {
+            "type": "string"
+          },
+          "branch": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "sanitizedSubject": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "author": {
+            "$ref": "#/components/schemas/ISystem.ICommit.IUser"
+          },
+          "committer": {
+            "$ref": "#/components/schemas/ISystem.ICommit.IUser"
+          },
+          "authored_at": {
+            "type": "string"
+          },
+          "commited_at": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "shortHash",
+          "branch",
+          "hash",
+          "subject",
+          "sanitizedSubject",
+          "body",
+          "author",
+          "committer",
+          "authored_at",
+          "commited_at",
+          "tags"
+        ],
+        "description": "Gitコミット情報."
+      },
+      "ISystem.ICommit.IUser": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "email"
+        ],
+        "description": "Git ユーザーアカウント情報."
+      },
+      "ISystem.IPackage": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "main": {
+            "type": "string"
+          },
+          "typings": {
+            "type": "string"
+          },
+          "scripts": {
+            "$ref": "#/components/schemas/Recordstringstring"
+          },
+          "repository": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "git"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "url"
+            ]
+          },
+          "author": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "bugs": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "url"
+            ]
+          },
+          "homepage": {
+            "type": "string"
+          },
+          "devDependencies": {
+            "$ref": "#/components/schemas/Recordstringstring"
+          },
+          "dependencies": {
+            "$ref": "#/components/schemas/Recordstringstring"
+          },
+          "publishConfig": {
+            "type": "object",
+            "properties": {
+              "registry": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "registry"
+            ]
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "version",
+          "description",
+          "scripts",
+          "repository",
+          "author",
+          "license",
+          "bugs",
+          "homepage",
+          "dependencies"
+        ],
+        "description": "NPM パッケージ情報."
+      },
+      "Recordstringstring": {
+        "type": "object",
+        "properties": {},
+        "description": "型TのプロパティKのセットを持つ型を構築する"
+      }
+    }
+  },
+  "x-samchon-emended": true
+}

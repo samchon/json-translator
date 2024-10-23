@@ -1,0 +1,2582 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ClickHouse Cloud の OpenAPI 仕様",
+    "version": "1.0",
+    "contact": {
+      "name": "ClickHouse Support",
+      "url": "https://clickhouse.com/docs/en/cloud/manage/openapi?referrer=openapi-82913",
+      "email": "support@clickhouse.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.clickhouse.cloud"
+    }
+  ],
+  "paths": {
+    "/v1/organizations": {
+      "get": {
+        "summary": "利用可能な組織のリストを取得する",
+        "description": "リクエスト内のAPIキーに関連付けられた単一の組織のリストを返します。.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Organization"
+                      }
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId": {
+      "get": {
+        "summary": "組織の詳細を取得する",
+        "description": "単一の組織の詳細を返します。詳細を取得するには、認証キーが組織に属している必要があります。.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "要求された組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Organization"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "組織の詳細を更新する",
+        "description": "組織フィールドを更新します。ADMIN 認証キーロールが必要です.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "更新する組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationPatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Organization"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId/services": {
+      "get": {
+        "summary": "組織サービス一覧",
+        "description": "組織内のすべてのサービスのリストを返します.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "要求された組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Service"
+                      }
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "新しいサービスを作成する",
+        "description": "組織内に新しいサービスを作成し、現在のサービス状態とサービスにアクセスするためのパスワードを返します。サービスは非同期的に開始されます。.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "サービスを所有する組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServicePostRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/ServicePostResponse"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId/services/:serviceId": {
+      "get": {
+        "summary": "サービスの詳細を取得する",
+        "description": "組織に属するサービスを返します",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "サービスを所有する組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Service ID",
+            "description": "要求されたサービスのID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Service"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "サービスの基本情報を更新する.",
+        "description": "サービス名やIPアクセスリストなどの基本的なサービス詳細を更新します.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "サービスを所有する組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Service ID",
+            "description": "更新するサービスのID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServicePatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Service"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "サービスを削除.",
+        "description": "サービスを削除します。サービスは停止状態である必要があり、このメソッド呼び出し後に非同期的に削除されます。.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "サービスを所有する組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Service ID",
+            "description": "削除するサービスのID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/organizations/:organizationId/services/:serviceId/state": {
+      "patch": {
+        "summary": "サービス状態の更新.",
+        "description": "サービスを開始または停止する",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "サービスを所有する組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Service ID",
+            "description": "状態を更新するサービスのID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceStatePatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Service"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId/services/:serviceId/scaling": {
+      "patch": {
+        "summary": "サービスの自動スケーリング設定を更新する.",
+        "description": "サービスの最小および最大合計メモリ制限とアイドル モードのスケーリング動作を更新します。メモリ設定は「プロダクション」サービスでのみ使用可能で、24 GB から始まる 12 の倍数である必要があります。.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "サービスを所有する組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Service ID",
+            "description": "スケーリングパラメータを更新するサービスのID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceScalingPatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Service"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId/services/:serviceId/password": {
+      "patch": {
+        "summary": "サービスパスワードを更新する.",
+        "description": "サービスの新しいパスワードを設定します",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "サービスを所有する組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Service ID",
+            "description": "パスワードを更新するサービスのID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServicePasswordPatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/ServicePasswordPatchResponse"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId/services/:serviceId/backups": {
+      "get": {
+        "summary": "サービス バックアップのリスト",
+        "description": "サービスのすべてのバックアップのリストを返します.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "バックアップを所有する組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Service ID",
+            "description": "バックアップが作成されたサービスのID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Backup"
+                      }
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId/services/:serviceId/backups/:backupId": {
+      "get": {
+        "summary": "バックアップの詳細を取得する",
+        "description": "単一のバックアップ情報を返します.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "バックアップを所有する組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Service ID",
+            "description": "バックアップが作成されたサービスのID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Service backup ID",
+            "description": "要求されたバックアップのID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Backup"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId/keys": {
+      "get": {
+        "summary": "すべてのキーのリストを取得する",
+        "description": "組織内のすべてのキーのリストを返します.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "要求された組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ApiKey"
+                      }
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "キーを作成",
+        "description": "新しいAPIキーを作成します.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "キーを所有する組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiKeyPostRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/ApiKeyPostResponse"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId/keys/:keyId": {
+      "get": {
+        "summary": "重要な詳細を取得する",
+        "description": "単一のキーの詳細を返します.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "要求された組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "API key ID",
+            "description": "要求されたキーのID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/ApiKey"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "更新キー",
+        "description": "APIキーのプロパティを更新します.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "キーを所有する組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "API key ID",
+            "description": "更新するキーのID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiKeyPatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/ApiKey"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "削除キー",
+        "description": "APIキーを削除します。アクティブなリクエストの認証に使用されていないキーのみ削除できます。.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "キーを所有する組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "API key ID",
+            "description": "削除するキーのID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/organizations/:organizationId/members": {
+      "get": {
+        "summary": "組織メンバーの一覧",
+        "description": "組織内のすべてのメンバーのリストを返します.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "要求された組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Member"
+                      }
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId/members/:userId": {
+      "get": {
+        "summary": "メンバーの詳細を取得する",
+        "description": "単一の組織メンバーの詳細を返します.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "メンバーが所属する組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "User ID",
+            "description": "要求されたユーザーのID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Member"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "組織メンバーの更新.",
+        "description": "組織メンバーの役割を更新.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "メンバーが所属する組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "User ID",
+            "description": "パッチを適用するユーザーのID",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MemberPatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Member"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "組織メンバーを削除する",
+        "description": "組織からユーザーを削除します",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "要求された組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "User ID",
+            "description": "要求されたユーザーのID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/organizations/:organizationId/invitations": {
+      "get": {
+        "summary": "すべての招待状を一覧表示する",
+        "description": "すべての組織の招待のリストを返します.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "要求された組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Invitation"
+                      }
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "招待状を作成する",
+        "description": "組織の招待状を作成する.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "ユーザーを招待する組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvitationPostRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Invitation"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId/invitations/:invitationId": {
+      "get": {
+        "summary": "招待の詳細を取得する",
+        "description": "単一の組織招待の詳細を返します.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "要求された組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Organization invitation ID",
+            "description": "要求された組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Invitation"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "組織の招待を削除する",
+        "description": "単一の組織招待を削除します.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "招待を受けた組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Organization invitation ID",
+            "description": "要求された組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/organizations/:organizationId/activities": {
+      "get": {
+        "summary": "団体活動一覧",
+        "description": "すべての組織活動のリストを返します.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "要求された組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Activity"
+                      }
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId/activities/:activityId": {
+      "get": {
+        "summary": "組織活動",
+        "description": "IDで単一の組織アクティビティを返します.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "要求された組織のID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Activity ID",
+            "description": "要求されたアクティビティのID.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "応答成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Activity"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "すべてのリクエストに割り当てられる一意の ID。UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "クライアントエラーと思われる何らかの原因により、サーバーがリクエストを処理できない、または処理しない.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP ステータス コード.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "詳細なエラーの説明."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ServiceEndpoint": {
+        "properties": {
+          "protocol": {
+            "type": "string",
+            "description": "エンドポイント プロトコル: &#39;https&#39;、&#39;nativesecure&#39;、&#39;mysql&#39;.",
+            "enum": [
+              "https",
+              "nativesecure",
+              "mysql"
+            ]
+          },
+          "host": {
+            "type": "string",
+            "description": "サービスホスト名"
+          },
+          "port": {
+            "type": "number",
+            "description": "数値ポート"
+          }
+        }
+      },
+      "IpAccessListEntry": {
+        "properties": {
+          "source": {
+            "type": "string",
+            "description": "IP または CIDR"
+          },
+          "description": {
+            "type": "string",
+            "description": "IPv4アドレスまたはIPv4 CIDRでアクセスを許可する"
+          }
+        }
+      },
+      "Service": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "固有のサービスID.",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "サービス名."
+          },
+          "provider": {
+            "type": "string",
+            "description": "クラウドプロバイダー",
+            "enum": [
+              "aws",
+              "gcp"
+            ]
+          },
+          "region": {
+            "type": "string",
+            "description": "サービス地域.",
+            "enum": [
+              "ap-south-1",
+              "ap-southeast-1",
+              "eu-central-1",
+              "eu-west-1",
+              "us-east-1",
+              "us-east-2",
+              "us-west-2",
+              "ap-southeast-2",
+              "us-east1",
+              "us-central1",
+              "europe-west4",
+              "asia-southeast1"
+            ]
+          },
+          "state": {
+            "type": "string",
+            "description": "サービスの現状.",
+            "enum": [
+              "starting",
+              "stopping",
+              "terminating",
+              "provisioning",
+              "running",
+              "stopped",
+              "terminated",
+              "degraded",
+              "failed",
+              "idle"
+            ]
+          },
+          "endpoints": {
+            "type": "array",
+            "description": "すべてのサービスエンドポイントのリスト.",
+            "items": {
+              "$ref": "#/components/schemas/ServiceEndpoint"
+            }
+          },
+          "tier": {
+            "type": "string",
+            "description": "サービスの階層: 「開発」、「本番」、「専用高メモリ」、「専用高CPU」、「専用標準」。本番サービスのスケール、開発は固定サイズです.",
+            "enum": [
+              "development",
+              "production",
+              "dedicated_high_mem",
+              "dedicated_high_cpu",
+              "dedicated_standard"
+            ]
+          },
+          "minTotalMemoryGb": {
+            "type": "number",
+            "description": "自動スケーリング中のすべてのワーカーの最小合計メモリ（GB）。「本番」サービスでのみ使用可能。12 の倍数で、24 より大きい必要があります。.",
+            "minimum": 24,
+            "maximum": 720,
+            "multipleOf": 12,
+            "example": 48
+          },
+          "maxTotalMemoryGb": {
+            "type": "number",
+            "description": "自動スケーリング中のすべてのワーカーの最大合計メモリ (GB)。「プロダクション」サービスでのみ使用できます。無料サービスの場合は 12 の倍数で 360 未満、有料サービスの場合は 720 未満である必要があります。.",
+            "minimum": 24,
+            "maximum": 720,
+            "multipleOf": 12,
+            "example": 360
+          },
+          "idleScaling": {
+            "type": "boolean",
+            "description": "true に設定すると、アイドル時にサービスがゼロにスケールダウンされます。開発サービスでは常に true です。."
+          },
+          "idleTimeoutMinutes": {
+            "type": "number",
+            "description": "最小アイドルタイムアウトを設定します（分単位）。5分以上である必要があります."
+          },
+          "ipAccessList": {
+            "type": "array",
+            "description": "サービスへのアクセスが許可された IP アドレスのリスト",
+            "items": {
+              "$ref": "#/components/schemas/IpAccessListEntry"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "サービス作成タイムスタンプ。ISO-8601.",
+            "format": "date-time"
+          }
+        }
+      },
+      "IpAccessListPatch": {
+        "properties": {
+          "add": {
+            "type": "array",
+            "description": "追加する要素。「削除」部分が処理された後に実行されます.",
+            "items": {
+              "$ref": "#/components/schemas/IpAccessListEntry"
+            }
+          },
+          "remove": {
+            "type": "array",
+            "description": "削除する要素。「追加」部分が処理される前に実行されます.",
+            "items": {
+              "$ref": "#/components/schemas/IpAccessListEntry"
+            }
+          }
+        }
+      },
+      "Activity": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "一意のアクティビティID."
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "アクティビティのタイムスタンプ。ISO-8601.",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "string",
+            "description": "活動の種類.",
+            "enum": [
+              "organization_update_name",
+              "organization_invite_create",
+              "organization_invite_delete",
+              "organization_member_join",
+              "organization_member_add",
+              "organization_member_leave",
+              "organization_member_delete",
+              "organization_member_update_role",
+              "key_create",
+              "key_delete",
+              "service_create",
+              "service_start",
+              "service_stop",
+              "service_delete",
+              "service_update_name",
+              "service_update_ip_access_list",
+              "service_update_autoscaling_memory",
+              "service_update_autoscaling_idling",
+              "service_update_password",
+              "backup_delete"
+            ]
+          },
+          "actorType": {
+            "type": "string",
+            "description": "アクターのタイプ: 「ユーザー」、「サポート」、「システム」、「API」.",
+            "enum": [
+              "user",
+              "support",
+              "system",
+              "api"
+            ]
+          },
+          "actorId": {
+            "type": "string",
+            "description": "ユニークな俳優ID."
+          },
+          "actorDetails": {
+            "type": "string",
+            "description": "俳優に関する追加情報."
+          },
+          "actorIpAddress": {
+            "type": "string",
+            "description": "アクターの IP アドレス。&#39;user&#39; および &#39;api&#39; アクター タイプで定義されます。."
+          },
+          "organizationId": {
+            "type": "string",
+            "description": "活動の範囲: この活動が関連する組織ID."
+          },
+          "serviceId": {
+            "type": "string",
+            "description": "アクティビティの範囲: このアクティビティが関連するサービスID."
+          }
+        }
+      },
+      "Backup": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "一意のバックアップID.",
+            "format": "uuid"
+          },
+          "status": {
+            "type": "string",
+            "description": "バックアップのステータス: 「完了」、「エラー」、「進行中」.",
+            "enum": [
+              "done",
+              "error",
+              "in_progress"
+            ]
+          },
+          "serviceId": {
+            "type": "string",
+            "description": "名前"
+          },
+          "startedAt": {
+            "type": "string",
+            "description": "バックアップ開始タイムスタンプ。ISO-8601.",
+            "format": "date-time"
+          },
+          "finishedAt": {
+            "type": "string",
+            "description": "バックアップ終了タイムスタンプ。ISO-8601。完了したバックアップにのみ使用可能",
+            "format": "date-time"
+          }
+        }
+      },
+      "Organization": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "固有の組織ID.",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "組織が作成されたタイムスタンプ。ISO-8601.",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string",
+            "description": "組織名."
+          }
+        }
+      },
+      "Member": {
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "固有のユーザーID。ユーザーが複数の組織のメンバーである場合、このIDは同じままになります。."
+          },
+          "name": {
+            "type": "string",
+            "description": "個人ユーザープロファイルに設定されたメンバーの名前."
+          },
+          "email": {
+            "type": "string",
+            "description": "個人ユーザープロフィールに設定されているメンバーのメールアドレス.",
+            "format": "email"
+          },
+          "role": {
+            "type": "string",
+            "description": "組織におけるメンバーの役割.",
+            "enum": [
+              "admin",
+              "developer"
+            ]
+          },
+          "joinedAt": {
+            "type": "string",
+            "description": "メンバーが組織に参加したタイムスタンプ。ISO-8601.",
+            "format": "date-time"
+          }
+        }
+      },
+      "Invitation": {
+        "properties": {
+          "role": {
+            "type": "string",
+            "description": "組織におけるメンバーの役割.",
+            "enum": [
+              "admin",
+              "developer"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "description": "固有の招待ID.",
+            "format": "uuid"
+          },
+          "email": {
+            "type": "string",
+            "description": "招待されたユーザーのメールアドレス。このメールアドレスを持つユーザーのみが招待を使用して参加できます。メールアドレスは小文字で保存されます。.",
+            "format": "email"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "招待状作成タイムスタンプ。ISO-8601.",
+            "format": "date-time"
+          },
+          "expireAt": {
+            "type": "string",
+            "description": "招待の有効期限をタイムスタンプします。ISO-8601.",
+            "format": "date-time"
+          }
+        }
+      },
+      "ApiKey": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "一意の API キー ID.",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "キーの名前"
+          },
+          "state": {
+            "type": "string",
+            "description": "キーの状態: 「有効」、「無効」.",
+            "enum": [
+              "enabled",
+              "disabled"
+            ]
+          },
+          "roles": {
+            "type": "array",
+            "description": "キーに割り当てられたロールのリスト。少なくとも 1 つの要素が含まれます。.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "admin",
+                "developer"
+              ]
+            }
+          },
+          "keySuffix": {
+            "type": "string",
+            "description": "キーの最後の4文字."
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "キーが作成されたタイムスタンプ。ISO-8601.",
+            "format": "date-time"
+          },
+          "expireAt": {
+            "type": "string",
+            "description": "キーの有効期限をタイムスタンプします。存在しないか空の場合、キーは期限切れになりません。ISO-8601.",
+            "format": "date-time"
+          },
+          "usedAt": {
+            "type": "string",
+            "description": "キーが最後に使用されたときのタイムスタンプ。存在しない場合、キーは一度も使用されていません。ISO-8601.",
+            "format": "date-time"
+          }
+        }
+      },
+      "ApiKeyHashData": {
+        "properties": {
+          "keyIdHash": {
+            "type": "string",
+            "description": "キーIDのハッシュ."
+          },
+          "keyIdSuffix": {
+            "type": "string",
+            "description": "キー ID の最後の 4 桁。アルゴリズム: echo -n &quot;yourpassword&quot; | sha256sum | tr -d &#39;-&#39; | xxd -r -p | base64"
+          },
+          "keySecretHash": {
+            "type": "string",
+            "description": "キー secret のハッシュ。アルゴリズム: echo -n &quot;yourpassword&quot; | sha256sum | tr -d &#39;-&#39; | xxd -r -p | base64"
+          }
+        }
+      },
+      "OrganizationPatchRequest": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "組織名."
+          }
+        }
+      },
+      "ServicePostRequest": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "サービス名."
+          },
+          "provider": {
+            "type": "string",
+            "description": "クラウドプロバイダー",
+            "enum": [
+              "aws",
+              "gcp"
+            ]
+          },
+          "region": {
+            "type": "string",
+            "description": "サービス地域.",
+            "enum": [
+              "ap-south-1",
+              "ap-southeast-1",
+              "eu-central-1",
+              "eu-west-1",
+              "us-east-1",
+              "us-east-2",
+              "us-west-2",
+              "ap-southeast-2",
+              "us-east1",
+              "us-central1",
+              "europe-west4",
+              "asia-southeast1"
+            ]
+          },
+          "tier": {
+            "type": "string",
+            "description": "サービスの階層: 「開発」、「本番」、「専用高メモリ」、「専用高CPU」、「専用標準」。本番サービスのスケール、開発は固定サイズです.",
+            "enum": [
+              "development",
+              "production",
+              "dedicated_high_mem",
+              "dedicated_high_cpu",
+              "dedicated_standard"
+            ]
+          },
+          "ipAccessList": {
+            "type": "array",
+            "description": "サービスへのアクセスが許可された IP アドレスのリスト",
+            "items": {
+              "$ref": "#/components/schemas/IpAccessListEntry"
+            }
+          },
+          "minTotalMemoryGb": {
+            "type": "number",
+            "description": "自動スケーリング中のすべてのワーカーの最小合計メモリ（GB）。「本番」サービスでのみ使用可能。12 の倍数で、24 より大きい必要があります。.",
+            "minimum": 24,
+            "maximum": 720,
+            "multipleOf": 12,
+            "example": 48
+          },
+          "maxTotalMemoryGb": {
+            "type": "number",
+            "description": "自動スケーリング中のすべてのワーカーの最大合計メモリ (GB)。「プロダクション」サービスでのみ使用できます。無料サービスの場合は 12 の倍数で 360 未満、有料サービスの場合は 720 未満である必要があります。.",
+            "minimum": 24,
+            "maximum": 720,
+            "multipleOf": 12,
+            "example": 360
+          },
+          "idleScaling": {
+            "type": "boolean",
+            "description": "true に設定すると、アイドル時にサービスがゼロにスケールダウンされます。開発サービスでは常に true です。."
+          },
+          "idleTimeoutMinutes": {
+            "type": "number",
+            "description": "最小アイドルタイムアウトを設定します（分単位）。5分以上である必要があります."
+          },
+          "backupId": {
+            "type": "string",
+            "description": "新しいサービスの初期状態として使用されるオプションのバックアップ ID。使用する場合、新しいインスタンスのリージョンと層は元のインスタンスの値と同じである必要があります。.",
+            "format": "uuid"
+          }
+        }
+      },
+      "ServicePostResponse": {
+        "properties": {
+          "service": {
+            "$ref": "#/components/schemas/Service"
+          },
+          "password": {
+            "type": "string",
+            "description": "新しく作成されたサービスのパスワード."
+          }
+        }
+      },
+      "ServicePatchRequest": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "サービス名."
+          },
+          "ipAccessList": {
+            "$ref": "#/components/schemas/IpAccessListPatch"
+          }
+        }
+      },
+      "ServiceStatePatchRequest": {
+        "properties": {
+          "command": {
+            "type": "string",
+            "description": "状態を変更するコマンド: &#39;start&#39;、&#39;stop&#39;.",
+            "enum": [
+              "start",
+              "stop"
+            ]
+          }
+        }
+      },
+      "ServiceScalingPatchRequest": {
+        "properties": {
+          "minTotalMemoryGb": {
+            "type": "number",
+            "description": "自動スケーリング中のすべてのワーカーの最小合計メモリ（GB）。「本番」サービスでのみ使用可能。12 の倍数で、24 より大きい必要があります。.",
+            "minimum": 24,
+            "maximum": 720,
+            "multipleOf": 12,
+            "example": 48
+          },
+          "maxTotalMemoryGb": {
+            "type": "number",
+            "description": "自動スケーリング中のすべてのワーカーの最大合計メモリ (GB)。「プロダクション」サービスでのみ使用できます。無料サービスの場合は 12 の倍数で 360 未満、有料サービスの場合は 720 未満である必要があります。.",
+            "minimum": 24,
+            "maximum": 720,
+            "multipleOf": 12,
+            "example": 360
+          },
+          "idleScaling": {
+            "type": "boolean",
+            "description": "true に設定すると、アイドル時にサービスがゼロにスケールダウンされます。開発サービスでは常に true です。."
+          },
+          "idleTimeoutMinutes": {
+            "type": "number",
+            "description": "最小アイドルタイムアウトを設定します（分単位）。5分以上である必要があります."
+          }
+        }
+      },
+      "ServicePasswordPatchRequest": {
+        "properties": {
+          "newPasswordHash": {
+            "type": "string",
+            "description": "オプションのパスワード ハッシュ。ネットワーク経由でのパスワードの送信を回避するために使用されます。指定しない場合は、新しいパスワードが生成され、応答で提供されます。それ以外の場合は、このハッシュが使用されます。アルゴリズム: echo -n &quot;yourpassword&quot; | sha256sum | tr -d &#39;-&#39; | xxd -r -p | base64"
+          },
+          "newDoubleSha1Hash": {
+            "type": "string",
+            "description": "MySQL プロトコルのオプションの二重 SHA1 パスワード ハッシュ。newPasswordHash が指定されていない場合、このキーは無視され、生成されたパスワードが使用されます。このフィールドを有効にするには、実験段階であるためサポートにお問い合わせください。アルゴリズム: echo -n &quot;yourpassword&quot; | sha1sum | tr -d &#39;-&#39; | xxd -r -p | sha1sum | tr -d &#39;-&#39;"
+          }
+        }
+      },
+      "ServicePasswordPatchResponse": {
+        "properties": {
+          "password": {
+            "type": "string",
+            "description": "新しいサービスパスワード。リクエストに「newPasswordHash」が含まれていない場合にのみ提供されます。"
+          }
+        }
+      },
+      "ApiKeyPostRequest": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "キーの名前."
+          },
+          "expireAt": {
+            "type": "string",
+            "description": "キーの有効期限をタイムスタンプします。存在しないか空の場合、キーは期限切れになりません。ISO-8601.",
+            "format": "date-time"
+          },
+          "state": {
+            "type": "string",
+            "description": "キーの初期状態: &#39;有効&#39;、&#39;無効&#39;。指定しない場合、新しいキーは &#39;有効&#39; になります。.",
+            "enum": [
+              "enabled",
+              "disabled"
+            ]
+          },
+          "hashData": {
+            "$ref": "#/components/schemas/ApiKeyHashData"
+          },
+          "roles": {
+            "type": "array",
+            "description": "キーに割り当てられたロールのリスト。少なくとも 1 つの要素が含まれます。.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "admin",
+                "developer"
+              ]
+            }
+          }
+        }
+      },
+      "ApiKeyPostResponse": {
+        "properties": {
+          "key": {
+            "$ref": "#/components/schemas/ApiKey"
+          },
+          "keyId": {
+            "type": "string",
+            "description": "生成されたキーID。リクエストに「hashData」がなかった場合にのみ提供されます。."
+          },
+          "keySecret": {
+            "type": "string",
+            "description": "生成されたキーシークレット。リクエストに「hashData」がなかった場合にのみ提供されます。."
+          }
+        }
+      },
+      "ApiKeyPatchRequest": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "キーの名前"
+          },
+          "roles": {
+            "type": "array",
+            "description": "キーに割り当てられたロールのリスト。少なくとも 1 つの要素が含まれます。.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "admin",
+                "developer"
+              ]
+            }
+          },
+          "expireAt": {
+            "type": "string",
+            "description": "キーの有効期限をタイムスタンプします。存在しないか空の場合、キーは期限切れになりません。ISO-8601.",
+            "format": "date-time"
+          },
+          "state": {
+            "type": "string",
+            "description": "キーの状態: 「有効」、「無効」.",
+            "enum": [
+              "enabled",
+              "disabled"
+            ]
+          }
+        }
+      },
+      "MemberPatchRequest": {
+        "properties": {
+          "role": {
+            "type": "string",
+            "description": "組織におけるメンバーの役割.",
+            "enum": [
+              "admin",
+              "developer"
+            ]
+          }
+        }
+      },
+      "InvitationPostRequest": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "招待されたユーザーのメールアドレス。このメールアドレスを持つユーザーのみが招待を使用して参加できます。メールアドレスは小文字で保存されます。.",
+            "format": "email"
+          },
+          "role": {
+            "type": "string",
+            "description": "組織におけるメンバーの役割.",
+            "enum": [
+              "admin",
+              "developer"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "x-samchon-emended": true
+}

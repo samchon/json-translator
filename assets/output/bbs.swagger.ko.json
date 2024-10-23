@@ -1,0 +1,1663 @@
+{
+  "openapi": "3.1.0",
+  "servers": [
+    {
+      "url": "http://localhost:37001",
+      "description": "로컬 서버"
+    }
+  ],
+  "info": {
+    "version": "2.1.0",
+    "title": "@samchon/bbs-백엔드",
+    "description": "bbs를 위한 백엔드",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "paths": {
+    "/bbs/articles": {
+      "patch": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "페이지 번호 및 검색 옵션에 대한 정보 요청.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticle.IRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "페이지별로 요약된 기사.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IPageIBbsArticle.ISummary"
+                }
+              }
+            }
+          }
+        },
+        "summary": "요약된 모든 기사를 나열하세요",
+        "description": "요약된 모든 기사를 나열합니다. 페이지 번호와 검색 옵션을 사용하여 요약된 모든 기사를 나열합니다.."
+      },
+      "post": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "작성을 위한 기사정보.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticle.ICreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "새로 생성된 기사.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBbsArticle"
+                }
+              }
+            }
+          }
+        },
+        "summary": "새로운 기사를 만드세요",
+        "description": "새 기사를 만듭니다. 첫 번째 {@link IBbsArticle.ISnapshot 스냅샷}으로 새 기사를 만듭니다.."
+      }
+    },
+    "/bbs/articles/abridges": {
+      "patch": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "페이지 번호 및 검색 옵션에 대한 정보 요청.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticle.IRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "페이지가 매겨진 요약 기사.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IPageIBbsArticle.IAbridge"
+                }
+              }
+            }
+          }
+        },
+        "summary": "모든 요약된 기사를 나열하세요",
+        "description": "모든 요약된 기사를 나열합니다. 페이지 번호와 검색 옵션이 있는 모든 요약된 기사를 나열합니다.."
+      }
+    },
+    "/bbs/articles/{id}": {
+      "get": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "대상 기사",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "기사 정보",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBbsArticle"
+                }
+              }
+            }
+          }
+        },
+        "summary": "개별 기사 읽기",
+        "description": "개별 기사를 읽습니다. 모든 {@link IBbsArticle.ISnapshot 스냅샷}이 있는 기사를 읽습니다.."
+      },
+      "put": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "대상 기사",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "업데이트할 기사 정보.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticle.IUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "새로 누적된 스냅샷 정보.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBbsArticle.ISnapshot"
+                }
+              }
+            }
+          }
+        },
+        "summary": "기사 업데이트",
+        "description": "기사를 업데이트합니다. 기사에 새로운 {@link IBbsArticle.ISnapshot 스냅샷} 레코드를 축적합니다.."
+      },
+      "delete": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "대상 기사",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "해당 기사의 비밀번호.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticle.IErase"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "기사를 지우다",
+        "description": "기사를 지웁니다. 기사에 소프트 삭제를 수행합니다.."
+      }
+    },
+    "/bbs/articles/{articleId}/comments": {
+      "patch": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "페이지 번호 및 검색 옵션에 대한 정보 요청.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticleComment.IRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "페이지별로 요약된 댓글.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IPageIBbsArticleComment"
+                }
+              }
+            }
+          }
+        },
+        "summary": "요약된 모든 의견을 나열하세요",
+        "description": "요약된 모든 댓글을 나열합니다. 페이지 번호와 검색 옵션을 사용하여 요약된 모든 댓글을 나열합니다.."
+      },
+      "post": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "소속 기사",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "생성하기 위한 코멘트 정보.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticleComment.ICreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "새로 생성된 댓글.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBbsArticleComment"
+                }
+              }
+            }
+          }
+        },
+        "summary": "새로운 댓글을 작성하세요",
+        "description": "새 댓글을 만듭니다. 첫 번째 {@link IBbsArticleComment.ISnapshot 스냅샷}으로 새 댓글을 만듭니다.."
+      }
+    },
+    "/bbs/articles/{articleId}/comments/{id}": {
+      "get": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "소속 기사",
+            "required": true
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "타겟 코멘트",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "댓글 정보",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBbsArticleComment"
+                }
+              }
+            }
+          }
+        },
+        "summary": "개별 댓글 읽기",
+        "description": "개별 댓글 읽기. 모든 {@link IBbsArticleComment.ISnapshot 스냅샷}과 함께 댓글을 읽습니다.."
+      },
+      "put": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "소속 기사",
+            "required": true
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "타겟 코멘트",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "업데이트할 코멘트 정보.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticleComment.IUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "새로 누적된 스냅샷 정보.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBbsArticleComment.ISnapshot"
+                }
+              }
+            }
+          }
+        },
+        "summary": "댓글 업데이트",
+        "description": "주석을 업데이트합니다. 주석에 새로운 {@link IBbsArticleComment.ISnapshot snapshot} 레코드를 축적합니다.."
+      },
+      "delete": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "소속 기사",
+            "required": true
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "타겟 코멘트",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "댓글의 비밀번호.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticleComment.IErase"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "댓글 지우기",
+        "description": "주석을 지웁니다. 주석에 소프트 삭제를 수행합니다.."
+      }
+    },
+    "/monitors/health": {
+      "get": {
+        "tags": [
+          "Monitor"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "건강 검진 API",
+        "description": "건강 검진 API."
+      }
+    },
+    "/monitors/performance": {
+      "get": {
+        "tags": [
+          "Monitor"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "성능 정보",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IPerformance"
+                }
+              }
+            }
+          }
+        },
+        "summary": "성능 정보 얻기",
+        "description": "성능 정보를 얻으세요. CPU, 메모리 및 리소스 사용량으로 구성된 성능 정보를 얻으세요.."
+      }
+    },
+    "/monitors/system": {
+      "get": {
+        "tags": [
+          "Monitor"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "시스템 정보",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISystem"
+                }
+              }
+            }
+          }
+        },
+        "summary": "시스템 정보 얻기",
+        "description": "시스템 정보 가져오기. commit 및 패키지 정보를 사용하여 시스템 정보 가져오기."
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "IBbsArticle.IRequest": {
+        "type": "object",
+        "properties": {
+          "search": {
+            "$ref": "#/components/schemas/IBbsArticle.IRequest.ISearch",
+            "title": "검색 조건",
+            "description": "검색 조건."
+          },
+          "sort": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "const": "-writer"
+                },
+                {
+                  "const": "-title"
+                },
+                {
+                  "const": "-created_at"
+                },
+                {
+                  "const": "-updated_at"
+                },
+                {
+                  "const": "+writer"
+                },
+                {
+                  "const": "+title"
+                },
+                {
+                  "const": "+created_at"
+                },
+                {
+                  "const": "+updated_at"
+                }
+              ]
+            },
+            "title": "정렬 조건",
+            "description": "정렬 조건."
+          },
+          "page": {
+            "type": "integer",
+            "title": "페이지 번호",
+            "description": "페이지 번호."
+          },
+          "limit": {
+            "type": "integer",
+            "default": 100,
+            "title": "페이지당 레코드 수 제한",
+            "description": "페이지당 레코드 수 제한."
+          }
+        }
+      },
+      "IBbsArticle.IRequest.ISearch": {
+        "type": "object",
+        "properties": {
+          "writer": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "title_or_body": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "to": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "description": "검색 정보."
+      },
+      "IPageIBbsArticle.ISummary": {
+        "type": "object",
+        "properties": {
+          "pagination": {
+            "$ref": "#/components/schemas/IPage.IPagination",
+            "title": "페이지 정보",
+            "description": "페이지 정보."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IBbsArticle.ISummary"
+            },
+            "title": "기록 목록",
+            "description": "기록 목록."
+          }
+        },
+        "required": [
+          "pagination",
+          "data"
+        ],
+        "description": "페이지. 페이지 번호 정보가 있는 레코드 모음."
+      },
+      "IPage.IPagination": {
+        "type": "object",
+        "properties": {
+          "current": {
+            "type": "integer",
+            "title": "현재 페이지 번호",
+            "description": "현재 페이지 번호."
+          },
+          "limit": {
+            "type": "integer",
+            "default": 100,
+            "title": "페이지당 레코드 수 제한",
+            "description": "페이지당 레코드 수 제한."
+          },
+          "records": {
+            "type": "integer",
+            "title": "데이터베이스의 총 레코드",
+            "description": "데이터베이스의 총 레코드."
+          },
+          "pages": {
+            "type": "integer",
+            "title": "총 페이지 수",
+            "description": "총 페이지 수. 상한이 있는 {@link 레코드 } / {@link 제한 }과 동일."
+          }
+        },
+        "required": [
+          "current",
+          "limit",
+          "records",
+          "pages"
+        ],
+        "description": "페이지 정보."
+      },
+      "IBbsArticle.ISummary": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "기본 키",
+            "description": "기본 키."
+          },
+          "writer": {
+            "type": "string",
+            "title": "기사 작성자",
+            "description": "기사 작성자."
+          },
+          "title": {
+            "type": "string",
+            "title": "마지막 스냅샷의 제목",
+            "description": "마지막 스냅샷의 제목."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "기사 작성 시간",
+            "description": "기사 작성 시간."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "기사 수정 시간",
+            "description": "기사의 수정 시간. 즉, 마지막 스냅샷이 생성된 시간입니다.."
+          }
+        },
+        "required": [
+          "id",
+          "writer",
+          "title",
+          "created_at",
+          "updated_at"
+        ],
+        "description": "기사의 요약된 정보."
+      },
+      "IPageIBbsArticle.IAbridge": {
+        "type": "object",
+        "properties": {
+          "pagination": {
+            "$ref": "#/components/schemas/IPage.IPagination",
+            "title": "페이지 정보",
+            "description": "페이지 정보."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IBbsArticle.IAbridge"
+            },
+            "title": "기록 목록",
+            "description": "기록 목록."
+          }
+        },
+        "required": [
+          "pagination",
+          "data"
+        ],
+        "description": "페이지. 페이지 번호 정보가 있는 레코드 모음."
+      },
+      "IBbsArticle.IAbridge": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "기본 키",
+            "description": "기본 키."
+          },
+          "writer": {
+            "type": "string",
+            "title": "기사 작성자",
+            "description": "기사 작성자."
+          },
+          "title": {
+            "type": "string",
+            "title": "마지막 스냅샷의 제목",
+            "description": "마지막 스냅샷의 제목."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "기사 작성 시간",
+            "description": "기사 작성 시간."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "기사 수정 시간",
+            "description": "기사의 수정 시간. 즉, 마지막 스냅샷이 생성된 시간입니다.."
+          },
+          "format": {
+            "$ref": "#/components/schemas/IBbsArticle.Format",
+            "title": "본문 형식",
+            "description": "본문 형식. `html`, `md`, `txt`와 같은 확장자와 동일한 의미."
+          },
+          "body": {
+            "type": "string",
+            "title": "기사의 내용 본문",
+            "description": "기사의 내용 본문."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IAttachmentFile.ICreate"
+            },
+            "title": "첨부파일 목록",
+            "description": "첨부파일 목록."
+          }
+        },
+        "required": [
+          "id",
+          "writer",
+          "title",
+          "created_at",
+          "updated_at",
+          "format",
+          "body",
+          "files"
+        ],
+        "description": "기사의 요약 정보."
+      },
+      "IBbsArticle.Format": {
+        "oneOf": [
+          {
+            "const": "txt"
+          },
+          {
+            "const": "md"
+          },
+          {
+            "const": "html"
+          }
+        ]
+      },
+      "IAttachmentFile.ICreate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 255,
+            "title": "확장자를 제외한 파일 이름",
+            "description": "확장자를 제외한 파일 이름."
+          },
+          "extension": {
+            "oneOf": [
+              {
+                "type": "string",
+                "maxLength": 8,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "확대",
+            "description": "확장자. `README`와 같은 경우 생략 가능."
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "contentMediaType": "application/octet-stream",
+            "title": "실제 파일의 URL 경로",
+            "description": "실제 파일의 URL 경로."
+          }
+        },
+        "required": [
+          "name",
+          "extension",
+          "url"
+        ]
+      },
+      "IBbsArticle": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "기본 키",
+            "description": "기본 키.",
+            "x-special-description": "Sommetimes made by database automatically."
+          },
+          "writer": {
+            "type": "string",
+            "title": "기사 작성자",
+            "description": "기사 작성자."
+          },
+          "snapshots": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IBbsArticle.ISnapshot"
+            },
+            "minItems": 1,
+            "title": "스냅샷 내용 목록",
+            "description": "스냅샷 내용 목록입니다. 기사가 생성될 때 처음 생성되며, 기사가 수정될 때마다 누적됩니다.."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "기사 작성 시간",
+            "description": "기사 작성 시간."
+          }
+        },
+        "required": [
+          "id",
+          "writer",
+          "snapshots",
+          "created_at"
+        ],
+        "description": "기사 엔터티. `IBbsArticle*은 현재 백엔드 시스템에서 모든 종류의 기사의 슈퍼 타입 엔터티로, 문자 그대로 게시판의 개별 기사를 형성합니다. 그리고 보시다시피, `제목`이나 `본문`과 같이 기사에 필연적으로 존재해야 하는 요소는 `IBbsArticle`에 존재하지 않고, 하위 엔터티인 {@link IBbsArticle.ISnapshot}에 1:N 관계로 존재합니다. 그 이유는 기사가 수정될 때마다 새로운 스냅샷 레코드가 게시되기 때문입니다. 기사가 수정될 때마다 새로운 스냅샷 레코드가 게시되는 이유는 증거를 보존하기 위해서입니다. 전자 커뮤니티의 특성상 참여자 간에는 항상 분쟁의 위협이 있습니다. 그리고 기사나 {@link IBbsArticleComment 댓글}을 통해 분쟁이 발생할 수 있으며, 상황을 조작하기 위해 기존 기사를 수정하는 것과 같은 일을 방지하기 위해 기사는 이러한 구조로 설계되었습니다. 즉, 증거를 보존하고 사기를 방지하기 위해서입니다.."
+      },
+      "IBbsArticle.ISnapshot": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "기본 키",
+            "description": "기본 키."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "스냅샷 레코드 생성 시간",
+            "description": "스냅샷 레코드의 생성 시간. 즉, 생성 시간 또는 업데이트 시간 또는 기사."
+          },
+          "format": {
+            "$ref": "#/components/schemas/IBbsArticle.Format",
+            "title": "본문 형식",
+            "description": "본문 형식. `html`, `md`, `txt`와 같은 확장자와 동일한 의미."
+          },
+          "body": {
+            "type": "string",
+            "title": "기사의 내용 본문",
+            "description": "기사의 내용 본문."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IAttachmentFile.ICreate"
+            },
+            "title": "첨부파일 목록",
+            "description": "첨부파일 목록."
+          },
+          "title": {
+            "type": "string",
+            "title": "기사 제목",
+            "description": "기사 제목."
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "format",
+          "body",
+          "files",
+          "title"
+        ],
+        "description": "기사의 스냅샷. `IBbsArticle.ISnapshot`은 {@link IBbsArticle}에서 언급된 대로 기사의 내용을 포함하는 스냅샷 엔터티이며, 기사의 내용은 증거를 보관하고 사기를 방지하기 위해 기사 기록과 분리됩니다.."
+      },
+      "IBbsArticle.ICreate": {
+        "type": "object",
+        "properties": {
+          "writer": {
+            "type": "string"
+          },
+          "format": {
+            "oneOf": [
+              {
+                "const": "txt"
+              },
+              {
+                "const": "md"
+              },
+              {
+                "const": "html"
+              }
+            ],
+            "title": "본문 형식",
+            "description": "본문 형식. `html`, `md`, `txt`와 같은 확장자와 동일한 의미."
+          },
+          "title": {
+            "type": "string",
+            "title": "기사 제목",
+            "description": "기사 제목."
+          },
+          "body": {
+            "type": "string",
+            "title": "기사의 내용 본문",
+            "description": "기사의 내용 본문."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IAttachmentFile.ICreate"
+            },
+            "title": "첨부파일 목록",
+            "description": "첨부파일 목록."
+          },
+          "password": {
+            "type": "string",
+            "title": "수정을 위한 비밀번호",
+            "description": "수정을 위한 비밀번호."
+          }
+        },
+        "required": [
+          "writer",
+          "format",
+          "title",
+          "body",
+          "files",
+          "password"
+        ],
+        "description": "기사의 콘텐츠 유형을 저장합니다.."
+      },
+      "IBbsArticle.IUpdate": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "oneOf": [
+              {
+                "const": "txt"
+              },
+              {
+                "const": "md"
+              },
+              {
+                "const": "html"
+              }
+            ],
+            "title": "본문 형식",
+            "description": "본문 형식. `html`, `md`, `txt`와 같은 확장자와 동일한 의미."
+          },
+          "title": {
+            "type": "string",
+            "title": "기사 제목",
+            "description": "기사 제목."
+          },
+          "body": {
+            "type": "string",
+            "title": "기사의 내용 본문",
+            "description": "기사의 내용 본문."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IAttachmentFile.ICreate"
+            },
+            "title": "첨부파일 목록",
+            "description": "첨부파일 목록."
+          },
+          "password": {
+            "type": "string",
+            "title": "수정을 위한 비밀번호",
+            "description": "수정을 위한 비밀번호."
+          }
+        },
+        "required": [
+          "format",
+          "title",
+          "body",
+          "files",
+          "password"
+        ]
+      },
+      "IBbsArticle.IErase": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "password"
+        ]
+      },
+      "IBbsArticleComment.IRequest": {
+        "type": "object",
+        "properties": {
+          "search": {
+            "$ref": "#/components/schemas/IBbsArticleComment.IRequest.ISearch"
+          },
+          "sort": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "const": "-writer"
+                },
+                {
+                  "const": "-created_at"
+                },
+                {
+                  "const": "+writer"
+                },
+                {
+                  "const": "+created_at"
+                }
+              ]
+            }
+          },
+          "page": {
+            "type": "integer",
+            "title": "페이지 번호",
+            "description": "페이지 번호."
+          },
+          "limit": {
+            "type": "integer",
+            "default": 100,
+            "title": "페이지당 레코드 수 제한",
+            "description": "페이지당 레코드 수 제한."
+          }
+        }
+      },
+      "IBbsArticleComment.IRequest.ISearch": {
+        "type": "object",
+        "properties": {
+          "writer": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          }
+        }
+      },
+      "IPageIBbsArticleComment": {
+        "type": "object",
+        "properties": {
+          "pagination": {
+            "$ref": "#/components/schemas/IPage.IPagination",
+            "title": "페이지 정보",
+            "description": "페이지 정보."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IBbsArticleComment"
+            },
+            "title": "기록 목록",
+            "description": "기록 목록."
+          }
+        },
+        "required": [
+          "pagination",
+          "data"
+        ],
+        "description": "페이지. 페이지 번호 정보가 있는 레코드 모음."
+      },
+      "IBbsArticleComment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "기본 키",
+            "description": "기본 키."
+          },
+          "parent_id": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "부모의 댓글 ID",
+            "description": "부모의 댓글 ID."
+          },
+          "writer": {
+            "type": "string",
+            "title": "댓글 작성자",
+            "description": "댓글 작성자."
+          },
+          "snapshots": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IBbsArticleComment.ISnapshot"
+            },
+            "minItems": 1,
+            "title": "스냅샷 내용 목록",
+            "description": "스냅샷 내용 목록입니다. 댓글이 생성될 때 처음 생성되며, 댓글이 수정될 때마다 누적됩니다.."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "댓글 작성 시간",
+            "description": "댓글 작성 시간."
+          }
+        },
+        "required": [
+          "id",
+          "parent_id",
+          "writer",
+          "snapshots",
+          "created_at"
+        ],
+        "description": "기사에 작성된 댓글. `IBbsArticleComment`는 기사에 작성된 댓글을 형성하는 엔티티입니다. 그리고 이 댓글의 경우, {@link IBbsArticle}과 {@link IBbsArticle.ISnapshot} 간의 이전 관계에서와 같이, 댓글의 콘텐츠 본문은 증거성을 위해 하위 {@link IBbsArticleComment.ISnapshot} 테이블에 저장되고, 댓글이 수정될 때마다 새 스냅샷 레코드가 발행됩니다. 또한 `IBbsArticleComment`는 {@link IBbsArticleComment.parent_id} 속성을 통해 계층적 회신 구조의 관계를 표현합니다.."
+      },
+      "IBbsArticleComment.ISnapshot": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "기본 키",
+            "description": "기본 키."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "스냅샷 레코드 생성 시간",
+            "description": "스냅샷 레코드의 생성 시간. 즉, 생성 시간 또는 업데이트 시간 또는 주석."
+          },
+          "format": {
+            "$ref": "#/components/schemas/IBbsArticleComment.Format",
+            "title": "본문 형식",
+            "description": "본문 형식. `html`, `md`, `txt`와 같은 확장자와 동일한 의미."
+          },
+          "body": {
+            "type": "string",
+            "title": "댓글의 내용 본문",
+            "description": "댓글의 내용 본문."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IAttachmentFile.ICreate"
+            },
+            "title": "첨부파일 목록",
+            "description": "첨부파일 목록."
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "format",
+          "body",
+          "files"
+        ],
+        "description": "댓글의 스냅샷. `IBbsArticleComment.ISnapshot`은 댓글의 내용을 담고 있는 스냅샷 엔티티입니다. {@link IBbsArticleComment }에서 언급했듯이, 증거를 보관하고 사기를 방지하도록 설계되었습니다.."
+      },
+      "IBbsArticleComment.Format": {
+        "oneOf": [
+          {
+            "const": "txt"
+          },
+          {
+            "const": "md"
+          },
+          {
+            "const": "html"
+          }
+        ]
+      },
+      "IBbsArticleComment.ICreate": {
+        "type": "object",
+        "properties": {
+          "writer": {
+            "type": "string",
+            "title": "댓글 작성자",
+            "description": "댓글 작성자."
+          },
+          "format": {
+            "oneOf": [
+              {
+                "const": "txt"
+              },
+              {
+                "const": "md"
+              },
+              {
+                "const": "html"
+              }
+            ],
+            "title": "본문 형식",
+            "description": "본문 형식. `html`, `md`, `txt`와 같은 확장자와 동일한 의미."
+          },
+          "body": {
+            "type": "string",
+            "title": "댓글의 내용 본문",
+            "description": "댓글의 내용 본문."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IAttachmentFile.ICreate"
+            },
+            "title": "첨부파일 목록",
+            "description": "첨부파일 목록."
+          },
+          "password": {
+            "type": "string",
+            "title": "수정을 위한 비밀번호",
+            "description": "수정을 위한 비밀번호."
+          }
+        },
+        "required": [
+          "writer",
+          "format",
+          "body",
+          "files",
+          "password"
+        ]
+      },
+      "IBbsArticleComment.IUpdate": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "oneOf": [
+              {
+                "const": "txt"
+              },
+              {
+                "const": "md"
+              },
+              {
+                "const": "html"
+              }
+            ],
+            "title": "본문 형식",
+            "description": "본문 형식. `html`, `md`, `txt`와 같은 확장자와 동일한 의미."
+          },
+          "body": {
+            "type": "string",
+            "title": "댓글의 내용 본문",
+            "description": "댓글의 내용 본문."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IAttachmentFile.ICreate"
+            },
+            "title": "첨부파일 목록",
+            "description": "첨부파일 목록."
+          },
+          "password": {
+            "type": "string",
+            "title": "수정을 위한 비밀번호",
+            "description": "수정을 위한 비밀번호."
+          }
+        },
+        "required": [
+          "format",
+          "body",
+          "files",
+          "password"
+        ]
+      },
+      "IBbsArticleComment.IErase": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "password"
+        ]
+      },
+      "IPerformance": {
+        "type": "object",
+        "properties": {
+          "cpu": {
+            "$ref": "#/components/schemas/process.global.NodeJS.CpuUsage"
+          },
+          "memory": {
+            "$ref": "#/components/schemas/process.global.NodeJS.MemoryUsage"
+          },
+          "resource": {
+            "$ref": "#/components/schemas/process.global.NodeJS.ResourceUsage"
+          }
+        },
+        "required": [
+          "cpu",
+          "memory",
+          "resource"
+        ]
+      },
+      "process.global.NodeJS.CpuUsage": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "number"
+          },
+          "system": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "user",
+          "system"
+        ]
+      },
+      "process.global.NodeJS.MemoryUsage": {
+        "type": "object",
+        "properties": {
+          "rss": {
+            "type": "number"
+          },
+          "heapTotal": {
+            "type": "number"
+          },
+          "heapUsed": {
+            "type": "number"
+          },
+          "external": {
+            "type": "number"
+          },
+          "arrayBuffers": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "rss",
+          "heapTotal",
+          "heapUsed",
+          "external",
+          "arrayBuffers"
+        ]
+      },
+      "process.global.NodeJS.ResourceUsage": {
+        "type": "object",
+        "properties": {
+          "fsRead": {
+            "type": "number"
+          },
+          "fsWrite": {
+            "type": "number"
+          },
+          "involuntaryContextSwitches": {
+            "type": "number"
+          },
+          "ipcReceived": {
+            "type": "number"
+          },
+          "ipcSent": {
+            "type": "number"
+          },
+          "majorPageFault": {
+            "type": "number"
+          },
+          "maxRSS": {
+            "type": "number"
+          },
+          "minorPageFault": {
+            "type": "number"
+          },
+          "sharedMemorySize": {
+            "type": "number"
+          },
+          "signalsCount": {
+            "type": "number"
+          },
+          "swappedOut": {
+            "type": "number"
+          },
+          "systemCPUTime": {
+            "type": "number"
+          },
+          "unsharedDataSize": {
+            "type": "number"
+          },
+          "unsharedStackSize": {
+            "type": "number"
+          },
+          "userCPUTime": {
+            "type": "number"
+          },
+          "voluntaryContextSwitches": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "fsRead",
+          "fsWrite",
+          "involuntaryContextSwitches",
+          "ipcReceived",
+          "ipcSent",
+          "majorPageFault",
+          "maxRSS",
+          "minorPageFault",
+          "sharedMemorySize",
+          "signalsCount",
+          "swappedOut",
+          "systemCPUTime",
+          "unsharedDataSize",
+          "unsharedStackSize",
+          "userCPUTime",
+          "voluntaryContextSwitches"
+        ]
+      },
+      "ISystem": {
+        "type": "object",
+        "properties": {
+          "uid": {
+            "type": "number",
+            "title": "무작위 고유 ID",
+            "description": "무작위 고유 ID."
+          },
+          "arguments": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "`과정",
+            "description": "`프로세스.argv`"
+          },
+          "commit": {
+            "$ref": "#/components/schemas/ISystem.ICommit",
+            "title": "Git 커밋 정보",
+            "description": "Git 커밋 정보."
+          },
+          "package": {
+            "$ref": "#/components/schemas/ISystem.IPackage",
+            "title": "`패키지",
+            "description": "`패키지.json`"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "이 서버의 생성 시간",
+            "description": "이 서버의 생성 시간."
+          }
+        },
+        "required": [
+          "uid",
+          "arguments",
+          "commit",
+          "package",
+          "created_at"
+        ],
+        "description": "시스템 정보."
+      },
+      "ISystem.ICommit": {
+        "type": "object",
+        "properties": {
+          "shortHash": {
+            "type": "string"
+          },
+          "branch": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "sanitizedSubject": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "author": {
+            "$ref": "#/components/schemas/ISystem.ICommit.IUser"
+          },
+          "committer": {
+            "$ref": "#/components/schemas/ISystem.ICommit.IUser"
+          },
+          "authored_at": {
+            "type": "string"
+          },
+          "commited_at": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "shortHash",
+          "branch",
+          "hash",
+          "subject",
+          "sanitizedSubject",
+          "body",
+          "author",
+          "committer",
+          "authored_at",
+          "commited_at",
+          "tags"
+        ],
+        "description": "Git 커밋 정보."
+      },
+      "ISystem.ICommit.IUser": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "email"
+        ],
+        "description": "Git 사용자 계정 정보."
+      },
+      "ISystem.IPackage": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "main": {
+            "type": "string"
+          },
+          "typings": {
+            "type": "string"
+          },
+          "scripts": {
+            "$ref": "#/components/schemas/Recordstringstring"
+          },
+          "repository": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "git"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "url"
+            ]
+          },
+          "author": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "bugs": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "url"
+            ]
+          },
+          "homepage": {
+            "type": "string"
+          },
+          "devDependencies": {
+            "$ref": "#/components/schemas/Recordstringstring"
+          },
+          "dependencies": {
+            "$ref": "#/components/schemas/Recordstringstring"
+          },
+          "publishConfig": {
+            "type": "object",
+            "properties": {
+              "registry": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "registry"
+            ]
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "version",
+          "description",
+          "scripts",
+          "repository",
+          "author",
+          "license",
+          "bugs",
+          "homepage",
+          "dependencies"
+        ],
+        "description": "NPM 패키지 정보."
+      },
+      "Recordstringstring": {
+        "type": "object",
+        "properties": {},
+        "description": "T 유형의 속성 K 집합을 갖는 유형을 구성합니다."
+      }
+    }
+  },
+  "x-samchon-emended": true
+}

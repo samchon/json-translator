@@ -1,0 +1,3432 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "مطلوب خادم OpenAPI V1",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "/v1"
+    }
+  ],
+  "paths": {
+    "/ai/pass/text-prediction/async": {
+      "post": {
+        "tags": [
+          "AI"
+        ],
+        "summary": "[مدفوع] تنفيذ التنبؤ بقبول المستند النصي (غير متزامن)",
+        "description": "**يمكن استخدام واجهة برمجة التطبيقات هذه بعد عقد منفصل. (الاستفسار: team-ml@wantedlab.com)** نظرًا لأنه يتم تنفيذ التنبؤ بشكل غير متزامن، يتم إكمال استدعاء واجهة برمجة التطبيقات على الفور ويتم تسليم النتيجة إلى callback_url.** (اتصل مرة واحدة الحد الأقصى لعدد بيانات الإدخال هو 50.)**",
+        "operationId": "_유료__텍스트_서류합격예측_실행_비동기__ai_pass_text_prediction_async_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "بيانات الإدخال",
+                "description": "ما يصل إلى 50",
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "items": {
+                      "$ref": "#/components/schemas/ResumeJdTextPredictionItemSerializer"
+                    },
+                    "type": "array",
+                    "title": "قائمة بيانات طلب التنبؤ"
+                  },
+                  "callback_url": {
+                    "type": "string",
+                    "title": "عنوان رد الاتصال",
+                    "description": "عنوان URL ليتم إعلامك بالنتيجة بعد المعالجة غير المتزامنة",
+                    "example": "http://my-server.com/v1/pass/callback"
+                  },
+                  "request_id": {
+                    "type": "string",
+                    "title": "معرف الطلب",
+                    "description": "عند إعلام نتيجة المعالجة، يتم إرسال معرف الطلب معًا. افتراضيًا، يتم إنشاؤه تلقائيًا بتنسيق UUID، ولكن إذا تم إجراء استدعاء عنوان URL للإشعار قبل عملية الطلب غير المتزامن بسبب منطق جانب العميل، فيجب تحديد request_id مسبقًا.",
+                    "example": "55e41f9f-a5a6-4836-8490-68914ff51b64"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "الاستجابة الناجحة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsyncPredictionResponseSerializer"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "مستخدم غير مصادق عليه",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "بيانات الطلب المطلوبة مفقودة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ClientIdHeader": []
+          },
+          {
+            "ClientSecretHeader": []
+          },
+          {
+            "PermissionsDependency": []
+          }
+        ]
+      }
+    },
+    "/ai/apply/text-prediction/async": {
+      "post": {
+        "tags": [
+          "AI"
+        ],
+        "summary": "[مدفوع] تنفيذ تنبؤ دعم النص (غير متزامن)",
+        "description": "**يمكن استخدام واجهة برمجة التطبيقات هذه بعد عقد منفصل. (الاستفسار: team-ml@wantedlab.com)** نظرًا لأنه يتم تنفيذ التنبؤ بشكل غير متزامن، يتم إكمال استدعاء واجهة برمجة التطبيقات على الفور ويتم تسليم النتيجة إلى callback_url.** (اتصل مرة واحدة الحد الأقصى لعدد بيانات الإدخال هو 50.)**",
+        "operationId": "_유료__텍스트_지원예측_실행_비동기__ai_apply_text_prediction_async_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "بيانات الإدخال",
+                "description": "ما يصل إلى 50",
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "items": {
+                      "$ref": "#/components/schemas/ResumeJdTextPredictionItemSerializer"
+                    },
+                    "type": "array",
+                    "title": "قائمة بيانات طلب التنبؤ"
+                  },
+                  "callback_url": {
+                    "type": "string",
+                    "title": "عنوان رد الاتصال",
+                    "description": "عنوان URL ليتم إعلامك بالنتيجة بعد المعالجة غير المتزامنة",
+                    "example": "http://my-server.com/v1/apply/callback"
+                  },
+                  "request_id": {
+                    "type": "string",
+                    "title": "معرف الطلب",
+                    "description": "عند إعلام نتيجة المعالجة، يتم إرسال معرف الطلب معًا. افتراضيًا، يتم إنشاؤه تلقائيًا بتنسيق UUID، ولكن إذا تم إجراء استدعاء عنوان URL للإشعار قبل عملية الطلب غير المتزامن بسبب منطق جانب العميل، فيجب تحديد request_id مسبقًا.",
+                    "example": "55e41f9f-a5a6-4836-8490-68914ff51b64"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "الاستجابة الناجحة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsyncPredictionResponseSerializer"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "مستخدم غير مصادق عليه",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "بيانات الطلب المطلوبة مفقودة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ClientIdHeader": []
+          },
+          {
+            "ClientSecretHeader": []
+          },
+          {
+            "PermissionsDependency": []
+          }
+        ]
+      }
+    },
+    "/applications": {
+      "get": {
+        "tags": [
+          "Application"
+        ],
+        "summary": "عرض قائمة الدعم",
+        "operationId": "get_application_list_applications_get",
+        "parameters": [
+          {
+            "description": "مصطلح البحث (اسم الشركة/اسم المنصب/اسم مقدم الطلب)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "س",
+              "description": "مصطلح البحث (اسم الشركة/اسم المنصب/اسم مقدم الطلب)"
+            },
+            "name": "q",
+            "in": "query"
+          },
+          {
+            "description": "معرف المنصب",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "معرف الوظيفة",
+              "description": "معرف المنصب"
+            },
+            "name": "job_id",
+            "in": "query"
+          },
+          {
+            "description": "حالة الطلب؛ كامل (تم استلام الطلب)، اجتياز (تم تمرير المستندات)، رفض (لم يتم اجتيازه)، توظيف (القبول النهائي)",
+            "required": false,
+            "schema": {
+              "items": {
+                "$ref": "#/components/schemas/ApplicationStatusSearchEnum"
+              },
+              "type": "array",
+              "description": "حالة الطلب؛ كامل (تم استلام الطلب)، اجتياز (تم تمرير المستندات)، رفض (لم يتم اجتيازه)، توظيف (القبول النهائي)"
+            },
+            "name": "status",
+            "in": "query"
+          },
+          {
+            "description": "نطاق بدء تاريخ تقديم الطلب (التنسيق: YYYY-MM-DD)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "title": "تاريخ البدء",
+              "description": "نطاق بدء تاريخ تقديم الطلب (التنسيق: YYYY-MM-DD)"
+            },
+            "name": "start_date",
+            "in": "query"
+          },
+          {
+            "description": "النطاق النهائي لتاريخ تقديم الطلب (التنسيق: YYYY-MM-DD)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "title": "تاريخ الانتهاء",
+              "description": "النطاق النهائي لتاريخ تقديم الطلب (التنسيق: YYYY-MM-DD)"
+            },
+            "name": "end_date",
+            "in": "query"
+          },
+          {
+            "description": "صحيح عند عرض التطبيق الملغى",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "title": "هل الإلغاء",
+              "description": "صحيح عند عرض التطبيق الملغى",
+              "default": false
+            },
+            "name": "is_cancel",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "إزاحة",
+              "default": 0
+            },
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "حد",
+              "default": 20
+            },
+            "name": "limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "الاستجابة الناجحة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationListResponseSerializer"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "مستخدم غير مصادق عليه",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "بيانات الطلب المطلوبة مفقودة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ClientIdHeader": []
+          },
+          {
+            "ClientSecretHeader": []
+          },
+          {
+            "PermissionsDependency": []
+          },
+          {
+            "PermissionsDependency": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Application"
+        ],
+        "summary": "تطبيق الموقف",
+        "operationId": "apply_for_job_applications_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplyJobRequestSerializer"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "الاستجابة الناجحة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationResponseSerializer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "اقتراح غير جيد",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "AlreadyAppliedJob": {
+                    "value": {
+                      "error_code": "AlreadyAppliedJob",
+                      "message": "이미 지원한 포지션입니다."
+                    }
+                  },
+                  "JobNotExists": {
+                    "value": {
+                      "error_code": "JobNotExists",
+                      "message": "존재하지 않는 포지션입니다."
+                    }
+                  },
+                  "FileNotFound": {
+                    "value": {
+                      "error_code": "FileNotFound",
+                      "message": "존재하지 않는 파일입니다."
+                    }
+                  },
+                  "DuplicateFile": {
+                    "value": {
+                      "error_code": "DuplicateFile",
+                      "message": "중복된 파일로 지원할 수 없습니다."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "مستخدم غير مصادق عليه",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "بيانات الطلب المطلوبة مفقودة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ClientIdHeader": []
+          },
+          {
+            "ClientSecretHeader": []
+          },
+          {
+            "PermissionsDependency": []
+          },
+          {
+            "PermissionsDependency": []
+          }
+        ]
+      }
+    },
+    "/applications/{application_id}/cancel": {
+      "patch": {
+        "tags": [
+          "Application"
+        ],
+        "summary": "إلغاء الدعم",
+        "operationId": "cancel_application_applications__application_id__cancel_patch",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "معرف التطبيق"
+            },
+            "name": "application_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelApplicationRequestSerializer"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "الاستجابة الناجحة",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "اقتراح غير جيد",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "ApplicationNotFound": {
+                    "value": {
+                      "error_code": "ApplicationNotFound",
+                      "message": "존재하지 않는 지원서입니다."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "مستخدم غير مصادق عليه",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "بيانات الطلب المطلوبة مفقودة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ClientIdHeader": []
+          },
+          {
+            "ClientSecretHeader": []
+          },
+          {
+            "PermissionsDependency": []
+          },
+          {
+            "PermissionsDependency": []
+          }
+        ]
+      }
+    },
+    "/companies/{company_id}": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "summary": "الاستفسار عن تفاصيل الشركة",
+        "operationId": "get_company_companies__company_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "معرف الشركة"
+            },
+            "name": "company_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "الاستجابة الناجحة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyResponseSerializer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "اقتراح غير جيد",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "JobNotExists": {
+                    "value": {
+                      "error_code": "JobNotExists",
+                      "message": "존재하지 않는 포지션입니다."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "مستخدم غير مصادق عليه",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "بيانات الطلب المطلوبة مفقودة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ClientIdHeader": []
+          },
+          {
+            "ClientSecretHeader": []
+          },
+          {
+            "PermissionsDependency": []
+          }
+        ]
+      }
+    },
+    "/companies/{company_id}/jobs": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "summary": "عرض قائمة الوظائف التي يتم تعيينها حاليا من قبل الشركة",
+        "operationId": "get_company_job_list_companies__company_id__jobs_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "معرف الشركة"
+            },
+            "name": "company_id",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "إزاحة",
+              "default": 0
+            },
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "حد",
+              "default": 12
+            },
+            "name": "limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "الاستجابة الناجحة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyJobListResponseSerializer"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "مستخدم غير مصادق عليه",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "بيانات الطلب المطلوبة مفقودة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ClientIdHeader": []
+          },
+          {
+            "ClientSecretHeader": []
+          },
+          {
+            "PermissionsDependency": []
+          }
+        ]
+      }
+    },
+    "/jobs": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "summary": "(بحث) قائمة مواقع البحث",
+        "operationId": "get_job_list_jobs_get",
+        "parameters": [
+          {
+            "description": "معرف علامة الوظيفة/الوظيفة (الحد الأقصى 5)",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array",
+              "maxItems": 5,
+              "minItems": 0,
+              "title": "علامات الفئة",
+              "description": "معرف علامة الوظيفة/الوظيفة (الحد الأقصى 5)"
+            },
+            "name": "category_tags",
+            "in": "query"
+          },
+          {
+            "description": "معرف علامة المهارة (الحد الأقصى 5)",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array",
+              "maxItems": 5,
+              "minItems": 0,
+              "title": "علامات المهارة",
+              "description": "معرف علامة المهارة (الحد الأقصى 5)"
+            },
+            "name": "skill_tags",
+            "in": "query"
+          },
+          {
+            "description": "التاريخ الشخصي. عند دخول الرقم 10، يتم عرض الوظائف التي تتمتع بخبرة تزيد عن 10 سنوات.",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "integer",
+                "maximum": 10,
+                "minimum": 0
+              },
+              "type": "array",
+              "maximum": 10,
+              "minimum": 0,
+              "maxItems": 2,
+              "title": "سنين",
+              "description": "التاريخ الشخصي. عند دخول الرقم 10، يتم عرض الوظائف التي تتمتع بخبرة تزيد عن 10 سنوات."
+            },
+            "name": "years",
+            "in": "query"
+          },
+          {
+            "description": "منطقة. أمة",
+            "required": false,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array",
+              "title": "المواقع",
+              "description": "منطقة. أمة"
+            },
+            "name": "locations",
+            "in": "query"
+          },
+          {
+            "description": "صفيف",
+            "required": false,
+            "schema": {
+              "description": "صفيف"
+            },
+            "name": "sort",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "إزاحة",
+              "default": 0
+            },
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "حد",
+              "default": 20
+            },
+            "name": "limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "الاستجابة الناجحة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobListResponseSerializer"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "مستخدم غير مصادق عليه",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "بيانات الطلب المطلوبة مفقودة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ClientIdHeader": []
+          },
+          {
+            "ClientSecretHeader": []
+          },
+          {
+            "PermissionsDependency": []
+          }
+        ]
+      }
+    },
+    "/jobs/{job_id}": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "summary": "الاستعلام عن تفاصيل الوظيفة",
+        "operationId": "get_job_jobs__job_id__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "معرف المنصب"
+            },
+            "name": "job_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "الاستجابة الناجحة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/openapi__apis__v1__jobs__serializers__JobResponseSerializer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "اقتراح غير جيد",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "JobNotExists": {
+                    "value": {
+                      "error_code": "JobNotExists",
+                      "message": "존재하지 않는 포지션입니다."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "مستخدم غير مصادق عليه",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "بيانات الطلب المطلوبة مفقودة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ClientIdHeader": []
+          },
+          {
+            "ClientSecretHeader": []
+          },
+          {
+            "PermissionsDependency": []
+          }
+        ]
+      }
+    },
+    "/tags/categories": {
+      "get": {
+        "tags": [
+          "Tag"
+        ],
+        "summary": "البحث عن وظيفة/قائمة الوظائف",
+        "operationId": "get_categories_tags_categories_get",
+        "responses": {
+          "200": {
+            "description": "الاستجابة الناجحة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TagListResponseSerializer"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "مستخدم غير مصادق عليه",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "بيانات الطلب المطلوبة مفقودة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ClientIdHeader": []
+          },
+          {
+            "ClientSecretHeader": []
+          },
+          {
+            "PermissionsDependency": []
+          }
+        ]
+      }
+    },
+    "/tags/skills": {
+      "get": {
+        "tags": [
+          "Tag"
+        ],
+        "summary": "الاستعلام عن قائمة المهارات",
+        "operationId": "get_skills_tags_skills_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "الكلمة الرئيسية"
+            },
+            "name": "keyword",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "الاستجابة الناجحة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SkillListResponseSerializer"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "مستخدم غير مصادق عليه",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "بيانات الطلب المطلوبة مفقودة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ClientIdHeader": []
+          },
+          {
+            "ClientSecretHeader": []
+          },
+          {
+            "PermissionsDependency": []
+          }
+        ]
+      }
+    },
+    "/search/company/autocomplate": {
+      "get": {
+        "tags": [
+          "Search"
+        ],
+        "summary": "مصادقة",
+        "operationId": "authcomplate_search_company_autocomplate_get",
+        "parameters": [
+          {
+            "description": "اسم الشركة للبحث",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "استفسار",
+              "description": "اسم الشركة للبحث"
+            },
+            "name": "query",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "الاستجابة الناجحة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyAutoCompleteResponseSerializer"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "مستخدم غير مصادق عليه",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "بيانات الطلب المطلوبة مفقودة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ClientIdHeader": []
+          },
+          {
+            "ClientSecretHeader": []
+          },
+          {
+            "PermissionsDependency": []
+          }
+        ]
+      }
+    },
+    "/search/company": {
+      "get": {
+        "tags": [
+          "Search"
+        ],
+        "summary": "شركات البحث",
+        "operationId": "search_companies_search_company_get",
+        "parameters": [
+          {
+            "description": "اسم الشركة أو رقم السجل التجاري للبحث عنه",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "استفسار",
+              "description": "اسم الشركة أو رقم السجل التجاري للبحث عنه"
+            },
+            "name": "query",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "إزاحة",
+              "default": 0
+            },
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "حد",
+              "default": 20
+            },
+            "name": "limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "الاستجابة الناجحة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchCompanyResponseSerializer"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "مستخدم غير مصادق عليه",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "بيانات الطلب المطلوبة مفقودة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ClientIdHeader": []
+          },
+          {
+            "ClientSecretHeader": []
+          },
+          {
+            "PermissionsDependency": []
+          }
+        ]
+      }
+    },
+    "/files": {
+      "get": {
+        "tags": [
+          "File"
+        ],
+        "summary": "عرض قائمة الملفات المرفقة",
+        "operationId": "get_file_list_files_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "إزاحة",
+              "default": 0
+            },
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "title": "حد",
+              "default": 20
+            },
+            "name": "limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "الاستجابة الناجحة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetFileListResponseSerializer"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "مستخدم غير مصادق عليه",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "بيانات الطلب المطلوبة مفقودة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ClientIdHeader": []
+          },
+          {
+            "ClientSecretHeader": []
+          },
+          {
+            "PermissionsDependency": []
+          },
+          {
+            "PermissionsDependency": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "File"
+        ],
+        "summary": "تحميل ملف مرفق التطبيق",
+        "description": "**كيفية تحميل ملف** 1. اطلب `POST /v1/files/upload-url` 2. قم بتحميل ملف مؤقت من خلال الاستجابة 1 `presigned_url` أ. `presigned_url` صالح لمدة 60 دقيقة ب. يطلب `presigned_url` أسلوب PUT ورأس نوع المحتوى كـ &quot;application/binary&quot; 3. يكتمل تحميل الملف عن طريق إدراج `upload_key` الخاص بالاستجابة 1 في بيانات طلب `POST /v1/files`.",
+        "operationId": "upload_file_files_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UploadFileRequestSerializer"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "الاستجابة الناجحة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadFileResponseSerializer"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "مستخدم غير مصادق عليه",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "بيانات الطلب المطلوبة مفقودة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ClientIdHeader": []
+          },
+          {
+            "ClientSecretHeader": []
+          },
+          {
+            "PermissionsDependency": []
+          },
+          {
+            "PermissionsDependency": []
+          }
+        ]
+      }
+    },
+    "/files/{file_key}/download": {
+      "get": {
+        "tags": [
+          "File"
+        ],
+        "summary": "تحميل الملف المرفق",
+        "operationId": "get_download_url_files__file_key__download_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "مفتاح الملف"
+            },
+            "name": "file_key",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "الاستجابة الناجحة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDownloadUrlResponseSerializer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "اقتراح غير جيد",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "FileNotFound": {
+                    "value": {
+                      "error_code": "FileNotFound",
+                      "message": "존재하지 않는 파일입니다."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "مستخدم غير مصادق عليه",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "بيانات الطلب المطلوبة مفقودة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ClientIdHeader": []
+          },
+          {
+            "ClientSecretHeader": []
+          },
+          {
+            "PermissionsDependency": []
+          },
+          {
+            "PermissionsDependency": []
+          }
+        ]
+      }
+    },
+    "/files/upload-url": {
+      "post": {
+        "tags": [
+          "File"
+        ],
+        "summary": "قم بإنشاء عنوان URL محدد مسبقًا لتحميل الملفات المرفقة",
+        "operationId": "generate_presigned_url_files_upload_url_post",
+        "responses": {
+          "200": {
+            "description": "الاستجابة الناجحة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePresignedURLResponseSerializer"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "مستخدم غير مصادق عليه",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "بيانات الطلب المطلوبة مفقودة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ClientIdHeader": []
+          },
+          {
+            "ClientSecretHeader": []
+          },
+          {
+            "PermissionsDependency": []
+          },
+          {
+            "PermissionsDependency": []
+          }
+        ]
+      }
+    },
+    "/stat/application/summary": {
+      "get": {
+        "tags": [
+          "Stat"
+        ],
+        "summary": "عرض ملخص حالة الدعم (حسب العميل)",
+        "operationId": "get_application_summary_by_client_stat_application_summary_get",
+        "parameters": [
+          {
+            "description": "نطاق بدء تاريخ تقديم الطلب (التنسيق: YYYY-MM-DD)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "title": "تاريخ البدء",
+              "description": "نطاق بدء تاريخ تقديم الطلب (التنسيق: YYYY-MM-DD)",
+              "default": "2023-11-24"
+            },
+            "name": "start_date",
+            "in": "query"
+          },
+          {
+            "description": "النطاق النهائي لتاريخ تقديم الطلب (التنسيق: YYYY-MM-DD)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "title": "تاريخ الانتهاء",
+              "description": "النطاق النهائي لتاريخ تقديم الطلب (التنسيق: YYYY-MM-DD)",
+              "default": "2024-02-22"
+            },
+            "name": "end_date",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "الاستجابة الناجحة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationSummaryResponseSerializer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "اقتراح غير جيد",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "InvalidDateRange": {
+                    "value": {
+                      "error_code": "InvalidDateRange",
+                      "message": "시작 날짜와 종료 날짜의 차이는 90일을 넘을 수 없습니다."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "مستخدم غير مصادق عليه",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "بيانات الطلب المطلوبة مفقودة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPIExceptionResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ClientIdHeader": []
+          },
+          {
+            "ClientSecretHeader": []
+          },
+          {
+            "PermissionsDependency": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddressResponseSerializer": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "بطاقة تعريف"
+          },
+          "country": {
+            "type": "string",
+            "title": "أمة"
+          },
+          "country_code": {
+            "type": "string",
+            "title": "رمز البلد"
+          },
+          "location": {
+            "type": "string",
+            "title": "موقع"
+          },
+          "full_location": {
+            "type": "string",
+            "title": "العنوان الكامل"
+          },
+          "geo_location": {
+            "type": "object",
+            "title": "الموقع الجغرافي"
+          }
+        },
+        "type": "object",
+        "title": "AddressResponseSerializer"
+      },
+      "ApplicationListResponseSerializer": {
+        "properties": {
+          "links": {
+            "$ref": "#/components/schemas/LinksSchema"
+          },
+          "applications": {
+            "items": {
+              "$ref": "#/components/schemas/ApplicationResponseSerializer"
+            },
+            "type": "array",
+            "title": "التطبيقات"
+          }
+        },
+        "type": "object",
+        "title": "ApplicationListResponseSerializer"
+      },
+      "ApplicationResponseSerializer": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "بطاقة تعريف",
+            "description": "معرف التطبيق"
+          },
+          "oneid": {
+            "type": "string",
+            "title": "أونيد",
+            "description": "معرف مقدم الطلب"
+          },
+          "username": {
+            "type": "string",
+            "title": "اسم المستخدم",
+            "description": "اسم مقدم الطلب"
+          },
+          "email": {
+            "type": "string",
+            "title": "بريد إلكتروني",
+            "description": "البريد الإلكتروني لمقدم الطلب"
+          },
+          "mobile": {
+            "type": "string",
+            "title": "متحرك",
+            "description": "رقم الهاتف المنسق (على سبيل المثال +821086388688)"
+          },
+          "application_status": {
+            "description": "حالة التطبيق"
+          },
+          "apply_time": {
+            "type": "string",
+            "format": "date-time",
+            "title": "تطبيق الوقت",
+            "description": "وقت تقديم الطلب"
+          },
+          "edited_time": {
+            "type": "string",
+            "format": "date-time",
+            "title": "الوقت المحرر",
+            "description": "وقت تعديل التطبيق"
+          },
+          "open_time": {
+            "type": "string",
+            "format": "date-time",
+            "title": "الوقت المفتوح",
+            "description": "التطبيق أول مرة مشاهدة"
+          },
+          "cancel_time": {
+            "type": "string",
+            "format": "date-time",
+            "title": "إلغاء الوقت",
+            "description": "دعم وقت الإلغاء"
+          },
+          "cancel_reason": {
+            "type": "string",
+            "title": "إلغاء السبب",
+            "description": "سبب إلغاء الطلب"
+          },
+          "company_id": {
+            "type": "integer",
+            "title": "معرف الشركة"
+          },
+          "company_name": {
+            "type": "string",
+            "title": "اسم الشركة",
+            "description": "اسم الشركة"
+          },
+          "job_id": {
+            "type": "integer",
+            "title": "معرف الوظيفة",
+            "description": "معرف المنصب"
+          },
+          "job_name": {
+            "type": "string",
+            "title": "اسم الوظيفة",
+            "description": "اسم الوظيفة وقت التقديم"
+          },
+          "job_detail": {
+            "title": "تفاصيل الوظيفة",
+            "description": "تفاصيل الموقف",
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "title": "بطاقة تعريف"
+              },
+              "status": {
+                "$ref": "#/components/schemas/JobStatusEnum"
+              },
+              "company_id": {
+                "type": "integer",
+                "title": "معرف الشركة"
+              },
+              "due_time": {
+                "type": "string",
+                "format": "date",
+                "title": "الوقت المناسب",
+                "description": "موعد التسليم"
+              },
+              "logo_url": {
+                "$ref": "#/components/schemas/ImageUrlResponseSerializer"
+              }
+            }
+          },
+          "resumes": {
+            "items": {
+              "$ref": "#/components/schemas/FilesResponseSerializer"
+            },
+            "type": "array",
+            "title": "يستأنف",
+            "description": "قائمة المرفقات"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "oneid",
+          "username",
+          "email",
+          "mobile",
+          "application_status",
+          "apply_time",
+          "company_id",
+          "job_id"
+        ],
+        "title": "ApplicationResponseSerializer",
+        "example": {
+          "id": 688129,
+          "oneid": "QrKSEkh74AFf",
+          "username": "지원자명",
+          "email": "user@test.com",
+          "mobile": "+821023456789",
+          "application_status": "complte",
+          "apply_time": "2023-03-15T02:09:27.883418",
+          "company_id": 1422,
+          "company_name": "원티드랩",
+          "job_id": 23920,
+          "job_name": "포지션명",
+          "job_detail": {
+            "id": 23920,
+            "status": "active",
+            "company_id": 1,
+            "logo_url": {
+              "origin": "https://...",
+              "thumb": "https://..."
+            }
+          },
+          "files": [
+            {
+              "key": "qwefew-qweifj-1234",
+              "title": "السيرة الذاتية.pdf",
+              "update_time": "2023-03-15T02:09:27.883418"
+            }
+          ]
+        }
+      },
+      "ApplicationStatusSearchEnum": {
+        "oneOf": [
+          {
+            "const": "complete",
+            "title": "حالة البحث عن التطبيق",
+            "description": "التعداد."
+          },
+          {
+            "const": "pass",
+            "title": "حالة البحث عن التطبيق",
+            "description": "التعداد."
+          },
+          {
+            "const": "reject",
+            "title": "حالة البحث عن التطبيق",
+            "description": "التعداد."
+          },
+          {
+            "const": "hire",
+            "title": "حالة البحث عن التطبيق",
+            "description": "التعداد."
+          }
+        ],
+        "title": "حالة البحث عن التطبيق",
+        "description": "التعداد."
+      },
+      "ApplicationSummaryResponseSerializer": {
+        "properties": {
+          "complete": {
+            "type": "integer",
+            "title": "مكتمل",
+            "default": 0
+          },
+          "document_pass": {
+            "type": "integer",
+            "title": "ممر الوثيقة",
+            "default": 0
+          },
+          "hire": {
+            "type": "integer",
+            "title": "أهلاً",
+            "default": 0
+          },
+          "reject": {
+            "type": "integer",
+            "title": "يرفض",
+            "default": 0
+          },
+          "total": {
+            "type": "integer",
+            "title": "المجموع",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "ملخص التطبيقالاستجابةSerializer",
+        "example": {
+          "complete": 1,
+          "document_pass": 1,
+          "hire": 0,
+          "reject": 1,
+          "total": 3
+        }
+      },
+      "ApplyJobRequestSerializer": {
+        "properties": {
+          "job_id": {
+            "type": "integer",
+            "title": "معرف الوظيفة"
+          },
+          "username": {
+            "type": "string",
+            "title": "اسم المستخدم"
+          },
+          "email": {
+            "type": "string",
+            "title": "بريد إلكتروني"
+          },
+          "mobile": {
+            "type": "string",
+            "title": "متحرك"
+          },
+          "resume_keys": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "استئناف المفاتيح",
+            "description": "قائمة الملفات التي يجب إرفاقها عند التقديم"
+          }
+        },
+        "type": "object",
+        "required": [
+          "job_id",
+          "username",
+          "email",
+          "mobile",
+          "resume_keys"
+        ],
+        "title": "ApplyJobRequestSerializer"
+      },
+      "ApplyTextPredictionRequestSerializer": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/ResumeJdTextPredictionItemSerializer"
+            },
+            "type": "array",
+            "title": "قائمة بيانات طلب التنبؤ"
+          },
+          "callback_url": {
+            "type": "string",
+            "title": "عنوان رد الاتصال",
+            "description": "عنوان URL ليتم إعلامك بالنتيجة بعد المعالجة غير المتزامنة",
+            "example": "http://my-server.com/v1/apply/callback"
+          },
+          "request_id": {
+            "type": "string",
+            "title": "معرف الطلب",
+            "description": "عند إعلام نتيجة المعالجة، يتم إرسال معرف الطلب معًا. افتراضيًا، يتم إنشاؤه تلقائيًا بتنسيق UUID، ولكن إذا تم إجراء استدعاء عنوان URL للإشعار قبل عملية الطلب غير المتزامن بسبب منطق جانب العميل، فيجب تحديد request_id مسبقًا.",
+            "example": "55e41f9f-a5a6-4836-8490-68914ff51b64"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "callback_url"
+        ],
+        "title": "ApplyTextPredictionRequestSerializer"
+      },
+      "AsyncPredictionResponseSerializer": {
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "title": "معرف الطلب",
+            "description": "عند الاتصال بـ CallbackURL، يتم أيضًا تمرير معرف الطلب لتمييز الطلب الذي جاءت النتيجة منه.",
+            "example": "55e41f9f-a5a6-4836-8490-68914ff51b64"
+          }
+        },
+        "type": "object",
+        "required": [
+          "request_id"
+        ],
+        "title": "AsyncPredictionResponseSerializer"
+      },
+      "CancelApplicationRequestSerializer": {
+        "properties": {
+          "cancel_reason": {
+            "type": "string",
+            "title": "إلغاء السبب"
+          }
+        },
+        "type": "object",
+        "title": "CancelApplicationRequestSerializer"
+      },
+      "CategoryTagResponseSerializer": {
+        "properties": {
+          "parent_tag": {
+            "title": "إشغال",
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "title": "معرف العلامة"
+              },
+              "text": {
+                "type": "string",
+                "title": "اسم العلامة"
+              }
+            }
+          },
+          "child_tags": {
+            "items": {
+              "$ref": "#/components/schemas/openapi__apis__v1__jobs__serializers__TagResponseSerializer"
+            },
+            "type": "array",
+            "title": "وظيفة"
+          }
+        },
+        "type": "object",
+        "title": "فئة TagResponseSerializer"
+      },
+      "CompanyAutoCompleteResponseSerializer": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/_CompanyAutoCompleteSerializer"
+            },
+            "type": "array",
+            "title": "بيانات"
+          }
+        },
+        "type": "object",
+        "title": "CompanyAutoCompleteResponseSerializer",
+        "example": {
+          "data": [
+            {
+              "company_id": 518,
+              "name": "원티드랩",
+              "logo_image": "https://image.jpg"
+            }
+          ]
+        }
+      },
+      "CompanyDetailResponseSerializer": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "معرف الشركة"
+          },
+          "company_confirm": {
+            "type": "boolean",
+            "title": "موافقة الشركة",
+            "description": "صحيح: تمت الموافقة عليه، خطأ: تمت الموافقة عليه مرفوض، تم طلب الموافقة، لم يتم طلب الموافقة"
+          },
+          "registration_number": {
+            "type": "string",
+            "title": "رقم السجل التجاري"
+          },
+          "name": {
+            "type": "string",
+            "title": "اسم الشركة"
+          },
+          "logo_url": {
+            "$ref": "#/components/schemas/ImageUrlSchema"
+          },
+          "images": {
+            "items": {
+              "type": "object"
+            },
+            "type": "array",
+            "title": "صورة الشركة"
+          },
+          "description": {
+            "type": "string",
+            "title": "مقدمة الشركة"
+          },
+          "link": {
+            "type": "string",
+            "title": "رابط صفحة الشركة"
+          },
+          "url": {
+            "type": "string",
+            "title": "عنوان URL لصفحة تفاصيل الشركة"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "company_confirm",
+          "name",
+          "url"
+        ],
+        "title": "تفاصيل الشركةالاستجابةSerializer"
+      },
+      "CompanyJobListResponseSerializer": {
+        "properties": {
+          "links": {
+            "$ref": "#/components/schemas/LinksSchema"
+          },
+          "jobs": {
+            "items": {
+              "$ref": "#/components/schemas/openapi__apis__v1__companies__serializers__JobResponseSerializer"
+            },
+            "type": "array",
+            "title": "وظائف"
+          }
+        },
+        "type": "object",
+        "title": "CompanyJobListResponseSerializer",
+        "example": {
+          "links": {
+            "next": "/v1/companies/79/jobs?offset=12&limit=12"
+          },
+          "jobs": [
+            {
+              "id": 23617,
+              "name": "VR 엔지니어",
+              "reward": {
+                "country": "KR",
+                "total": "100만원",
+                "recommender": "50만원",
+                "recommendee": "50만원"
+              },
+              "url": "https://www.wanted.co.kr/wd/10002"
+            },
+            {
+              "id": 23652,
+              "name": "QA",
+              "due_time": "2023-03-21"
+            }
+          ]
+        }
+      },
+      "CompanyResponseSerializer": {
+        "properties": {
+          "company": {
+            "$ref": "#/components/schemas/CompanyDetailResponseSerializer"
+          }
+        },
+        "type": "object",
+        "title": "الشركةResponseSerializer",
+        "example": {
+          "company": {
+            "id": 79,
+            "company_confirm": true,
+            "registration_number": "12622032023",
+            "name": "원티드랩",
+            "logo_url": {
+              "origin": "https://...",
+              "thumb": "https://..."
+            },
+            "images": [
+              {
+                "id": 1894,
+                "is_title": true,
+                "origin": "https://...",
+                "thumb": "https://..."
+              },
+              {
+                "id": 1889,
+                "is_title": false,
+                "origin": "https://...",
+                "thumb": "https://..."
+              }
+            ],
+            "description": "مطلوب شركة مختبر مقدمة",
+            "link": "http://wanted.co.kr/",
+            "url": "https://www.wanted.co.kr/company/79?client_id=xxxx"
+          }
+        }
+      },
+      "CompanyTagResponseSerializer": {
+        "properties": {
+          "tag_type_id": {
+            "type": "integer",
+            "title": "معرف العلامة"
+          },
+          "text": {
+            "type": "string",
+            "title": "اسم العلامة"
+          }
+        },
+        "type": "object",
+        "title": "شركة TagResponseSerializer"
+      },
+      "CountryEnum": {
+        "oneOf": [
+          {
+            "const": "KR",
+            "title": "CountryEnum",
+            "description": "التعداد."
+          },
+          {
+            "const": "JP",
+            "title": "CountryEnum",
+            "description": "التعداد."
+          },
+          {
+            "const": "TW",
+            "title": "CountryEnum",
+            "description": "التعداد."
+          },
+          {
+            "const": "HK",
+            "title": "CountryEnum",
+            "description": "التعداد."
+          },
+          {
+            "const": "SG",
+            "title": "CountryEnum",
+            "description": "التعداد."
+          },
+          {
+            "const": "WW",
+            "title": "CountryEnum",
+            "description": "التعداد."
+          }
+        ],
+        "title": "CountryEnum",
+        "description": "التعداد."
+      },
+      "CreatePresignedURLResponseSerializer": {
+        "properties": {
+          "presigned_url": {
+            "type": "string",
+            "title": "عناوين URL المحددة"
+          },
+          "upload_key": {
+            "type": "string",
+            "title": "مفتاح التحميل"
+          }
+        },
+        "type": "object",
+        "required": [
+          "presigned_url",
+          "upload_key"
+        ],
+        "title": "CreatePresignedURLResponseSerializer",
+        "example": {
+          "presigned_url": "https://...",
+          "upload_key": "qwe0982awfwef"
+        }
+      },
+      "FilesResponseSerializer": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "مفتاح"
+          },
+          "title": {
+            "type": "string",
+            "title": "عنوان"
+          },
+          "update_time": {
+            "type": "string",
+            "format": "date-time",
+            "title": "وقت التحديث"
+          }
+        },
+        "type": "object",
+        "required": [
+          "key",
+          "update_time"
+        ],
+        "title": "FilesResponseSerializer"
+      },
+      "GetDownloadUrlResponseSerializer": {
+        "properties": {
+          "presigned_url": {
+            "type": "string",
+            "title": "عناوين URL المحددة"
+          }
+        },
+        "type": "object",
+        "required": [
+          "presigned_url"
+        ],
+        "title": "الحصول علىDownloadUrlResponseSerializer",
+        "example": {
+          "url": "https://..."
+        }
+      },
+      "GetFileListResponseSerializer": {
+        "properties": {
+          "links": {
+            "$ref": "#/components/schemas/LinksSchema"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/FilesResponseSerializer"
+            },
+            "type": "array",
+            "title": "بيانات"
+          }
+        },
+        "type": "object",
+        "title": "GetFileListResponseSerializer",
+        "example": {
+          "data": [
+            {
+              "key": "AAUIBQQDSgdNVQ==",
+              "title": "string.pdf",
+              "update_time": "2023-04-10T16:53:23"
+            }
+          ],
+          "links": {
+            "prev": "http://...",
+            "next": "http://..."
+          }
+        }
+      },
+      "ImageUrlResponseSerializer": {
+        "properties": {
+          "origin": {
+            "type": "string",
+            "maxLength": 2083,
+            "minLength": 1,
+            "format": "uri",
+            "title": "أصل"
+          },
+          "thumb": {
+            "type": "string",
+            "maxLength": 2083,
+            "minLength": 1,
+            "format": "uri",
+            "title": "إبهام"
+          },
+          "is_title": {
+            "type": "boolean",
+            "title": "هو العنوان",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "ImageUrlResponseSerializer"
+      },
+      "ImageUrlSchema": {
+        "properties": {
+          "origin": {
+            "type": "string",
+            "maxLength": 2083,
+            "minLength": 1,
+            "format": "uri",
+            "title": "أصل",
+            "description": "عنوان URL للصورة الأصلية"
+          },
+          "thumb": {
+            "type": "string",
+            "maxLength": 2083,
+            "minLength": 1,
+            "format": "uri",
+            "title": "إبهام",
+            "description": "عنوان URL للصورة المصغرة"
+          }
+        },
+        "type": "object",
+        "title": "ImageUrlSchema"
+      },
+      "JobCompanyResponseSerializer": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "معرف الشركة"
+          },
+          "name": {
+            "type": "string",
+            "title": "اسم الشركة"
+          },
+          "link": {
+            "type": "string",
+            "title": "رابط صفحة الشركة"
+          },
+          "registration_number": {
+            "type": "string",
+            "title": "رقم السجل التجاري"
+          },
+          "logo_img": {
+            "title": "صورة الشعار",
+            "type": "object",
+            "properties": {
+              "origin": {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri",
+                "title": "أصل"
+              },
+              "thumb": {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri",
+                "title": "إبهام"
+              },
+              "is_title": {
+                "type": "boolean",
+                "title": "هو العنوان",
+                "default": false
+              }
+            }
+          },
+          "description": {
+            "type": "string",
+            "title": "مقدمة الشركة"
+          },
+          "company_tags": {
+            "items": {
+              "$ref": "#/components/schemas/CompanyTagResponseSerializer"
+            },
+            "type": "array",
+            "title": "علامات الشركات",
+            "default": []
+          }
+        },
+        "type": "object",
+        "title": "JobCompanyResponseSerializer"
+      },
+      "JobListAddressResponseSerializer": {
+        "properties": {
+          "country": {
+            "type": "string",
+            "title": "دولة"
+          },
+          "location": {
+            "type": "string",
+            "title": "موقع"
+          },
+          "full_location": {
+            "type": "string",
+            "title": "الموقع الكامل"
+          }
+        },
+        "type": "object",
+        "title": "JobListAddressResponseSerializer"
+      },
+      "JobListDetailResponseSerializer": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "معرف المنصب"
+          },
+          "status": {
+            "$ref": "#/components/schemas/JobStatusEnum"
+          },
+          "due_time": {
+            "type": "string",
+            "format": "date",
+            "title": "موعد التسليم"
+          },
+          "position": {
+            "type": "string",
+            "title": "اسم المنصب"
+          },
+          "company": {
+            "title": "شركة",
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "title": "معرف الشركة"
+              },
+              "name": {
+                "type": "string",
+                "title": "اسم الشركة"
+              },
+              "link": {
+                "type": "string",
+                "title": "رابط صفحة الشركة"
+              },
+              "registration_number": {
+                "type": "string",
+                "title": "رقم السجل التجاري"
+              },
+              "logo_img": {
+                "title": "صورة الشعار",
+                "type": "object",
+                "properties": {
+                  "origin": {
+                    "type": "string",
+                    "maxLength": 2083,
+                    "minLength": 1,
+                    "format": "uri",
+                    "title": "أصل"
+                  },
+                  "thumb": {
+                    "type": "string",
+                    "maxLength": 2083,
+                    "minLength": 1,
+                    "format": "uri",
+                    "title": "إبهام"
+                  },
+                  "is_title": {
+                    "type": "boolean",
+                    "title": "هو العنوان",
+                    "default": false
+                  }
+                }
+              },
+              "description": {
+                "type": "string",
+                "title": "مقدمة الشركة"
+              },
+              "company_tags": {
+                "items": {
+                  "$ref": "#/components/schemas/CompanyTagResponseSerializer"
+                },
+                "type": "array",
+                "title": "علامات الشركات",
+                "default": []
+              }
+            }
+          },
+          "reward": {
+            "title": "تعويض",
+            "type": "object",
+            "properties": {
+              "country": {
+                "$ref": "#/components/schemas/CountryEnum"
+              },
+              "formatted_total": {
+                "type": "string",
+                "title": "المجموع المنسق",
+                "description": "التعويض الكامل",
+                "default": "0"
+              },
+              "formatted_recommender": {
+                "type": "string",
+                "title": "توصية منسقة",
+                "description": "مكافأة المرجع",
+                "default": "0"
+              },
+              "formatted_recommendee": {
+                "type": "string",
+                "title": "الموصى بها منسقة",
+                "description": "تعويض مقدم الطلب",
+                "default": "0"
+              }
+            }
+          },
+          "address": {
+            "title": "عنوان",
+            "type": "object",
+            "properties": {
+              "country": {
+                "type": "string",
+                "title": "دولة"
+              },
+              "location": {
+                "type": "string",
+                "title": "موقع"
+              },
+              "full_location": {
+                "type": "string",
+                "title": "الموقع الكامل"
+              }
+            }
+          },
+          "title_img": {
+            "$ref": "#/components/schemas/ImageUrlResponseSerializer"
+          },
+          "logo_img": {
+            "$ref": "#/components/schemas/ImageUrlResponseSerializer"
+          },
+          "category_tags": {
+            "title": "المهنة/العلامة الوظيفية",
+            "type": "object",
+            "properties": {
+              "parent_tag": {
+                "title": "إشغال",
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "title": "معرف العلامة"
+                  },
+                  "text": {
+                    "type": "string",
+                    "title": "اسم العلامة"
+                  }
+                }
+              },
+              "child_tags": {
+                "items": {
+                  "$ref": "#/components/schemas/openapi__apis__v1__jobs__serializers__TagResponseSerializer"
+                },
+                "type": "array",
+                "title": "وظيفة"
+              }
+            }
+          },
+          "url": {
+            "type": "string",
+            "title": "عنوان URL لتفاصيل صفحة الموضع"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "position",
+          "company",
+          "url"
+        ],
+        "title": "JobListDetailResponseSerializer"
+      },
+      "JobListResponseSerializer": {
+        "properties": {
+          "links": {
+            "$ref": "#/components/schemas/LinksSchema"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/JobListDetailResponseSerializer"
+            },
+            "type": "array",
+            "title": "بيانات"
+          }
+        },
+        "type": "object",
+        "title": "JobListResponseSerializer",
+        "example": {
+          "data": [
+            {
+              "id": 24049,
+              "status": "active",
+              "due_time": "2023-05-01",
+              "name": "포지션명",
+              "address": {
+                "country": "한국",
+                "location": "서울"
+              },
+              "title_img": {
+                "origin": "https://...",
+                "thumb": "https://..."
+              },
+              "logo_img": {
+                "origin": "https://...",
+                "thumb": "https://..."
+              },
+              "company": {
+                "id": 7565,
+                "name": "기업명"
+              },
+              "reward": {
+                "total": "100만원",
+                "recommender": "50만원",
+                "recommendee": "50만원"
+              }
+            }
+          ],
+          "links": {
+            "prev": "/api/chaos/jobs/v1?country=KR&sort=company.response_rate_order&offset=1&limit=1",
+            "next": "/api/chaos/jobs/v1?country=KR&sort=company.response_rate_order&offset=1&limit=1"
+          }
+        }
+      },
+      "JobSortEnum": {
+        "enum": [
+          "job.latest_order",
+          "job.popularity_order",
+          "company.response_rate_order"
+        ],
+        "title": "JobSortEnum",
+        "description": "التعداد."
+      },
+      "JobStatusEnum": {
+        "oneOf": [
+          {
+            "const": "request",
+            "title": "JobStatusEnum",
+            "description": "التعداد."
+          },
+          {
+            "const": "draft",
+            "title": "JobStatusEnum",
+            "description": "التعداد."
+          },
+          {
+            "const": "active",
+            "title": "JobStatusEnum",
+            "description": "التعداد."
+          },
+          {
+            "const": "archived",
+            "title": "JobStatusEnum",
+            "description": "التعداد."
+          },
+          {
+            "const": "close",
+            "title": "JobStatusEnum",
+            "description": "التعداد."
+          },
+          {
+            "const": "saved",
+            "title": "JobStatusEnum",
+            "description": "التعداد."
+          }
+        ],
+        "title": "JobStatusEnum",
+        "description": "التعداد."
+      },
+      "LinksSchema": {
+        "properties": {
+          "prev": {
+            "type": "string",
+            "title": "السابق",
+            "description": "الصفحة السابقة"
+          },
+          "next": {
+            "type": "string",
+            "title": "التالي",
+            "description": "الصفحة التالية"
+          }
+        },
+        "type": "object",
+        "title": "مخطط الروابط"
+      },
+      "OpenAPIExceptionResponse": {
+        "properties": {
+          "error_code": {
+            "type": "string",
+            "title": "رمز الخطأ"
+          },
+          "message": {
+            "type": "string",
+            "title": "رسالة"
+          },
+          "data": {
+            "type": "object",
+            "title": "بيانات"
+          }
+        },
+        "type": "object",
+        "required": [
+          "error_code",
+          "message"
+        ],
+        "title": "OpenAPIExceptionResponse"
+      },
+      "ParentTagResponseSerializer": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "بطاقة تعريف",
+            "description": "معرف العلامة"
+          },
+          "parent_id": {
+            "type": "integer",
+            "title": "معرف الوالدين",
+            "description": "معرف العلامة الأصل"
+          },
+          "title": {
+            "type": "string",
+            "title": "عنوان",
+            "description": "اسم العلامة"
+          },
+          "title_thumb_img": {
+            "type": "string",
+            "maxLength": 2083,
+            "minLength": 1,
+            "format": "uri",
+            "title": "عنوان الإبهام الصورة",
+            "description": "عنوان URL لصورة العلامة"
+          },
+          "sub_tags": {
+            "items": {
+              "$ref": "#/components/schemas/openapi__apis__v1__tags__serializers__TagResponseSerializer"
+            },
+            "type": "array",
+            "title": "العلامات الفرعية"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title"
+        ],
+        "title": "ParentTagResponseSerializer"
+      },
+      "PassTextPredictionRequestSerializer": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/ResumeJdTextPredictionItemSerializer"
+            },
+            "type": "array",
+            "title": "قائمة بيانات طلب التنبؤ"
+          },
+          "callback_url": {
+            "type": "string",
+            "title": "عنوان رد الاتصال",
+            "description": "عنوان URL ليتم إعلامك بالنتيجة بعد المعالجة غير المتزامنة",
+            "example": "http://my-server.com/v1/pass/callback"
+          },
+          "request_id": {
+            "type": "string",
+            "title": "معرف الطلب",
+            "description": "عند إعلام نتيجة المعالجة، يتم إرسال معرف الطلب معًا. افتراضيًا، يتم إنشاؤه تلقائيًا بتنسيق UUID، ولكن إذا تم إجراء استدعاء عنوان URL للإشعار قبل عملية الطلب غير المتزامن بسبب منطق جانب العميل، فيجب تحديد request_id مسبقًا.",
+            "example": "55e41f9f-a5a6-4836-8490-68914ff51b64"
+          }
+        },
+        "type": "object",
+        "required": [
+          "data",
+          "callback_url"
+        ],
+        "title": "PassTextPredictionRequestSerializer"
+      },
+      "ResumeJdTextPredictionItemSerializer": {
+        "properties": {
+          "resume": {
+            "type": "string",
+            "title": "استئناف النص",
+            "example": "5년차 소프트웨어 엔지니어 입니다..."
+          },
+          "jd": {
+            "type": "string",
+            "title": "نص دينار",
+            "example": "5년차 소프트웨어 엔지니어 구합니다..."
+          }
+        },
+        "type": "object",
+        "required": [
+          "resume",
+          "jd"
+        ],
+        "title": "استئنافJdTextPredictionItemSerializer"
+      },
+      "RewardResponseSerializer": {
+        "properties": {
+          "country": {
+            "$ref": "#/components/schemas/CountryEnum"
+          },
+          "formatted_total": {
+            "type": "string",
+            "title": "المجموع المنسق",
+            "description": "التعويض الكامل",
+            "default": "0"
+          },
+          "formatted_recommender": {
+            "type": "string",
+            "title": "توصية منسقة",
+            "description": "مكافأة المرجع",
+            "default": "0"
+          },
+          "formatted_recommendee": {
+            "type": "string",
+            "title": "الموصى بها منسقة",
+            "description": "تعويض مقدم الطلب",
+            "default": "0"
+          }
+        },
+        "type": "object",
+        "title": "RewardResponseSerializer"
+      },
+      "SearchCompanyResponseSerializer": {
+        "properties": {
+          "links": {
+            "$ref": "#/components/schemas/LinksSchema"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/_SearchCompanySchema"
+            },
+            "type": "array",
+            "title": "بيانات"
+          }
+        },
+        "type": "object",
+        "title": "SearchCompanyResponseSerializer",
+        "example": {
+          "links": {
+            "next": "/api/chaos/search/v1/company?query=%EC%9B%90%ED%8B%B0%EB%93%9C&offset=1&limit=1&offset=1&limit=1"
+          },
+          "companies": [
+            {
+              "id": 79,
+              "name": "원티드랩",
+              "logo_img": {
+                "origin": "https://static.wanted.co.kr/nextweek/images/wdes/0_4.7d6ea9b0.test_nextweek.jpg",
+                "thumb": "https://static.wanted.co.kr/nextweek/images/wdes/0_5.7d6ea9b0.test_nextweek.jpg"
+              },
+              "title_img": {
+                "origin": "https://static.wanted.co.kr/images/company/79/15562_2_6.__1080_790.jpg",
+                "thumb": "https://static.wanted.co.kr/images/company/79/15562_2_6.__400_400.jpg"
+              },
+              "description": "مطلوب مختبر هو الأفضل",
+              "url": "https://www.wanted.co.kr/company/79?client_id=xxxx"
+            }
+          ]
+        }
+      },
+      "SkillListResponseSerializer": {
+        "properties": {
+          "skills": {
+            "items": {
+              "$ref": "#/components/schemas/ParentTagResponseSerializer"
+            },
+            "type": "array",
+            "title": "مهارات"
+          }
+        },
+        "type": "object",
+        "title": "SkillListResponseSerializer",
+        "example": {
+          "data": [
+            {
+              "id": 1540,
+              "title": "جافا"
+            }
+          ]
+        }
+      },
+      "TagListResponseSerializer": {
+        "properties": {
+          "tags": {
+            "items": {
+              "$ref": "#/components/schemas/ParentTagResponseSerializer"
+            },
+            "type": "array",
+            "title": "العلامات"
+          }
+        },
+        "type": "object",
+        "title": "TagListResponseSerializer",
+        "example": {
+          "data": [
+            {
+              "id": 518,
+              "title": "تطوير",
+              "image_url": "https://...",
+              "sub_tags": [
+                {
+                  "id": 873,
+                  "parent_id": 518,
+                  "title": "مطور الويب",
+                  "image_url": "https://..."
+                },
+                {
+                  "id": 872,
+                  "parent_id": 518,
+                  "title": "مطور الخادم",
+                  "image_url": "https://..."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "UploadFileRequestSerializer": {
+        "properties": {
+          "upload_key": {
+            "type": "string",
+            "title": "مفتاح التحميل",
+            "description": "upload_key ردًا على `/v1/files/upload-url`"
+          },
+          "title": {
+            "type": "string",
+            "title": "اسم الملف",
+            "description": "اسم الملف بما في ذلك امتداد الملف الذي تم تحميله باستخدام `presigned_url` في الاستجابة `/v1/files/upload-url`."
+          }
+        },
+        "type": "object",
+        "required": [
+          "upload_key",
+          "title"
+        ],
+        "title": "UploadFileRequestSerializer",
+        "example": {
+          "upload_key": "0362e393-45b7-4bca-9e33-676cffcc5cbe",
+          "title": "الملف المرفق.pdf"
+        }
+      },
+      "UploadFileResponseSerializer": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "مفتاح"
+          }
+        },
+        "type": "object",
+        "required": [
+          "key"
+        ],
+        "title": "UploadFileResponseSerializer",
+        "example": {
+          "key": "AAUIBQQGSgdNVQ=="
+        }
+      },
+      "_CompanyAutoCompleteSerializer": {
+        "properties": {
+          "company_id": {
+            "type": "integer",
+            "title": "معرف الشركة",
+            "description": "معرف الشركة"
+          },
+          "name_ko": {
+            "type": "string",
+            "title": "الاسم كو",
+            "description": "اسم الشركة"
+          },
+          "logo_image": {
+            "type": "string",
+            "title": "صورة الشعار",
+            "description": "رابط صورة شعار الشركة"
+          }
+        },
+        "type": "object",
+        "required": [
+          "company_id",
+          "name_ko"
+        ],
+        "title": "_CompanyAutoCompleteSerializer"
+      },
+      "_SearchCompanySchema": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "بطاقة تعريف",
+            "description": "معرف الشركة"
+          },
+          "name": {
+            "type": "string",
+            "title": "اسم",
+            "description": "اسم الشركة"
+          },
+          "logo_img": {
+            "$ref": "#/components/schemas/ImageUrlSchema"
+          },
+          "title_img": {
+            "$ref": "#/components/schemas/ImageUrlSchema"
+          },
+          "description": {
+            "type": "string",
+            "title": "وصف",
+            "description": "وصف الشركة"
+          },
+          "url": {
+            "type": "string",
+            "title": "عنوان URL",
+            "description": "عنوان URL لصفحة تفاصيل الشركة"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "url"
+        ],
+        "title": "_SearchCompanySchema"
+      },
+      "openapi__apis__v1__applications__serializers__JobDetailResponseSerializer": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "بطاقة تعريف"
+          },
+          "status": {
+            "$ref": "#/components/schemas/JobStatusEnum"
+          },
+          "company_id": {
+            "type": "integer",
+            "title": "معرف الشركة"
+          },
+          "due_time": {
+            "type": "string",
+            "format": "date",
+            "title": "الوقت المناسب",
+            "description": "موعد التسليم"
+          },
+          "logo_url": {
+            "$ref": "#/components/schemas/ImageUrlResponseSerializer"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "status"
+        ],
+        "title": "JobDetailResponseSerializer"
+      },
+      "openapi__apis__v1__companies__serializers__JobResponseSerializer": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "بطاقة تعريف",
+            "description": "معرف المنصب"
+          },
+          "name": {
+            "type": "string",
+            "title": "اسم",
+            "description": "اسم المنصب"
+          },
+          "due_time": {
+            "type": "string",
+            "format": "date",
+            "title": "الوقت المناسب",
+            "description": "موعد التسليم"
+          },
+          "reward": {
+            "title": "جائزة",
+            "description": "تعويض",
+            "type": "object",
+            "properties": {
+              "country": {
+                "$ref": "#/components/schemas/CountryEnum"
+              },
+              "formatted_total": {
+                "type": "string",
+                "title": "المجموع المنسق",
+                "description": "التعويض الكامل",
+                "default": "0"
+              },
+              "formatted_recommender": {
+                "type": "string",
+                "title": "توصية منسقة",
+                "description": "مكافأة المرجع",
+                "default": "0"
+              },
+              "formatted_recommendee": {
+                "type": "string",
+                "title": "الموصى بها منسقة",
+                "description": "تعويض مقدم الطلب",
+                "default": "0"
+              }
+            }
+          },
+          "url": {
+            "type": "string",
+            "title": "عنوان URL لتفاصيل صفحة الموضع"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "url"
+        ],
+        "title": "JobResponseSerializer"
+      },
+      "openapi__apis__v1__jobs__serializers__JobDetailResponseSerializer": {
+        "properties": {
+          "position": {
+            "type": "string",
+            "title": "اسم المنصب"
+          },
+          "intro": {
+            "type": "string",
+            "title": "مقدمة"
+          },
+          "main_tasks": {
+            "type": "string",
+            "title": "المهام الرئيسية"
+          },
+          "requirements": {
+            "type": "string",
+            "title": "المؤهلات"
+          },
+          "preferred_points": {
+            "type": "string",
+            "title": "معاملة تفضيلية"
+          },
+          "benefits": {
+            "type": "string",
+            "title": "الفوائد والرفاهية"
+          }
+        },
+        "type": "object",
+        "title": "JobDetailResponseSerializer"
+      },
+      "openapi__apis__v1__jobs__serializers__JobResponseSerializer": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "معرف المنصب"
+          },
+          "status": {
+            "$ref": "#/components/schemas/JobStatusEnum"
+          },
+          "due_time": {
+            "type": "string",
+            "format": "date",
+            "title": "موعد التسليم"
+          },
+          "detail": {
+            "$ref": "#/components/schemas/openapi__apis__v1__jobs__serializers__JobDetailResponseSerializer"
+          },
+          "category_tags": {
+            "title": "المهنة/العلامة الوظيفية",
+            "type": "object",
+            "properties": {
+              "parent_tag": {
+                "title": "إشغال",
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "title": "معرف العلامة"
+                  },
+                  "text": {
+                    "type": "string",
+                    "title": "اسم العلامة"
+                  }
+                }
+              },
+              "child_tags": {
+                "items": {
+                  "$ref": "#/components/schemas/openapi__apis__v1__jobs__serializers__TagResponseSerializer"
+                },
+                "type": "array",
+                "title": "وظيفة"
+              }
+            }
+          },
+          "skill_tags": {
+            "items": {
+              "$ref": "#/components/schemas/openapi__apis__v1__jobs__serializers__TagResponseSerializer"
+            },
+            "type": "array",
+            "title": "علامة المهارة"
+          },
+          "company": {
+            "title": "شركة",
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "title": "معرف الشركة"
+              },
+              "name": {
+                "type": "string",
+                "title": "اسم الشركة"
+              },
+              "link": {
+                "type": "string",
+                "title": "رابط صفحة الشركة"
+              },
+              "registration_number": {
+                "type": "string",
+                "title": "رقم السجل التجاري"
+              },
+              "logo_img": {
+                "title": "صورة الشعار",
+                "type": "object",
+                "properties": {
+                  "origin": {
+                    "type": "string",
+                    "maxLength": 2083,
+                    "minLength": 1,
+                    "format": "uri",
+                    "title": "أصل"
+                  },
+                  "thumb": {
+                    "type": "string",
+                    "maxLength": 2083,
+                    "minLength": 1,
+                    "format": "uri",
+                    "title": "إبهام"
+                  },
+                  "is_title": {
+                    "type": "boolean",
+                    "title": "هو العنوان",
+                    "default": false
+                  }
+                }
+              },
+              "description": {
+                "type": "string",
+                "title": "مقدمة الشركة"
+              },
+              "company_tags": {
+                "items": {
+                  "$ref": "#/components/schemas/CompanyTagResponseSerializer"
+                },
+                "type": "array",
+                "title": "علامات الشركات",
+                "default": []
+              }
+            }
+          },
+          "reward": {
+            "title": "تعويض",
+            "type": "object",
+            "properties": {
+              "country": {
+                "$ref": "#/components/schemas/CountryEnum"
+              },
+              "formatted_total": {
+                "type": "string",
+                "title": "المجموع المنسق",
+                "description": "التعويض الكامل",
+                "default": "0"
+              },
+              "formatted_recommender": {
+                "type": "string",
+                "title": "توصية منسقة",
+                "description": "مكافأة المرجع",
+                "default": "0"
+              },
+              "formatted_recommendee": {
+                "type": "string",
+                "title": "الموصى بها منسقة",
+                "description": "تعويض مقدم الطلب",
+                "default": "0"
+              }
+            }
+          },
+          "address": {
+            "title": "عنوان",
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "title": "بطاقة تعريف"
+              },
+              "country": {
+                "type": "string",
+                "title": "أمة"
+              },
+              "country_code": {
+                "type": "string",
+                "title": "رمز البلد"
+              },
+              "location": {
+                "type": "string",
+                "title": "موقع"
+              },
+              "full_location": {
+                "type": "string",
+                "title": "العنوان الكامل"
+              },
+              "geo_location": {
+                "type": "object",
+                "title": "الموقع الجغرافي"
+              }
+            }
+          },
+          "images": {
+            "items": {
+              "$ref": "#/components/schemas/ImageUrlResponseSerializer"
+            },
+            "type": "array",
+            "title": "الصور"
+          },
+          "url": {
+            "type": "string",
+            "title": "عنوان URL لتفاصيل صفحة الموضع"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "title": "JobResponseSerializer",
+        "example": {
+          "id": 24090,
+          "status": "active",
+          "due_time": "2023-05-01",
+          "detail": {
+            "intro": "‘원티드랩’은 전 세계 모든 기업과 직장인의 고민을 해결하기 위한 HR 스타트업입니다. 직장인의 90%는 이직을 생각하지만, 어떤 기업이 자신에게 최선의 선택인지 알지 못한 채 업무에 자신을 맞추고 있습니다. 기업은 누군가에 의해 검증된 인재를 채용하고 싶지만, 그 비용과 시간이 만만치 않아 잡포털 광고와 오프라인 헤드헌팅에 의존하고 있습니다. \n\n우리는 단순한 채용 서비스가 되려는 것이 아닙니다. 우리는 ‘좋은 일자리와 숨은 인재를 연결하는 가장 효율적이고 인간적인 방법’이라는 문제를 풀고자 합니다. 인재에게는 자신의 역량을 유감없이 발휘할 수 있는 일자리를 추천하고, 기업에게는 필요한 자리에 딱 맞는 인재를 추천하는 서비스입니다. 이를 위해 모바일 / 소셜 네트워크 / 빅데이터에 기반한 HR 솔루션들을 하나씩 만들어나가고 있습니다. 우리의 시선은 한국에 머물러 있지 않습니다. \n\n2015년 5월 서비스를 시작하여, 2019년 3월 현재 4000여 기업, 60만 유저(한국 기준)가 이용 중에 있습니다. 2017년 5월에는 100억 투자를 받았으며, 한국/일본/대만/싱가폴/홍콩 오피스에 65여명의 구성원들과 함께 아시아 HR 시장을 선도하고자 합니다.  \n \n2016년 아시아 최초로 설립된 Google Campus의 첫 번째 입주기업으로 선발되었으며, 2016년 KMA 대한민국모바일어워드 대상 수상, 2017년 AWS의 떠오르는 스타트업 선정, Facebook Korea가 선정한 대표적인 파트너십 사례로 소개, 2018년 Forbes가 선정한 2018년 주목해야 할 한국 스타트업으로 선정되었고, 또한 Google TensorFlow를 활용하여 매칭 서비스를 하고 있는 국내 첫 사례로 구글 개발자 행사에서 사례를 발표하기도 하였습니다.",
+            "main_tasks": "• 메이플 스토리2 기획 업무 \n• 게임의 재미를 위한 다양한 룰이나 시스템을 기획하고 이를 구현",
+            "requirements": "• 실무에서 MS Office를 활용하는데 큰 문제가 없는 분 \n• 게임을 즐기고 좋아하시는 분",
+            "preferred_points": "• 독특하고 창의적인 아이디어가 넘치는 분 \n• 특정 포지션에 종속되지 않고 게임 기획 전반의 다양한 역할을 수행할 수 있으신 분 \n• 메이플 스토리2의 플레이 경험과 이해도가 있으신  분",
+            "benefits": "• 전 직장보다 시간적/경제적으로 더 나은 삶 추구\n• 하루 8시간, 야근없이 집중하는 문화 정착\n• 편리한 출퇴근 (역삼역 3번 출구 도보 10초)\n• 자율적 업무환경 (위워크 사무실, 라운지/부스, 수평적 조직, 맥주 무한대)\n• 휴가다운 휴가 (사유나 승인없이 스스로 휴가 계획, 3/5/7년 만근시 2주 리프레시 휴가)\n• 반려동물, 휴대가능한 악기, 자전거와 동반출근 가능\n• 업무관련 컨퍼런스/교육/도서구매비 지원\n• 월 1회 팀 식사 및 티타임 제공\n• 직무 수행에 필요한 최신장비/소프트웨어 제공\n• 최고의 업무 환경인 Wework 역삼역점 입주사입니다. 안락한 환경, 국내/외 지점 자유로운 이용, 맥주와 커피 무한제공, 수시 이벤트 등의 서비스를 제공합니다.\n\n기타\n• 본 채용은 사업 확장에 따른 신규 채용입니다.  \n• 일을 더 잘하기 위한 방법 중 하나로 월 2회 리모트 근무를 하실 수 있습니다.",
+            "name": "테스트 포지션"
+          },
+          "url": "https://www.wanted.co.kr/wd/24090",
+          "company": {
+            "id": 79,
+            "name": "원티드랩",
+            "description": "ربما تكون أغنية راب مطلوبة.",
+            "link": "https://",
+            "registration_number": "2991023012",
+            "company_tags": [
+              {
+                "id": 9962,
+                "text": "맥주"
+              }
+            ],
+            "logo_img": {
+              "origin": "https://...",
+              "thumb": "https://..."
+            }
+          },
+          "address": {
+            "id": 5873,
+            "country": "한국",
+            "country_code": "kr",
+            "location": "서울",
+            "district": "seoul.songpa-gu",
+            "full_location": "서울시 송파구 올림픽로 300",
+            "geo_location": {
+              "bounds": {
+                "northeast": {
+                  "lat": 37.5137876,
+                  "lng": 127.1047335
+                },
+                "southwest": {
+                  "lat": 37.5130537,
+                  "lng": 127.1034478
+                }
+              },
+              "location": {
+                "lat": 37.5134449,
+                "lng": 127.1041611
+              },
+              "location_type": "ROOFTOP",
+              "viewport": {
+                "northeast": {
+                  "lat": 37.5147696302915,
+                  "lng": 127.1054396302915
+                },
+                "southwest": {
+                  "lat": 37.5120716697085,
+                  "lng": 127.1027416697085
+                }
+              }
+            }
+          },
+          "reward": {
+            "total": "100만원",
+            "recommender": "50만원",
+            "recommendee": "50만원"
+          },
+          "category_tags": {
+            "parent_tag": {
+              "id": 530,
+              "text": "영업"
+            },
+            "child_tags": [
+              {
+                "id": 768,
+                "text": "주요고객사 담당자"
+              }
+            ]
+          },
+          "skill_tags": [
+            {
+              "id": 1630,
+              "text": "영업"
+            }
+          ],
+          "images": [
+            {
+              "origin": "https://...",
+              "thumb": "https://...",
+              "is_title": true
+            },
+            {
+              "origin": "https://...",
+              "thumb": "https://...",
+              "is_title": false
+            }
+          ]
+        }
+      },
+      "openapi__apis__v1__jobs__serializers__TagResponseSerializer": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "معرف العلامة"
+          },
+          "text": {
+            "type": "string",
+            "title": "اسم العلامة"
+          }
+        },
+        "type": "object",
+        "title": "TagResponseSerializer"
+      },
+      "openapi__apis__v1__tags__serializers__TagResponseSerializer": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "بطاقة تعريف",
+            "description": "معرف العلامة"
+          },
+          "parent_id": {
+            "type": "integer",
+            "title": "معرف الوالدين",
+            "description": "معرف العلامة الأصل"
+          },
+          "title": {
+            "type": "string",
+            "title": "عنوان",
+            "description": "اسم العلامة"
+          },
+          "title_thumb_img": {
+            "type": "string",
+            "maxLength": 2083,
+            "minLength": 1,
+            "format": "uri",
+            "title": "عنوان الإبهام الصورة",
+            "description": "عنوان URL لصورة العلامة"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title"
+        ],
+        "title": "TagResponseSerializer"
+      }
+    },
+    "securitySchemes": {
+      "ClientIdHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "wanted-client-id"
+      },
+      "ClientSecretHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "wanted-client-secret"
+      },
+      "PermissionsDependency": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization"
+      }
+    }
+  },
+  "x-samchon-emended": true
+}

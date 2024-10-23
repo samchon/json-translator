@@ -1,0 +1,3641 @@
+{
+  "openapi": "3.1.0",
+  "servers": [
+    {
+      "url": "http://localhost:30771",
+      "description": "fake"
+    },
+    {
+      "url": "https://api.tosspayments.com",
+      "description": "real"
+    }
+  ],
+  "info": {
+    "title": "Toss Payments API",
+    "description": "Built by [fake-toss-payments-server](https://github.com/samchon/fake-toss-payments-server) with [nestia](https://github.com/samchon/nestia)",
+    "version": "2.0.0",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "paths": {
+    "/v1/billing/authorizations/card": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "簡単決済カードのプロパティ",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossBilling.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "簡単決済カード情報",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossBilling"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "簡単決済カードを登録する",
+        "description": "簡単決済カードを登録する。 `billing.authorizations.card.store`は、顧客が自分の新着カードをサーバーに登録しておき、毎回決済が必要なときはいつでもカード情報を繰り返し入力することなく簡単に決済を進めたいときに呼び出されるAPI関数です。ちなみに、 `billing.authorizations.card.store` は、クライアントアプリケーションがトスフェイメンツが提供する簡易決済カード登録ウィンドウを使用する場合、あなたのバックエンドサーバがこれを実サービスから呼び出すことはないだろう。ただし、顧客が容易な支払いカードを登録する状況をシミュレートするために、テスト自動化プログラムのレベルで使用することができる.",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.billing.authorizations.card.store",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "간편 결제 카드 등록 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "간편 결제 카드 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/v1/billing/authorizations/{billingKey}": {
+      "post": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "billingKey",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "対象情報の",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "顧客識別子キー",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossBilling.ICustomerKey"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "簡単決済手段情報",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossBilling"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "簡単決済で登録した手段を見る",
+        "description": "簡単決済で登録した手段を見る。 `billing.authorizations.at`は、顧客が簡単に支払うためにトスフェイメンツサーバーに登録した支払い方法を照会する関数です。主にクライアントアプリケーションがトスフェイメンツが独自に提供する決済ウィンドウを使用する場合、従ってフロントアプリケーションがあなたのバックエンドサーバに `billingKey` と ` customerKey` だけを渡し、詳細な簡易決済手段情報が必要なときに使用する.",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.billing.authorizations.at",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "billingKey",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "대상 정보의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "ITossBilling.billingKey",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-toss-payments-server/src/api/structures/ITossBilling.ts",
+                  "textSpan": {
+                    "start": 500,
+                    "length": 19
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "고객 식별자 키",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "간편 결제 수단 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/v1/billing/{billingKey}": {
+      "post": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "billingKey",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "簡単決済に登録した手段の",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "注文情報",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossBilling.IPaymentStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "お支払い情報",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossPayment"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "簡単決済に登録した手段で決済する",
+        "description": "簡単決済に登録した手段で決済する。 `billing.pay`は、簡単な支払いに登録した手段で支払いを進めたいときに呼び出すAPI関数です。そして `billing.pay` は決済手段の中で唯一、クライアントアプリケーションがトースフェイメンツが提供する決済ウィンドウを使用できず、あなたのバックエンドサーバがトスフェイメンツの API 関数を直接呼び出す必要がある場合に該当する。したがって、簡易決済に関してトスフェイメンツと連動するバックエンドサーバおよびフロントアプリケーションを開発する際には、必ずこの状況に対する別途の設計および開発が必要となるので、この点を念頭に置いておきたい。さらに、 `billing.pay` は徹底的にあなたのバックエンドサーバーの判断の下で呼び出されるAPI関数なので、それを介して行われる支払いは一切{@link payments.approve}を必要としません。ただし、 `billing.pay` はこのように副次的な承認過程を必要とせず、その直ちに決済が完了するので、これを呼び出す状況に注意深く注意を払う必要がある。",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.billing.pay",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "billingKey",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "간편 결제에 등록한 수단의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "ITossBilling.billingKey",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-toss-payments-server/src/api/structures/ITossBilling.ts",
+                  "textSpan": {
+                    "start": 500,
+                    "length": 19
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "주문 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/v1/cash-receipts": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "入力情報",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossCashReceipt.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "現金領収書情報",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossCashReceipt"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "現金領収書の発行",
+        "description": "現金領収書の発行.",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.cash-receipts.store",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "입력 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "현금 영수증 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/v1/cash-receipts/{receiptKey}/cancel": {
+      "post": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "receiptKey",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "現金領収書",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "キャンセル入力情報",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossCashReceipt.ICancel"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "キャンセルされた現金領収書情報",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossCashReceipt"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "現金領収書をキャンセルする",
+        "description": "現金領収書をキャンセルする.",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.cash-receipts.cancel.cancel",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "receiptKey",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "현금 영수증의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "ITossCashReceipt.receiptKey",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-toss-payments-server/src/api/structures/ITossCashReceipt.ts",
+                  "textSpan": {
+                    "start": 199,
+                    "length": 19
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "취소 입력 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "취소된 현금 영수증 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/internal/webhook": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Webフックイベント情報",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossPaymentWebhook"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Webフックイベントダミーリスナー",
+        "description": "Webフックイベントダミーリスナー。 `internal.webhook` は実際のトスフェイメンツの決済サーバには存在しない API で、 `fake-toss-payments-server` の {@link Configuration.WEBHOOK_URL } に何も URL を設定しないと、 `fake-toss- payments-server` から発生するあらゆる種類の Webhook イベントはここに送られ、無意味に消える。したがって、 `fake-toss-payments-server` を使ってトスフェイメンツサーバーとの連動を事前検証コザするときは、必ず{@link Configuration.WEBHOOK_URL } を設定してWebフックイベントがあなたのバックエンドサーバーに正しく配信されるようにしよう.",
+        "x-nestia-namespace": "internal.webhook.webhook",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "웹훅 이벤트 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/internal/{paymentKey}/deposit": {
+      "get": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "paymentKey",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "対象仮想口座決済情報の",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "入金完了した仮想口座決済情報",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossPayment"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "仮想アカウントに入金する",
+        "description": "仮想口座に入金する。 `internal.virtual_accounts.deposit` は実際のトスフェイメンツの決済サーバには存在しないAPIで、仮想口座決済を申請した顧客が、その後仮想口座に目標金額を入金する状況をシミュレートできる関数である。つまり `internal.virtual_accounts.deposit` は顧客が自らに仮想的に発行された口座に入金を行い、それに応じてトスフェイメンツサーバーで webhook イベントが発生してこれをあなたのバックエンドサーバーに転送する一連の状況をテストするための関数です。.",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "internal.deposit.deposit",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "paymentKey",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "대상 가상 계좌 결제 정보의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "ITossPayment.paymentKey",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-toss-payments-server/src/api/structures/ITossPayment.ts",
+                  "textSpan": {
+                    "start": 2480,
+                    "length": 19
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "입금 완료된 가상 꼐좌 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "GET"
+      }
+    },
+    "/v1/payments/{paymentKey}": {
+      "get": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "paymentKey",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "お支払い情報の",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "お支払い情報",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossPayment"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "お支払い情報を見る",
+        "description": "お支払い情報を確認してください。 `payments.at`は支払い情報を照会する関数です。主にクライアントアプリケーションがトスフェイメントが独自に提供する決済ウィンドウを使用する場合、従ってフロントアプリケーションがあなたのバックエンドサーバに `paymentKey&#39; などごく一部の識別子情報だけを渡してくれ、詳細決済情報が必要なときに使用する。ちなみに、トスペイメントは他の決済PG社とは異なり、クライアントアプリケーションでトスペイメントの決済ウィンドウを利用して進行した決済がすぐに確定されるわけではない。貴社のバックエンドサーバーが現在の `payments.at` を通じて該当の決済情報を確認し、{@link approve } を呼び出して直接承認するまで、当該決済は確定されないので、この点に留意してください。.",
+        "x-nestia-namespace": "v1.payments.at",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "paymentKey",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "결제 정보의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "ITossPayment.paymentKey",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-toss-payments-server/src/api/structures/ITossPayment.ts",
+                  "textSpan": {
+                    "start": 2480,
+                    "length": 19
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "GET"
+      },
+      "post": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "paymentKey",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "対象決済",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "注文情報の確認",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossPayment.IApproval"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "承認されたお支払い情報",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossPayment"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "お支払いを承認する",
+        "description": "支払いを承認する。トスフェイメンツは、貴社のバックエンドで行われた決済ではなく、フロントアプリケーションの決済ウィンドウで行われる決済の場合、該当サービスがバックエンドサーバーから決済を承認されるまで、これを確定しない。 `payments.approve` はまさにこのような状況で、その決済を承認する関数である。 `fake-toss-payments-server`を使用して支払いをシミュレートする場合は、支払い関連APIを呼び出すときに{@link ITossCardPayment.IStore.__approved}から{@link ITossVirtualAccountPayment.IStore.__approved}をfalse` にすることで、別途承認が必要なこのような状況をシミュレートできます。.",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.payments.approve",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "paymentKey",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "대상 결제의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "ITossPayment.paymentKey",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-toss-payments-server/src/api/structures/ITossPayment.ts",
+                  "textSpan": {
+                    "start": 2480,
+                    "length": 19
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "주문 정보 확인",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "승인된 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/v1/payments/key-in": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "カード決済入力情報",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossCardPayment.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "カード決済情報",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossCardPayment"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "カードでお支払い",
+        "description": "カードでお支払いください。 `payments.key_in`は、カードを使って支払いをするときに呼び出されるAPI関数です。ちなみに、 `payments.key_in` は、クライアントアプリケーションがトスフェイメンツが独自に提供する決済ウィンドウを使用する場合、あなたのバックエンドサーバーがそれを実サービスから呼び出すことはないでしょう。ただし、顧客がカードを通して支払う状況をシミュレートするために、テスト自動化プログラムレベルで使用することができる。そして、あなたのバックエンドサーバーが `payments.key-in` を直接呼び出す場合、トスフェイメンツサーバーはそれを完全に承認された支払いと見てすぐに確定します。そのため `payments.key-in` を直接呼び出す場合、トスフェイメンツの決済ウィンドウを利用して別の {@link approve } が必要なときに備えて、はるかに細心の注意が求められる。さらに、お客様のバックエンドサーバーが `fake-toss-payments-server` を使用してお客様のカード決済をシミュレートする場合、{@link ITossCardPayment.IStore.__approved } 値を `false` にしてカード決済の確定を意図的に回避できる。これにより、トスフェイメンツの決済ウィンドウを利用したカード決済の場合、別途{@link approve}が必要な状況をシミュレートすることができる。.",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.payments.key-in.key_in",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "카드 결제 입력 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "카드 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/v1/payments/{paymentKey}/cancel": {
+      "post": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "paymentKey",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "お支払い情報の",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "キャンセル入力情報",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossPaymentCancel.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "キャンセルされたお支払い情報",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossPayment"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "お支払いをキャンセルする",
+        "description": "お支払いをキャンセルします。 `payments.cancel`は決済をキャンセルするAPIです。お支払いキャンセル入力情報{@link ITossPaymentCancel.IStore}には、キャンセル理由をはじめ、お客様に払い戻す金額と税金、必要に応じて払い戻し口座情報などを入力することになっています。.",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.payments.cancel.cancel",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "paymentKey",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "결제 정보의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "ITossPayment.paymentKey",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-toss-payments-server/src/api/structures/ITossPayment.ts",
+                  "textSpan": {
+                    "start": 2480,
+                    "length": 19
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "취소 입력 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "취소된 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/v1/virtual-accounts": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "仮想決済申請情報.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossVirtualAccountPayment.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "仮想アカウントのお支払い情報",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossVirtualAccountPayment"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "仮想口座にお支払いを申請する",
+        "description": "仮想口座にお支払いを申し込む。 `virtual_accounts.store`は、顧客が決済手段を仮想アカウントとして選択したときに呼び出されるAPI関数です。もちろん、顧客がこのように仮想口座を選択した場合、顧客が指定された口座にお金を入金するまでは決済が終わったわけではないので、{@link ITossPayment.status}の値は `WAITING_FOR_DEPOSIT`になる。ちなみに、 `virtual_accounts.store` は、クライアントアプリケーションがトスフェイメンツが独自に提供する決済ウィンドウを使用する場合、あなたのバックエンドサーバーがこれを実サービスから呼び出すことはないでしょう。ただし、顧客が仮想アカウントに支払いを進める状況をシミュレートするために、テスト自動化プログラムレベルで使用することができます。そして`virtual_accounts.store`の後に顧客が指定された口座に金額を入金すると、トスフェイメンツサーバーからウェブフックイベントが発生してあなたのバックエンドサーバーに送信される。連携先のトスフェイメンツサーバーが実際ではない `fake-toss-payments-server` なら、{@link internal.virtual_accounts.deposit } を呼び出して、顧客が仮想口座に入金する状況をシミュレートできます。.",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.virtual-accounts.store",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "가상 결제 신청 정보.",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "가상 계좌 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ITossBilling.IStore": {
+        "type": "object",
+        "properties": {
+          "cardNumber": {
+            "description": "カード番号.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "[0-9]{16}"
+          },
+          "cardExpirationYear": {
+            "description": "カードの有効期限（2桁）.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "\\d{2}"
+          },
+          "cardExpirationMonth": {
+            "description": "カード有効期限月（2桁）.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^(0[1-9]|1[012])$"
+          },
+          "cardPassword": {
+            "description": "カードパスワード.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "customerBirthday": {
+            "description": "顧客の生年月日。表記形式YYMMDD.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^([0-9]{2})(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$"
+          },
+          "consumerName": {
+            "description": "顧客の名前.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "customerEmail": {
+            "description": "お客様のメール.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "format": "email"
+          },
+          "vbv": {
+            "$ref": "#/components/schemas/__type"
+          },
+          "customerKey": {
+            "description": "顧客識別子キー。トスフェイメンツではなく、それを利用するサービスで独自に管理する識別子キー.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "cardNumber",
+          "cardExpirationYear",
+          "cardExpirationMonth",
+          "cardPassword",
+          "customerBirthday",
+          "customerKey"
+        ],
+        "description": "簡単決済カードのプロパティ.",
+        "x-typia-jsDocTags": []
+      },
+      "__type": {
+        "type": "object",
+        "properties": {
+          "cavv": {
+            "description": "3D Secure認証セッションの認証値.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "xid": {
+            "description": "トランザクションID.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "eci": {
+            "description": "3DS認証結果のコード値.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "cavv",
+          "xid",
+          "eci"
+        ],
+        "x-typia-jsDocTags": []
+      },
+      "ITossBilling": {
+        "type": "object",
+        "properties": {
+          "mId": {
+            "description": "加盟店ID。現在のtosspaymentsが使われています.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "billingKey": {
+            "description": "{@link ITossBilling}の識別子キー.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "method": {
+            "const": "카드",
+            "description": "お支払い方法.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cardCompany": {
+            "description": "カード会社名.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "cardNumber": {
+            "description": "カード番号.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "[0-9]{16}"
+          },
+          "authenticatedAt": {
+            "description": "認証日時.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          "customerKey": {
+            "description": "顧客識別子キー。トスフェイメンツではなく、それを利用するサービスで独自に管理する識別子キー.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "mId",
+          "billingKey",
+          "method",
+          "cardCompany",
+          "cardNumber",
+          "authenticatedAt",
+          "customerKey"
+        ],
+        "description": "簡単決済登録手段情報。 「ITossBilling」は、簡易決済登録手段を形象化したデータ構造インターフェースで、顧客が自分のクレジットカードをサーバーに登録しておき、毎回決済が必要なときはいつでもカード情報を繰り返し入れようとすることなく手軽に決済を進めたいときに使用する.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossBilling.ICustomerKey": {
+        "type": "object",
+        "properties": {
+          "customerKey": {
+            "description": "顧客識別子キー。トスフェイメンツではなく、それを利用するサービスで独自に管理する識別子キー.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "customerKey"
+        ],
+        "description": "顧客識別情報.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossBilling.IPaymentStore": {
+        "type": "object",
+        "properties": {
+          "method": {
+            "const": "billing",
+            "description": "お支払い方法が簡単なお支払いであることを意味します.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "billingKey": {
+            "description": "{@link IPaymentStore}の識別子キー.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "注文識別子キー。トスフェイメンツではなく、それを利用するサービスで独自に管理する識別子キー.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "description": "お支払い総額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "customerKey": {
+            "description": "顧客識別子キー。トスフェイメンツではなく、それを利用するサービスで独自に管理する識別子キー.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "method",
+          "billingKey",
+          "orderId",
+          "amount",
+          "customerKey"
+        ],
+        "description": "簡易決済を利用した決済申請情報.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossPayment": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ITossCardPayment"
+          },
+          {
+            "$ref": "#/components/schemas/ITossGiftCertificatePayment"
+          },
+          {
+            "$ref": "#/components/schemas/ITossMobilePhonePayment"
+          },
+          {
+            "$ref": "#/components/schemas/ITossTransferPayment"
+          },
+          {
+            "$ref": "#/components/schemas/ITossVirtualAccountPayment"
+          }
+        ],
+        "description": "お支払い情報「ITossPayment」は、トスフェイメンツの決済情報を形状化したデータ構造でユニオンタイプのインタフェースであり、if condition を通じてメソッド値を指定すると、派生タイプが自動的に指定される。 `` typescript if（payment.method ===「カード」）payment.card; // payment be ITossCardPayment ``",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossCardPayment": {
+        "type": "object",
+        "properties": {
+          "card": {
+            "$ref": "#/components/schemas/ITossCardPayment.ICard"
+          },
+          "discount": {
+            "$ref": "#/components/schemas/ITossCardPayment.IDiscount.Nullable"
+          },
+          "easyPay": {
+            "oneOf": [
+              {
+                "const": "토스결제"
+              },
+              {
+                "const": "페이코"
+              },
+              {
+                "const": "삼성페이"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "簡易決済で決済した場合の簡易決済タイプ情報.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "method": {
+            "const": "카드",
+            "description": "お支払い方法.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "type": {
+            "oneOf": [
+              {
+                "const": "NORMAL"
+              },
+              {
+                "const": "BILLING"
+              }
+            ],
+            "description": "お支払いタイプ。 - NORMAL：一般決済 - BILLING：あらかじめ登録したカードによる簡単決済.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "READY"
+              },
+              {
+                "const": "IN_PROGRESS"
+              },
+              {
+                "const": "WAITING_FOR_DEPOSIT"
+              },
+              {
+                "const": "DONE"
+              },
+              {
+                "const": "CANCELED"
+              },
+              {
+                "const": "PARTIAL_CANCELED"
+              },
+              {
+                "const": "ABORTED"
+              },
+              {
+                "const": "EXPIRED"
+              }
+            ],
+            "description": "お支払い状況。 - READY - IN_PROGRESS - WAITING_FOR_DEPOSIT - DONE - CANCELED - PARTIAL_CANCELED - ABORTED - EXPIRED",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "mId": {
+            "description": "加盟店ID。現在のtosspaymentsが使われています.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "version": {
+            "description": "使用しているトスフェイメンツAPIのバージョン.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "paymentKey": {
+            "description": "お支払い履歴の識別番号.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "注文識別子キー。トスフェイメンツではなく、それを利用するサービスで独自に管理する識別子キー.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "transactionKey": {
+            "description": "取引ガンの一意のキー値。 {@link paymentKey}とは異なり、これを使用することはありませんでした。.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "注文名。トスフェイメントではなく、これを利用するサービスで発行した注文名.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "currency": {
+            "description": "通貨単位。現在、トスフェイメンツはJPYのみ利用可能.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "totalAmount": {
+            "description": "総決済額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "balanceAmount": {
+            "description": "キャンセルできる金額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "suppliedAmount": {
+            "description": "供給価格.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "免税額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vat": {
+            "description": "付加価値税.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "useEscrow": {
+            "description": "エスクローとして使用するかどうか.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "cultureExpense": {
+            "description": "文化費を費やすかどうか。陶石入、公演チケット、博物館/美術館入場券など.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "requestedAt": {
+            "description": "お支払いリクエストの日時.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          "approvedAt": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "支払い承認日時.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancels": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ITossPaymentCancel"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "お支払いキャンセル履歴.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cashReceipt": {
+            "$ref": "#/components/schemas/ITossCashReceipt.ISummary.Nullable"
+          }
+        },
+        "required": [
+          "card",
+          "discount",
+          "easyPay",
+          "method",
+          "type",
+          "status",
+          "mId",
+          "version",
+          "paymentKey",
+          "orderId",
+          "transactionKey",
+          "orderName",
+          "currency",
+          "totalAmount",
+          "balanceAmount",
+          "suppliedAmount",
+          "taxFreeAmount",
+          "vat",
+          "useEscrow",
+          "cultureExpense",
+          "requestedAt",
+          "approvedAt",
+          "cancels",
+          "cashReceipt"
+        ],
+        "description": "カード決済情報.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossCardPayment.ICard": {
+        "type": "object",
+        "properties": {
+          "company": {
+            "description": "カード会社名.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "number": {
+            "description": "カード番号.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "[0-9]{16}"
+          },
+          "installmentPlanMonths": {
+            "description": "分割払い月数.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "isInterestFree": {
+            "description": "無利子分割払いを適用するかどうか.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "approveNo": {
+            "description": "承認番号.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "useCardPoint": {
+            "const": false,
+            "description": "カードポイントを使用するかどうか.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cardType": {
+            "oneOf": [
+              {
+                "const": "신용"
+              },
+              {
+                "const": "체크"
+              },
+              {
+                "const": "기프트"
+              }
+            ],
+            "description": "カードタイプ.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "ownerType": {
+            "oneOf": [
+              {
+                "const": "개인"
+              },
+              {
+                "const": "법인"
+              }
+            ],
+            "description": "カードの所有者タイプ.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "acquireStatus": {
+            "oneOf": [
+              {
+                "const": "READY"
+              },
+              {
+                "const": "CANCELED"
+              },
+              {
+                "const": "REQUESTED"
+              },
+              {
+                "const": "COMPLETED"
+              },
+              {
+                "const": "CANCEL_REQUESTED"
+              }
+            ],
+            "description": "カード決済の購入状況。 - READY：購入待ち - REQUESTED：購入要求済み - COMPLETED：購入完了 - CANCEL_REQUESTED：購入キャンセル要求済み - CANCELD：購入解除",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "receiptUrl": {
+            "description": "領収書URL.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "url"
+          }
+        },
+        "required": [
+          "company",
+          "number",
+          "installmentPlanMonths",
+          "isInterestFree",
+          "approveNo",
+          "useCardPoint",
+          "cardType",
+          "ownerType",
+          "acquireStatus",
+          "receiptUrl"
+        ],
+        "description": "カード情報.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossCardPayment.IDiscount.Nullable": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "amount": {
+                "description": "カード会社の即時割引プロモーションを適用した金額.",
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "number"
+              }
+            },
+            "required": [
+              "amount"
+            ],
+            "x-typia-jsDocTags": []
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "カード会社の即割引プロモーション情報.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossPaymentCancel": {
+        "type": "object",
+        "properties": {
+          "cancelAmount": {
+            "description": "キャンセル総額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancelReason": {
+            "description": "キャンセル理由.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "taxFreeAmount": {
+            "description": "免税された金額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxAmount": {
+            "description": "課税された金額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "refundableAmount": {
+            "description": "お支払いのキャンセル後の払い戻し可能残高.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "canceledAt": {
+            "description": "キャンセル日時.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "cancelAmount",
+          "cancelReason",
+          "taxFreeAmount",
+          "taxAmount",
+          "refundableAmount",
+          "canceledAt"
+        ],
+        "description": "お支払いキャンセルについて.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossCashReceipt.ISummary.Nullable": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "$ref": "#/components/schemas/ITossCashReceipt.Type"
+              },
+              "amount": {
+                "description": "現金領収書処理された金額.",
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "number"
+              },
+              "taxFreeAmount": {
+                "description": "免税された金額.",
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "number"
+              },
+              "issueNumber": {
+                "description": "現金領収書発行番号.",
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              "receiptUrl": {
+                "description": "現金領収書の閲覧ページの住所.",
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "amount",
+              "taxFreeAmount",
+              "issueNumber",
+              "receiptUrl"
+            ],
+            "x-typia-jsDocTags": []
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "現金領収書の概要について.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossCashReceipt.Type": {
+        "oneOf": [
+          {
+            "const": "소득공제"
+          },
+          {
+            "const": "지출증빙"
+          }
+        ],
+        "description": "現金領収書の種類."
+      },
+      "ITossGiftCertificatePayment": {
+        "type": "object",
+        "properties": {
+          "giftCertificate": {
+            "$ref": "#/components/schemas/ITossGiftCertificatePayment.IGiftCertificate"
+          },
+          "method": {
+            "const": "상품권",
+            "description": "お支払い方法.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "type": {
+            "const": "NORMAL",
+            "description": "お支払いタイプ。 - NORMAL：一般決済 - BILLING：あらかじめ登録したカードによる簡単決済.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "READY"
+              },
+              {
+                "const": "IN_PROGRESS"
+              },
+              {
+                "const": "WAITING_FOR_DEPOSIT"
+              },
+              {
+                "const": "DONE"
+              },
+              {
+                "const": "CANCELED"
+              },
+              {
+                "const": "PARTIAL_CANCELED"
+              },
+              {
+                "const": "ABORTED"
+              },
+              {
+                "const": "EXPIRED"
+              }
+            ],
+            "description": "お支払い状況。 - READY - IN_PROGRESS - WAITING_FOR_DEPOSIT - DONE - CANCELED - PARTIAL_CANCELED - ABORTED - EXPIRED",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "mId": {
+            "description": "加盟店ID。現在のtosspaymentsが使われています.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "version": {
+            "description": "使用しているトスフェイメンツAPIのバージョン.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "paymentKey": {
+            "description": "お支払い履歴の識別番号.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "注文識別子キー。トスフェイメンツではなく、それを利用するサービスで独自に管理する識別子キー.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "transactionKey": {
+            "description": "取引ガンの一意のキー値。 {@link paymentKey}とは異なり、これを使用することはありませんでした。.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "注文名。トスフェイメントではなく、これを利用するサービスで発行した注文名.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "currency": {
+            "description": "通貨単位。現在、トスフェイメンツはJPYのみ利用可能.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "totalAmount": {
+            "description": "総決済額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "balanceAmount": {
+            "description": "キャンセルできる金額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "suppliedAmount": {
+            "description": "供給価格.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "免税額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vat": {
+            "description": "付加価値税.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "useEscrow": {
+            "description": "エスクローとして使用するかどうか.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "cultureExpense": {
+            "description": "文化費を費やすかどうか。陶石入、公演チケット、博物館/美術館入場券など.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "requestedAt": {
+            "description": "お支払いリクエストの日時.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          "approvedAt": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "支払い承認日時.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancels": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ITossPaymentCancel"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "お支払いキャンセル履歴.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cashReceipt": {
+            "$ref": "#/components/schemas/ITossCashReceipt.ISummary.Nullable"
+          }
+        },
+        "required": [
+          "giftCertificate",
+          "method",
+          "type",
+          "status",
+          "mId",
+          "version",
+          "paymentKey",
+          "orderId",
+          "transactionKey",
+          "orderName",
+          "currency",
+          "totalAmount",
+          "balanceAmount",
+          "suppliedAmount",
+          "taxFreeAmount",
+          "vat",
+          "useEscrow",
+          "cultureExpense",
+          "requestedAt",
+          "approvedAt",
+          "cancels",
+          "cashReceipt"
+        ],
+        "description": "商品券決済情報.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossGiftCertificatePayment.IGiftCertificate": {
+        "type": "object",
+        "properties": {
+          "approveNo": {
+            "description": "承認番号.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "settlementStatus": {
+            "oneOf": [
+              {
+                "const": "COMPLETE"
+              },
+              {
+                "const": "INCOMPLETE"
+              }
+            ],
+            "description": "決済状況.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          }
+        },
+        "required": [
+          "approveNo",
+          "settlementStatus"
+        ],
+        "description": "商品券情報.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossMobilePhonePayment": {
+        "type": "object",
+        "properties": {
+          "mobilePhone": {
+            "$ref": "#/components/schemas/ITossMobilePhonePayment.IMobilePhone"
+          },
+          "method": {
+            "const": "휴대폰",
+            "description": "お支払い方法.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "type": {
+            "const": "NORMAL",
+            "description": "お支払いタイプ。 - NORMAL：一般決済 - BILLING：あらかじめ登録したカードによる簡単決済.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "READY"
+              },
+              {
+                "const": "IN_PROGRESS"
+              },
+              {
+                "const": "WAITING_FOR_DEPOSIT"
+              },
+              {
+                "const": "DONE"
+              },
+              {
+                "const": "CANCELED"
+              },
+              {
+                "const": "PARTIAL_CANCELED"
+              },
+              {
+                "const": "ABORTED"
+              },
+              {
+                "const": "EXPIRED"
+              }
+            ],
+            "description": "お支払い状況。 - READY - IN_PROGRESS - WAITING_FOR_DEPOSIT - DONE - CANCELED - PARTIAL_CANCELED - ABORTED - EXPIRED",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "mId": {
+            "description": "加盟店ID。現在のtosspaymentsが使われています.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "version": {
+            "description": "使用しているトスフェイメンツAPIのバージョン.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "paymentKey": {
+            "description": "お支払い履歴の識別番号.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "注文識別子キー。トスフェイメンツではなく、それを利用するサービスで独自に管理する識別子キー.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "transactionKey": {
+            "description": "取引ガンの一意のキー値。 {@link paymentKey}とは異なり、これを使用することはありませんでした。.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "注文名。トスフェイメントではなく、これを利用するサービスで発行した注文名.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "currency": {
+            "description": "通貨単位。現在、トスフェイメンツはJPYのみ利用可能.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "totalAmount": {
+            "description": "総決済額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "balanceAmount": {
+            "description": "キャンセルできる金額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "suppliedAmount": {
+            "description": "供給価格.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "免税額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vat": {
+            "description": "付加価値税.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "useEscrow": {
+            "description": "エスクローとして使用するかどうか.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "cultureExpense": {
+            "description": "文化費を費やすかどうか。陶石入、公演チケット、博物館/美術館入場券など.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "requestedAt": {
+            "description": "お支払いリクエストの日時.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          "approvedAt": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "支払い承認日時.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancels": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ITossPaymentCancel"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "お支払いキャンセル履歴.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cashReceipt": {
+            "$ref": "#/components/schemas/ITossCashReceipt.ISummary.Nullable"
+          }
+        },
+        "required": [
+          "mobilePhone",
+          "method",
+          "type",
+          "status",
+          "mId",
+          "version",
+          "paymentKey",
+          "orderId",
+          "transactionKey",
+          "orderName",
+          "currency",
+          "totalAmount",
+          "balanceAmount",
+          "suppliedAmount",
+          "taxFreeAmount",
+          "vat",
+          "useEscrow",
+          "cultureExpense",
+          "requestedAt",
+          "approvedAt",
+          "cancels",
+          "cashReceipt"
+        ],
+        "description": "携帯電話のお支払い情報.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossMobilePhonePayment.IMobilePhone": {
+        "type": "object",
+        "properties": {
+          "carrier": {
+            "description": "通信会社.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "customerMobilePhone": {
+            "description": "顧客の携帯電話番号.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "settlementStatus": {
+            "oneOf": [
+              {
+                "const": "COMPLETED"
+              },
+              {
+                "const": "INCOMPLETED"
+              }
+            ],
+            "description": "決済状況.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          }
+        },
+        "required": [
+          "carrier",
+          "customerMobilePhone",
+          "settlementStatus"
+        ],
+        "description": "携帯電話情報.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossTransferPayment": {
+        "type": "object",
+        "properties": {
+          "transfer": {
+            "$ref": "#/components/schemas/ITossTransferPayment.ITransfer"
+          },
+          "method": {
+            "const": "계좌이체",
+            "description": "お支払い方法.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "type": {
+            "const": "NORMAL",
+            "description": "お支払いタイプ。 - NORMAL：一般決済 - BILLING：あらかじめ登録したカードによる簡単決済.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "READY"
+              },
+              {
+                "const": "IN_PROGRESS"
+              },
+              {
+                "const": "WAITING_FOR_DEPOSIT"
+              },
+              {
+                "const": "DONE"
+              },
+              {
+                "const": "CANCELED"
+              },
+              {
+                "const": "PARTIAL_CANCELED"
+              },
+              {
+                "const": "ABORTED"
+              },
+              {
+                "const": "EXPIRED"
+              }
+            ],
+            "description": "お支払い状況。 - READY - IN_PROGRESS - WAITING_FOR_DEPOSIT - DONE - CANCELED - PARTIAL_CANCELED - ABORTED - EXPIRED",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "mId": {
+            "description": "加盟店ID。現在のtosspaymentsが使われています.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "version": {
+            "description": "使用しているトスフェイメンツAPIのバージョン.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "paymentKey": {
+            "description": "お支払い履歴の識別番号.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "注文識別子キー。トスフェイメンツではなく、それを利用するサービスで独自に管理する識別子キー.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "transactionKey": {
+            "description": "取引ガンの一意のキー値。 {@link paymentKey}とは異なり、これを使用することはありませんでした。.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "注文名。トスフェイメントではなく、これを利用するサービスで発行した注文名.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "currency": {
+            "description": "通貨単位。現在、トスフェイメンツはJPYのみ利用可能.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "totalAmount": {
+            "description": "総決済額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "balanceAmount": {
+            "description": "キャンセルできる金額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "suppliedAmount": {
+            "description": "供給価格.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "免税額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vat": {
+            "description": "付加価値税.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "useEscrow": {
+            "description": "エスクローとして使用するかどうか.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "cultureExpense": {
+            "description": "文化費を費やすかどうか。陶石入、公演チケット、博物館/美術館入場券など.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "requestedAt": {
+            "description": "お支払いリクエストの日時.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          "approvedAt": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "支払い承認日時.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancels": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ITossPaymentCancel"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "お支払いキャンセル履歴.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cashReceipt": {
+            "$ref": "#/components/schemas/ITossCashReceipt.ISummary.Nullable"
+          }
+        },
+        "required": [
+          "transfer",
+          "method",
+          "type",
+          "status",
+          "mId",
+          "version",
+          "paymentKey",
+          "orderId",
+          "transactionKey",
+          "orderName",
+          "currency",
+          "totalAmount",
+          "balanceAmount",
+          "suppliedAmount",
+          "taxFreeAmount",
+          "vat",
+          "useEscrow",
+          "cultureExpense",
+          "requestedAt",
+          "approvedAt",
+          "cancels",
+          "cashReceipt"
+        ],
+        "description": "口座振替決済情報.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossTransferPayment.ITransfer": {
+        "type": "object",
+        "properties": {
+          "bank": {
+            "description": "銀行名.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "settlementStatus": {
+            "oneOf": [
+              {
+                "const": "COMPLETED"
+              },
+              {
+                "const": "INCOMPLETED"
+              }
+            ],
+            "description": "振替状態.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          }
+        },
+        "required": [
+          "bank",
+          "settlementStatus"
+        ],
+        "description": "口座振替情報.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossVirtualAccountPayment": {
+        "type": "object",
+        "properties": {
+          "secret": {
+            "description": "仮想口座へのお支払い時に転送されるデポジットコールバックを検証するための値.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "virtualAccount": {
+            "$ref": "#/components/schemas/ITossVirtualAccountPayment.IVirtualAccount"
+          },
+          "method": {
+            "const": "가상계좌",
+            "description": "お支払い方法.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "type": {
+            "const": "NORMAL",
+            "description": "お支払いタイプ。 - NORMAL：一般決済 - BILLING：あらかじめ登録したカードによる簡単決済.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "READY"
+              },
+              {
+                "const": "IN_PROGRESS"
+              },
+              {
+                "const": "WAITING_FOR_DEPOSIT"
+              },
+              {
+                "const": "DONE"
+              },
+              {
+                "const": "CANCELED"
+              },
+              {
+                "const": "PARTIAL_CANCELED"
+              },
+              {
+                "const": "ABORTED"
+              },
+              {
+                "const": "EXPIRED"
+              }
+            ],
+            "description": "お支払い状況。 - READY - IN_PROGRESS - WAITING_FOR_DEPOSIT - DONE - CANCELED - PARTIAL_CANCELED - ABORTED - EXPIRED",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "mId": {
+            "description": "加盟店ID。現在のtosspaymentsが使われています.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "version": {
+            "description": "使用しているトスフェイメンツAPIのバージョン.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "paymentKey": {
+            "description": "お支払い履歴の識別番号.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "注文識別子キー。トスフェイメンツではなく、それを利用するサービスで独自に管理する識別子キー.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "transactionKey": {
+            "description": "取引ガンの一意のキー値。 {@link paymentKey}とは異なり、これを使用することはありませんでした。.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "注文名。トスフェイメントではなく、これを利用するサービスで発行した注文名.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "currency": {
+            "description": "通貨単位。現在、トスフェイメンツはJPYのみ利用可能.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "totalAmount": {
+            "description": "総決済額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "balanceAmount": {
+            "description": "キャンセルできる金額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "suppliedAmount": {
+            "description": "供給価格.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "免税額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vat": {
+            "description": "付加価値税.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "useEscrow": {
+            "description": "エスクローとして使用するかどうか.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "cultureExpense": {
+            "description": "文化費を費やすかどうか。陶石入、公演チケット、博物館/美術館入場券など.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "requestedAt": {
+            "description": "お支払いリクエストの日時.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          "approvedAt": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "支払い承認日時.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancels": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ITossPaymentCancel"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "お支払いキャンセル履歴.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cashReceipt": {
+            "$ref": "#/components/schemas/ITossCashReceipt.ISummary.Nullable"
+          }
+        },
+        "required": [
+          "secret",
+          "virtualAccount",
+          "method",
+          "type",
+          "status",
+          "mId",
+          "version",
+          "paymentKey",
+          "orderId",
+          "transactionKey",
+          "orderName",
+          "currency",
+          "totalAmount",
+          "balanceAmount",
+          "suppliedAmount",
+          "taxFreeAmount",
+          "vat",
+          "useEscrow",
+          "cultureExpense",
+          "requestedAt",
+          "approvedAt",
+          "cancels",
+          "cashReceipt"
+        ],
+        "description": "仮想アカウントのお支払い情報.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossVirtualAccountPayment.IVirtualAccount": {
+        "type": "object",
+        "properties": {
+          "accountNumber": {
+            "description": "口座番号.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "accountType": {
+            "oneOf": [
+              {
+                "const": "일반"
+              },
+              {
+                "const": "고정"
+              }
+            ],
+            "description": "仮想アカウントタイプ.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "bank": {
+            "description": "銀行名.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "customerName": {
+            "description": "顧客名.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "dueDate": {
+            "description": "入金期限.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date"
+          },
+          "expired": {
+            "description": "仮想アカウントの有効期限.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "settlementStatus": {
+            "oneOf": [
+              {
+                "const": "COMPLETED"
+              },
+              {
+                "const": "INCOMPLETED"
+              }
+            ],
+            "description": "決済状況.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "refundStatus": {
+            "oneOf": [
+              {
+                "const": "COMPLETED"
+              },
+              {
+                "const": "NONE"
+              },
+              {
+                "const": "FAILED"
+              },
+              {
+                "const": "PENDING"
+              },
+              {
+                "const": "PARTIAL_FAILED"
+              }
+            ],
+            "description": "払い戻し処理ステータス。 - NONE：該当なし - FAILED：払い戻し失敗 - PENDING：払い戻し処理中 - PARTIAL_FAILED：部分払い戻し失敗 - COMPLETED：払い戻し完了",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          }
+        },
+        "required": [
+          "accountNumber",
+          "accountType",
+          "bank",
+          "customerName",
+          "dueDate",
+          "expired",
+          "settlementStatus",
+          "refundStatus"
+        ],
+        "description": "仮想アカウント情報.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossCashReceipt.IStore": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "oneOf": [
+              {
+                "const": "소득공제"
+              },
+              {
+                "const": "지출증빙"
+              }
+            ],
+            "description": "現金領収書の種類.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "paymentKey": {
+            "description": "帰属請求の{@link ITossPayment.paymentKey}.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "注文の識別子ID.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "注文名.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "registrationNumber": {
+            "description": "現金領収書を発行するための個人識別番号。現金領収書の種類に応じて携帯電話番号や住民登録番号または事業者登録番号およびカード番号を入力することができる.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "description": "現金領収書を発行する金額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "免税額.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "businessNumber": {
+            "description": "事業者登録番号.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "paymentKey",
+          "orderId",
+          "orderName",
+          "registrationNumber",
+          "amount"
+        ],
+        "description": "現金領収書入力情報.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossCashReceipt": {
+        "type": "object",
+        "properties": {
+          "receiptKey": {
+            "description": "現金領収書の識別子キー.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ITossCashReceipt.Type"
+          },
+          "orderId": {
+            "description": "注文の識別子ID.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "注文名.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "approvalNumber": {
+            "description": "現金領収書承認番号.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "approvedAt": {
+            "description": "現金領収書承認日時.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          "canceledAt": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "現金領収書のキャンセル日時.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "receiptUrl": {
+            "description": "領収書URL.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "receiptKey",
+          "type",
+          "orderId",
+          "orderName",
+          "approvalNumber",
+          "approvedAt",
+          "canceledAt",
+          "receiptUrl"
+        ],
+        "description": "現金領収書情報.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossCashReceipt.ICancel": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "description": "キャンセル金額。未入力の場合、現金領収書に記載されている{@link ITossCashReceipt.amount総額}がキャンセルされました.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          }
+        },
+        "description": "現金領収書キャンセル入力情報.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossPaymentWebhook": {
+        "type": "object",
+        "properties": {
+          "eventType": {
+            "const": "PAYMENT_STATUS_CHANGED",
+            "description": "イベントタイプ.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "data": {
+            "$ref": "#/components/schemas/ITossPaymentWebhook.IData"
+          }
+        },
+        "required": [
+          "eventType",
+          "data"
+        ],
+        "description": "Webフックイベント情報.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossPaymentWebhook.IData": {
+        "type": "object",
+        "properties": {
+          "paymentKey": {
+            "description": "{@link ITossPayment}の識別子キー.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "注文識別子キー。トスフェイメンツではなく、それを利用するサービスで独自に管理する識別子キー.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "WAITING_FOR_DEPOSIT"
+              },
+              {
+                "const": "DONE"
+              },
+              {
+                "const": "CANCELED"
+              },
+              {
+                "const": "PARTIAL_CANCELED"
+              }
+            ],
+            "description": "お支払い状況。 - DONE：支払いが完了しました - CANCELED：支払いがキャンセルされました - PARTIAL_CANCELED：支払いが部分的にキャンセルされました - WAITING_FOR_DEPOSIT：入金待機中",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          }
+        },
+        "required": [
+          "paymentKey",
+          "orderId",
+          "status"
+        ],
+        "description": "Webフックイベントデータ.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossCardPayment.IStore": {
+        "type": "object",
+        "properties": {
+          "method": {
+            "const": "card",
+            "description": "お支払い方法がクレジットカードであることを意味します.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cardNumber": {
+            "description": "カード番号.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "[0-9]{16}"
+          },
+          "cardExpirationYear": {
+            "description": "カードの有効期限（2桁）.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "\\d{2}"
+          },
+          "cardExpirationMonth": {
+            "description": "カード有効期限月（2桁）.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^(0[1-9]|1[012])$"
+          },
+          "cardPassword": {
+            "description": "カードパスワード.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "cardInstallmentPlan": {
+            "description": "分割払い月数.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "amount": {
+            "description": "支払総額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "免税金総額.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "orderId": {
+            "description": "注文識別子キー。トスフェイメンツではなく、それを利用するサービスで独自に管理する識別子キー.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "注文名。トスフェイメントではなく、これを利用するサービスで発行した注文名.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "customerBirthday": {
+            "description": "顧客の生年月日。表記形式YYMMDD.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "pattern": "^([0-9]{2})(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$"
+          },
+          "customerEmail": {
+            "description": "お客様のメール.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "format": "email"
+          },
+          "vbv": {
+            "$ref": "#/components/schemas/__type.o1"
+          },
+          "__approved": {
+            "description": "支払いを承認するかどうか。偽のフェイメントサーバー `fake-toss-payments-server` でのみ使用される値として、決済承認を意図的に遅延させたりするときに使用される。この値を `false` にすると、フロントアプリケーションがトスフェイメンツが提供する決済ウィンドウを使って決済を進行する状況をシミュレートできます。ボンディートスフェイメンツサーバーはフロントアプリケーションでバックエンドサーバーを経由せず、トスフェイメンツが提供する決済ウィンドウを利用して直接決済を要求する場合、バックエンドでこれを別途{@link functional.payments.approve承認}処理するまで正式決済で人清治しない。一方、バックエンドサーバーでトスフェイメンツサーバーのAPIを呼び出す場合、トスフェイメンツはそれを即座に承認し、 `fake-toss-payments-server` で別途の承認処理が必要な状況をシミュレートするためには、これらの属性が必要なもの.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "method",
+          "cardNumber",
+          "cardExpirationYear",
+          "cardExpirationMonth",
+          "amount",
+          "orderId"
+        ],
+        "description": "クレジットカードを利用した決済申請情報.",
+        "x-typia-jsDocTags": []
+      },
+      "__type.o1": {
+        "type": "object",
+        "properties": {
+          "cavv": {
+            "description": "3D Secure認証セッションの認証値.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "xid": {
+            "description": "トランザクションID.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "eci": {
+            "description": "3DS認証結果のコード値.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "cavv",
+          "xid",
+          "eci"
+        ],
+        "x-typia-jsDocTags": []
+      },
+      "ITossPayment.IApproval": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "description": "注文識別子キー。トスフェイメンツではなく、それを利用するサービスで独自に管理する識別子キー.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "description": "お支払い総額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          }
+        },
+        "required": [
+          "orderId",
+          "amount"
+        ],
+        "description": "お支払い承認情報.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossPaymentCancel.IStore": {
+        "type": "object",
+        "properties": {
+          "paymentKey": {
+            "description": "{@link ITossPayment}の識別子キー.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "cancelReason": {
+            "description": "キャンセル理由.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "cancelAmount": {
+            "description": "キャンセル総額.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "refundReceiveAccount": {
+            "$ref": "#/components/schemas/__type.o2"
+          },
+          "taxAmount": {
+            "description": "課税処理額.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "免税処理額.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "refundableAmount": {
+            "description": "お支払いのキャンセル後の払い戻し可能残高.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          }
+        },
+        "required": [
+          "paymentKey",
+          "cancelReason"
+        ],
+        "description": "決済キャンセル申請情報.",
+        "x-typia-jsDocTags": []
+      },
+      "__type.o2": {
+        "type": "object",
+        "properties": {
+          "bank": {
+            "description": "銀行情報.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "accountNumber": {
+            "description": "口座番号.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^[0-9]{0,20}$"
+          },
+          "holderName": {
+            "description": "預金株.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "bank",
+          "accountNumber",
+          "holderName"
+        ],
+        "x-typia-jsDocTags": []
+      },
+      "ITossVirtualAccountPayment.IStore": {
+        "type": "object",
+        "properties": {
+          "method": {
+            "const": "virtual-account",
+            "description": "お支払い方法が仮想アカウントであることを意味します.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "orderId": {
+            "description": "注文識別子番号。トスフェイメンツではなく、それを利用するサービスで独自に管理する識別子キー.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "注文名。トスフェイメントではなく、これを利用するサービスで発行した注文名.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "bank": {
+            "description": "銀行名.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "customerName": {
+            "description": "顧客名.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "description": "お支払い総額.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "__approved": {
+            "description": "支払いを承認するかどうか。偽のフェイメントサーバー `fake-toss-payments-server` でのみ使用される値として、決済承認を意図的に遅延させたりするときに使用される。この値を `false` にすると、フロントアプリケーションがトスフェイメンツが提供する決済ウィンドウを使って決済を進行する状況をシミュレートできます。ボンディートスフェイメンツサーバーはフロントアプリケーションでバックエンドサーバーを経由せず、トスフェイメンツが提供する決済ウィンドウを利用して直接決済を要求する場合、バックエンドでこれを別途{@link functional.payments.approve承認}処理するまで正式決済で人清治しない。一方、バックエンドサーバーでトスフェイメンツサーバーのAPIを呼び出す場合、トスフェイメンツはそれを即座に承認し、 `fake-toss-payments-server` で別途の承認処理が必要な状況をシミュレートするためには、これらの属性が必要なもの.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "method",
+          "orderId",
+          "orderName",
+          "bank",
+          "customerName",
+          "amount"
+        ],
+        "description": "仮想口座を利用した決済申請情報.",
+        "x-typia-jsDocTags": []
+      }
+    },
+    "securitySchemes": {
+      "basic": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "x-samchon-emended": true
+}

@@ -1,0 +1,1663 @@
+{
+  "openapi": "3.1.0",
+  "servers": [
+    {
+      "url": "http://localhost:37001",
+      "description": "الخادم المحلي"
+    }
+  ],
+  "info": {
+    "version": "2.1.0",
+    "title": "@samchon/bbs-backend",
+    "description": "الواجهة الخلفية للـ BBS",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "paths": {
+    "/bbs/articles": {
+      "patch": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "طلب معلومات حول الترقيم وخيارات البحث.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticle.IRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "مقالات مختصرة مقسمة إلى صفحات.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IPageIBbsArticle.ISummary"
+                }
+              }
+            }
+          }
+        },
+        "summary": "قم بإدراج جميع المقالات المختصرة",
+        "description": "قم بإدراج جميع المقالات المختصرة. قم بإدراج جميع المقالات المختصرة مع خيارات الترقيم والبحث."
+      },
+      "post": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "معلومات المقال المراد إنشائه.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticle.ICreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "مقالة تم إنشاؤها حديثًا.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBbsArticle"
+                }
+              }
+            }
+          }
+        },
+        "summary": "إنشاء مقال جديد",
+        "description": "إنشاء مقال جديد. إنشاء مقال جديد مع أول {@link IBbsArticle.ISnapshot snapshot}."
+      }
+    },
+    "/bbs/articles/abridges": {
+      "patch": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "طلب معلومات حول الترقيم وخيارات البحث.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticle.IRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "مقالات مختصرة مقسمة إلى صفحات.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IPageIBbsArticle.IAbridge"
+                }
+              }
+            }
+          }
+        },
+        "summary": "قم بإدراج جميع المقالات المختصرة",
+        "description": "قم بإدراج جميع المقالات المختصرة. قم بإدراج جميع المقالات المختصرة مع خيارات الترقيم والبحث."
+      }
+    },
+    "/bbs/articles/{id}": {
+      "get": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "المقال المستهدف",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "معلومات المقال",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBbsArticle"
+                }
+              }
+            }
+          }
+        },
+        "summary": "اقرأ المقال الفردي",
+        "description": "قراءة مقال فردي. قراءة مقال مع كل {@link IBbsArticle.ISnapshot snapshots}."
+      },
+      "put": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "المقال المستهدف",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "معلومات المقال المطلوب تحديثها.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticle.IUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "معلومات اللقطة المتراكمة حديثًا.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBbsArticle.ISnapshot"
+                }
+              }
+            }
+          }
+        },
+        "summary": "تحديث المقال",
+        "description": "تحديث مقالة. تجميع سجل جديد {@link IBbsArticle.ISnapshot snapshot} للمقالة."
+      },
+      "delete": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "المقال المستهدف",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "كلمة المرور للمقالة.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticle.IErase"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "مسح مقالة",
+        "description": "مسح مقالة. تنفيذ عملية حذف بسيطة للمقالة."
+      }
+    },
+    "/bbs/articles/{articleId}/comments": {
+      "patch": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "طلب معلومات حول الترقيم وخيارات البحث.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticleComment.IRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "تعليقات مختصرة مقسمة إلى صفحات.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IPageIBbsArticleComment"
+                }
+              }
+            }
+          }
+        },
+        "summary": "قم بإدراج جميع التعليقات المختصرة",
+        "description": "قم بإدراج جميع التعليقات المختصرة. قم بإدراج جميع التعليقات المختصرة مع خيارات الترقيم والبحث."
+      },
+      "post": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "المقالات التابعة",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "معلومات التعليق لإنشاء.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticleComment.ICreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "تعليق تم إنشاؤه حديثًا.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBbsArticleComment"
+                }
+              }
+            }
+          }
+        },
+        "summary": "إنشاء تعليق جديد",
+        "description": "إنشاء تعليق جديد. إنشاء تعليق جديد مع أول {@link IBbsArticleComment.ISnapshot snapshot}."
+      }
+    },
+    "/bbs/articles/{articleId}/comments/{id}": {
+      "get": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "المقالات التابعة",
+            "required": true
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "تعليق الهدف",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "معلومات التعليق",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBbsArticleComment"
+                }
+              }
+            }
+          }
+        },
+        "summary": "اقرأ التعليق الفردي",
+        "description": "قراءة التعليقات الفردية. قراءة التعليق مع كل {@link IBbsArticleComment.ISnapshot snapshots}."
+      },
+      "put": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "المقالات التابعة",
+            "required": true
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "تعليق الهدف",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "تعليق على المعلومات التي يجب تحديثها.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticleComment.IUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "معلومات اللقطة المتراكمة حديثًا.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBbsArticleComment.ISnapshot"
+                }
+              }
+            }
+          }
+        },
+        "summary": "تحديث تعليق",
+        "description": "تحديث تعليق. قم بتجميع سجل جديد {@link IBbsArticleComment.ISnapshot snapshot} للتعليق."
+      },
+      "delete": {
+        "tags": [
+          "BBS"
+        ],
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "المقالات التابعة",
+            "required": true
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "تعليق الهدف",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "كلمة المرور للتعليق.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IBbsArticleComment.IErase"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "مسح التعليق",
+        "description": "مسح تعليق. يقوم بحذف التعليق بشكل ناعم."
+      }
+    },
+    "/monitors/health": {
+      "get": {
+        "tags": [
+          "Monitor"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "فحص الصحة API",
+        "description": "فحص الصحة API."
+      }
+    },
+    "/monitors/performance": {
+      "get": {
+        "tags": [
+          "Monitor"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "معلومات الأداء",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IPerformance"
+                }
+              }
+            }
+          }
+        },
+        "summary": "احصل على معلومات الأداء",
+        "description": "احصل على معلومات الأداء. احصل على معلومات الأداء المؤلفة من وحدة المعالجة المركزية والذاكرة واستخدام الموارد."
+      }
+    },
+    "/monitors/system": {
+      "get": {
+        "tags": [
+          "Monitor"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "معلومات النظام",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISystem"
+                }
+              }
+            }
+          }
+        },
+        "summary": "الحصول على معلومات النظام",
+        "description": "احصل على معلومات النظام. احصل على معلومات النظام باستخدام معلومات الالتزام والحزمة."
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "IBbsArticle.IRequest": {
+        "type": "object",
+        "properties": {
+          "search": {
+            "$ref": "#/components/schemas/IBbsArticle.IRequest.ISearch",
+            "title": "شرط البحث",
+            "description": "شرط البحث."
+          },
+          "sort": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "const": "-writer"
+                },
+                {
+                  "const": "-title"
+                },
+                {
+                  "const": "-created_at"
+                },
+                {
+                  "const": "-updated_at"
+                },
+                {
+                  "const": "+writer"
+                },
+                {
+                  "const": "+title"
+                },
+                {
+                  "const": "+created_at"
+                },
+                {
+                  "const": "+updated_at"
+                }
+              ]
+            },
+            "title": "حالة الفرز",
+            "description": "حالة الفرز."
+          },
+          "page": {
+            "type": "integer",
+            "title": "رقم الصفحة",
+            "description": "رقم الصفحة."
+          },
+          "limit": {
+            "type": "integer",
+            "default": 100,
+            "title": "تحديد عدد السجلات لكل صفحة",
+            "description": "تحديد عدد السجلات لكل صفحة."
+          }
+        }
+      },
+      "IBbsArticle.IRequest.ISearch": {
+        "type": "object",
+        "properties": {
+          "writer": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "title_or_body": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "to": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "description": "검색 정보."
+      },
+      "IPageIBbsArticle.ISummary": {
+        "type": "object",
+        "properties": {
+          "pagination": {
+            "$ref": "#/components/schemas/IPage.IPagination",
+            "title": "معلومات الصفحة",
+            "description": "معلومات الصفحة."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IBbsArticle.ISummary"
+            },
+            "title": "قائمة السجلات",
+            "description": "قائمة السجلات."
+          }
+        },
+        "required": [
+          "pagination",
+          "data"
+        ],
+        "description": "صفحة. مجموعة من السجلات مع معلومات الترقيم."
+      },
+      "IPage.IPagination": {
+        "type": "object",
+        "properties": {
+          "current": {
+            "type": "integer",
+            "title": "رقم الصفحة الحالية",
+            "description": "رقم الصفحة الحالية."
+          },
+          "limit": {
+            "type": "integer",
+            "default": 100,
+            "title": "تحديد عدد السجلات لكل صفحة",
+            "description": "تحديد عدد السجلات لكل صفحة."
+          },
+          "records": {
+            "type": "integer",
+            "title": "مجموع السجلات في قاعدة البيانات",
+            "description": "مجموع السجلات في قاعدة البيانات."
+          },
+          "pages": {
+            "type": "integer",
+            "title": "مجموع الصفحات",
+            "description": "إجمالي الصفحات يساوي {@link records } / {@link limit } مع سقف."
+          }
+        },
+        "required": [
+          "current",
+          "limit",
+          "records",
+          "pages"
+        ],
+        "description": "معلومات الصفحة."
+      },
+      "IBbsArticle.ISummary": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "المفتاح الأساسي",
+            "description": "المفتاح الأساسي."
+          },
+          "writer": {
+            "type": "string",
+            "title": "كاتب المقال",
+            "description": "كاتب المقال."
+          },
+          "title": {
+            "type": "string",
+            "title": "عنوان الصورة الاخيرة",
+            "description": "عنوان الصورة الاخيرة."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "وقت إنشاء المقال",
+            "description": "وقت إنشاء المقال."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "وقت تعديل المقال",
+            "description": "وقت تعديل المقالة. بمعنى آخر، الوقت الذي تم فيه إنشاء آخر لقطة."
+          }
+        },
+        "required": [
+          "id",
+          "writer",
+          "title",
+          "created_at",
+          "updated_at"
+        ],
+        "description": "ملخص المعلومات الموجودة في المقال."
+      },
+      "IPageIBbsArticle.IAbridge": {
+        "type": "object",
+        "properties": {
+          "pagination": {
+            "$ref": "#/components/schemas/IPage.IPagination",
+            "title": "معلومات الصفحة",
+            "description": "معلومات الصفحة."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IBbsArticle.IAbridge"
+            },
+            "title": "قائمة السجلات",
+            "description": "قائمة السجلات."
+          }
+        },
+        "required": [
+          "pagination",
+          "data"
+        ],
+        "description": "صفحة. مجموعة من السجلات مع معلومات الترقيم."
+      },
+      "IBbsArticle.IAbridge": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "المفتاح الأساسي",
+            "description": "المفتاح الأساسي."
+          },
+          "writer": {
+            "type": "string",
+            "title": "كاتب المقال",
+            "description": "كاتب المقال."
+          },
+          "title": {
+            "type": "string",
+            "title": "عنوان الصورة الاخيرة",
+            "description": "عنوان الصورة الاخيرة."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "وقت إنشاء المقال",
+            "description": "وقت إنشاء المقال."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "وقت تعديل المقال",
+            "description": "وقت تعديل المقالة. بمعنى آخر، الوقت الذي تم فيه إنشاء آخر لقطة."
+          },
+          "format": {
+            "$ref": "#/components/schemas/IBbsArticle.Format",
+            "title": "شكل الجسم",
+            "description": "تنسيق النص، نفس المعنى مع امتدادات مثل `html`، `md`، `txt`."
+          },
+          "body": {
+            "type": "string",
+            "title": "محتوى نص المقال",
+            "description": "محتوى نص المقال."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IAttachmentFile.ICreate"
+            },
+            "title": "قائمة الملفات المرفقة",
+            "description": "قائمة الملفات المرفقة."
+          }
+        },
+        "required": [
+          "id",
+          "writer",
+          "title",
+          "created_at",
+          "updated_at",
+          "format",
+          "body",
+          "files"
+        ],
+        "description": "معلومات مختصرة عن المقال."
+      },
+      "IBbsArticle.Format": {
+        "oneOf": [
+          {
+            "const": "txt"
+          },
+          {
+            "const": "md"
+          },
+          {
+            "const": "html"
+          }
+        ]
+      },
+      "IAttachmentFile.ICreate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 255,
+            "title": "اسم الملف، باستثناء الامتداد",
+            "description": "اسم الملف، باستثناء الامتداد."
+          },
+          "extension": {
+            "oneOf": [
+              {
+                "type": "string",
+                "maxLength": 8,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "امتداد",
+            "description": "الامتداد. من الممكن حذف مثل حالة `README`."
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "contentMediaType": "application/octet-stream",
+            "title": "مسار URL للملف الحقيقي",
+            "description": "مسار URL للملف الحقيقي."
+          }
+        },
+        "required": [
+          "name",
+          "extension",
+          "url"
+        ]
+      },
+      "IBbsArticle": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "المفتاح الأساسي",
+            "description": "المفتاح الأساسي.",
+            "x-special-description": "Sommetimes made by database automatically."
+          },
+          "writer": {
+            "type": "string",
+            "title": "كاتب المقال",
+            "description": "كاتب المقال."
+          },
+          "snapshots": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IBbsArticle.ISnapshot"
+            },
+            "minItems": 1,
+            "title": "قائمة محتويات الصورة",
+            "description": "قائمة محتويات الصورة الفورية. يتم إنشاؤها لأول مرة عند إنشاء مقال، ويتم تجميعها في كل مرة يتم فيها تعديل المقال."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "وقت إنشاء المقال",
+            "description": "وقت إنشاء المقال."
+          }
+        },
+        "required": [
+          "id",
+          "writer",
+          "snapshots",
+          "created_at"
+        ],
+        "description": "كيان المقالة. `IBbsArticle* هو كيان من نوع فرعي لجميع أنواع المقالات في نظام الواجهة الخلفية الحالي، ويشكل حرفيًا المقالات الفردية للوحة الإعلانات. وكما ترى، فإن العناصر التي يجب أن توجد حتمًا في المقالة، مثل `العنوان` أو `الجسم`، لا توجد في `IBbsArticle`، ولكنها موجودة في الكيان الفرعي، {@link IBbsArticle.ISnapshot }، كعلاقة 1: N، وذلك لأن سجل لقطة جديد يتم نشره في كل مرة يتم فيها تعديل المقالة. والسبب وراء نشر سجل لقطة جديد في كل مرة يتم فيها تعديل المقالة هو الحفاظ على الأدلة. نظرًا لطبيعة المجتمع الإلكتروني، هناك دائمًا تهديد بالنزاع بين المشاركين. وقد يحدث أن تنشأ النزاعات من خلال المقالات أو {@link IBbsArticleComment comments}، ولمنع أشياء مثل تعديل المقالات الموجودة للتلاعب بالموقف، تم تصميم المقالة بهذا الهيكل. بعبارة أخرى، للحفاظ على الأدلة ومنع الاحتيال."
+      },
+      "IBbsArticle.ISnapshot": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "المفتاح الأساسي",
+            "description": "المفتاح الأساسي."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "وقت إنشاء سجل اللقطة",
+            "description": "وقت إنشاء سجل لقطة. بمعنى آخر، وقت الإنشاء أو وقت التحديث أو المقالة."
+          },
+          "format": {
+            "$ref": "#/components/schemas/IBbsArticle.Format",
+            "title": "شكل الجسم",
+            "description": "تنسيق النص، نفس المعنى مع امتدادات مثل `html`، `md`، `txt`."
+          },
+          "body": {
+            "type": "string",
+            "title": "محتوى نص المقال",
+            "description": "محتوى نص المقال."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IAttachmentFile.ICreate"
+            },
+            "title": "قائمة الملفات المرفقة",
+            "description": "قائمة الملفات المرفقة."
+          },
+          "title": {
+            "type": "string",
+            "title": "عنوان المقال",
+            "description": "عنوان المقال."
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "format",
+          "body",
+          "files",
+          "title"
+        ],
+        "description": "لقطة من المقالة. `IBbsArticle.ISnapshot` هي كيان لقطة يحتوي على محتويات المقالة، كما هو مذكور في {@link IBbsArticle }، يتم فصل محتويات المقالة عن سجل المقالة للاحتفاظ بالأدلة ومنع الاحتيال."
+      },
+      "IBbsArticle.ICreate": {
+        "type": "object",
+        "properties": {
+          "writer": {
+            "type": "string"
+          },
+          "format": {
+            "oneOf": [
+              {
+                "const": "txt"
+              },
+              {
+                "const": "md"
+              },
+              {
+                "const": "html"
+              }
+            ],
+            "title": "شكل الجسم",
+            "description": "تنسيق النص، نفس المعنى مع امتدادات مثل `html`، `md`، `txt`."
+          },
+          "title": {
+            "type": "string",
+            "title": "عنوان المقال",
+            "description": "عنوان المقال."
+          },
+          "body": {
+            "type": "string",
+            "title": "محتوى نص المقال",
+            "description": "محتوى نص المقال."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IAttachmentFile.ICreate"
+            },
+            "title": "قائمة الملفات المرفقة",
+            "description": "قائمة الملفات المرفقة."
+          },
+          "password": {
+            "type": "string",
+            "title": "كلمة المرور للتعديل",
+            "description": "كلمة المرور للتعديل."
+          }
+        },
+        "required": [
+          "writer",
+          "format",
+          "title",
+          "body",
+          "files",
+          "password"
+        ],
+        "description": "تخزين نوع محتوى المقالة."
+      },
+      "IBbsArticle.IUpdate": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "oneOf": [
+              {
+                "const": "txt"
+              },
+              {
+                "const": "md"
+              },
+              {
+                "const": "html"
+              }
+            ],
+            "title": "شكل الجسم",
+            "description": "تنسيق النص، نفس المعنى مع امتدادات مثل `html`، `md`، `txt`."
+          },
+          "title": {
+            "type": "string",
+            "title": "عنوان المقال",
+            "description": "عنوان المقال."
+          },
+          "body": {
+            "type": "string",
+            "title": "محتوى نص المقال",
+            "description": "محتوى نص المقال."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IAttachmentFile.ICreate"
+            },
+            "title": "قائمة الملفات المرفقة",
+            "description": "قائمة الملفات المرفقة."
+          },
+          "password": {
+            "type": "string",
+            "title": "كلمة المرور للتعديل",
+            "description": "كلمة المرور للتعديل."
+          }
+        },
+        "required": [
+          "format",
+          "title",
+          "body",
+          "files",
+          "password"
+        ]
+      },
+      "IBbsArticle.IErase": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "password"
+        ]
+      },
+      "IBbsArticleComment.IRequest": {
+        "type": "object",
+        "properties": {
+          "search": {
+            "$ref": "#/components/schemas/IBbsArticleComment.IRequest.ISearch"
+          },
+          "sort": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "const": "-writer"
+                },
+                {
+                  "const": "-created_at"
+                },
+                {
+                  "const": "+writer"
+                },
+                {
+                  "const": "+created_at"
+                }
+              ]
+            }
+          },
+          "page": {
+            "type": "integer",
+            "title": "رقم الصفحة",
+            "description": "رقم الصفحة."
+          },
+          "limit": {
+            "type": "integer",
+            "default": 100,
+            "title": "تحديد عدد السجلات لكل صفحة",
+            "description": "تحديد عدد السجلات لكل صفحة."
+          }
+        }
+      },
+      "IBbsArticleComment.IRequest.ISearch": {
+        "type": "object",
+        "properties": {
+          "writer": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          }
+        }
+      },
+      "IPageIBbsArticleComment": {
+        "type": "object",
+        "properties": {
+          "pagination": {
+            "$ref": "#/components/schemas/IPage.IPagination",
+            "title": "معلومات الصفحة",
+            "description": "معلومات الصفحة."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IBbsArticleComment"
+            },
+            "title": "قائمة السجلات",
+            "description": "قائمة السجلات."
+          }
+        },
+        "required": [
+          "pagination",
+          "data"
+        ],
+        "description": "صفحة. مجموعة من السجلات مع معلومات الترقيم."
+      },
+      "IBbsArticleComment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "المفتاح الأساسي",
+            "description": "المفتاح الأساسي."
+          },
+          "parent_id": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "معرف تعليق الوالدين",
+            "description": "معرف تعليق الوالدين."
+          },
+          "writer": {
+            "type": "string",
+            "title": "كاتب التعليق",
+            "description": "كاتب التعليق."
+          },
+          "snapshots": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IBbsArticleComment.ISnapshot"
+            },
+            "minItems": 1,
+            "title": "قائمة محتويات الصورة",
+            "description": "قائمة محتويات اللقطة. يتم إنشاؤها لأول مرة عند إنشاء تعليق، ويتم تجميعها في كل مرة يتم فيها تعديل التعليق."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "وقت إنشاء التعليق",
+            "description": "وقت إنشاء التعليق."
+          }
+        },
+        "required": [
+          "id",
+          "parent_id",
+          "writer",
+          "snapshots",
+          "created_at"
+        ],
+        "description": "التعليق المكتوب على مقال. `IBbsArticleComment` هو كيان يشكل التعليقات المكتوبة على مقال. وبالنسبة لهذا التعليق، كما في العلاقة السابقة بين {@link IBbsArticle } و{@link IBbsArticle.ISnapshot }، يتم تخزين نص محتوى التعليق في الجدول الفرعي {@link IBbsArticleComment.ISnapshot } للإثبات، ويتم إصدار سجل لقطة جديد في كل مرة يتم فيها تعديل التعليق. كما يعبر `IBbsArticleComment` عن علاقة هيكل الرد الهرمي من خلال السمة {@link IBbsArticleComment.parent_id }."
+      },
+      "IBbsArticleComment.ISnapshot": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "المفتاح الأساسي",
+            "description": "المفتاح الأساسي."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "وقت إنشاء سجل اللقطة",
+            "description": "وقت إنشاء سجل لقطة. بمعنى آخر، وقت الإنشاء أو وقت التحديث أو التعليق."
+          },
+          "format": {
+            "$ref": "#/components/schemas/IBbsArticleComment.Format",
+            "title": "شكل الجسم",
+            "description": "تنسيق النص، نفس المعنى مع امتدادات مثل `html`، `md`، `txt`."
+          },
+          "body": {
+            "type": "string",
+            "title": "محتوى نص التعليق",
+            "description": "محتوى نص التعليق."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IAttachmentFile.ICreate"
+            },
+            "title": "قائمة الملفات المرفقة",
+            "description": "قائمة الملفات المرفقة."
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "format",
+          "body",
+          "files"
+        ],
+        "description": "لقطة من التعليق. `IBbsArticleComment.ISnapshot` عبارة عن كيان لقطة يحتوي على محتويات التعليق. وكما ذكر في {@link IBbsArticleComment }، تم تصميمه للاحتفاظ بالأدلة ومنع الاحتيال."
+      },
+      "IBbsArticleComment.Format": {
+        "oneOf": [
+          {
+            "const": "txt"
+          },
+          {
+            "const": "md"
+          },
+          {
+            "const": "html"
+          }
+        ]
+      },
+      "IBbsArticleComment.ICreate": {
+        "type": "object",
+        "properties": {
+          "writer": {
+            "type": "string",
+            "title": "كاتب التعليق",
+            "description": "كاتب التعليق."
+          },
+          "format": {
+            "oneOf": [
+              {
+                "const": "txt"
+              },
+              {
+                "const": "md"
+              },
+              {
+                "const": "html"
+              }
+            ],
+            "title": "شكل الجسم",
+            "description": "تنسيق النص، نفس المعنى مع امتدادات مثل `html`، `md`، `txt`."
+          },
+          "body": {
+            "type": "string",
+            "title": "محتوى نص التعليق",
+            "description": "محتوى نص التعليق."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IAttachmentFile.ICreate"
+            },
+            "title": "قائمة الملفات المرفقة",
+            "description": "قائمة الملفات المرفقة."
+          },
+          "password": {
+            "type": "string",
+            "title": "كلمة المرور للتعديل",
+            "description": "كلمة المرور للتعديل."
+          }
+        },
+        "required": [
+          "writer",
+          "format",
+          "body",
+          "files",
+          "password"
+        ]
+      },
+      "IBbsArticleComment.IUpdate": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "oneOf": [
+              {
+                "const": "txt"
+              },
+              {
+                "const": "md"
+              },
+              {
+                "const": "html"
+              }
+            ],
+            "title": "شكل الجسم",
+            "description": "تنسيق النص، نفس المعنى مع امتدادات مثل `html`، `md`، `txt`."
+          },
+          "body": {
+            "type": "string",
+            "title": "محتوى نص التعليق",
+            "description": "محتوى نص التعليق."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IAttachmentFile.ICreate"
+            },
+            "title": "قائمة الملفات المرفقة",
+            "description": "قائمة الملفات المرفقة."
+          },
+          "password": {
+            "type": "string",
+            "title": "كلمة المرور للتعديل",
+            "description": "كلمة المرور للتعديل."
+          }
+        },
+        "required": [
+          "format",
+          "body",
+          "files",
+          "password"
+        ]
+      },
+      "IBbsArticleComment.IErase": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "password"
+        ]
+      },
+      "IPerformance": {
+        "type": "object",
+        "properties": {
+          "cpu": {
+            "$ref": "#/components/schemas/process.global.NodeJS.CpuUsage"
+          },
+          "memory": {
+            "$ref": "#/components/schemas/process.global.NodeJS.MemoryUsage"
+          },
+          "resource": {
+            "$ref": "#/components/schemas/process.global.NodeJS.ResourceUsage"
+          }
+        },
+        "required": [
+          "cpu",
+          "memory",
+          "resource"
+        ]
+      },
+      "process.global.NodeJS.CpuUsage": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "number"
+          },
+          "system": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "user",
+          "system"
+        ]
+      },
+      "process.global.NodeJS.MemoryUsage": {
+        "type": "object",
+        "properties": {
+          "rss": {
+            "type": "number"
+          },
+          "heapTotal": {
+            "type": "number"
+          },
+          "heapUsed": {
+            "type": "number"
+          },
+          "external": {
+            "type": "number"
+          },
+          "arrayBuffers": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "rss",
+          "heapTotal",
+          "heapUsed",
+          "external",
+          "arrayBuffers"
+        ]
+      },
+      "process.global.NodeJS.ResourceUsage": {
+        "type": "object",
+        "properties": {
+          "fsRead": {
+            "type": "number"
+          },
+          "fsWrite": {
+            "type": "number"
+          },
+          "involuntaryContextSwitches": {
+            "type": "number"
+          },
+          "ipcReceived": {
+            "type": "number"
+          },
+          "ipcSent": {
+            "type": "number"
+          },
+          "majorPageFault": {
+            "type": "number"
+          },
+          "maxRSS": {
+            "type": "number"
+          },
+          "minorPageFault": {
+            "type": "number"
+          },
+          "sharedMemorySize": {
+            "type": "number"
+          },
+          "signalsCount": {
+            "type": "number"
+          },
+          "swappedOut": {
+            "type": "number"
+          },
+          "systemCPUTime": {
+            "type": "number"
+          },
+          "unsharedDataSize": {
+            "type": "number"
+          },
+          "unsharedStackSize": {
+            "type": "number"
+          },
+          "userCPUTime": {
+            "type": "number"
+          },
+          "voluntaryContextSwitches": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "fsRead",
+          "fsWrite",
+          "involuntaryContextSwitches",
+          "ipcReceived",
+          "ipcSent",
+          "majorPageFault",
+          "maxRSS",
+          "minorPageFault",
+          "sharedMemorySize",
+          "signalsCount",
+          "swappedOut",
+          "systemCPUTime",
+          "unsharedDataSize",
+          "unsharedStackSize",
+          "userCPUTime",
+          "voluntaryContextSwitches"
+        ]
+      },
+      "ISystem": {
+        "type": "object",
+        "properties": {
+          "uid": {
+            "type": "number",
+            "title": "معرف فريد عشوائي",
+            "description": "معرف فريد عشوائي."
+          },
+          "arguments": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "`عملية",
+            "description": "`process.argv`"
+          },
+          "commit": {
+            "$ref": "#/components/schemas/ISystem.ICommit",
+            "title": "معلومات حول التزام Git",
+            "description": "معلومات حول التزام Git."
+          },
+          "package": {
+            "$ref": "#/components/schemas/ISystem.IPackage",
+            "title": "`الحزمة",
+            "description": "`package.json`"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "وقت إنشاء هذا الخادم",
+            "description": "وقت إنشاء هذا الخادم."
+          }
+        },
+        "required": [
+          "uid",
+          "arguments",
+          "commit",
+          "package",
+          "created_at"
+        ],
+        "description": "معلومات النظام."
+      },
+      "ISystem.ICommit": {
+        "type": "object",
+        "properties": {
+          "shortHash": {
+            "type": "string"
+          },
+          "branch": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "sanitizedSubject": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "author": {
+            "$ref": "#/components/schemas/ISystem.ICommit.IUser"
+          },
+          "committer": {
+            "$ref": "#/components/schemas/ISystem.ICommit.IUser"
+          },
+          "authored_at": {
+            "type": "string"
+          },
+          "commited_at": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "shortHash",
+          "branch",
+          "hash",
+          "subject",
+          "sanitizedSubject",
+          "body",
+          "author",
+          "committer",
+          "authored_at",
+          "commited_at",
+          "tags"
+        ],
+        "description": "معلومات حول التزام Git."
+      },
+      "ISystem.ICommit.IUser": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "email"
+        ],
+        "description": "معلومات حساب مستخدم Git."
+      },
+      "ISystem.IPackage": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "main": {
+            "type": "string"
+          },
+          "typings": {
+            "type": "string"
+          },
+          "scripts": {
+            "$ref": "#/components/schemas/Recordstringstring"
+          },
+          "repository": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "git"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "url"
+            ]
+          },
+          "author": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "bugs": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "url"
+            ]
+          },
+          "homepage": {
+            "type": "string"
+          },
+          "devDependencies": {
+            "$ref": "#/components/schemas/Recordstringstring"
+          },
+          "dependencies": {
+            "$ref": "#/components/schemas/Recordstringstring"
+          },
+          "publishConfig": {
+            "type": "object",
+            "properties": {
+              "registry": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "registry"
+            ]
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "version",
+          "description",
+          "scripts",
+          "repository",
+          "author",
+          "license",
+          "bugs",
+          "homepage",
+          "dependencies"
+        ],
+        "description": "معلومات عن حزمة NPM."
+      },
+      "Recordstringstring": {
+        "type": "object",
+        "properties": {},
+        "description": "إنشاء نوع بمجموعة من الخصائص K من النوع T"
+      }
+    }
+  },
+  "x-samchon-emended": true
+}

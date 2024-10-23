@@ -1,0 +1,5056 @@
+{
+  "openapi": "3.1.0",
+  "servers": [
+    {
+      "url": "http://localhost:10851",
+      "description": "fake"
+    },
+    {
+      "url": "https://api.iamport.kr",
+      "description": "real"
+    }
+  ],
+  "info": {
+    "title": "Iamport API",
+    "description": "Built by [fake-iamport-server](https://github.com/samchon/fake-iamport-server) with [nestia](https://github.com/samchon/nestia)",
+    "version": "2.0.1",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "paths": {
+    "/certifications/{imp_uid}": {
+      "get": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "imp_uid",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The target&#39;s personal authentication information",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Personal authentication information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportCertification_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "View your personal authentication information",
+        "description": "Viewing authentication information. `certiciations.at` is an API function used to view authentication information. However, there is no guarantee that the authentication information {@link IIamportCertification} viewed through this API function is a record that has completed authentication, including OTP authentication. This is because the completion of authentication can only be known by directly checking the {@link IIamportCertification.certified} value..",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "certifications.at",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "imp_uid",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "대상 본인인증 정보의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "IIamportCertification.imp_uid",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-iamport-server/src/api/structures/IIamportCertification.ts",
+                  "textSpan": {
+                    "start": 488,
+                    "length": 16
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "본인인증 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "GET"
+      },
+      "delete": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "imp_uid",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The target&#39;s personal authentication information",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted authentication information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportCertification_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Delete your personal authentication information",
+        "description": "Delete your personal authentication information.",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "certifications.erase",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "imp_uid",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "대상 본인인증 정보의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "IIamportCertification.imp_uid",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-iamport-server/src/api/structures/IIamportCertification.ts",
+                  "textSpan": {
+                    "start": 488,
+                    "length": 16
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "삭제된 본인인증 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "DELETE"
+      }
+    },
+    "/certifications/otp/request": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Request for identity verification information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IIamportCertification.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "Identifier information for ongoing identity verification",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportCertification.IAccessor_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Request identity verification",
+        "description": "Request identity verification. `certifications.otp.request` is an API function that requests identity verification to the Iamport server. When this API is called, an OTP text message is sent to the mobile phone of the person subject to identity verification, and the person subject to identity verification completes identity verification by accurately entering this OTP number through {@link certifications.otp.confirm}. In addition, even before the person subject to identity verification enters the OTP text message sent to his or her mobile phone, the identity verification details can still be viewed through the {@link certifications.at} function. However, the {@link IIamportCertification.certified} value, which indicates whether the authentication is complete in the {@link IIamportCertification} returned at this time, is `false`..",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "certifications.otp.request.request",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "본인인증 요청 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "진행 중인 본인인증의 식별자 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/certifications/otp/confirm/{imp_uid}": {
+      "post": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "imp_uid",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The target&#39;s personal authentication information",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "OTP Code",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IIamportCertification.IConfirm"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "Completed authentication information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportCertification_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Enter the OTP code issued during identity verification",
+        "description": "Enter the OTP code issued during identity verification. `certifications.otp.confirm` is an API function that verifies the OTP number sent to the mobile phone of the person subject to identity verification for the identity verification issued through {@link certifications.otp.request}, and approves and completes the identity verification if the entered OTP number is correct. When identity verification is completed in this way, the {@link IIamportCertification.certified} value of the identity verification {@link IIamportCertification} changes to `true`, and it is finally completed..",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "certifications.otp.confirm.confirm",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "imp_uid",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "대상 본인인증 정보의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "IIamportCertification.imp_uid",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-iamport-server/src/api/structures/IIamportCertification.ts",
+                  "textSpan": {
+                    "start": 488,
+                    "length": 16
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "OTP 코드",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "인증 완료된 본인인증 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/internal/webhook": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Webhook event information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IIamportPayment.IWebhook"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Webhook event dummy listener",
+        "description": "Webhook event dummy listener. `internal.webhook` is an API that does not exist in the actual Impoot server. If you do not set any URL in {@link Configuration.WEBHOOK_URL } of `fake-impoart-server`, all kinds of webhook events occurring from `fake-iamport-server` will be forwarded to this and disappear meaninglessly. Therefore, when you want to verify the connection with the Impoot server in advance using `fake-iamport-server`, be sure to set {@link Configuration.WEBHOOK_URL } so that the webhook event will be properly forwarded to your backend server..",
+        "x-nestia-namespace": "internal.webhook.webhook",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "웹훅 이벤트 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/internal/deposit/{imp_uid}": {
+      "get": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "imp_uid",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Target payment",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Deposit to virtual account",
+        "description": "Deposit to a virtual account. `internal.deposit` is an API that does not exist in the actual import payment server. It is a function that can simulate a situation where a customer who applied for a virtual account payment deposits the target amount into the virtual account. In other words, `internal.deposit` is a test function designed to simulate a series of situations where a customer deposits money into a virtual account issued to him/herself, and a webhook event occurs on the import server accordingly, which is then transmitted to your backend server..",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "internal.deposit.deposit",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "imp_uid",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "대상 결제의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "IIamportVBankPayment.imp_uid ",
+                "kind": "linkText"
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "GET"
+      }
+    },
+    "/payments/{imp_uid}": {
+      "get": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "imp_uid",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The target payment record",
+            "required": true
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/IIamportPayment.IQuery"
+            },
+            "description": "Use when your payment method is PayPal",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payment Information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportPayment_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "View payment records",
+        "description": "View payment records. View payment records made through Aimport..",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "payments.at",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "imp_uid",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "대상 결제 기록의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "IIamportPayment.imp_uid",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-iamport-server/src/api/structures/IIamportPayment.ts",
+                  "textSpan": {
+                    "start": 2339,
+                    "length": 16
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "query",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "결제 수단이 페이팔인 경우에 사용",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "GET"
+      }
+    },
+    "/payments/cancel": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Payment Cancellation Input Information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IIamportPaymentCancel.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "Cancelled Payment Information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportPayment_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Cancel payment",
+        "description": "Cancel payment. If payment was made through a virtual account, you must enter the refund account information..",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "payments.cancel.cancel",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "결제 취소 입력 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "취소된 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/receipts/{imp_uid}": {
+      "get": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "imp_uid",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Attribution payment",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cash Receipt Information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportReceipt_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Check cash receipt",
+        "description": "Check cash receipt.",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "receipts.at",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "imp_uid",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "귀속 결제의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "IIamportPayment.imp_uid",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-iamport-server/src/api/structures/IIamportPayment.ts",
+                  "textSpan": {
+                    "start": 2339,
+                    "length": 16
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "현금 영수증 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "GET"
+      },
+      "post": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "imp_uid",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Attribution payment",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "Cash receipt entry information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IIamportReceipt.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "Cash Receipt Information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportReceipt_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Issue a cash receipt",
+        "description": "Issue a cash receipt.",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "receipts.store",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "imp_uid",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "귀속 결제의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "IIamportPayment.imp_uid",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-iamport-server/src/api/structures/IIamportPayment.ts",
+                  "textSpan": {
+                    "start": 2339,
+                    "length": 16
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "현금 영수증 입력 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "현금 영수증 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      },
+      "delete": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "imp_uid",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Attribution payment",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cancelled Cash Receipt Information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportReceipt_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Cancel a cash receipt",
+        "description": "Cancel a cash receipt.",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "receipts.erase",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "imp_uid",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "귀속 결제의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "IIamportPayment.imp_uid",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-iamport-server/src/api/structures/IIamportPayment.ts",
+                  "textSpan": {
+                    "start": 2339,
+                    "length": 16
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "취소된 현금 영수증 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "DELETE"
+      }
+    },
+    "/users/getToken": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Import&#39;s API and secret key information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IIamportUser.IAccessor"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "User authentication token information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportUser_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Issue user authentication token",
+        "description": "Issue a user authentication token. Issue a user authentication token based on the API and secret key granted by signing up for Iamport. However, the user authentication token issued by Iamport has a validity time {@link IIamportUser.expired_at }, and when the time elapses, the previously issued token expires and can no longer be used. Therefore, if you want to freely use Iamport&#39;s API without being restricted by this time limit of Iamport, let&#39;s use {@link IamportConnector } provided by `iamport-server-api`..",
+        "x-nestia-namespace": "users.getToken.getToken",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "아임포트의 API 및 secret 키 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "유저 인증 토큰 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/vbanks": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Virtual account entry information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IIamportVBankPayment.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "Virtual Account Payment Information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportVBankPayment_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Issuing a virtual account",
+        "description": "Issuing a virtual account.",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "vbanks.store",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "가상 계좌 입력 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "가상 계좌 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      },
+      "put": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Edit Virtual Account Input Information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IIamportVBankPayment.IUpdate"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "Edited Virtual Account Payment Information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportVBankPayment_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Editing a virtual account",
+        "description": "Editing a virtual account.",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "vbanks.update",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "가상 계좌 편집 입력 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "편집된 가상 계좌 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "PUT"
+      }
+    },
+    "/subscribe/customers/{customer_uid}": {
+      "get": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "customer_uid",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Customer (simple payment card) identifier key",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Easy Payment Card Information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportSubscription_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Check your easy payment card information",
+        "description": "Search for simple payment card information. `subscribe.customers.at` is an API function that searches for simple payment card information saved by customers using {@link store} or the simple payment card registration window provided by I&#39;mport..",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "subscribe.customers.at",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "customer_uid",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "고객 (간편 결제 카드) 식별자 키",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "간편 결제 카드 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "GET"
+      },
+      "post": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "customer_uid",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Customer (simple payment card) identifier key",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "Card entry information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IIamportSubscription.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "Easy Payment Card Information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportSubscription_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Register a simple payment card",
+        "description": "Registering a simple payment card. `subscribe.customers.stoer` is an API function used when a customer wants to register his/her card on the server and make a simple payment without having to repeatedly enter the card information every time a payment is needed. Please note that `subscribe.customers.store` will not be called by your backend server in the actual service if the client application uses the simple payment card registration window provided by Aimport. However, it can be used at the test automation program level to simulate a situation where a customer registers a simple payment card..",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "subscribe.customers.store",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "customer_uid",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "고객 (간편 결제 카드) 식별자 키",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "카드 입력 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "간편 결제 카드 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      },
+      "delete": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "customer_uid",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Customer (simple payment card) identifier key",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted Easy Payment Card Information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportSubscription_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Delete Easy Payment Card",
+        "description": "Delete a simple payment card. Remove the card registered for simple payment..",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "subscribe.customers.erase",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "customer_uid",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "고객 (간편 결제 카드) 식별자 키",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "삭제된 간편 결제 카드 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "DELETE"
+      }
+    },
+    "/subscribe/payments/onetime": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Card Payment Application Information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IIamportSubscription.IOnetime"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "Card Payment Information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportCardPayment_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Pay by card, and register for easy payment",
+        "description": "Pay by card, and also register for simple payment. `subscribe.payments.onetime` is an API function called when you want to make a payment using a card. In addition, if you enter {@link IIamportSubscription.IOnetime.customer_uid} in the input value, the card used for payment will be registered as a simple payment card {@link IIamportSubscription}. However, if you really want to register a simple card and make a payment at the same time, it is recommended to call {@link subscribe.customers.store} and {@link subscribe.payments.again} separately rather than adding {@link IIamportSubscription.IOnetime.customer_uid} to `subscribe.payments.onetime`. This is because it can handle exceptional situations more safely. In addition, if the client application uses the payment window provided by Aimport as it is, `subscribe.payments.onetime` will not be called by your backend server in the actual service. However, it can be used at the test automation program level to simulate a situation where a customer pays using a card..",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "subscribe.payments.onetime.onetime",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "카드 결제 신청 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "카드 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/subscribe/payments/again": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Payment application information using a pre-registered card",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IIamportSubscription.IAgain"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "Card Payment Information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportCardPayment_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Pay with a card registered for easy payment",
+        "description": "Pay with a card registered for easy payment. `subscribe.payments.again` is an API function called when a customer wants to make a payment with a card registered for easy payment. Regardless of whether it is convenient or inconvenient, it is essentially a part of card payment, so the return value is {@link IIamportCardPayment }, which is the same as for general card payment. And `subscribe.payments.again` is the only payment method that applies when the client application cannot use the payment window provided by Iamport, and only your backend server must directly call Iamport&#39;s API function. Therefore, when developing a backend server and front-end application that are linked with the Iamport server for easy payment, separate design and development for this situation is required, so please keep this in mind..",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "subscribe.payments.again.again",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "미리 등록한 카드를 이용한 결제 신청 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "카드 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "IIamportResponse_lt_IIamportCertification_gt_": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Error code. A value of 0 means there is no error..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "message": {
+            "description": "Success or error message.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "response": {
+            "$ref": "#/components/schemas/IIamportCertification"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "response"
+        ],
+        "description": "Import-specific response data.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportCertification": {
+        "type": "object",
+        "properties": {
+          "imp_uid": {
+            "description": "Identifier number issued by Import.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "merchant_uid": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "An identifier key from a service. It is issued and managed by the service that uses it, not by the import server..",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "name": {
+            "description": "Name of person to be authenticated.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "gender": {
+            "description": "gender.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "birth": {
+            "description": "Date of birth. Linux time is used..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "birthday": {
+            "description": "Date of birth, YYYYMMDD format.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^([0-9]{4})(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$"
+          },
+          "foreigner": {
+            "description": "Whether you are a foreigner.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "phone": {
+            "description": "Mobile phone number of the person to be authenticated.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "carrier": {
+            "oneOf": [
+              {
+                "const": "SKT"
+              },
+              {
+                "const": "KT"
+              },
+              {
+                "const": "LGT"
+              }
+            ],
+            "description": "Telecommunications company code of the person being authenticated.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "certified": {
+            "description": "Whether OTP authentication is required.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "certified_at": {
+            "description": "OTP authentication date and time. Linux time is used, and 0 is used instead of `null`..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "unique_key": {
+            "description": "I&#39;m not sure what this is, does anyone know what it&#39;s used for?",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "unique_in_site": {
+            "description": "I&#39;m not sure what this is, does anyone know what it&#39;s used for?",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_tid": {
+            "description": "I&#39;m not sure what this is, does anyone know what it&#39;s used for?",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_provider": {
+            "description": "PG Provider.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "origin": {
+            "description": "I&#39;m not sure what this is, does anyone know what it&#39;s used for?",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "__otp": {
+            "description": "(For testing only) OTP code. This is an attribute used only in `fake-iamport-server`, and is used to check what OTP code was issued when simulating identity verification. Using this, you can complete identity verification by calling the {@link functional.certifications.otp.confirm } function..",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "imp_uid",
+          "merchant_uid",
+          "name",
+          "gender",
+          "birth",
+          "birthday",
+          "foreigner",
+          "phone",
+          "carrier",
+          "certified",
+          "certified_at",
+          "unique_key",
+          "unique_in_site",
+          "pg_tid",
+          "pg_provider",
+          "origin"
+        ],
+        "description": "Identity verification details. `IIamportCertification` is a data structure interface that visualizes identity verification information of Iamport. However, the existence of the `IIamportCertification` record does not mean that identity verification is complete. Only when the value of {@link IIamportCertification.certified } is `true` does it mean that the identity verification target has completed identity verification by accurately entering the OTP sent to his/her mobile phone number in the identity verification pop-up window of Iamport..",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportCertification.IStore": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Name of person to be authenticated.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "phone": {
+            "description": "The mobile phone number of the person being authenticated. It doesn&#39;t matter whether the mobile phone number contains a &quot;-&quot; value or not. However, internally, the &quot;-&quot; value is removed and processed..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "birth": {
+            "description": "Date of birth. YYYYMMDD format.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^([0-9]{4})(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$"
+          },
+          "gender_digit": {
+            "description": "The first digit of the last part of the resident registration number.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "carrier": {
+            "oneOf": [
+              {
+                "const": "SKT"
+              },
+              {
+                "const": "KT"
+              },
+              {
+                "const": "LGT"
+              }
+            ],
+            "description": "Telecommunications company code of the person being authenticated.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "is_mvno": {
+            "description": "Whether it is a budget phone or not.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "boolean"
+          },
+          "commpany": {
+            "description": "Merchant service name or domain URL. Service name to be notified in SMS sent to target by KISA.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "merchant_uid": {
+            "description": "The identity verification key for your service. It is issued and managed by the service that uses it, not the import server..",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "pg": {
+            "description": "PG store separator. Set this when you want to use more than two Danal store IDs at the same time. Specify in the format **danal.{store ID}**.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "phone",
+          "birth",
+          "gender_digit",
+          "carrier"
+        ],
+        "description": "Enter your personal authentication information.",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportResponse_lt_IIamportCertification.IAccessor_gt_": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Error code. A value of 0 means there is no error..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "message": {
+            "description": "Success or error message.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "response": {
+            "$ref": "#/components/schemas/IIamportCertification.IAccessor"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "response"
+        ],
+        "description": "Import-specific response data.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportCertification.IAccessor": {
+        "type": "object",
+        "properties": {
+          "imp_uid": {
+            "description": "Identifier key of your authentication information.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "imp_uid"
+        ],
+        "description": "Accessor structure for authentication information.",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportCertification.IConfirm": {
+        "type": "object",
+        "properties": {
+          "otp": {
+            "description": "Authentication number sent via SMS.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "otp"
+        ],
+        "description": "Input information for identity verification approval.",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportPayment.IWebhook": {
+        "type": "object",
+        "properties": {
+          "imp_uid": {
+            "description": "Identifier key of payment information {@link IIamportPayment}.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "merchant_uid": {
+            "description": "Order identifier key. Issued and managed by the service that uses it, not the import server..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "paid"
+              },
+              {
+                "const": "ready"
+              },
+              {
+                "const": "failed"
+              },
+              {
+                "const": "cancelled"
+              }
+            ],
+            "description": "Current status.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          }
+        },
+        "required": [
+          "imp_uid",
+          "merchant_uid",
+          "status"
+        ],
+        "description": "Webhook data.",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportPayment.IQuery": {
+        "type": "object",
+        "properties": {
+          "extension": {
+            "description": "For PayPal, this value should be `true`.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "boolean"
+          }
+        },
+        "description": "If the payment method is PayPal, the status is created as Pending at the time of payment approval due to PayPal&#39;s buyer protection policy, and then changed to final payment completion through internal review, etc. Due to a technical issue with `iamport`, the status is recorded as status: failed. If it is later changed to final payment completion in PayPal, `iamport` is changed to `paid` and a webhook is sent for the case. Customers who use `iamport` have a problem receiving a webhook of the paid status for a payment that has already been processed as failed. Therefore, the `extension=true` option must be added as a query-string to `/payment/{imp_uid}` provided by `iamport`.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "issue",
+            "text": [
+              {
+                "text": "https://github.com/samchon/fake-iamport-server/issues/13",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Sangjin Han - https://github.com/ltnscp9028",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportResponse_lt_IIamportPayment_gt_": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Error code. A value of 0 means there is no error..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "message": {
+            "description": "Success or error message.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "response": {
+            "$ref": "#/components/schemas/IIamportPayment"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "response"
+        ],
+        "description": "Import-specific response data.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportPayment": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/IIamportCardPayment"
+          },
+          {
+            "$ref": "#/components/schemas/IIamportTransferPayment"
+          },
+          {
+            "$ref": "#/components/schemas/IIamportVBankPayment"
+          },
+          {
+            "$ref": "#/components/schemas/IIamportPayment.IBase_lt__doublequote_phone_doublequote__space__or__space__doublequote_kpay_doublequote__space__or__space__doublequote_kakaopay_doublequote__space__or__space__doublequote_payco_doublequote__space__or__space__doublequote_lpay_doublequote__space__or__space__doublequote_ssgpay_doublequote__space__or__space__doublequote_tosspay_doublequote__space__or__space__doublequote_cultureland_doublequote__space__or__space__doublequote_smartculture_doublequote__space__or__space__doublequote_happymoney_doublequote__space__or__space__doublequote_booknlife_doublequote__space__or__space__doublequote_point_doublequote__gt_"
+          }
+        ],
+        "description": "Payment information. `IIamportPayment` is a data structure that visualizes the payment information of Iamport, and is a union type interface. If the method value is specified through the if condition, the derived type is automatically specified. ```typescript if (payment.pay_method === &quot;card&quot;) payment.card_number; // payment be IIamportCardPayment ```",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportCardPayment": {
+        "type": "object",
+        "properties": {
+          "card_code": {
+            "description": "Card identifier code.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "card_name": {
+            "description": "Card name.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "card_number": {
+            "description": "Card number.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "\\d{4}-\\d{4}-\\d{4}-\\d{4}"
+          },
+          "card_quota": {
+            "description": "Number of installment months.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "integer"
+          },
+          "apply_num": {
+            "description": "Card company approval number.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pay_method": {
+            "oneOf": [
+              {
+                "const": "card"
+              },
+              {
+                "const": "samsung"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "imp_uid": {
+            "description": "Identifier key of payment information {@link IIamportPayment}.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "merchant_uid": {
+            "description": "Order identifier key. Issued and managed by the service that uses it, not the import server..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "name": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Order name, may be missing.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "amount": {
+            "description": "Total payment amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancel_amount": {
+            "description": "Cancellation of payment, total refund amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/IIamportPayment.Currency"
+          },
+          "receipt_url": {
+            "description": "Receipt URL.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "url"
+          },
+          "cash_receipt_issue": {
+            "description": "Whether to issue a cash receipt.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "channel": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_provider": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "emb_pg_provider": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "pg_id": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_tid": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "escrow": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "buyer_name": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_email": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "email"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_tel": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_addr": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_postcode": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_uid": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_uid_usage": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "custom_data": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "user_agent": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "$ref": "#/components/schemas/IIamportPayment.Status"
+          },
+          "started_at": {
+            "description": "Payment request date and time. Linux time is used..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "paid_at": {
+            "description": "The date and time of payment completion. Linux time is used, and 0 is used instead of `null`..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "failed_at": {
+            "description": "The date and time of the payment failure. Linux time is used, and 0 is used instead of `null`..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancelled_at": {
+            "description": "The date and time of the cancellation. Linux time is used, and 0 is used instead of `null`..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "fail_reason": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancel_reason": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancel_history": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IIamportPaymentCancel"
+            }
+          }
+        },
+        "required": [
+          "card_code",
+          "card_name",
+          "card_number",
+          "card_quota",
+          "apply_num",
+          "pay_method",
+          "imp_uid",
+          "merchant_uid",
+          "name",
+          "amount",
+          "cancel_amount",
+          "currency",
+          "receipt_url",
+          "cash_receipt_issue",
+          "channel",
+          "pg_provider",
+          "emb_pg_provider",
+          "pg_id",
+          "pg_tid",
+          "escrow",
+          "buyer_name",
+          "buyer_email",
+          "buyer_tel",
+          "buyer_addr",
+          "buyer_postcode",
+          "customer_uid",
+          "customer_uid_usage",
+          "custom_data",
+          "user_agent",
+          "status",
+          "started_at",
+          "paid_at",
+          "failed_at",
+          "cancelled_at",
+          "fail_reason",
+          "cancel_reason",
+          "cancel_history"
+        ],
+        "description": "Card Payment Information.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportPayment.Currency": {
+        "oneOf": [
+          {
+            "const": "KRW"
+          },
+          {
+            "const": "USD"
+          },
+          {
+            "const": "EUR"
+          },
+          {
+            "const": "JPY"
+          }
+        ]
+      },
+      "IIamportPayment.Status": {
+        "oneOf": [
+          {
+            "const": "paid"
+          },
+          {
+            "const": "ready"
+          },
+          {
+            "const": "failed"
+          },
+          {
+            "const": "cancelled"
+          }
+        ]
+      },
+      "IIamportPaymentCancel": {
+        "type": "object",
+        "properties": {
+          "pg_id": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_tid": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancelled_at": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "reason": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "receipt_url": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "url"
+          }
+        },
+        "required": [
+          "pg_id",
+          "pg_tid",
+          "amount",
+          "cancelled_at",
+          "reason",
+          "receipt_url"
+        ],
+        "description": "Payment Cancellation Information.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportTransferPayment": {
+        "type": "object",
+        "properties": {
+          "bank_code": {
+            "description": "Bank identifier code.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "bank_name": {
+            "description": "Bank name.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pay_method": {
+            "const": "trans",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "imp_uid": {
+            "description": "Identifier key of payment information {@link IIamportPayment}.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "merchant_uid": {
+            "description": "Order identifier key. Issued and managed by the service that uses it, not the import server..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "name": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Order name, may be missing.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "amount": {
+            "description": "Total payment amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancel_amount": {
+            "description": "Cancellation of payment, total refund amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/IIamportPayment.Currency"
+          },
+          "receipt_url": {
+            "description": "Receipt URL.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "url"
+          },
+          "cash_receipt_issue": {
+            "description": "Whether to issue a cash receipt.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "channel": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_provider": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "emb_pg_provider": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "pg_id": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_tid": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "escrow": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "buyer_name": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_email": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "email"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_tel": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_addr": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_postcode": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_uid": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_uid_usage": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "custom_data": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "user_agent": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "$ref": "#/components/schemas/IIamportPayment.Status"
+          },
+          "started_at": {
+            "description": "Payment request date and time. Linux time is used..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "paid_at": {
+            "description": "The date and time of payment completion. Linux time is used, and 0 is used instead of `null`..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "failed_at": {
+            "description": "The date and time of the payment failure. Linux time is used, and 0 is used instead of `null`..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancelled_at": {
+            "description": "The date and time of the cancellation. Linux time is used, and 0 is used instead of `null`..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "fail_reason": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancel_reason": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancel_history": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IIamportPaymentCancel"
+            }
+          }
+        },
+        "required": [
+          "bank_code",
+          "bank_name",
+          "pay_method",
+          "imp_uid",
+          "merchant_uid",
+          "name",
+          "amount",
+          "cancel_amount",
+          "currency",
+          "receipt_url",
+          "cash_receipt_issue",
+          "channel",
+          "pg_provider",
+          "emb_pg_provider",
+          "pg_id",
+          "pg_tid",
+          "escrow",
+          "buyer_name",
+          "buyer_email",
+          "buyer_tel",
+          "buyer_addr",
+          "buyer_postcode",
+          "customer_uid",
+          "customer_uid_usage",
+          "custom_data",
+          "user_agent",
+          "status",
+          "started_at",
+          "paid_at",
+          "failed_at",
+          "cancelled_at",
+          "fail_reason",
+          "cancel_reason",
+          "cancel_history"
+        ],
+        "description": "Account transfer payment information.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportVBankPayment": {
+        "type": "object",
+        "properties": {
+          "vbank_code": {
+            "description": "Virtual Account Identifier Code.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "vbank_name": {
+            "description": "Virtual account name",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "vbank_num": {
+            "description": "Virtual account number",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "vbank_holder": {
+            "description": "Virtual account depositor.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "vbank_date": {
+            "description": "Virtual account deposit expiration date.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vbank_issued_at": {
+            "description": "Virtual account opening date.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "pay_method": {
+            "const": "vbank",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "imp_uid": {
+            "description": "Identifier key of payment information {@link IIamportPayment}.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "merchant_uid": {
+            "description": "Order identifier key. Issued and managed by the service that uses it, not the import server..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "name": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Order name, may be missing.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "amount": {
+            "description": "Total payment amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancel_amount": {
+            "description": "Cancellation of payment, total refund amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/IIamportPayment.Currency"
+          },
+          "receipt_url": {
+            "description": "Receipt URL.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "url"
+          },
+          "cash_receipt_issue": {
+            "description": "Whether to issue a cash receipt.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "channel": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_provider": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "emb_pg_provider": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "pg_id": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_tid": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "escrow": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "buyer_name": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_email": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "email"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_tel": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_addr": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_postcode": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_uid": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_uid_usage": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "custom_data": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "user_agent": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "$ref": "#/components/schemas/IIamportPayment.Status"
+          },
+          "started_at": {
+            "description": "Payment request date and time. Linux time is used..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "paid_at": {
+            "description": "The date and time of payment completion. Linux time is used, and 0 is used instead of `null`..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "failed_at": {
+            "description": "The date and time of the payment failure. Linux time is used, and 0 is used instead of `null`..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancelled_at": {
+            "description": "The date and time of the cancellation. Linux time is used, and 0 is used instead of `null`..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "fail_reason": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancel_reason": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancel_history": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IIamportPaymentCancel"
+            }
+          }
+        },
+        "required": [
+          "vbank_code",
+          "vbank_name",
+          "vbank_num",
+          "vbank_holder",
+          "vbank_date",
+          "vbank_issued_at",
+          "pay_method",
+          "imp_uid",
+          "merchant_uid",
+          "name",
+          "amount",
+          "cancel_amount",
+          "currency",
+          "receipt_url",
+          "cash_receipt_issue",
+          "channel",
+          "pg_provider",
+          "emb_pg_provider",
+          "pg_id",
+          "pg_tid",
+          "escrow",
+          "buyer_name",
+          "buyer_email",
+          "buyer_tel",
+          "buyer_addr",
+          "buyer_postcode",
+          "customer_uid",
+          "customer_uid_usage",
+          "custom_data",
+          "user_agent",
+          "status",
+          "started_at",
+          "paid_at",
+          "failed_at",
+          "cancelled_at",
+          "fail_reason",
+          "cancel_reason",
+          "cancel_history"
+        ],
+        "description": "Virtual Account Payment Information.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportPayment.IBase_lt__doublequote_phone_doublequote__space__or__space__doublequote_kpay_doublequote__space__or__space__doublequote_kakaopay_doublequote__space__or__space__doublequote_payco_doublequote__space__or__space__doublequote_lpay_doublequote__space__or__space__doublequote_ssgpay_doublequote__space__or__space__doublequote_tosspay_doublequote__space__or__space__doublequote_cultureland_doublequote__space__or__space__doublequote_smartculture_doublequote__space__or__space__doublequote_happymoney_doublequote__space__or__space__doublequote_booknlife_doublequote__space__or__space__doublequote_point_doublequote__gt_": {
+        "type": "object",
+        "properties": {
+          "pay_method": {
+            "oneOf": [
+              {
+                "const": "phone"
+              },
+              {
+                "const": "kpay"
+              },
+              {
+                "const": "kakaopay"
+              },
+              {
+                "const": "payco"
+              },
+              {
+                "const": "lpay"
+              },
+              {
+                "const": "ssgpay"
+              },
+              {
+                "const": "tosspay"
+              },
+              {
+                "const": "cultureland"
+              },
+              {
+                "const": "smartculture"
+              },
+              {
+                "const": "happymoney"
+              },
+              {
+                "const": "booknlife"
+              },
+              {
+                "const": "point"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "imp_uid": {
+            "description": "Identifier key of payment information {@link IIamportPayment}.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "merchant_uid": {
+            "description": "Order identifier key. Issued and managed by the service that uses it, not the import server..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "name": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Order name, may be missing.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "amount": {
+            "description": "Total payment amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancel_amount": {
+            "description": "Cancellation of payment, total refund amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/IIamportPayment.Currency"
+          },
+          "receipt_url": {
+            "description": "Receipt URL.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "url"
+          },
+          "cash_receipt_issue": {
+            "description": "Whether to issue a cash receipt.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "channel": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_provider": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "emb_pg_provider": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "pg_id": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_tid": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "escrow": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "buyer_name": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_email": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "email"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_tel": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_addr": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_postcode": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_uid": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_uid_usage": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "custom_data": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "user_agent": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "$ref": "#/components/schemas/IIamportPayment.Status"
+          },
+          "started_at": {
+            "description": "Payment request date and time. Linux time is used..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "paid_at": {
+            "description": "The date and time of payment completion. Linux time is used, and 0 is used instead of `null`..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "failed_at": {
+            "description": "The date and time of the payment failure. Linux time is used, and 0 is used instead of `null`..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancelled_at": {
+            "description": "The date and time of the cancellation. Linux time is used, and 0 is used instead of `null`..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "fail_reason": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancel_reason": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancel_history": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IIamportPaymentCancel"
+            }
+          }
+        },
+        "required": [
+          "pay_method",
+          "imp_uid",
+          "merchant_uid",
+          "name",
+          "amount",
+          "cancel_amount",
+          "currency",
+          "receipt_url",
+          "cash_receipt_issue",
+          "channel",
+          "pg_provider",
+          "emb_pg_provider",
+          "pg_id",
+          "pg_tid",
+          "escrow",
+          "buyer_name",
+          "buyer_email",
+          "buyer_tel",
+          "buyer_addr",
+          "buyer_postcode",
+          "customer_uid",
+          "customer_uid_usage",
+          "custom_data",
+          "user_agent",
+          "status",
+          "started_at",
+          "paid_at",
+          "failed_at",
+          "cancelled_at",
+          "fail_reason",
+          "cancel_reason",
+          "cancel_history"
+        ],
+        "description": "Payment Basics (Common) Information.",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportPaymentCancel.IStore": {
+        "type": "object",
+        "properties": {
+          "imp_uid": {
+            "description": "Identifier key of payment information {@link IIamportPayment}.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "merchant_uid": {
+            "description": "Order identifier key. Issued and managed by the service that uses it, not the import server..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "description": "Cancellation amount, partial cancellation is also possible. Full cancellation in case of omission.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "checksum": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Before performing a cancellation transaction, the current cancelable balance. Verify in advance whether the cancelable balance recorded by the API requester matches the cancelable balance recorded by Import, and if verification fails, the transaction is not performed. If it is `null`, the verification process is skipped..",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "reason": {
+            "description": "Reason for cancellation.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "tax_free": {
+            "description": "Tax-free amount among cancellation request amounts.",
+            "x-typia-jsDocTags": [
+              {
+                "name": "default",
+                "text": [
+                  {
+                    "text": "0",
+                    "kind": "text"
+                  }
+                ]
+              }
+            ],
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number",
+            "default": 0
+          },
+          "refund_holder": {
+            "description": "Refund account depositor.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "refund_bank": {
+            "description": "Refund account bank code.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "refund_account": {
+            "description": "Refund account account number.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "refund_tel": {
+            "description": "Refund account depositor contact information",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "imp_uid",
+          "merchant_uid",
+          "checksum",
+          "reason"
+        ],
+        "description": "Payment Cancellation Input Information.",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportResponse_lt_IIamportReceipt_gt_": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Error code. A value of 0 means there is no error..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "message": {
+            "description": "Success or error message.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "response": {
+            "$ref": "#/components/schemas/IIamportReceipt"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "response"
+        ],
+        "description": "Import-specific response data.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportReceipt": {
+        "type": "object",
+        "properties": {
+          "imp_uid": {
+            "description": "{@link IIamportPayment.imp_uid } of the attribution payment.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "receipt_uid": {
+            "description": "Unique identifier ID of cash receipt.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "apply_num": {
+            "description": "Approval Number.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/IIamportReceipt.Type"
+          },
+          "amount": {
+            "description": "Total payment amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vat": {
+            "description": "surtax.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "receipt_url": {
+            "description": "Cash receipt inquiry URL.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "url"
+          },
+          "applied_at": {
+            "description": "Cash receipt issuance time.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancelled_at": {
+            "description": "Cash receipt cancellation time. Linux time is used, and 0 is used instead of `null`..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          }
+        },
+        "required": [
+          "imp_uid",
+          "receipt_uid",
+          "apply_num",
+          "type",
+          "amount",
+          "vat",
+          "receipt_url",
+          "applied_at",
+          "cancelled_at"
+        ],
+        "description": "Cash Receipt Information.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportReceipt.Type": {
+        "oneOf": [
+          {
+            "const": "person"
+          },
+          {
+            "const": "company"
+          }
+        ],
+        "description": "Cash receipt issuance type (target)."
+      },
+      "IIamportReceipt.IStore": {
+        "type": "object",
+        "properties": {
+          "imp_uid": {
+            "description": "{@link IIamportPayment.imp_uid } of the attribution payment.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "identifier": {
+            "description": "Cash receipt issuance target identification information. - National Tax Service Cash Receipt Card - Mobile phone number - Resident registration number - Business registration number",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "identifier_type": {
+            "oneOf": [
+              {
+                "const": "phone"
+              },
+              {
+                "const": "person"
+              },
+              {
+                "const": "business"
+              },
+              {
+                "const": "taxcard"
+              }
+            ],
+            "description": "Types of cash receipt issuance targets. - person: Resident registration number - business: Business registration number - phone: Mobile phone number - taxcard: National Tax Service Cash Receipt Card Some PG companies say this item is not required, but if possible, just use it..",
+            "x-typia-required": false,
+            "x-typia-optional": true
+          },
+          "type": {
+            "oneOf": [
+              {
+                "const": "person"
+              },
+              {
+                "const": "company"
+              }
+            ],
+            "description": "Cash receipt issuance type (target). If omitted, person is used..",
+            "x-typia-required": false,
+            "x-typia-optional": true
+          },
+          "buyer_name": {
+            "description": "Buyer&#39;s name. Please enter it if possible for tracking the issuance of the receipt..",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_email": {
+            "description": "Buyer Email.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_tel": {
+            "description": "Buyer&#39;s phone number. Please enter it if possible for tracking cash receipts..",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "tax_free": {
+            "description": "Tax-free amount.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          }
+        },
+        "required": [
+          "imp_uid",
+          "identifier"
+        ],
+        "description": "Cash receipt input information.",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportUser.IAccessor": {
+        "type": "object",
+        "properties": {
+          "imp_key": {
+            "description": "API Key.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "imp_secret": {
+            "description": "Secret Key.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "imp_key",
+          "imp_secret"
+        ],
+        "description": "API and secret key provided by Import.",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportResponse_lt_IIamportUser_gt_": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Error code. A value of 0 means there is no error..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "message": {
+            "description": "Success or error message.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "response": {
+            "$ref": "#/components/schemas/IIamportUser"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "response"
+        ],
+        "description": "Import-specific response data.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportUser": {
+        "type": "object",
+        "properties": {
+          "now": {
+            "description": "Token issuance time.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "expired_at": {
+            "description": "Token expiration time. It is based on Linux time, and if you want to use it in JS, you need to convert it like this: ```typescript new Date(user.expired_at * 1_000); ```",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "access_token": {
+            "description": "User authentication token.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "now",
+          "expired_at",
+          "access_token"
+        ],
+        "description": "Import user authentication information. Import issues API and secret key information, {@link IIamportUser.IAccessor} to clients. However, this cannot be used directly for Import user authentication. A user authentication token must be issued based on the API and secret key. Unfortunately, this user authentication token has an expiration time. `IIamportUser` is a data structure interface that visualizes this user authentication token and its expiration time. In addition, due to the nature of Import&#39;s user authentication tokens that have expiration times, it is very difficult to manage them so that their expiration time does not exceed. Therefore, `iamport-server-api` provides the {@link IamportConnector} class, which automatically renews the Import user authentication token whenever it expires..",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportVBankPayment.IStore": {
+        "type": "object",
+        "properties": {
+          "merchant_uid": {
+            "description": "Order identifier key. Issued and managed by the service that uses it, not the import server..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "description": "total amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vbank_code": {
+            "description": "Virtual account bank code.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "vbank_due": {
+            "description": "Virtual account deposit deadline, Unix time.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vbank_holder": {
+            "description": "Depositor.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "name": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_name": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_email": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_tel": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_addr": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_postcode": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "pg": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "notice_url": {
+            "description": "URL to receive virtual account deposit information. If omitted, use default webhook URL..",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "custom_data": {
+            "description": "Custom data, freely available.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "pg_api_key": {
+            "description": "[Inicis only] API values confirmed in the merchant console.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "merchant_uid",
+          "amount",
+          "vbank_code",
+          "vbank_due",
+          "vbank_holder"
+        ],
+        "description": "Virtual account payment input information. You can create a virtual account arbitrarily. However, only some PG companies or `fake-iamport-server` are available. - Settle Bank - Nice Payments - KG Inicis",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportResponse_lt_IIamportVBankPayment_gt_": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Error code. A value of 0 means there is no error..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "message": {
+            "description": "Success or error message.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "response": {
+            "$ref": "#/components/schemas/IIamportVBankPayment"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "response"
+        ],
+        "description": "Import-specific response data.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportVBankPayment.IUpdate": {
+        "type": "object",
+        "properties": {
+          "imp_uid": {
+            "description": "{@link IIamportPayment.imp_uid } of the target payment record.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "description": "Payment amount to be modified.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "vbank_due": {
+            "description": "Deadline for depositing virtual account to be modified.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          }
+        },
+        "required": [
+          "imp_uid"
+        ],
+        "description": "Modification input information for virtual account payment. You can modify the deposit deadline or deposit amount of a virtual account that has not yet been deposited. However, only settlement bank or `fake-iamport-server` is possible..",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportResponse_lt_IIamportSubscription_gt_": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Error code. A value of 0 means there is no error..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "message": {
+            "description": "Success or error message.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "response": {
+            "$ref": "#/components/schemas/IIamportSubscription"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "response"
+        ],
+        "description": "Import-specific response data.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportSubscription": {
+        "type": "object",
+        "properties": {
+          "pg_provider": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_id": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "card_name": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "card_code": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "card_number": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "card_type": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "customer_name": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_tel": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_email": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_addr": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_postcode": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "inserted": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "updated": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "customer_uid": {
+            "description": "Customer identifier key. An identifier key managed by the service that uses it, not by Aimport. However, it should actually be used as the card identifier key rather than the customer identifier key..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "pg_provider",
+          "pg_id",
+          "card_name",
+          "card_code",
+          "card_number",
+          "card_type",
+          "customer_name",
+          "customer_tel",
+          "customer_email",
+          "customer_addr",
+          "customer_postcode",
+          "inserted",
+          "updated",
+          "customer_uid"
+        ],
+        "description": "Easy Payment Card Information.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportSubscription.IStore": {
+        "type": "object",
+        "properties": {
+          "card_number": {
+            "description": "Card number. Format: XXXX-XXXX-XXXX-XXXX",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "\\d{4}-\\d{4}-\\d{4}-\\d{4}"
+          },
+          "expiry": {
+            "description": "Card expiration date. Format: YYYY-MM",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^([0-9]{4})-(0[1-9]|1[012])$"
+          },
+          "birth": {
+            "description": "Date of birth YYMMDD or 10-digit business registration number.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^(([0-9]{2})(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01]))|(\\d{10})$"
+          },
+          "pwd_2digit": {
+            "description": "The first two digits of your card password.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "pattern": "\\d{2}"
+          },
+          "cvc": {
+            "description": "Card authentication number (3 digits on the back of the card).",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "pattern": "\\d{2}"
+          },
+          "customer_name": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "customer_tel": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "customer_email": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "format": "email"
+          },
+          "customr_addr": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "customer_postcode": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "customer_uid": {
+            "description": "Customer identifier key. An identifier key managed by the service that uses it, not by Aimport. However, it should actually be used as the card identifier key rather than the customer identifier key..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "card_number",
+          "expiry",
+          "birth",
+          "customer_uid"
+        ],
+        "description": "Easy payment card entry information.",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportSubscription.IOnetime": {
+        "type": "object",
+        "properties": {
+          "customer_uid": {
+            "description": "Customer identifier key. An identifier key managed by the service that uses it, not by Aimport. However, it should actually be used as a card identifier key rather than a customer identifier key. If this is omitted, it will only end in simple payment, and the card information will not be registered for easy payment..",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "card_number": {
+            "description": "Card number. Format: XXXX-XXXX-XXXX-XXXX",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "\\d{4}-\\d{4}-\\d{4}-\\d{4}"
+          },
+          "expiry": {
+            "description": "Card expiration date. Format: YYYY-MM",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^([0-9]{4})-(0[1-9]|1[012])$"
+          },
+          "birth": {
+            "description": "Date of birth YYMMDD or 10-digit business registration number.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^(([0-9]{2})(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01]))|(\\d{10})$"
+          },
+          "pwd_2digit": {
+            "description": "The first two digits of your card password.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "pattern": "\\d{2}"
+          },
+          "cvc": {
+            "description": "Card authentication number (3 digits on the back of the card).",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "pattern": "\\d{2}"
+          },
+          "customer_name": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "customer_tel": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "customer_email": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "format": "email"
+          },
+          "customr_addr": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "customer_postcode": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "merchant_uid": {
+            "description": "Order identifier key. An identifier key managed by the service that uses it, not by Aimport..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "description": "Total payment amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "name": {
+            "description": "Order name.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "currency": {
+            "oneOf": [
+              {
+                "const": "KRW"
+              },
+              {
+                "const": "USD"
+              },
+              {
+                "const": "EUR"
+              },
+              {
+                "const": "JPY"
+              }
+            ],
+            "description": "Currency Information.",
+            "x-typia-required": false,
+            "x-typia-optional": true
+          },
+          "tax_free": {
+            "description": "Duty-free supply amount. The default value is 0, and VAT is automatically processed as 1/11 of the amount..",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "card_quota": {
+            "description": "Number of installment months. Lump sum payment is 0.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "buyer_name": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_email": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "format": "email"
+          },
+          "buyer_tel": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_addr": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_postcode": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "interest_free_by_merchant": {
+            "description": "When processing card installments, if installment interest occurs (excluding card company interest-free promotions), if the merchant has a contract with the PG company to pay the installment interest on behalf of the customer (currently, only Nice Payments is supported)",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "boolean"
+          },
+          "use_card_point": {
+            "description": "Flag whether to deduct card company points and process payment approval when requesting approval. Prior consultation with PG company sales representative is required at the time of contract (currently, only Nice Payments is supported)",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "boolean"
+          },
+          "custom_data": {
+            "description": "You can enter arbitrary information.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "notice_url": {
+            "description": "Notification and webhook URL to be notified when payment is successful.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "format": "url"
+          }
+        },
+        "required": [
+          "card_number",
+          "expiry",
+          "birth",
+          "merchant_uid",
+          "amount",
+          "name"
+        ],
+        "description": "Payment application input information.",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportResponse_lt_IIamportCardPayment_gt_": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Error code. A value of 0 means there is no error..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "message": {
+            "description": "Success or error message.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "response": {
+            "$ref": "#/components/schemas/IIamportCardPayment"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "response"
+        ],
+        "description": "Import-specific response data.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportSubscription.IAgain": {
+        "type": "object",
+        "properties": {
+          "merchant_uid": {
+            "description": "Order identifier key. An identifier key managed by the service that uses it, not by Aimport..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "description": "Total payment amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "name": {
+            "description": "Order name.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "currency": {
+            "oneOf": [
+              {
+                "const": "KRW"
+              },
+              {
+                "const": "USD"
+              },
+              {
+                "const": "EUR"
+              },
+              {
+                "const": "JPY"
+              }
+            ],
+            "description": "Currency Information.",
+            "x-typia-required": false,
+            "x-typia-optional": true
+          },
+          "tax_free": {
+            "description": "Duty-free supply amount. The default value is 0, and VAT is automatically processed as 1/11 of the amount..",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "card_quota": {
+            "description": "Number of installment months. Lump sum payment is 0.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "buyer_name": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_email": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "format": "email"
+          },
+          "buyer_tel": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_addr": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_postcode": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "interest_free_by_merchant": {
+            "description": "When processing card installments, if installment interest occurs (excluding card company interest-free promotions), if the merchant has a contract with the PG company to pay the installment interest on behalf of the customer (currently, only Nice Payments is supported)",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "boolean"
+          },
+          "use_card_point": {
+            "description": "Flag whether to deduct card company points and process payment approval when requesting approval. Prior consultation with PG company sales representative is required at the time of contract (currently, only Nice Payments is supported)",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "boolean"
+          },
+          "custom_data": {
+            "description": "You can enter arbitrary information.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "notice_url": {
+            "description": "Notification and webhook URL to be notified when payment is successful.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "format": "url"
+          },
+          "customer_uid": {
+            "description": "Customer identifier key. An identifier key managed by the service that uses it, not by Aimport. However, it should actually be used as the card identifier key rather than the customer identifier key..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "merchant_uid",
+          "amount",
+          "name",
+          "customer_uid"
+        ],
+        "description": "Enter information to apply for payment using a simple payment card.",
+        "x-typia-jsDocTags": []
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "x-samchon-emended": true
+}

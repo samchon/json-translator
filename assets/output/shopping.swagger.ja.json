@@ -6381,7 +6381,7 @@
           }
         ],
         "requestBody": {
-          "description": "旅程の完了時間",
+          "description": "旅の完了時間",
           "content": {
             "application/json": {
               "schema": {
@@ -10061,7 +10061,7 @@
           "type",
           "direction"
         ],
-        "description": "割引クーポンの販売者の条件。`IShoppingCouponSellerCriteria` は {@link IShoppingCouponCriteriaBase} のサブタイプエンティティであり、特定の {@link IShoppingSeller} の条件を設定するときに使用されます。{@link direction} の値が &quot;include&quot; の場合、クーポンは対象の {@link sellers} に対してのみ使用できます。逆に、&quot;exclude&quot; の場合、クーポンは使用できません。."
+        "description": "割引クーポンの販売者の条件。`IShoppingCouponSellerCriteria` は {@link IShoppingCouponCriteriaBase} のサブタイプエンティティであり、特定の {@link IShoppingSeller 販売者} の条件を設定するときに使用されます。{@link direction} の値が &quot;include&quot; の場合、クーポンは対象の {@link sellers} に対してのみ使用できます。逆に、&quot;exclude&quot; の場合、クーポンは使用できません。."
       },
       "IShoppingCouponSaleCriteria": {
         "type": "object",
@@ -12496,8 +12496,8 @@
           "deposit": {
             "type": "number",
             "minimum": 0,
-            "title": "預かり金支払額",
-            "description": "預かり金支払額."
+            "title": "預かり金の金額",
+            "description": "預かり金の金額."
           },
           "mileage": {
             "type": "number",
@@ -12532,7 +12532,7 @@
           "nominal",
           "real"
         ],
-        "description": "注文価格の要約情報."
+        "description": "注文価格の概要情報."
       },
       "IShoppingOrderPrice": {
         "type": "object",
@@ -12554,8 +12554,8 @@
           "deposit": {
             "type": "number",
             "minimum": 0,
-            "title": "預かり金支払額",
-            "description": "預かり金支払額."
+            "title": "預かり金の金額",
+            "description": "預かり金の金額."
           },
           "mileage": {
             "type": "number",
@@ -12939,8 +12939,8 @@
                 "format": "date-time"
               }
             ],
-            "title": "旅程の完了時間",
-            "description": "旅程の完了時間."
+            "title": "旅の完了時間",
+            "description": "旅の完了時間."
           }
         },
         "required": [
@@ -18078,8 +18078,8 @@
                 "format": "date-time"
               }
             ],
-            "title": "旅程の完了時間",
-            "description": "旅程の完了時間."
+            "title": "旅の完了時間",
+            "description": "旅の完了時間."
           }
         },
         "required": [
@@ -18145,8 +18145,8 @@
                 "format": "date-time"
               }
             ],
-            "title": "旅程の完了時間",
-            "description": "旅程の完了時間."
+            "title": "旅の完了時間",
+            "description": "旅の完了時間."
           }
         },
         "required": [

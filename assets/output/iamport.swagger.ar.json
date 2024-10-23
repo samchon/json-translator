@@ -1,0 +1,5056 @@
+{
+  "openapi": "3.1.0",
+  "servers": [
+    {
+      "url": "http://localhost:10851",
+      "description": "مزيف"
+    },
+    {
+      "url": "https://api.iamport.kr",
+      "description": "حقيقي"
+    }
+  ],
+  "info": {
+    "title": "استيراد واجهة برمجة التطبيقات",
+    "description": "تم إنشاؤه بواسطة [fake-iamport-server](https://github.com/samchon/fake-iamport-server) مع [nestia](https://github.com/samchon/nestia)",
+    "version": "2.0.1",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "paths": {
+    "/certifications/{imp_uid}": {
+      "get": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "imp_uid",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "استهداف معلومات المصادقة الشخصية",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "معلومات المصادقة الشخصية",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportCertification_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "عرض معلومات المصادقة الشخصية",
+        "description": "عرض معلومات المصادقة الخاصة بك. `certiciations.at` هي إحدى وظائف API المستخدمة لعرض معلومات المصادقة الشخصية. ومع ذلك، ليس هناك ما يضمن أن معلومات المصادقة الشخصية {@link IIamportCertification} التي يتم عرضها من خلال وظيفة API هذه هي سجل تم فيه إكمال جميع المصادقة الشخصية، بما في ذلك مصادقة OTP. وذلك لأنه لا يمكنك معرفة ما إذا كانت مصادقة هويتك مكتملة إلا من خلال التحقق مباشرة من القيمة {@link IIamportCertification.certified }..",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "certifications.at",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "imp_uid",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "대상 본인인증 정보의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "IIamportCertification.imp_uid",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-iamport-server/src/api/structures/IIamportCertification.ts",
+                  "textSpan": {
+                    "start": 488,
+                    "length": 16
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "본인인증 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "GET"
+      },
+      "delete": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "imp_uid",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "استهداف معلومات المصادقة الشخصية",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "معلومات المصادقة الشخصية المحذوفة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportCertification_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "حذف معلومات المصادقة الشخصية",
+        "description": "حذف معلومات المصادقة الشخصية.",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "certifications.erase",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "imp_uid",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "대상 본인인증 정보의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "IIamportCertification.imp_uid",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-iamport-server/src/api/structures/IIamportCertification.ts",
+                  "textSpan": {
+                    "start": 488,
+                    "length": 16
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "삭제된 본인인증 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "DELETE"
+      }
+    },
+    "/certifications/otp/request": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "معلومات طلب المصادقة الشخصية",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IIamportCertification.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "معلومات المعرف للتحقق من الهوية قيد التقدم",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportCertification.IAccessor_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "طلب التحقق من الهوية",
+        "description": "طلب التحقق من الهوية. `certifications.otp.request` هي إحدى وظائف API التي تطلب مصادقة الهوية من خادم الاستيراد. عندما يتم استدعاء واجهة برمجة التطبيقات هذه، يتم إرسال رسالة نصية لمرة واحدة (OTP) إلى الهاتف المحمول للشخص الذي تتم مصادقته، ويتم إكمال التحقق من الهوية عن طريق إدخال رقم OTP هذا بدقة من خلال {@link الشهادات.otp.confirm}. بالإضافة إلى ذلك، حتى قبل أن يقوم مستلم التحقق من الهوية بإدخال الرسالة النصية لمرة واحدة (OTP) المرسلة إلى هاتفه المحمول، لا يزال من الممكن عرض تفاصيل التحقق من الهوية من خلال وظيفة {@link الشهادات.at}. ومع ذلك، في {@link IIamportCertification } التي تم إرجاعها في هذا الوقت، تكون قيمة {@link IIamportCertification.certified }، التي تشير إلى ما إذا كانت المصادقة قد اكتملت، هي &quot;خطأ&quot;..",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "certifications.otp.request.request",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "본인인증 요청 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "진행 중인 본인인증의 식별자 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/certifications/otp/confirm/{imp_uid}": {
+      "post": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "imp_uid",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "استهداف معلومات المصادقة الشخصية",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "رمز مكتب المدعي العام",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IIamportCertification.IConfirm"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "معلومات المصادقة الشخصية التي تم التحقق منها",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportCertification_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "أدخل رمز OTP الصادر عند التحقق من هويتك.",
+        "description": "أدخل رمز OTP الصادر أثناء التحقق من الهوية. `certifications.otp.confirm` يتحقق من رقم OTP المرسل إلى الهاتف المحمول للشخص المراد المصادقة عليه للتحقق من الهوية الصادرة من خلال {@link الشهادات.otp.request }، وإذا كان رقم OTP الذي تم إدخاله صحيحًا، فهذه واجهة برمجة التطبيقات (API) الوظيفة التي توافق على طلب المصادقة وتكمله. عند اكتمال التحقق من الهوية بهذه الطريقة، يتم تغيير قيمة {@link IIamportCertification.certified} لمصادقة الهوية المقابلة {@link IIamportCertification } أخيرًا إلى &quot;true&quot;، ويتم إكمالها أخيرًا..",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "certifications.otp.confirm.confirm",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "imp_uid",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "대상 본인인증 정보의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "IIamportCertification.imp_uid",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-iamport-server/src/api/structures/IIamportCertification.ts",
+                  "textSpan": {
+                    "start": 488,
+                    "length": 16
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "OTP 코드",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "인증 완료된 본인인증 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/internal/webhook": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "معلومات حدث Webhook",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IIamportPayment.IWebhook"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "المستمع الوهمي لحدث Webhook",
+        "description": "مستمع وهمي لحدث Webhook. `internal.webhook` هو واجهة برمجة تطبيقات غير موجودة في خادم Iimport الفعلي. إذا لم يتم تعيين عنوان URL في {@link Configuration.WEBHOOK_URL} لـ `fake-impoart-server`، فإنه يحدث من `fake-iamport-server`. يتم إرسال جميع أنواع أحداث webhook إلى هذا المكان وتختفي بلا معنى. لذلك، عندما تريد استخدام &quot;fake-iamport-server&quot; للتحقق من الاتصال بخادم الاستيراد مسبقًا، تأكد من تعيين {@link Configuration.WEBHOOK_URL } للتأكد من تسليم حدث webhook بشكل صحيح إلى خادم الواجهة الخلفية لديك..",
+        "x-nestia-namespace": "internal.webhook.webhook",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "웹훅 이벤트 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/internal/deposit/{imp_uid}": {
+      "get": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "imp_uid",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "الدفع المستهدف",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "قم بإيداع الأموال في حسابك الافتراضي",
+        "description": "قم بإيداع الأموال في حسابك الافتراضي. `internal.deposit` عبارة عن واجهة برمجة تطبيقات غير موجودة في خادم دفع I&#39;mport الفعلي، وهي وظيفة يمكنها محاكاة الموقف حيث يقوم العميل الذي تقدم بطلب للحصول على دفعة من حساب افتراضي بإيداع المبلغ المستهدف لاحقًا في الحساب الافتراضي . بمعنى آخر، &quot;internal.deposit&quot; هو اختبار مصمم لمحاكاة سلسلة من المواقف التي يقوم فيها العميل بإيداع أموال في حساب صادر له فعليًا، وبناءً على ذلك يتم إنشاء حدث webhook على خادم الاستيراد ونقله إلى حسابك إنها وظيفة.",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "internal.deposit.deposit",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "imp_uid",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "대상 결제의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "IIamportVBankPayment.imp_uid ",
+                "kind": "linkText"
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "GET"
+      }
+    },
+    "/payments/{imp_uid}": {
+      "get": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "imp_uid",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "من سجلات الدفع المستهدفة",
+            "required": true
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/IIamportPayment.IQuery"
+            },
+            "description": "تستخدم عندما تكون طريقة الدفع هي PayPal",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "معلومات الدفع",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportPayment_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "عرض تاريخ الدفع",
+        "description": "عرض سجل الدفع الخاص بك. عرض سجلات الدفع التي تم إنشاؤها من خلال Iimport..",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "payments.at",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "imp_uid",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "대상 결제 기록의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "IIamportPayment.imp_uid",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-iamport-server/src/api/structures/IIamportPayment.ts",
+                  "textSpan": {
+                    "start": 2339,
+                    "length": 16
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "query",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "결제 수단이 페이팔인 경우에 사용",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "GET"
+      }
+    },
+    "/payments/cancel": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "معلومات إدخال إلغاء الدفع",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IIamportPaymentCancel.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "معلومات الدفع الملغاة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportPayment_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "إلغاء الدفع",
+        "description": "إلغاء الدفع. إذا تم الدفع من خلال حساب افتراضي، فيجب عليك إدخال معلومات حساب الاسترداد..",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "payments.cancel.cancel",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "결제 취소 입력 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "취소된 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/receipts/{imp_uid}": {
+      "get": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "imp_uid",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "من الدفع المنسوب",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "معلومات استلام النقد",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportReceipt_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "عرض إيصال النقدية",
+        "description": "عرض إيصال النقدية.",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "receipts.at",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "imp_uid",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "귀속 결제의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "IIamportPayment.imp_uid",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-iamport-server/src/api/structures/IIamportPayment.ts",
+                  "textSpan": {
+                    "start": 2339,
+                    "length": 16
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "현금 영수증 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "GET"
+      },
+      "post": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "imp_uid",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "من الدفع المنسوب",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "معلومات إدخال إيصال النقد",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IIamportReceipt.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "معلومات استلام النقد",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportReceipt_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "إصدار إيصال نقدي",
+        "description": "إصدار إيصال نقدي.",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "receipts.store",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "imp_uid",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "귀속 결제의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "IIamportPayment.imp_uid",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-iamport-server/src/api/structures/IIamportPayment.ts",
+                  "textSpan": {
+                    "start": 2339,
+                    "length": 16
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "현금 영수증 입력 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "현금 영수증 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      },
+      "delete": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "imp_uid",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "من الدفع المنسوب",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "معلومات استلام النقد الملغاة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportReceipt_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "إلغاء إيصال نقدي",
+        "description": "إلغاء إيصال نقدي.",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "receipts.erase",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "imp_uid",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "귀속 결제의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "IIamportPayment.imp_uid",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-iamport-server/src/api/structures/IIamportPayment.ts",
+                  "textSpan": {
+                    "start": 2339,
+                    "length": 16
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "취소된 현금 영수증 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "DELETE"
+      }
+    },
+    "/users/getToken": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "I&#39;mport&#39;s API والمعلومات الرئيسية السرية",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IIamportUser.IAccessor"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "معلومات رمز مصادقة المستخدم",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportUser_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "إصدار رمز مصادقة المستخدم",
+        "description": "إصدار رمز مصادقة المستخدم. يتم إصدار رمز مصادقة المستخدم استنادًا إلى واجهة برمجة التطبيقات (API) والمفتاح السري الممنوح من خلال الاشتراك في I&#39;mport. ومع ذلك، فإن رمز مصادقة المستخدم الصادر عن Iimport له وقت انتهاء صلاحية {@link IIamportUser.expired_at}، وعندما ينقضي هذا الوقت، تنتهي صلاحية الرمز المميز الذي تم إصداره مسبقًا ولا يمكن استخدامه بعد ذلك. لذلك، إذا كنت تريد استخدام واجهة برمجة التطبيقات الخاصة بالاستيراد بحرية دون التقيد بالقيود الزمنية للاستيراد، فاستخدم {@link IamportConnector } المقدم من `iamport-server-api`..",
+        "x-nestia-namespace": "users.getToken.getToken",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "아임포트의 API 및 secret 키 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "유저 인증 토큰 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/vbanks": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "معلومات إدخال الحساب الظاهري",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IIamportVBankPayment.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "معلومات الدفع بالحساب الافتراضي",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportVBankPayment_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "إصدار حساب افتراضي",
+        "description": "إصدار حساب افتراضي.",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "vbanks.store",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "가상 계좌 입력 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "가상 계좌 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      },
+      "put": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "الحساب الظاهري تحرير معلومات الإدخال",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IIamportVBankPayment.IUpdate"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "تعديل معلومات الدفع للحساب الافتراضي",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportVBankPayment_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "تحرير حساب افتراضي",
+        "description": "تحرير حساب افتراضي.",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "vbanks.update",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "가상 계좌 편집 입력 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "편집된 가상 계좌 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "PUT"
+      }
+    },
+    "/subscribe/customers/{customer_uid}": {
+      "get": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "customer_uid",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "مفتاح معرف العميل (بطاقة الدفع البسيطة).",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "معلومات بطاقة الدفع البسيطة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportSubscription_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "التحقق من معلومات بطاقة الدفع بسهولة",
+        "description": "التحقق من معلومات بطاقة الدفع بسهولة. `subscribe.customers.at` هي إحدى وظائف واجهة برمجة التطبيقات (API) التي تبحث في معلومات بطاقة الدفع البسيطة التي حفظها العميل باستخدام {@link store} أو نافذة تسجيل بطاقة الدفع البسيطة المقدمة من Import..",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "subscribe.customers.at",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "customer_uid",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "고객 (간편 결제 카드) 식별자 키",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "간편 결제 카드 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "GET"
+      },
+      "post": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "customer_uid",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "مفتاح معرف العميل (بطاقة الدفع البسيطة).",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "معلومات إدخال البطاقة",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IIamportSubscription.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "معلومات بطاقة الدفع البسيطة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportSubscription_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "تسجيل بطاقة دفع بسيطة",
+        "description": "تسجيل بطاقة دفع بسيطة. `subscribe.customers.stoer` هي وظيفة واجهة برمجة التطبيقات (API) تُستخدم عندما يسجل العميل بطاقته على الخادم ويريد إجراء الدفع بسهولة دون الحاجة إلى إدخال معلومات البطاقة بشكل متكرر في كل مرة يُطلب فيها الدفع. كمرجع، إذا كان تطبيق العميل الخاص بـ &quot;subscribe.customers.store&quot; يستخدم نافذة تسجيل بطاقة الدفع البسيطة التي توفرها iImport، فلن يستدعي خادم الواجهة الخلفية هذا في الخدمة الفعلية. ومع ذلك، يمكن استخدامه على مستوى برنامج أتمتة الاختبار لمحاكاة الموقف حيث يقوم العميل بتسجيل بطاقة دفع بسيطة..",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "subscribe.customers.store",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "customer_uid",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "고객 (간편 결제 카드) 식별자 키",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "카드 입력 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "간편 결제 카드 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      },
+      "delete": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "customer_uid",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "مفتاح معرف العميل (بطاقة الدفع البسيطة).",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "تم حذف معلومات بطاقة الدفع البسيطة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportSubscription_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "حذف بطاقة دفع بسيطة",
+        "description": "حذف بطاقة دفع بسيطة. قم بإزالة البطاقة المسجلة لتسهيل الدفع.",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "subscribe.customers.erase",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "customer_uid",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "고객 (간편 결제 카드) 식별자 키",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "삭제된 간편 결제 카드 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "DELETE"
+      }
+    },
+    "/subscribe/payments/onetime": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "معلومات طلب الدفع بالبطاقة",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IIamportSubscription.IOnetime"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "معلومات الدفع بالبطاقة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportCardPayment_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "يمكنك الدفع عن طريق البطاقة والتسجيل للدفع البسيط.",
+        "description": "بالإضافة إلى الدفع عن طريق البطاقة، يمكنك أيضًا التسجيل للدفع البسيط. `subscribe. Payments.onetime` هي وظيفة واجهة برمجة التطبيقات يتم استدعاؤها عند إجراء الدفع عبر البطاقة. بالإضافة إلى ذلك، إذا قمت بإدخال {@link IIamportSubscription.IOnetime.customer_uid } في قيمة الإدخال، فسيتم تسجيل البطاقة المستخدمة للدفع كبطاقة دفع بسيطة {@link IIamportSubscription }. ومع ذلك، إذا كنت تريد حقًا إجراء تسجيل بسيط للبطاقة والدفع في نفس الوقت، فبدلاً من إضافة {@link IIamportSubscription.IOnetime.customer_uid } إلى `subscribe.Payments.onetime`، أضف {@link Submit.customers.store } و {@linkاشتراك.المدفوعات يوصى بالاتصال بـ .مرة أخرى } بشكل منفصل. وذلك لأنه يتيح لنا الاستجابة بشكل أكثر أمانًا للمواقف الاستثنائية. بالإضافة إلى ذلك، لن يتم استدعاء `subscribe.Payments.onetime` بواسطة خادم الواجهة الخلفية لديك في الخدمة الفعلية إذا كان تطبيق العميل يستخدم نافذة الدفع التي يوفرها الاستيراد. ومع ذلك، يمكن استخدامه على مستوى برنامج أتمتة الاختبار لمحاكاة الموقف الذي يدفع فيه العميل بالبطاقة..",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "subscribe.payments.onetime.onetime",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "카드 결제 신청 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "카드 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/subscribe/payments/again": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "معلومات طلب الدفع باستخدام بطاقة مسجلة مسبقًا",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IIamportSubscription.IAgain"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "معلومات الدفع بالبطاقة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportCardPayment_gt_"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "ادفع باستخدام بطاقة مسجلة للدفع البسيط",
+        "description": "ادفع باستخدام بطاقة مسجلة للدفع البسيط. `subscribe. Payments.again` هي إحدى وظائف واجهة برمجة التطبيقات (API) التي يتم استدعاؤها عندما يريد العميل إجراء الدفع باستخدام البطاقة المسجلة للدفع البسيط. بغض النظر عما إذا كان ذلك مناسبًا أم غير مناسب، يعد هذا في الأساس جزءًا من الدفع بالبطاقة، وبالتالي فإن قيمة الإرجاع هي {@link IIamportCardPayment }، وهي نفس قيمة دفعات البطاقة العادية. و&quot;subscribe. Payments.again&quot; هي طريقة الدفع الوحيدة التي تنطبق على الحالات التي لا يتمكن فيها تطبيق العميل من استخدام نافذة الدفع التي توفرها I&#39;mport، ويجب أن يقوم خادم الواجهة الخلفية لديك باستدعاء وظيفة I&#39;mport&#39;s API مباشرةً. لذلك، عند تطوير خوادم الواجهة الخلفية والتطبيقات الأمامية التي ترتبط بخادم الاستيراد للمدفوعات البسيطة، يلزم تصميم وتطوير منفصلين لهذه الحالة، لذا يرجى وضع ذلك في الاعتبار..",
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "x-nestia-namespace": "subscribe.payments.again.again",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "미리 등록한 카드를 이용한 결제 신청 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "카드 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "bearer",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "IIamportResponse_lt_IIamportCertification_gt_": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "رمز الخطأ. القيمة 0 تعني عدم وجود خطأ..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "message": {
+            "description": "رسالة النجاح أو الخطأ.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "response": {
+            "$ref": "#/components/schemas/IIamportCertification"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "response"
+        ],
+        "description": "أقوم باستيراد بيانات الاستجابة الفريدة.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportCertification": {
+        "type": "object",
+        "properties": {
+          "imp_uid": {
+            "description": "رقم التعريف الصادر عن الاستيراد.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "merchant_uid": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "مفتاح المعرف من الخدمة. ولا يتم إصداره وإدارته بواسطة خادم الاستيراد، ولكن بواسطة الخدمة التي تستخدمه..",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "name": {
+            "description": "اسم الشخص الخاضع للتحقق من الهوية.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "gender": {
+            "description": "جنس.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "birth": {
+            "description": "تاريخ الميلاد. يتم استخدام وقت Linux.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "birthday": {
+            "description": "تاريخ الميلاد بالصيغة YYYYMMDD.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^([0-9]{4})(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$"
+          },
+          "foreigner": {
+            "description": "أجنبي أم لا.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "phone": {
+            "description": "رقم الهاتف المحمول للشخص للتحقق من الهوية.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "carrier": {
+            "oneOf": [
+              {
+                "const": "SKT"
+              },
+              {
+                "const": "KT"
+              },
+              {
+                "const": "LGT"
+              }
+            ],
+            "description": "رمز شركة الاتصالات للتحقق من الهوية.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "certified": {
+            "description": "حالة مصادقة OTP.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "certified_at": {
+            "description": "تاريخ ووقت مصادقة OTP. يتم استخدام وقت Linux، ويتم استخدام 0 بدلاً من `null`.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "unique_key": {
+            "description": "لا أعرف ما هو، هل يعرف أحد ما هو؟",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "unique_in_site": {
+            "description": "لا أعرف ما هو، هل يعرف أحد ما هو؟",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_tid": {
+            "description": "لا أعرف ما هو، هل يعرف أحد ما هو؟",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_provider": {
+            "description": "مزود PG.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "origin": {
+            "description": "لا أعرف ما هو، هل يعرف أحد ما هو؟",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "__otp": {
+            "description": "(للاختبار فقط) رمز OTP. هذه خاصية تُستخدم فقط في `fake-iamport-server`، وتُستخدم للتحقق من رمز OTP الذي تم إصداره عند محاكاة مصادقة الهوية. باستخدام هذا للاتصال بوظيفة {@linkfunctional.certifications.otp.confirm }، يمكنك إكمال عملية التحقق من هويتك..",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "imp_uid",
+          "merchant_uid",
+          "name",
+          "gender",
+          "birth",
+          "birthday",
+          "foreigner",
+          "phone",
+          "carrier",
+          "certified",
+          "certified_at",
+          "unique_key",
+          "unique_in_site",
+          "pg_tid",
+          "pg_provider",
+          "origin"
+        ],
+        "description": "تفاصيل المصادقة الشخصية. `IIamportCertification` هي واجهة بنية بيانات تجسد معلومات المصادقة الشخصية لـ Iimport. ومع ذلك، فإن وجود سجل `IIamportCertification` لا يعني اكتمال مصادقة الهوية. فقط عندما تكون قيمة {@link IIamportCertification.certified } &quot;صحيحة&quot;، فهذا يعني أن الشخص المطلوب المصادقة عليه قد أكمل المصادقة عن طريق كتابة كلمة المرور لمرة واحدة (OTP) المرسلة إلى رقم هاتفه المحمول بدقة في نافذة مصادقة iAmport المنبثقة..",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportCertification.IStore": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "اسم الشخص الخاضع للتحقق من الهوية.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "phone": {
+            "description": "رقم الهاتف المحمول للشخص الذي يتحقق من هويته. لا يهم ما إذا كان رقم الهاتف الخليوي يحتوي على &quot;-&quot; أم لا. ومع ذلك، تتم معالجته داخليًا عن طريق إزالة القيمة &quot;-&quot;..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "birth": {
+            "description": "تاريخ الميلاد. تنسيق YYYYMMDD.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^([0-9]{4})(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$"
+          },
+          "gender_digit": {
+            "description": "الرقم الأول في الجزء الخلفي من تسجيل المقيم.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "carrier": {
+            "oneOf": [
+              {
+                "const": "SKT"
+              },
+              {
+                "const": "KT"
+              },
+              {
+                "const": "LGT"
+              }
+            ],
+            "description": "رمز شركة الاتصالات للتحقق من الهوية.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "is_mvno": {
+            "description": "هاتف الميزانية أم لا؟.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "boolean"
+          },
+          "commpany": {
+            "description": "اسم خدمة التاجر أو عنوان URL للنطاق. اسم الخدمة التي سيتم الإعلان عنها في الرسالة النصية القصيرة المرسلة من KISA إلى الشخص المستهدف.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "merchant_uid": {
+            "description": "مفتاح معرف مصادقة الهوية لخدمة شركتك. ولا يتم إصداره وإدارته بواسطة خادم الاستيراد، ولكن بواسطة الخدمة التي تستخدمه..",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "pg": {
+            "description": "فاصل شركة PG. يمكنك ضبط هذا إذا كنت تريد استخدام معرفين أو أكثر لمتجر Danal في نفس الوقت. محدد في النموذج **danal.{store ID}**.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "phone",
+          "birth",
+          "gender_digit",
+          "carrier"
+        ],
+        "description": "معلومات إدخال المصادقة الشخصية.",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportResponse_lt_IIamportCertification.IAccessor_gt_": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "رمز الخطأ. القيمة 0 تعني عدم وجود خطأ..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "message": {
+            "description": "رسالة النجاح أو الخطأ.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "response": {
+            "$ref": "#/components/schemas/IIamportCertification.IAccessor"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "response"
+        ],
+        "description": "أقوم باستيراد بيانات الاستجابة الفريدة.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportCertification.IAccessor": {
+        "type": "object",
+        "properties": {
+          "imp_uid": {
+            "description": "مفتاح المعرف لمعلومات المصادقة الشخصية.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "imp_uid"
+        ],
+        "description": "هيكل الوصول لمعلومات المصادقة الشخصية.",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportCertification.IConfirm": {
+        "type": "object",
+        "properties": {
+          "otp": {
+            "description": "يتم إرسال رقم التحقق من الهوية عبر الرسائل القصيرة.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "otp"
+        ],
+        "description": "إدخال المعلومات للموافقة على التحقق من الهوية.",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportPayment.IWebhook": {
+        "type": "object",
+        "properties": {
+          "imp_uid": {
+            "description": "مفتاح المعرف لمعلومات الدفع {@link IIamportPayment }.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "merchant_uid": {
+            "description": "مفتاح معرف الطلب. ولا يتم إصداره وإدارته بواسطة خادم الاستيراد، ولكن بواسطة الخدمة التي تستخدمه..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "paid"
+              },
+              {
+                "const": "ready"
+              },
+              {
+                "const": "failed"
+              },
+              {
+                "const": "cancelled"
+              }
+            ],
+            "description": "الوضع الحالي.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          }
+        },
+        "required": [
+          "imp_uid",
+          "merchant_uid",
+          "status"
+        ],
+        "description": "بيانات الويب هوك.",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportPayment.IQuery": {
+        "type": "object",
+        "properties": {
+          "extension": {
+            "description": "بالنسبة لـ PayPal، قم بتعيين هذه القيمة على &quot;صحيح&quot;..",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "boolean"
+          }
+        },
+        "description": "إذا كانت طريقة الدفع هي PayPal، فسيتم تعيين الحالة إلى معلق في وقت الموافقة على الدفع وفقًا لسياسة حماية المشتري في PayPal، ثم يتم تغييرها إلى الدفع النهائي المكتمل من خلال المراجعة الداخلية. بسبب مشكلة فنية في `iamport`، يتم تسجيل الحالة بالحالة: فشل. إذا تم تغيير الدفعة النهائية لاحقًا لإكمالها في PayPal، فقم بتغيير &quot;iamport&quot; إلى &quot;مدفوع&quot; وأرسل خطافًا عبر الويب للحالة. يواجه العملاء الذين يستخدمون iamport مشكلة في تلقي خطافات الويب المدفوعة للمدفوعات التي تمت معالجتها بالفعل على أنها فاشلة. وبناءً على ذلك، يجب إضافة الخيار `extension=true` كسلسلة استعلام إلى `/Payment/{imp_uid}` المقدم من `iamport`.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "issue",
+            "text": [
+              {
+                "text": "https://github.com/samchon/fake-iamport-server/issues/13",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Sangjin Han - https://github.com/ltnscp9028",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportResponse_lt_IIamportPayment_gt_": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "رمز الخطأ. القيمة 0 تعني عدم وجود خطأ..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "message": {
+            "description": "رسالة النجاح أو الخطأ.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "response": {
+            "$ref": "#/components/schemas/IIamportPayment"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "response"
+        ],
+        "description": "أقوم باستيراد بيانات الاستجابة الفريدة.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportPayment": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/IIamportCardPayment"
+          },
+          {
+            "$ref": "#/components/schemas/IIamportTransferPayment"
+          },
+          {
+            "$ref": "#/components/schemas/IIamportVBankPayment"
+          },
+          {
+            "$ref": "#/components/schemas/IIamportPayment.IBase_lt__doublequote_phone_doublequote__space__or__space__doublequote_kpay_doublequote__space__or__space__doublequote_kakaopay_doublequote__space__or__space__doublequote_payco_doublequote__space__or__space__doublequote_lpay_doublequote__space__or__space__doublequote_ssgpay_doublequote__space__or__space__doublequote_tosspay_doublequote__space__or__space__doublequote_cultureland_doublequote__space__or__space__doublequote_smartculture_doublequote__space__or__space__doublequote_happymoney_doublequote__space__or__space__doublequote_booknlife_doublequote__space__or__space__doublequote_point_doublequote__gt_"
+          }
+        ],
+        "description": "معلومات الدفع. &quot;IIamportPayment&quot; عبارة عن بنية بيانات تجسد معلومات الدفع الخاصة بـ Iimport وواجهة نوع الاتحاد عندما يتم تحديد قيمة الطريقة من خلال الشرط، يتم تحديد النوع المشتق تلقائيًا. ```نوع النص إذا (Payment.pay_method === &quot;card&quot;) Payment.card_number; // الدفع يكون IIamportCardPayment ```",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportCardPayment": {
+        "type": "object",
+        "properties": {
+          "card_code": {
+            "description": "رمز معرف البطاقة.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "card_name": {
+            "description": "اسم البطاقة.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "card_number": {
+            "description": "رقم البطاقة.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "\\d{4}-\\d{4}-\\d{4}-\\d{4}"
+          },
+          "card_quota": {
+            "description": "عدد الأقساط.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "integer"
+          },
+          "apply_num": {
+            "description": "رقم موافقة شركة البطاقة.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pay_method": {
+            "oneOf": [
+              {
+                "const": "card"
+              },
+              {
+                "const": "samsung"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "imp_uid": {
+            "description": "مفتاح المعرف لمعلومات الدفع {@link IIamportPayment }.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "merchant_uid": {
+            "description": "مفتاح معرف الطلب. ولا يتم إصداره وإدارته بواسطة خادم الاستيراد، ولكن بواسطة الخدمة التي تستخدمه..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "name": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "اسم الطلب، قد يتم حذفه.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "amount": {
+            "description": "إجمالي الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancel_amount": {
+            "description": "إلغاء الدفع، استرداد المبلغ الإجمالي.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/IIamportPayment.Currency"
+          },
+          "receipt_url": {
+            "description": "عنوان URL للإيصال.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "url"
+          },
+          "cash_receipt_issue": {
+            "description": "إصدار إيصالات نقدية؟.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "channel": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_provider": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "emb_pg_provider": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "pg_id": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_tid": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "escrow": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "buyer_name": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_email": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "email"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_tel": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_addr": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_postcode": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_uid": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_uid_usage": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "custom_data": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "user_agent": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "$ref": "#/components/schemas/IIamportPayment.Status"
+          },
+          "started_at": {
+            "description": "تاريخ ووقت طلب الدفع. يتم استخدام وقت Linux.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "paid_at": {
+            "description": "تاريخ ووقت إتمام الدفع (الدفع). يتم استخدام وقت Linux، ويتم استخدام 0 بدلاً من `null`.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "failed_at": {
+            "description": "تاريخ ووقت فشل الدفع. يتم استخدام وقت Linux، ويتم استخدام 0 بدلاً من `null`.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancelled_at": {
+            "description": "تاريخ ووقت إلغاء الدفع. يتم استخدام وقت Linux، ويتم استخدام 0 بدلاً من `null`.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "fail_reason": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancel_reason": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancel_history": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IIamportPaymentCancel"
+            }
+          }
+        },
+        "required": [
+          "card_code",
+          "card_name",
+          "card_number",
+          "card_quota",
+          "apply_num",
+          "pay_method",
+          "imp_uid",
+          "merchant_uid",
+          "name",
+          "amount",
+          "cancel_amount",
+          "currency",
+          "receipt_url",
+          "cash_receipt_issue",
+          "channel",
+          "pg_provider",
+          "emb_pg_provider",
+          "pg_id",
+          "pg_tid",
+          "escrow",
+          "buyer_name",
+          "buyer_email",
+          "buyer_tel",
+          "buyer_addr",
+          "buyer_postcode",
+          "customer_uid",
+          "customer_uid_usage",
+          "custom_data",
+          "user_agent",
+          "status",
+          "started_at",
+          "paid_at",
+          "failed_at",
+          "cancelled_at",
+          "fail_reason",
+          "cancel_reason",
+          "cancel_history"
+        ],
+        "description": "معلومات الدفع بالبطاقة.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportPayment.Currency": {
+        "oneOf": [
+          {
+            "const": "KRW"
+          },
+          {
+            "const": "USD"
+          },
+          {
+            "const": "EUR"
+          },
+          {
+            "const": "JPY"
+          }
+        ]
+      },
+      "IIamportPayment.Status": {
+        "oneOf": [
+          {
+            "const": "paid"
+          },
+          {
+            "const": "ready"
+          },
+          {
+            "const": "failed"
+          },
+          {
+            "const": "cancelled"
+          }
+        ]
+      },
+      "IIamportPaymentCancel": {
+        "type": "object",
+        "properties": {
+          "pg_id": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_tid": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancelled_at": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "reason": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "receipt_url": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "url"
+          }
+        },
+        "required": [
+          "pg_id",
+          "pg_tid",
+          "amount",
+          "cancelled_at",
+          "reason",
+          "receipt_url"
+        ],
+        "description": "معلومات إلغاء الدفع.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportTransferPayment": {
+        "type": "object",
+        "properties": {
+          "bank_code": {
+            "description": "رمز معرف البنك.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "bank_name": {
+            "description": "اسم البنك.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pay_method": {
+            "const": "trans",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "imp_uid": {
+            "description": "مفتاح المعرف لمعلومات الدفع {@link IIamportPayment }.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "merchant_uid": {
+            "description": "مفتاح معرف الطلب. ولا يتم إصداره وإدارته بواسطة خادم الاستيراد، ولكن بواسطة الخدمة التي تستخدمه..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "name": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "اسم الطلب، قد يتم حذفه.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "amount": {
+            "description": "إجمالي الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancel_amount": {
+            "description": "إلغاء الدفع، استرداد المبلغ الإجمالي.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/IIamportPayment.Currency"
+          },
+          "receipt_url": {
+            "description": "عنوان URL للإيصال.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "url"
+          },
+          "cash_receipt_issue": {
+            "description": "إصدار إيصالات نقدية؟.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "channel": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_provider": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "emb_pg_provider": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "pg_id": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_tid": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "escrow": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "buyer_name": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_email": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "email"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_tel": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_addr": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_postcode": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_uid": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_uid_usage": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "custom_data": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "user_agent": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "$ref": "#/components/schemas/IIamportPayment.Status"
+          },
+          "started_at": {
+            "description": "تاريخ ووقت طلب الدفع. يتم استخدام وقت Linux.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "paid_at": {
+            "description": "تاريخ ووقت إتمام الدفع (الدفع). يتم استخدام وقت Linux، ويتم استخدام 0 بدلاً من `null`.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "failed_at": {
+            "description": "تاريخ ووقت فشل الدفع. يتم استخدام وقت Linux، ويتم استخدام 0 بدلاً من `null`.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancelled_at": {
+            "description": "تاريخ ووقت إلغاء الدفع. يتم استخدام وقت Linux، ويتم استخدام 0 بدلاً من `null`.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "fail_reason": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancel_reason": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancel_history": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IIamportPaymentCancel"
+            }
+          }
+        },
+        "required": [
+          "bank_code",
+          "bank_name",
+          "pay_method",
+          "imp_uid",
+          "merchant_uid",
+          "name",
+          "amount",
+          "cancel_amount",
+          "currency",
+          "receipt_url",
+          "cash_receipt_issue",
+          "channel",
+          "pg_provider",
+          "emb_pg_provider",
+          "pg_id",
+          "pg_tid",
+          "escrow",
+          "buyer_name",
+          "buyer_email",
+          "buyer_tel",
+          "buyer_addr",
+          "buyer_postcode",
+          "customer_uid",
+          "customer_uid_usage",
+          "custom_data",
+          "user_agent",
+          "status",
+          "started_at",
+          "paid_at",
+          "failed_at",
+          "cancelled_at",
+          "fail_reason",
+          "cancel_reason",
+          "cancel_history"
+        ],
+        "description": "معلومات الدفع عن طريق تحويل الحساب.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportVBankPayment": {
+        "type": "object",
+        "properties": {
+          "vbank_code": {
+            "description": "رمز معرف الحساب الافتراضي.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "vbank_name": {
+            "description": "اسم الحساب الافتراضي",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "vbank_num": {
+            "description": "رقم الحساب الافتراضي",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "vbank_holder": {
+            "description": "مودع الحساب الظاهري.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "vbank_date": {
+            "description": "تاريخ انتهاء صلاحية إيداع الحساب الافتراضي.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vbank_issued_at": {
+            "description": "تاريخ ووقت فتح الحساب الافتراضي.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "pay_method": {
+            "const": "vbank",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "imp_uid": {
+            "description": "مفتاح المعرف لمعلومات الدفع {@link IIamportPayment }.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "merchant_uid": {
+            "description": "مفتاح معرف الطلب. ولا يتم إصداره وإدارته بواسطة خادم الاستيراد، ولكن بواسطة الخدمة التي تستخدمه..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "name": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "اسم الطلب، قد يتم حذفه.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "amount": {
+            "description": "إجمالي الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancel_amount": {
+            "description": "إلغاء الدفع، استرداد المبلغ الإجمالي.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/IIamportPayment.Currency"
+          },
+          "receipt_url": {
+            "description": "عنوان URL للإيصال.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "url"
+          },
+          "cash_receipt_issue": {
+            "description": "إصدار إيصالات نقدية؟.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "channel": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_provider": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "emb_pg_provider": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "pg_id": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_tid": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "escrow": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "buyer_name": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_email": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "email"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_tel": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_addr": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_postcode": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_uid": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_uid_usage": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "custom_data": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "user_agent": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "$ref": "#/components/schemas/IIamportPayment.Status"
+          },
+          "started_at": {
+            "description": "تاريخ ووقت طلب الدفع. يتم استخدام وقت Linux.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "paid_at": {
+            "description": "تاريخ ووقت إتمام الدفع (الدفع). يتم استخدام وقت Linux، ويتم استخدام 0 بدلاً من `null`.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "failed_at": {
+            "description": "تاريخ ووقت فشل الدفع. يتم استخدام وقت Linux، ويتم استخدام 0 بدلاً من `null`.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancelled_at": {
+            "description": "تاريخ ووقت إلغاء الدفع. يتم استخدام وقت Linux، ويتم استخدام 0 بدلاً من `null`.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "fail_reason": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancel_reason": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancel_history": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IIamportPaymentCancel"
+            }
+          }
+        },
+        "required": [
+          "vbank_code",
+          "vbank_name",
+          "vbank_num",
+          "vbank_holder",
+          "vbank_date",
+          "vbank_issued_at",
+          "pay_method",
+          "imp_uid",
+          "merchant_uid",
+          "name",
+          "amount",
+          "cancel_amount",
+          "currency",
+          "receipt_url",
+          "cash_receipt_issue",
+          "channel",
+          "pg_provider",
+          "emb_pg_provider",
+          "pg_id",
+          "pg_tid",
+          "escrow",
+          "buyer_name",
+          "buyer_email",
+          "buyer_tel",
+          "buyer_addr",
+          "buyer_postcode",
+          "customer_uid",
+          "customer_uid_usage",
+          "custom_data",
+          "user_agent",
+          "status",
+          "started_at",
+          "paid_at",
+          "failed_at",
+          "cancelled_at",
+          "fail_reason",
+          "cancel_reason",
+          "cancel_history"
+        ],
+        "description": "معلومات الدفع بالحساب الافتراضي.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportPayment.IBase_lt__doublequote_phone_doublequote__space__or__space__doublequote_kpay_doublequote__space__or__space__doublequote_kakaopay_doublequote__space__or__space__doublequote_payco_doublequote__space__or__space__doublequote_lpay_doublequote__space__or__space__doublequote_ssgpay_doublequote__space__or__space__doublequote_tosspay_doublequote__space__or__space__doublequote_cultureland_doublequote__space__or__space__doublequote_smartculture_doublequote__space__or__space__doublequote_happymoney_doublequote__space__or__space__doublequote_booknlife_doublequote__space__or__space__doublequote_point_doublequote__gt_": {
+        "type": "object",
+        "properties": {
+          "pay_method": {
+            "oneOf": [
+              {
+                "const": "phone"
+              },
+              {
+                "const": "kpay"
+              },
+              {
+                "const": "kakaopay"
+              },
+              {
+                "const": "payco"
+              },
+              {
+                "const": "lpay"
+              },
+              {
+                "const": "ssgpay"
+              },
+              {
+                "const": "tosspay"
+              },
+              {
+                "const": "cultureland"
+              },
+              {
+                "const": "smartculture"
+              },
+              {
+                "const": "happymoney"
+              },
+              {
+                "const": "booknlife"
+              },
+              {
+                "const": "point"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "imp_uid": {
+            "description": "مفتاح المعرف لمعلومات الدفع {@link IIamportPayment }.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "merchant_uid": {
+            "description": "مفتاح معرف الطلب. ولا يتم إصداره وإدارته بواسطة خادم الاستيراد، ولكن بواسطة الخدمة التي تستخدمه..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "name": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "اسم الطلب، قد يتم حذفه.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "amount": {
+            "description": "إجمالي الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancel_amount": {
+            "description": "إلغاء الدفع، استرداد المبلغ الإجمالي.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/IIamportPayment.Currency"
+          },
+          "receipt_url": {
+            "description": "عنوان URL للإيصال.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "url"
+          },
+          "cash_receipt_issue": {
+            "description": "إصدار إيصالات نقدية؟.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "channel": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_provider": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "emb_pg_provider": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "pg_id": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_tid": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "escrow": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "buyer_name": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_email": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "email"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_tel": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_addr": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "buyer_postcode": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_uid": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_uid_usage": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "custom_data": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "user_agent": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "$ref": "#/components/schemas/IIamportPayment.Status"
+          },
+          "started_at": {
+            "description": "تاريخ ووقت طلب الدفع. يتم استخدام وقت Linux.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "paid_at": {
+            "description": "تاريخ ووقت إتمام الدفع (الدفع). يتم استخدام وقت Linux، ويتم استخدام 0 بدلاً من `null`.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "failed_at": {
+            "description": "تاريخ ووقت فشل الدفع. يتم استخدام وقت Linux، ويتم استخدام 0 بدلاً من `null`.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancelled_at": {
+            "description": "تاريخ ووقت إلغاء الدفع. يتم استخدام وقت Linux، ويتم استخدام 0 بدلاً من `null`.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "fail_reason": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancel_reason": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancel_history": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IIamportPaymentCancel"
+            }
+          }
+        },
+        "required": [
+          "pay_method",
+          "imp_uid",
+          "merchant_uid",
+          "name",
+          "amount",
+          "cancel_amount",
+          "currency",
+          "receipt_url",
+          "cash_receipt_issue",
+          "channel",
+          "pg_provider",
+          "emb_pg_provider",
+          "pg_id",
+          "pg_tid",
+          "escrow",
+          "buyer_name",
+          "buyer_email",
+          "buyer_tel",
+          "buyer_addr",
+          "buyer_postcode",
+          "customer_uid",
+          "customer_uid_usage",
+          "custom_data",
+          "user_agent",
+          "status",
+          "started_at",
+          "paid_at",
+          "failed_at",
+          "cancelled_at",
+          "fail_reason",
+          "cancel_reason",
+          "cancel_history"
+        ],
+        "description": "معلومات الدفع الأساسية (المشتركة)..",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportPaymentCancel.IStore": {
+        "type": "object",
+        "properties": {
+          "imp_uid": {
+            "description": "مفتاح المعرف لمعلومات الدفع {@link IIamportPayment }.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "merchant_uid": {
+            "description": "مفتاح معرف الطلب. ولا يتم إصداره وإدارته بواسطة خادم الاستيراد، ولكن بواسطة الخدمة التي تستخدمه..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "description": "مبلغ الإلغاء والإلغاء الجزئي ممكنان أيضًا. الإلغاء الكامل في حالة الإغفال.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "checksum": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "الإلغاء الرصيد الحالي القابل للإلغاء قبل تنفيذ المعاملة. يتم التحقق مقدمًا مما إذا كان الرصيد القابل للإلغاء المسجل بواسطة طالب واجهة برمجة التطبيقات (API) يتطابق مع الرصيد القابل للإلغاء المسجل بواسطة I&#39;mport، وإذا فشل التحقق، فلن يتم تنفيذ المعاملة. إذا كان &quot;فارغًا&quot;، فسيتم تخطي عملية التحقق..",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "reason": {
+            "description": "سبب الإلغاء.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "tax_free": {
+            "description": "مبلغ معفى من الضرائب بين مبلغ طلب الإلغاء.",
+            "x-typia-jsDocTags": [
+              {
+                "name": "default",
+                "text": [
+                  {
+                    "text": "0",
+                    "kind": "text"
+                  }
+                ]
+              }
+            ],
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number",
+            "default": 0
+          },
+          "refund_holder": {
+            "description": "استرداد حساب المودع.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "refund_bank": {
+            "description": "رمز استرداد حساب البنك.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "refund_account": {
+            "description": "رقم حساب حساب الاسترداد.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "refund_tel": {
+            "description": "استرداد معلومات الاتصال بصاحب الحساب",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "imp_uid",
+          "merchant_uid",
+          "checksum",
+          "reason"
+        ],
+        "description": "معلومات إدخال إلغاء الدفع.",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportResponse_lt_IIamportReceipt_gt_": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "رمز الخطأ. القيمة 0 تعني عدم وجود خطأ..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "message": {
+            "description": "رسالة النجاح أو الخطأ.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "response": {
+            "$ref": "#/components/schemas/IIamportReceipt"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "response"
+        ],
+        "description": "أقوم باستيراد بيانات الاستجابة الفريدة.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportReceipt": {
+        "type": "object",
+        "properties": {
+          "imp_uid": {
+            "description": "{@link IIamportPayment.imp_uid } من الدفعة المحتسبة.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "receipt_uid": {
+            "description": "معرف معرف فريد لإيصال النقدية.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "apply_num": {
+            "description": "رقم الموافقة.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/IIamportReceipt.Type"
+          },
+          "amount": {
+            "description": "إجمالي الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vat": {
+            "description": "ضريبة إضافية.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "receipt_url": {
+            "description": "عنوان URL للاستعلام عن إيصال الدفع النقدي.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "url"
+          },
+          "applied_at": {
+            "description": "وقت إصدار إيصال النقدية.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancelled_at": {
+            "description": "وقت إلغاء إيصال النقدية. يتم استخدام وقت Linux، ويتم استخدام 0 بدلاً من `null`.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          }
+        },
+        "required": [
+          "imp_uid",
+          "receipt_uid",
+          "apply_num",
+          "type",
+          "amount",
+          "vat",
+          "receipt_url",
+          "applied_at",
+          "cancelled_at"
+        ],
+        "description": "معلومات استلام النقد.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportReceipt.Type": {
+        "oneOf": [
+          {
+            "const": "person"
+          },
+          {
+            "const": "company"
+          }
+        ],
+        "description": "نوع إصدار إيصال النقدية (الهدف)."
+      },
+      "IIamportReceipt.IStore": {
+        "type": "object",
+        "properties": {
+          "imp_uid": {
+            "description": "{@link IIamportPayment.imp_uid } من الدفعة المحتسبة.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "identifier": {
+            "description": "معلومات التعريف للإيصالات النقدية. - بطاقة إيصال نقدي لدائرة الضرائب الوطنية - رقم الهاتف المحمول - رقم تسجيل المقيم - رقم تسجيل الأعمال",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "identifier_type": {
+            "oneOf": [
+              {
+                "const": "phone"
+              },
+              {
+                "const": "person"
+              },
+              {
+                "const": "business"
+              },
+              {
+                "const": "taxcard"
+              }
+            ],
+            "description": "نوع الإيصال النقدي الصادر. - الشخص: رقم تسجيل المقيم - العمل: رقم تسجيل النشاط التجاري - الهاتف: رقم الهاتف المحمول - البطاقة الضريبية: بطاقة الإيصال النقدي لدائرة الضرائب الوطنية بعض شركات PG ليس لديها هذا العنصر، ولكن في معظم الحالات، استخدمه فقط..",
+            "x-typia-required": false,
+            "x-typia-optional": true
+          },
+          "type": {
+            "oneOf": [
+              {
+                "const": "person"
+              },
+              {
+                "const": "company"
+              }
+            ],
+            "description": "نوع إصدار إيصال النقدية (الهدف). في حالة فقدانه، يتم استخدام الشخص.",
+            "x-typia-required": false,
+            "x-typia-optional": true
+          },
+          "buyer_name": {
+            "description": "اسم المشتري. يرجى إدخال أكبر قدر ممكن من المعلومات للتتبع اللاحق لإصدار إيصال الغرامة..",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_email": {
+            "description": "البريد الإلكتروني للمشتري.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_tel": {
+            "description": "رقم هاتف المشتري. لإصدار إيصال نقدي، يرجى إدخاله قدر الإمكان للمتابعة..",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "tax_free": {
+            "description": "مبلغ معفى من الضرائب.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          }
+        },
+        "required": [
+          "imp_uid",
+          "identifier"
+        ],
+        "description": "معلومات إدخال إيصال النقدية.",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportUser.IAccessor": {
+        "type": "object",
+        "properties": {
+          "imp_key": {
+            "description": "مفتاح واجهة برمجة التطبيقات.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "imp_secret": {
+            "description": "المفتاح السري.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "imp_key",
+          "imp_secret"
+        ],
+        "description": "واجهة برمجة التطبيقات (API) والمفتاح السري المقدم من خلال الاستيراد.",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportResponse_lt_IIamportUser_gt_": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "رمز الخطأ. القيمة 0 تعني عدم وجود خطأ..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "message": {
+            "description": "رسالة النجاح أو الخطأ.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "response": {
+            "$ref": "#/components/schemas/IIamportUser"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "response"
+        ],
+        "description": "أقوم باستيراد بيانات الاستجابة الفريدة.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportUser": {
+        "type": "object",
+        "properties": {
+          "now": {
+            "description": "وقت إصدار الرمز المميز.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "expired_at": {
+            "description": "وقت انتهاء الرمز المميز. وقت Linux هو المعيار، وإذا كنت تريد استخدامه في JS، فيجب عليك تحويله على النحو التالي. ```نوع النص الجديد Date(user.expired_at * 1_000); ```",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "access_token": {
+            "description": "رمز مصادقة المستخدم.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "now",
+          "expired_at",
+          "access_token"
+        ],
+        "description": "استيراد معلومات مصادقة المستخدم. يقوم Iimport بإصدار واجهة برمجة التطبيقات (API) ومعلومات المفتاح السري، {@link IIamportUser.IAccessor }، للعملاء. ومع ذلك، لا يمكن استخدام هذا مباشرة لمصادقة مستخدم Iimport، ويجب إصدار رمز مميز لمصادقة المستخدم بناءً على واجهة برمجة التطبيقات المقابلة والمفتاح السري، ولكن رمز مصادقة المستخدم هذا له حتمًا حد زمني خاص به. `IIamportUser` هي واجهة بنية بيانات تمثل رمز مصادقة المستخدم هذا ووقت انتهاء صلاحيته. بالإضافة إلى ذلك، نظرًا لطبيعة رمز مصادقة المستخدم الخاص بـ I&#39;mport، والذي له وقت انتهاء صلاحية، فمن الصعب جدًا إدارته بحيث لا يتجاوز وقت انتهاء صلاحيته. وبناءً على ذلك، يوفر `iamport-server-api` فئة {@link IamportConnector }، والتي تقوم تلقائيًا بتجديد رمز مصادقة مستخدم Iamport عند انتهاء صلاحيته..",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportVBankPayment.IStore": {
+        "type": "object",
+        "properties": {
+          "merchant_uid": {
+            "description": "مفتاح معرف الطلب. ولا يتم إصداره وإدارته بواسطة خادم الاستيراد، ولكن بواسطة الخدمة التي تستخدمه..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "description": "المبلغ الإجمالي.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vbank_code": {
+            "description": "رمز البنك للحساب الافتراضي.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "vbank_due": {
+            "description": "الموعد النهائي لإيداع الحساب الافتراضي، بتوقيت يونكس.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vbank_holder": {
+            "description": "المودع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "name": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_name": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_email": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_tel": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_addr": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_postcode": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "pg": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "notice_url": {
+            "description": "عنوان URL لتلقي معلومات إيداع الحساب الافتراضي. استخدم عنوان URL الافتراضي لخطاف الويب إذا كان مفقودًا.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "custom_data": {
+            "description": "البيانات المخصصة، متاحة بحرية.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "pg_api_key": {
+            "description": "[Inicis فقط] تم تأكيد قيمة واجهة برمجة التطبيقات (API) في وحدة تحكم التاجر.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "merchant_uid",
+          "amount",
+          "vbank_code",
+          "vbank_due",
+          "vbank_holder"
+        ],
+        "description": "معلومات إدخال الدفع للحساب الافتراضي. يمكن إنشاء الحسابات الافتراضية بشكل عشوائي. ومع ذلك، لا يتوفر سوى بعض شركات PG أو &quot;خادم استيراد مزيف&quot;. - بنك التسوية - المدفوعات اللطيفة - KG Inicis",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportResponse_lt_IIamportVBankPayment_gt_": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "رمز الخطأ. القيمة 0 تعني عدم وجود خطأ..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "message": {
+            "description": "رسالة النجاح أو الخطأ.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "response": {
+            "$ref": "#/components/schemas/IIamportVBankPayment"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "response"
+        ],
+        "description": "أقوم باستيراد بيانات الاستجابة الفريدة.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportVBankPayment.IUpdate": {
+        "type": "object",
+        "properties": {
+          "imp_uid": {
+            "description": "{@link IIamportPayment.imp_uid } في سجل الدفع المستهدف.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "description": "مبلغ الدفع للتحرير.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "vbank_due": {
+            "description": "الموعد النهائي لإيداع الحساب الافتراضي للتعديل.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          }
+        },
+        "required": [
+          "imp_uid"
+        ],
+        "description": "تحرير معلومات الإدخال لمدفوعات الحساب الافتراضي. يمكنك تعديل الموعد النهائي للإيداع أو مبلغ الإيداع الخاص بالحساب الافتراضي الذي لم يتم إيداعه بعد. ومع ذلك، يتوفر فقط Settlebank أو &quot;خادم استيراد مزيف&quot;..",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportResponse_lt_IIamportSubscription_gt_": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "رمز الخطأ. القيمة 0 تعني عدم وجود خطأ..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "message": {
+            "description": "رسالة النجاح أو الخطأ.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "response": {
+            "$ref": "#/components/schemas/IIamportSubscription"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "response"
+        ],
+        "description": "أقوم باستيراد بيانات الاستجابة الفريدة.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportSubscription": {
+        "type": "object",
+        "properties": {
+          "pg_provider": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "pg_id": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "card_name": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "card_code": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "card_number": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "card_type": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "customer_name": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_tel": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_email": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_addr": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "customer_postcode": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "inserted": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "updated": {
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "customer_uid": {
+            "description": "مفتاح معرف العميل. مفتاح معرف تتم إدارته بواسطة الخدمة التي تستخدمه، وليس عن طريق الاستيراد. ومع ذلك، يجب استخدامه فعليًا كمفتاح معرف البطاقة بدلاً من استخدامه كعميل..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "pg_provider",
+          "pg_id",
+          "card_name",
+          "card_code",
+          "card_number",
+          "card_type",
+          "customer_name",
+          "customer_tel",
+          "customer_email",
+          "customer_addr",
+          "customer_postcode",
+          "inserted",
+          "updated",
+          "customer_uid"
+        ],
+        "description": "معلومات بطاقة الدفع البسيطة.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportSubscription.IStore": {
+        "type": "object",
+        "properties": {
+          "card_number": {
+            "description": "رقم البطاقة. التنسيق: XXXX-XXXX-XXXX-XXXX",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "\\d{4}-\\d{4}-\\d{4}-\\d{4}"
+          },
+          "expiry": {
+            "description": "تاريخ انتهاء البطاقة. التنسيق: YYYY-MM",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^([0-9]{4})-(0[1-9]|1[012])$"
+          },
+          "birth": {
+            "description": "تاريخ الميلاد YYMMDD أو رقم التسجيل التجاري المكون من 10 أرقام.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^(([0-9]{2})(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01]))|(\\d{10})$"
+          },
+          "pwd_2digit": {
+            "description": "أول رقمين من كلمة مرور البطاقة.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "pattern": "\\d{2}"
+          },
+          "cvc": {
+            "description": "رقم توثيق البطاقة (3 أرقام خلف البطاقة).",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "pattern": "\\d{2}"
+          },
+          "customer_name": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "customer_tel": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "customer_email": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "format": "email"
+          },
+          "customr_addr": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "customer_postcode": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "customer_uid": {
+            "description": "مفتاح معرف العميل. مفتاح معرف تتم إدارته بواسطة الخدمة التي تستخدمه، وليس عن طريق الاستيراد. ومع ذلك، يجب استخدامه فعليًا كمفتاح معرف البطاقة بدلاً من استخدامه كعميل..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "card_number",
+          "expiry",
+          "birth",
+          "customer_uid"
+        ],
+        "description": "معلومات إدخال بطاقة الدفع البسيطة.",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportSubscription.IOnetime": {
+        "type": "object",
+        "properties": {
+          "customer_uid": {
+            "description": "مفتاح معرف العميل. مفتاح معرف تتم إدارته بواسطة الخدمة التي تستخدمه، وليس عن طريق الاستيراد. ومع ذلك، يجب استخدامه فعليًا كمفتاح معرف البطاقة بدلاً من استخدامه كعميل. إذا تم حذف ذلك، فسيتم إجراء دفعة بسيطة فقط، ولا يتم تسجيل معلومات البطاقة للدفع البسيط..",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "card_number": {
+            "description": "رقم البطاقة. التنسيق: XXXX-XXXX-XXXX-XXXX",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "\\d{4}-\\d{4}-\\d{4}-\\d{4}"
+          },
+          "expiry": {
+            "description": "تاريخ انتهاء البطاقة. التنسيق: YYYY-MM",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^([0-9]{4})-(0[1-9]|1[012])$"
+          },
+          "birth": {
+            "description": "تاريخ الميلاد YYMMDD أو رقم التسجيل التجاري المكون من 10 أرقام.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^(([0-9]{2})(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01]))|(\\d{10})$"
+          },
+          "pwd_2digit": {
+            "description": "أول رقمين من كلمة مرور البطاقة.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "pattern": "\\d{2}"
+          },
+          "cvc": {
+            "description": "رقم توثيق البطاقة (3 أرقام خلف البطاقة).",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "pattern": "\\d{2}"
+          },
+          "customer_name": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "customer_tel": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "customer_email": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "format": "email"
+          },
+          "customr_addr": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "customer_postcode": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "merchant_uid": {
+            "description": "مفتاح معرف الطلب. مفتاح المعرف تتم إدارته بواسطة الخدمة التي تستخدمه، وليس بواسطة I&#39;mport..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "description": "إجمالي الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "name": {
+            "description": "اسم الطلب.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "currency": {
+            "oneOf": [
+              {
+                "const": "KRW"
+              },
+              {
+                "const": "USD"
+              },
+              {
+                "const": "EUR"
+              },
+              {
+                "const": "JPY"
+              }
+            ],
+            "description": "معلومات المكالمة.",
+            "x-typia-required": false,
+            "x-typia-optional": true
+          },
+          "tax_free": {
+            "description": "قيمة العرض المعفاة من الضرائب. القيمة الافتراضية هي 0، لذا تتم معالجة ضريبة القيمة المضافة تلقائيًا على أنها 1/11 من المبلغ..",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "card_quota": {
+            "description": "عدد أشهر القسط. دفع المبلغ المقطوع هو 0.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "buyer_name": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_email": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "format": "email"
+          },
+          "buyer_tel": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_addr": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_postcode": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "interest_free_by_merchant": {
+            "description": "عند معالجة أقساط بطاقة الائتمان، تتراكم فائدة القسط (باستثناء العروض الترويجية بدون فوائد لشركة بطاقات الائتمان). عند إبرام عقد مع شركة PG ليقوم المتجر التابع بدفع فائدة القسط المفروضة نيابة عن العميل (في الوقت الحالي، يتم دعم Nice Payments فقط)",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "boolean"
+          },
+          "use_card_point": {
+            "description": "عند طلب الموافقة، ضع علامة على ما إذا كان سيتم خصم نقاط شركة البطاقة وسيتم الموافقة على الدفع. مطلوب التشاور المسبق مع مندوب مبيعات شركة PG في وقت توقيع العقد (حاليًا، يتم دعم Nice Payments فقط)",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "boolean"
+          },
+          "custom_data": {
+            "description": "يمكن إدخال المعلومات التعسفية.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "notice_url": {
+            "description": "سيتم إخطار الإشعار وعنوان URL للخطاف الإلكتروني عند الدفع الناجح.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "format": "url"
+          }
+        },
+        "required": [
+          "card_number",
+          "expiry",
+          "birth",
+          "merchant_uid",
+          "amount",
+          "name"
+        ],
+        "description": "معلومات إدخال طلب الدفع.",
+        "x-typia-jsDocTags": []
+      },
+      "IIamportResponse_lt_IIamportCardPayment_gt_": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "رمز الخطأ. القيمة 0 تعني عدم وجود خطأ..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "message": {
+            "description": "رسالة النجاح أو الخطأ.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "response": {
+            "$ref": "#/components/schemas/IIamportCardPayment"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "response"
+        ],
+        "description": "أقوم باستيراد بيانات الاستجابة الفريدة.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "IIamportSubscription.IAgain": {
+        "type": "object",
+        "properties": {
+          "merchant_uid": {
+            "description": "مفتاح معرف الطلب. مفتاح المعرف تتم إدارته بواسطة الخدمة التي تستخدمه، وليس بواسطة I&#39;mport..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "description": "إجمالي الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "name": {
+            "description": "اسم الطلب.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "currency": {
+            "oneOf": [
+              {
+                "const": "KRW"
+              },
+              {
+                "const": "USD"
+              },
+              {
+                "const": "EUR"
+              },
+              {
+                "const": "JPY"
+              }
+            ],
+            "description": "معلومات المكالمة.",
+            "x-typia-required": false,
+            "x-typia-optional": true
+          },
+          "tax_free": {
+            "description": "قيمة العرض المعفاة من الضرائب. القيمة الافتراضية هي 0، لذا تتم معالجة ضريبة القيمة المضافة تلقائيًا على أنها 1/11 من المبلغ..",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "card_quota": {
+            "description": "عدد أشهر القسط. دفع المبلغ المقطوع هو 0.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "buyer_name": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_email": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "format": "email"
+          },
+          "buyer_tel": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_addr": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "buyer_postcode": {
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "interest_free_by_merchant": {
+            "description": "عند معالجة أقساط بطاقة الائتمان، تتراكم فائدة القسط (باستثناء العروض الترويجية بدون فوائد لشركة بطاقات الائتمان). عند إبرام عقد مع شركة PG ليقوم المتجر التابع بدفع فائدة القسط المفروضة نيابة عن العميل (في الوقت الحالي، يتم دعم Nice Payments فقط)",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "boolean"
+          },
+          "use_card_point": {
+            "description": "عند طلب الموافقة، ضع علامة على ما إذا كان سيتم خصم نقاط شركة البطاقة وسيتم الموافقة على الدفع. مطلوب التشاور المسبق مع مندوب مبيعات شركة PG في وقت توقيع العقد (حاليًا، يتم دعم Nice Payments فقط)",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "boolean"
+          },
+          "custom_data": {
+            "description": "يمكن إدخال المعلومات التعسفية.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "notice_url": {
+            "description": "سيتم إخطار الإشعار وعنوان URL للخطاف الإلكتروني عند الدفع الناجح.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "format": "url"
+          },
+          "customer_uid": {
+            "description": "مفتاح معرف العميل. مفتاح معرف تتم إدارته بواسطة الخدمة التي تستخدمه، وليس عن طريق الاستيراد. ومع ذلك، يجب استخدامه فعليًا كمفتاح معرف البطاقة بدلاً من استخدامه كعميل..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "merchant_uid",
+          "amount",
+          "name",
+          "customer_uid"
+        ],
+        "description": "معلومات لتقديم طلب الدفع عن طريق بطاقة الدفع البسيطة.",
+        "x-typia-jsDocTags": []
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "x-samchon-emended": true
+}
