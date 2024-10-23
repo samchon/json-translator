@@ -57,33 +57,34 @@ export namespace JsonTranslateComposer {
     explore: Omit<JsonTranslator.IExplore, "value">;
   }): void => {
     if (typeof next.value === "string") {
-      if (next.value.trim().length === 0) return;
+      const text: string = next.value.trim().endsWith(".")
+        ? next.value.trim().slice(0, -1)
+        : next.value.trim();
+      const endDot: boolean = next.value.trim().endsWith(".");
+      const final = (str: string) => `${str}${endDot ? "." : ""}`;
+      if (text.length === 0) return;
       else if (
         next.filter &&
         !next.filter({
           ...next.explore,
-          value: next.value,
+          value: final(text),
         })
       )
         return;
-      else if (
-        next.dictionary &&
-        typeof next.dictionary[next.value] === "string"
-      ) {
-        next.set(next.dictionary[next.value]);
+      else if (next.dictionary && typeof next.dictionary[text] === "string") {
+        next.set(final(next.dictionary[text]));
         return;
       }
-      const found: Setter<string> | undefined = next.container.setters.get(
-        next.value,
-      );
+      const found: Setter<string> | undefined =
+        next.container.setters.get(text);
       if (found !== undefined) {
-        next.container.setters.set(next.value, (str) => {
-          next.set(str);
+        next.container.setters.set(text, (str) => {
+          next.set(final(str));
           found(str);
         });
       } else {
-        next.container.raw.push(next.value);
-        next.container.setters.set(next.value, next.set);
+        next.container.raw.push(text);
+        next.container.setters.set(text, (str) => next.set(final(str)));
       }
     } else if (Array.isArray(next.value))
       next.value.forEach((elem, i) =>

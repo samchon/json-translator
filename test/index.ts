@@ -21,6 +21,7 @@ const main = async (): Promise<void> => {
   dotenvExpand.expand(dotenv.config());
   const translator: JsonTranslator = new JsonTranslator({
     credentials: JSON.parse(process.env.CREDENTIALS ?? "{}"),
+    autoRetry: true,
   });
 
   // DO TEST
