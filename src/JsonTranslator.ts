@@ -63,6 +63,7 @@ export class JsonTranslator {
           {
             from,
             to: props.target,
+            format: "html",
           },
         );
         const expected: number = queue
@@ -113,7 +114,8 @@ export class JsonTranslator {
 
     const transformed: string[] = translated
       .map((s) => s.split(SEPARATOR))
-      .flat();
+      .flat()
+      .map((s) => s.trim());
     collection.setters.forEach((setter, i) => {
       if (transformed[i]) setter(transformed[i]);
     });
