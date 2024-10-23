@@ -845,7 +845,7 @@
     "/shoppings/admins/orders": {
       "patch": {
         "summary": "모든 주문을 나열하세요",
-        "description": "모든 주문을 나열합니다. 페이지 번호가 있는 모든 {@link IShoppingOrder 주문}을 나열합니다. 원하는 경우 요청 본문에서 {@link IShoppingOrder.IRequest.search 검색 조건}을 구성하여 결과를 제한할 수 있습니다. 또한 {@link IShoppingOrder.IRequest.sort 정렬 조건}을 구성하여 레코드의 시퀀스 순서를 사용자 정의할 수 있습니다. 참고로, {@link IShoppingCustomer 고객}인 경우 자신의 주문을 나열할 수 있으며 주문이 {@link IShoppingOrderPublish.paid_at paid}되었는지 여부는 중요하지 않습니다. 그렇지 않은 경우 {@link IShoppingSeller 판매자} 또는 {@link IShoppingAdministrator 관리자}인 경우 유료 주문만 나열할 수 있습니다. 또한 판매자의 경우 관련 {@link IShoppingOrder.goods 상품}만 주문에 나열됩니다..",
+        "description": "모든 주문을 나열합니다. 페이지 번호가 있는 모든 {@link IShoppingOrder 주문}을 나열합니다. 원하는 경우 요청 본문에서 {@link IShoppingOrder.IRequest.search 검색 조건}을 구성하여 결과를 제한할 수 있습니다. 또한 {@link IShoppingOrder.IRequest.sort 정렬 조건}을 구성하여 레코드의 시퀀스 순서를 사용자 정의할 수 있습니다. 참고로, {@link IShoppingCustomer 고객}인 경우 직접 주문을 나열할 수 있으며 주문이 {@link IShoppingOrderPublish.paid_at paid}되었는지 여부는 중요하지 않습니다. 그렇지 않은 경우 {@link IShoppingSeller 판매자} 또는 {@link IShoppingAdministrator 관리자}인 경우 유료 주문만 나열할 수 있습니다. 또한 판매자의 경우 관련 {@link IShoppingOrder.goods 상품}만 주문에 나열됩니다..",
         "tags": [
           "Order"
         ],
@@ -3774,7 +3774,7 @@
         ]
       },
       "put": {
-        "summary": "상품(수량) 업데이트",
+        "summary": "상품(볼륨) 업데이트",
         "description": "상품(볼륨)을 업데이트합니다. 쇼핑 카트에서 {@link IShoppingCartCommodity 상품}의 볼륨을 업데이트합니다. *cartId*가 속한 카트의 ID와 다르면 404 찾을 수 없음 예외가 발생합니다. 그렇지 않으면 *cartId*에 `null` 값이 있는 경우 이러한 종속성 검사는 건너뛰지만 소유권은 여전히 검증됩니다. 또한 대상 {@link IShoppingSale 판매}가 중단되거나 {@link IShoppingSaleUnitStockInventory 재고 없음}이 갑자기 발생하면 410 gone 오류가 발생합니다..",
         "tags": [
           "Order"
@@ -4032,7 +4032,7 @@
       },
       "patch": {
         "summary": "모든 주문을 나열하세요",
-        "description": "모든 주문을 나열합니다. 페이지 번호가 있는 모든 {@link IShoppingOrder 주문}을 나열합니다. 원하는 경우 요청 본문에서 {@link IShoppingOrder.IRequest.search 검색 조건}을 구성하여 결과를 제한할 수 있습니다. 또한 {@link IShoppingOrder.IRequest.sort 정렬 조건}을 구성하여 레코드의 시퀀스 순서를 사용자 정의할 수 있습니다. 참고로, {@link IShoppingCustomer 고객}인 경우 자신의 주문을 나열할 수 있으며 주문이 {@link IShoppingOrderPublish.paid_at paid}되었는지 여부는 중요하지 않습니다. 그렇지 않은 경우 {@link IShoppingSeller 판매자} 또는 {@link IShoppingAdministrator 관리자}인 경우 유료 주문만 나열할 수 있습니다. 또한 판매자의 경우 관련 {@link IShoppingOrder.goods 상품}만 주문에 나열됩니다..",
+        "description": "모든 주문을 나열합니다. 페이지 번호가 있는 모든 {@link IShoppingOrder 주문}을 나열합니다. 원하는 경우 요청 본문에서 {@link IShoppingOrder.IRequest.search 검색 조건}을 구성하여 결과를 제한할 수 있습니다. 또한 {@link IShoppingOrder.IRequest.sort 정렬 조건}을 구성하여 레코드의 시퀀스 순서를 사용자 정의할 수 있습니다. 참고로, {@link IShoppingCustomer 고객}인 경우 직접 주문을 나열할 수 있으며 주문이 {@link IShoppingOrderPublish.paid_at paid}되었는지 여부는 중요하지 않습니다. 그렇지 않은 경우 {@link IShoppingSeller 판매자} 또는 {@link IShoppingAdministrator 관리자}인 경우 유료 주문만 나열할 수 있습니다. 또한 판매자의 경우 관련 {@link IShoppingOrder.goods 상품}만 주문에 나열됩니다..",
         "tags": [
           "Order"
         ],
@@ -6642,7 +6642,7 @@
     "/shoppings/sellers/orders": {
       "patch": {
         "summary": "모든 주문을 나열하세요",
-        "description": "모든 주문을 나열합니다. 페이지 번호가 있는 모든 {@link IShoppingOrder 주문}을 나열합니다. 원하는 경우 요청 본문에서 {@link IShoppingOrder.IRequest.search 검색 조건}을 구성하여 결과를 제한할 수 있습니다. 또한 {@link IShoppingOrder.IRequest.sort 정렬 조건}을 구성하여 레코드의 시퀀스 순서를 사용자 정의할 수 있습니다. 참고로, {@link IShoppingCustomer 고객}인 경우 자신의 주문을 나열할 수 있으며 주문이 {@link IShoppingOrderPublish.paid_at paid}되었는지 여부는 중요하지 않습니다. 그렇지 않은 경우 {@link IShoppingSeller 판매자} 또는 {@link IShoppingAdministrator 관리자}인 경우 유료 주문만 나열할 수 있습니다. 또한 판매자의 경우 관련 {@link IShoppingOrder.goods 상품}만 주문에 나열됩니다..",
+        "description": "모든 주문을 나열합니다. 페이지 번호가 있는 모든 {@link IShoppingOrder 주문}을 나열합니다. 원하는 경우 요청 본문에서 {@link IShoppingOrder.IRequest.search 검색 조건}을 구성하여 결과를 제한할 수 있습니다. 또한 {@link IShoppingOrder.IRequest.sort 정렬 조건}을 구성하여 레코드의 시퀀스 순서를 사용자 정의할 수 있습니다. 참고로, {@link IShoppingCustomer 고객}인 경우 직접 주문을 나열할 수 있으며 주문이 {@link IShoppingOrderPublish.paid_at paid}되었는지 여부는 중요하지 않습니다. 그렇지 않은 경우 {@link IShoppingSeller 판매자} 또는 {@link IShoppingAdministrator 관리자}인 경우 유료 주문만 나열할 수 있습니다. 또한 판매자의 경우 관련 {@link IShoppingOrder.goods 상품}만 주문에 나열됩니다..",
         "tags": [
           "Order"
         ],
@@ -13834,7 +13834,7 @@
           "option_id": {
             "type": "string",
             "format": "uuid",
-            "description": "타겟 옵션의 {@link IShoppingSaleUnitOption.id}"
+            "description": "대상 옵션의 {@link IShoppingSaleUnitOption.id}"
           },
           "candidate_id": {
             "type": "string",
@@ -14214,8 +14214,8 @@
                 "$ref": "#/components/schemas/IShoppingSaleInquiryAnswer.ISummary"
               }
             ],
-            "title": "판매자의 문의에 대한 공식 답변",
-            "description": "판매자의 문의에 대한 공식 답변."
+            "title": "판매자 문의에 대한 공식 답변",
+            "description": "판매자 문의에 대한 공식 답변."
           },
           "read_by_seller": {
             "type": "boolean",
@@ -14439,8 +14439,8 @@
                 "$ref": "#/components/schemas/IShoppingSaleInquiryAnswer.IAbridge"
               }
             ],
-            "title": "판매자의 문의에 대한 공식 답변",
-            "description": "판매자의 문의에 대한 공식 답변."
+            "title": "판매자 문의에 대한 공식 답변",
+            "description": "판매자 문의에 대한 공식 답변."
           },
           "read_by_seller": {
             "type": "boolean",
@@ -14610,8 +14610,8 @@
                 "$ref": "#/components/schemas/IShoppingSaleInquiryAnswer"
               }
             ],
-            "title": "판매자의 문의에 대한 공식 답변",
-            "description": "판매자의 문의에 대한 공식 답변."
+            "title": "판매자 문의에 대한 공식 답변",
+            "description": "판매자 문의에 대한 공식 답변."
           },
           "read_by_seller": {
             "type": "boolean",
@@ -14793,8 +14793,8 @@
                 "$ref": "#/components/schemas/IShoppingSaleInquiryAnswer.ISummary"
               }
             ],
-            "title": "판매자의 문의에 대한 공식 답변",
-            "description": "판매자의 문의에 대한 공식 답변."
+            "title": "판매자 문의에 대한 공식 답변",
+            "description": "판매자 문의에 대한 공식 답변."
           },
           "read_by_seller": {
             "type": "boolean",
@@ -14998,8 +14998,8 @@
                 "$ref": "#/components/schemas/IShoppingSaleInquiryAnswer.IAbridge"
               }
             ],
-            "title": "판매자의 문의에 대한 공식 답변",
-            "description": "판매자의 문의에 대한 공식 답변."
+            "title": "판매자 문의에 대한 공식 답변",
+            "description": "판매자 문의에 대한 공식 답변."
           },
           "read_by_seller": {
             "type": "boolean",
@@ -15095,8 +15095,8 @@
                 "$ref": "#/components/schemas/IShoppingSaleInquiryAnswer"
               }
             ],
-            "title": "판매자의 문의에 대한 공식 답변",
-            "description": "판매자의 문의에 대한 공식 답변."
+            "title": "판매자 문의에 대한 공식 답변",
+            "description": "판매자 문의에 대한 공식 답변."
           },
           "read_by_seller": {
             "type": "boolean",
@@ -17037,8 +17037,8 @@
           "option_id": {
             "type": "string",
             "format": "uuid",
-            "title": "타겟 옵션의 {@link IShoppingSaleUnitOption.id}",
-            "description": "타겟 옵션의 {@link IShoppingSaleUnitOption.id}."
+            "title": "대상 옵션의 {@link IShoppingSaleUnitOption.id}",
+            "description": "대상 옵션의 {@link IShoppingSaleUnitOption.id}."
           },
           "candidate_id": {
             "oneOf": [
@@ -18294,7 +18294,7 @@
               "type": "string",
               "format": "uuid"
             },
-            "title": "타겟 카테고리 목록 {@link IShoppingChannelCategory.id}",
+            "title": "대상 카테고리 목록 {@link IShoppingChannelCategory.id}",
             "description": "대상 카테고리의 {@link IShoppingChannelCategory.id} 목록입니다. 비어 있으면 채널의 모든 카테고리가 판매를 나열하고 있음을 의미합니다.."
           }
         },

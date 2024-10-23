@@ -3732,7 +3732,7 @@
           }
         },
         "summary": "إضافة شرائح صور من النوع &quot;العمودي&quot; إلى عرض تقديمي في Google Slides",
-        "description": "إضافة شرائح من النوع &quot;العمودي&quot; إلى عرض تقديمي على Google Slides. النوع &quot;العمودي&quot; يشبه الشريحة من النوع المربع، مع صورة على اليسار ونص على اليمين. في هذه الحالة، على عكس النوع المربع، يتم ملء الصورة حتى ارتفاع العرض التقديمي مع الحفاظ على النسبة. يسمح هذا أيضًا بنص كافٍ. قد تحتاج إلى صورة عندما يطلب منك المستخدم إضافة شريحة. في هذه الحالة، بدلاً من إدراج أي صورة، يجب عليك أولاً تأمين الصورة باستخدام موصل بحث أو موصل إنشاء صورة. من الآمن أن تطلب من المستخدم الموافقة على هذه العملية.",
+        "description": "إضافة شرائح من النوع &quot;العمودي&quot; إلى عرض تقديمي على Google Slides. النوع &quot;العمودي&quot; يشبه الشريحة من النوع المربع، مع صورة على اليسار ونص على اليمين. في هذه الحالة، على عكس النوع المربع، يتم ملء الصورة حتى ارتفاع العرض التقديمي مع الحفاظ على النسبة. وهذا يسمح أيضًا بإضافة نص كافٍ. قد تحتاج إلى صورة عندما يطلب منك المستخدم إضافة شريحة. في هذه الحالة، بدلاً من إدراج أي صورة، يجب عليك أولاً تأمين الصورة باستخدام موصل بحث أو موصل إنشاء صورة. من الآمن أن تطلب من المستخدم الموافقة على هذه العملية.",
         "tags": [
           "Google Slide"
         ]
@@ -3807,7 +3807,7 @@
                 }
               }
             },
-            "description": "معلومات العرض التقديمي المولدة DTO"
+            "description": "معلومات العرض التقديمي التي تم إنشاؤها بواسطة DTO"
           }
         },
         "summary": "إنشاء عرض تقديمي على Google Slides",
@@ -5593,7 +5593,7 @@
           }
         },
         "summary": "استرجاع قائمة إعلانات الحملة",
-        "description": "احصل على قائمة الإعلانات من حساب عميل Google مرر `customerId` إلى المستخدم وابحث عن الإعلانات (=ad) في حساب إعلان العميل. إذا لم يتم تمرير `customerId`، فسيتم تحديده تلقائيًا فقط إذا كان هناك حساب إعلان واحد فقط يمكن الوصول إليه بواسطة `Wrtn` من المستخدم. الإعلان هو عقدة في نهاية بنية شجرة تتكون من الحملات ومجموعات الإعلانات والإعلانات، وهو قسم مسؤول عن المواد، وهو أيضًا وحدة مكشوفة للمستخدمين النهائيين. إذا تم تمرير اسم المورد لمجموعة إعلانات (=adGroup) كحجة، فسيتم البحث عن الإعلانات التي تنتمي إلى مجموعة الإعلانات هذه فقط. الغرض من هذا الموصل هو تحديد ما إذا كان إعلان المستخدم قيد التشغيل حاليًا أم لا. في حالة مديري `Wrtn`، لا يتم تغيير الحملات ومجموعات الإعلانات إلى حالة `PAUSED` ما لم يغير المستخدم حالة الحملة ومجموعة الإعلانات مباشرةً في لوحة معلومات إعلانات Google. لذلك، بشكل عام، إذا كانت حالة الإعلان هي ENABLED، فإن الإعلان قيد التشغيل، وإذا كانت ENABLED، فإن الإعلان متوقف. مرة أخرى، لا يغير موصل Wrtn حالة الحملة أو مجموعة الإعلانات. يمكن أيضًا استخدام هذه الوظيفة للتحقق مما إذا كان يتم تنفيذ الإعلان بشكل صحيح بالإضافة إلى عرض الإعلان. يحتوي كل إعلان على سجل تقييم لمراجعة الإعلان والسياسة، والذي يوجد كخاصية تسمى PolicySummary. تحتوي هذه الخاصية على ما إذا كان الإعلان قد تمت الموافقة عليه، وتعني حالة APPROVED أن Google قد وافقت على المراجعة وقررت أنه مؤهل. يمكنك تغيير حالة الإعلان في PATCH connector/google-ads/campaigns/ads/status. قبل استدعاء الوظيفة، يجب أن تطلب من المستخدم معرف العميل الخاص به، لذا يجب أن تقترح موصلًا يمكنه التحقق من معرف العميل الخاص به.",
+        "description": "احصل على قائمة الإعلانات من حساب عميل Google مرر `customerId` إلى المستخدم وابحث عن الإعلانات (=ad) في حساب إعلان العميل. إذا لم يتم تمرير `customerId`، فسيتم تحديده تلقائيًا فقط إذا كان هناك حساب إعلان واحد فقط يمكن الوصول إليه بواسطة `Wrtn` من المستخدم. الإعلان هو عقدة في نهاية بنية شجرة تتكون من الحملات ومجموعات الإعلانات والإعلانات، وهو قسم مسؤول عن المواد، وهو أيضًا وحدة مكشوفة للمستخدمين النهائيين. إذا تم تمرير اسم المورد لمجموعة إعلانات (=adGroup) كحجة، فسيتم البحث عن الإعلانات التي تنتمي إلى مجموعة الإعلانات هذه فقط. الغرض من هذا الموصل هو تحديد ما إذا كان إعلان المستخدم قيد التشغيل حاليًا أم لا. في حالة مديري `Wrtn`، لا يتم تغيير الحملات ومجموعات الإعلانات إلى حالة `PAUSED` ما لم يغير المستخدم حالة الحملة ومجموعة الإعلانات مباشرةً في لوحة معلومات إعلانات Google. لذلك، بشكل عام، إذا كانت حالة الإعلان هي `ENABLED`، فإن الإعلان قيد التشغيل، وإذا كانت `PAUSED`، فإن الإعلان متوقف. مرة أخرى، لا يغير موصل `Wrtn` حالة الحملة أو مجموعة الإعلانات. يمكن أيضًا استخدام هذه الوظيفة للتحقق مما إذا كان يتم تنفيذ الإعلان بشكل صحيح بالإضافة إلى عرض الإعلان. يحتوي كل إعلان على سجل تقييم لمراجعة الإعلان والسياسة، والذي يوجد كخاصية تسمى `PolicySummary`. تحتوي هذه الخاصية على ما إذا كان الإعلان قد تمت الموافقة عليه، وتعني حالة `APPROVED` أن Google قد وافقت على المراجعة وقررت أنه مؤهل. يمكنك تغيير حالة الإعلان في `PATCH connector/google-ads/campaigns/ads/status`. قبل استدعاء الوظيفة، يجب أن تطلب من المستخدم `customerId` الخاص به، لذلك يجب أن تقترح موصلًا يمكنه التحقق من `customerId` الخاص به.",
         "tags": [
           "Google Ads"
         ]
@@ -5842,7 +5842,7 @@
                 }
               }
             },
-            "description": "معلومات الإعلان المُولدة"
+            "description": "معلومات الإعلان المُولَّد"
           }
         },
         "summary": "إنشاء إعلان",
@@ -6417,7 +6417,7 @@
           }
         },
         "summary": "إضافة كتلة بتنسيق Markdown",
-        "description": "إضافة كتلة بتنسيق Markdown يمكنك إضافة كتل إلى الصفحة على الفور باستخدام قواعد Markdown فقط. يمكنك إنشاء صفحات بشكل أكثر فعالية من الموصلات الأخرى، لذا يمكنك إعطاء الأولوية لذلك. إذا كانت هناك كتل فريدة من الملاحظة لا يمكن إنشاؤها باستخدام قواعد Markdown، فيجب ربطها بموصلات إنشاء كتل أخرى. نظرًا لأن المستخدمين قد لا يعرفون قواعد Markdown، فمن الأفضل استخدام قواعد Markdown بدلاً من توجيههم. يدعم Markdown النص والعناوين 1 و2 و3 وقواعد مختلفة مثل الجدول أو القائمة السوداء وقائمة الأرقام وإرفاق الصور والخط العريض والمائل وما إلى ذلك.",
+        "description": "إضافة كتلة بتنسيق Markdown يمكنك إضافة كتل إلى الصفحة على الفور باستخدام قواعد Markdown فقط. يمكنك إنشاء صفحات بشكل أكثر فعالية من الموصلات الأخرى، لذا يمكنك إعطاء الأولوية لذلك. إذا كانت هناك كتل فريدة من الملاحظة لا يمكن إنشاؤها باستخدام قواعد Markdown، فيجب ربطها بموصلات إنشاء كتل أخرى. نظرًا لأن المستخدمين قد لا يعرفون قواعد Markdown، فمن الأفضل استخدام قواعد Markdown بدلاً من توجيههم. يدعم Markdown النص والعناوين 1 و2 و3 وقواعد مختلفة مثل الجدول أو قائمة الثور وقائمة الأرقام وإرفاق الصور والخط العريض والمائل وما إلى ذلك.",
         "tags": [
           "Notion"
         ]
@@ -8434,7 +8434,7 @@
                 }
               }
             },
-            "description": "قائمة مقسمة إلى صفحات للمشاريع المرئية للمستخدم"
+            "description": "قائمة مقسمة إلى صفحات من المشاريع المرئية للمستخدم"
           }
         },
         "summary": "البحث عن مشاريع Jira.",
@@ -12847,8 +12847,8 @@
       "_namespace_swagger.MyPartialIMarketingCopyComponents": {
         "properties": {
           "title": {
-            "title": "عنوان نصك التسويقي",
-            "description": "عنوان نصك التسويقي.",
+            "title": "عنوان نص التسويق الخاص بك",
+            "description": "عنوان نص التسويق الخاص بك.",
             "type": "string"
           },
           "cta": {
@@ -12858,7 +12858,7 @@
           },
           "subtitle": {
             "title": "وصف النص التسويقي",
-            "description": "فيما يلي وصف لنص التسويق.",
+            "description": "فيما يلي وصف لنسخة التسويق.",
             "type": "string"
           }
         },
@@ -12999,8 +12999,8 @@
           "imageUrl": {
             "format": "iri",
             "contentMediaType": "image/*",
-            "title": "عنوان URL لصورة مسودة النسخة التسويقية المُولدة",
-            "description": "عنوان URL لصورة مسودة النسخة التسويقية المُولدة.",
+            "title": "عنوان URL لصورة مسودة النسخة التسويقية المولدة",
+            "description": "عنوان URL لصورة مسودة النسخة التسويقية المولدة.",
             "type": "string"
           }
         },
@@ -15441,8 +15441,8 @@
       "_namespace_swagger.IGoogleDrive.ICreateFileGoogleDriveOutput": {
         "properties": {
           "id": {
-            "title": "معرف ملف محرك الأقراص الذي تم إنشاؤه",
-            "description": "معرف ملف محرك الأقراص الذي تم إنشاؤه.",
+            "title": "معرف ملف محرك الأقراص المُنشأ",
+            "description": "معرف ملف محرك الأقراص المُنشأ.",
             "type": "string"
           }
         },
@@ -15665,7 +15665,7 @@
             "type": "object"
           },
           "fileExtension": {
-            "title": "امتداد الملف",
+            "title": "ملف الامتداد",
             "type": "string"
           },
           "ownerNames": {
@@ -17008,7 +17008,7 @@
             "type": "string"
           },
           "plugin_data": {
-            "title": "قائمة منفصلة بفواصل من معرفات المكونات الإضافية و/أو السلسلة &quot;مشتركة&quot;",
+            "title": "قائمة منفصلة بفواصل بين معرفات المكونات الإضافية و/أو السلسلة &quot;مشتركة&quot;",
             "description": "قائمة منفصلة بفواصل من معرفات المكونات الإضافية و/أو السلسلة &quot;shared&quot;. سيتم تضمين جميع البيانات الموجودة في المستند الذي تم إنشاؤه بواسطة هذا المكون الإضافي في خصائص `pluginData` و`sharedPluginData` للنتيجة.",
             "type": "string"
           },
@@ -17419,8 +17419,8 @@
             "type": "string"
           },
           "as_md": {
-            "title": "إذا تم تمكينه، فسيتم إرجاع التعليقات كمكافئات لها في وضع العلامات عند الاقتضاء",
-            "description": "إذا تم تمكينه، فسيتم إرجاع التعليقات كمكافئات لها في وضع العلامات عند الاقتضاء.",
+            "title": "إذا تم تمكينه، فسيتم إرجاع التعليقات كمكافئات لها عند الحاجة",
+            "description": "إذا تم تمكينه، فسيتم إرجاع التعليقات كمكافئات لها عند الحاجة.",
             "type": "boolean"
           }
         },
@@ -17626,8 +17626,8 @@
             "type": "string"
           },
           "as_md": {
-            "title": "إذا تم تمكينه، فسيتم إرجاع التعليقات كمكافئات لها في وضع العلامات عند الاقتضاء",
-            "description": "إذا تم تمكينه، فسيتم إرجاع التعليقات كمكافئات لها في وضع العلامات عند الاقتضاء.",
+            "title": "إذا تم تمكينه، فسيتم إرجاع التعليقات كمكافئات لها عند الحاجة",
+            "description": "إذا تم تمكينه، فسيتم إرجاع التعليقات كمكافئات لها عند الحاجة.",
             "type": "boolean"
           },
           "teamId": {
@@ -20367,7 +20367,7 @@
               },
               {
                 "title": "أرجواني",
-                "description": "أب47 قبل الميلاد",
+                "description": "أيه بي 47 قبل الميلاد",
                 "const": "MAGENTA"
               },
               {
@@ -20397,7 +20397,7 @@
           "title",
           "time"
         ],
-        "title": "حدث تم إنشاؤه في تقويم KakaoTalk",
+        "title": "تم إنشاء الحدث في تقويم KakaoTalk",
         "type": "object"
       },
       "_namespace_swagger.IKakaoTalk.Time": {
@@ -20728,7 +20728,7 @@
               },
               {
                 "title": "أرجواني",
-                "description": "أب47 قبل الميلاد",
+                "description": "أيه بي 47 قبل الميلاد",
                 "const": "MAGENTA"
               },
               {
@@ -20985,7 +20985,7 @@
               },
               {
                 "title": "أرجواني",
-                "description": "أب47 قبل الميلاد",
+                "description": "أيه بي 47 قبل الميلاد",
                 "const": "MAGENTA"
               },
               {
@@ -21110,7 +21110,7 @@
               },
               {
                 "title": "أرجواني",
-                "description": "أب47 قبل الميلاد",
+                "description": "أيه بي 47 قبل الميلاد",
                 "const": "MAGENTA"
               },
               {
@@ -21336,7 +21336,7 @@
                 "const": "AG2"
               },
               {
-                "title": "공공기관",
+                "title": "مقالات متعلقة",
                 "const": "PO3"
               },
               {
@@ -21417,7 +21417,7 @@
                 "const": "중개업소"
               },
               {
-                "title": "공공기관",
+                "title": "مقالات متعلقة",
                 "const": "공공기관"
               },
               {
@@ -21464,7 +21464,7 @@
           },
           "x": {
             "title": "قيمة إحداثيات X",
-            "description": "خط الطول (Longitude) في حالة خطوط العرض والطول",
+            "description": "خط الطول (الخط الطولي) في حالة خطوط العرض والطول",
             "type": "string"
           },
           "y": {
@@ -21611,7 +21611,7 @@
                 "const": 0
               },
               {
-                "title": "هذا هو السبب في أن هذا هو ما تبحث عنه",
+                "title": "هذا هو ما تبحث عنه",
                 "const": 1
               },
               {
@@ -21663,11 +21663,11 @@
                 "const": 205
               },
               {
-                "title": "다중 출발지: 목적지 주변의 고 고 정보(교통 장애) أو 로 한 통행 불가",
+                "title": "다중 출발지: 목적지 주변의 유고 정보(교통 장애) أو 로 한 통행 불가",
                 "const": 206
               },
               {
-                "title": "다중 출발지: أفضل ما في الأمر بالنسبة لك",
+                "title": "다중 출발지: مستلزماتك المفضلة",
                 "const": 207
               },
               {
@@ -21967,7 +21967,7 @@
                 "const": 7
               },
               {
-                "title": "هذا هو ما تبحث عنه",
+                "title": "أفضل ما في الأمر",
                 "const": 8
               },
               {
@@ -22055,7 +22055,7 @@
                 "const": 30
               },
               {
-                "title": "مكافأة نهاية الأسبوع 2",
+                "title": "الجزء الثاني من اللعبة",
                 "const": 31
               },
               {
@@ -22107,7 +22107,7 @@
                 "const": 43
               },
               {
-                "title": "أفضل ما في الأمر هو أن تكون قادرًا على العمل",
+                "title": "أفضل ما في الأمر هو الحصول على بطاقة الائتمان الخاصة بك",
                 "const": 44
               },
               {
@@ -22119,7 +22119,7 @@
                 "const": 46
               },
               {
-                "title": "أفضل ما في الأمر هو الحصول على المال",
+                "title": "أفضل ما في الأمر هو أن تكون قادرًا على العمل",
                 "const": 47
               },
               {
@@ -22127,7 +22127,7 @@
                 "const": 48
               },
               {
-                "title": "هذا هو المكان المناسب لك",
+                "title": "هذا هو ما تبحث عنه",
                 "const": 49
               },
               {
@@ -22159,7 +22159,7 @@
                 "const": 74
               },
               {
-                "title": "6 نقاط الاتصال",
+                "title": "أفضل 6 نقاط في الأسبوع",
                 "const": 75
               },
               {
@@ -22171,7 +22171,7 @@
                 "const": 77
               },
               {
-                "title": "9 سنوات من تاريخ الميلاد",
+                "title": "أفضل ما في 9 سنوات من الخبرة",
                 "const": 78
               },
               {
@@ -22971,7 +22971,7 @@
           "type",
           "contents"
         ],
-        "title": "مربع مكون من 4 أجزاء (قطع من نوع الكرتون)",
+        "title": "مربع مكون من 4 أجزاء (نوع الكرتون المقطوع)",
         "type": "object"
       },
       "_namespace_swagger.IGoogleSlides.ICreatePresentationInput": {
@@ -23696,7 +23696,7 @@
               "cmmMsgHeader": {
                 "properties": {
                   "totalCount": {
-                    "title": "المجموع الكلي",
+                    "title": "مجموع العدد",
                     "type": "integer"
                   },
                   "countPerPage": {
@@ -24887,7 +24887,7 @@
             "type": "number"
           },
           "indrAutoUtcnt": {
-            "title": "مخزون داخلي مكتفٍ ذاتيًا (كبير)",
+            "title": "مخزون مكتف ذاتيا داخليا (كبير)",
             "type": "number"
           },
           "indrAutoArea": {
@@ -26103,7 +26103,7 @@
         "properties": {
           "user_request": {
             "title": "طلب المستخدم",
-            "x-wrtn-placeholder": "لا داعي للقلق بشأن كيفية استخدام بطاقة الائتمان الخاصة بك.",
+            "x-wrtn-placeholder": "إن الحصول على بطاقة الائتمان الخاصة بك هو أمر رائع بالنسبة لك.",
             "type": "string"
           },
           "system_prompt": {
@@ -26226,7 +26226,7 @@
             "format": "iri",
             "contentMediaType": "image/*",
             "title": "رابط الصورة المولدة",
-            "description": "تم إنشاء عنوان URL للصورة",
+            "description": "عنوان URL للصورة المولدة",
             "type": "string"
           }
         },
@@ -26352,7 +26352,7 @@
             "format": "iri",
             "contentMediaType": "image/*",
             "title": "رابط الصورة المولدة",
-            "description": "تم إنشاء عنوان URL للصورة",
+            "description": "عنوان URL للصورة المولدة",
             "type": "string"
           }
         },
@@ -27202,7 +27202,7 @@
                 "const": "SEARCH_STANDARD"
               },
               {
-                "title": "المزيد من التفاصيل",
+                "title": "المزيد من التفاصيل حول ديسيباتا",
                 "const": "DISPLAY_STANDARD"
               }
             ]
@@ -27251,7 +27251,7 @@
                     "const": "APPROVED_LIMITED"
                   },
                   {
-                    "title": "الحصول على مكافأة نهاية الأسبوع",
+                    "title": "الحصول على بطاقة الائتمان الخاصة بك",
                     "const": "AREA_OF_INTEREST_ONLY"
                   },
                   {
@@ -27346,7 +27346,7 @@
                 "const": "PHRASE"
               },
               {
-                "title": "هايرجين",
+                "title": "هايرجينجين",
                 "const": "BROAD"
               }
             ]
@@ -27457,7 +27457,7 @@
                     "const": "APPROVED_LIMITED"
                   },
                   {
-                    "title": "الحصول على مكافأة نهاية الأسبوع",
+                    "title": "الحصول على بطاقة الائتمان الخاصة بك",
                     "const": "AREA_OF_INTEREST_ONLY"
                   },
                   {
@@ -27760,7 +27760,7 @@
                 "const": "PHRASE"
               },
               {
-                "title": "هايرجين",
+                "title": "هايرجينجين",
                 "const": "BROAD"
               }
             ]
@@ -27803,7 +27803,7 @@
                 "const": "PHRASE"
               },
               {
-                "title": "هايرجين",
+                "title": "هايرجينجين",
                 "const": "BROAD"
               }
             ]
@@ -28501,7 +28501,7 @@
                 "const": "SEARCH"
               },
               {
-                "title": "المزيد من التفاصيل",
+                "title": "المزيد من التفاصيل حول ديسيباتا",
                 "description": "أفضل ما في الأمر هو أن تكون على دراية بـ 3 نقاط رئيسية في رحلتك",
                 "const": "DISPLAY"
               }
@@ -28686,7 +28686,7 @@
                 "const": "SEARCH"
               },
               {
-                "title": "المزيد من التفاصيل",
+                "title": "المزيد من التفاصيل حول ديسيباتا",
                 "description": "أفضل ما في الأمر هو أن تكون على دراية بـ 3 نقاط رئيسية في رحلتك",
                 "const": "DISPLAY"
               }
@@ -29045,8 +29045,8 @@
             "default": 10,
             "minimum": 1,
             "maximum": 50,
-            "title": "عدد المستندات المطلوب عرضها في الصفحة الواحدة",
-            "description": "عدد المستندات المطلوب عرضها في الصفحة الواحدة.",
+            "title": "عدد المستندات المطلوب عرضها في صفحة واحدة",
+            "description": "عدد المستندات المطلوب عرضها في صفحة واحدة.",
             "type": "number"
           }
         },
@@ -29178,8 +29178,8 @@
               "display",
               "items"
             ],
-            "title": "بيانات نتيجة البحث في Naver Cafe",
-            "description": "بيانات نتيجة البحث في Naver Cafe.",
+            "title": "بيانات نتيجة البحث في مقهى Naver",
+            "description": "بيانات نتيجة البحث في مقهى Naver.",
             "type": "object"
           }
         },
@@ -29268,7 +29268,7 @@
               },
               {
                 "title": "تاريخ",
-                "description": "نايك نايك نايك",
+                "description": "نايك نايك نايك نايك",
                 "x-wrtn-placeholder": "سيم",
                 "const": "date"
               }
@@ -29812,7 +29812,7 @@
             "title": "معرف الكتلة",
             "oneOf": [
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:pageId, label:title}",
                   "method": "post",
@@ -29821,7 +29821,7 @@
                 "type": "string"
               },
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:id, label:id}",
                   "method": "post",
@@ -29870,7 +29870,7 @@
             "title": "معرف الصفحة",
             "oneOf": [
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:pageId, label:title}",
                   "method": "post",
@@ -29879,7 +29879,7 @@
                 "type": "string"
               },
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:id, label:id}",
                   "method": "post",
@@ -29985,7 +29985,7 @@
             "title": "معرف الصفحة",
             "oneOf": [
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:pageId, label:title}",
                   "method": "post",
@@ -29994,7 +29994,7 @@
                 "type": "string"
               },
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:id, label:id}",
                   "method": "post",
@@ -30076,7 +30076,7 @@
             "title": "معرف الصفحة",
             "oneOf": [
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:pageId, label:title}",
                   "method": "post",
@@ -30085,7 +30085,7 @@
                 "type": "string"
               },
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:id, label:id}",
                   "method": "post",
@@ -30167,7 +30167,7 @@
             "title": "معرف الصفحة",
             "oneOf": [
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:pageId, label:title}",
                   "method": "post",
@@ -30176,7 +30176,7 @@
                 "type": "string"
               },
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:id, label:id}",
                   "method": "post",
@@ -30268,7 +30268,7 @@
             "title": "معرف الصفحة",
             "oneOf": [
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:pageId, label:title}",
                   "method": "post",
@@ -30277,7 +30277,7 @@
                 "type": "string"
               },
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:id, label:id}",
                   "method": "post",
@@ -30367,7 +30367,7 @@
             "title": "معرف الصفحة",
             "oneOf": [
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:pageId, label:title}",
                   "method": "post",
@@ -30376,7 +30376,7 @@
                 "type": "string"
               },
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:id, label:id}",
                   "method": "post",
@@ -30468,7 +30468,7 @@
             "title": "معرف الصفحة",
             "oneOf": [
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:pageId, label:title}",
                   "method": "post",
@@ -30477,7 +30477,7 @@
                 "type": "string"
               },
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:id, label:id}",
                   "method": "post",
@@ -30816,7 +30816,7 @@
             "title": "معرف الصفحة",
             "oneOf": [
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:pageId, label:title}",
                   "method": "post",
@@ -30825,7 +30825,7 @@
                 "type": "string"
               },
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:id, label:id}",
                   "method": "post",
@@ -30869,7 +30869,7 @@
             "title": "معرف الصفحة",
             "oneOf": [
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:pageId, label:title}",
                   "method": "post",
@@ -30878,7 +30878,7 @@
                 "type": "string"
               },
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:id, label:id}",
                   "method": "post",
@@ -30913,7 +30913,7 @@
             "title": "معرف الصفحة",
             "oneOf": [
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:pageId, label:title}",
                   "method": "post",
@@ -30922,7 +30922,7 @@
                 "type": "string"
               },
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:id, label:id}",
                   "method": "post",
@@ -30948,7 +30948,7 @@
       "_namespace_swagger.INotion.ICreateChildContentTypeBreadcrumbInput": {
         "properties": {
           "breadcrumb": {
-            "title": "مسار التنقل، كل ما عليك فعله هو مطابقة اسم المفتاح بشكل صحيح، لذا ما عليك سوى تمرير كائن فارغ.",
+            "title": "مسار التنقل، ما عليك سوى مطابقة اسم المفتاح بشكل صحيح، لذا ما عليك سوى تمرير كائن فارغ.",
             "$ref": "#/components/schemas/_namespace_swagger.Recordstringnever"
           },
           "secretKey": {
@@ -30962,7 +30962,7 @@
             "title": "معرف الصفحة",
             "oneOf": [
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:pageId, label:title}",
                   "method": "post",
@@ -30971,7 +30971,7 @@
                 "type": "string"
               },
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:id, label:id}",
                   "method": "post",
@@ -31074,7 +31074,7 @@
             "title": "معرف الصفحة",
             "oneOf": [
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:pageId, label:title}",
                   "method": "post",
@@ -31083,7 +31083,7 @@
                 "type": "string"
               },
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:id, label:id}",
                   "method": "post",
@@ -31110,7 +31110,7 @@
                 "title": "معرف الصفحة",
                 "oneOf": [
                   {
-                    "x-wrtn-placeholder": "المزيد من المعلومات.",
+                    "x-wrtn-placeholder": "شكرا لك.",
                     "x-wrtn-prerequisite": {
                       "jmesPath": "[].{value:pageId, label:title}",
                       "method": "post",
@@ -31119,7 +31119,7 @@
                     "type": "string"
                   },
                   {
-                    "x-wrtn-placeholder": "المزيد من المعلومات.",
+                    "x-wrtn-placeholder": "شكرا لك.",
                     "x-wrtn-prerequisite": {
                       "jmesPath": "[].{value:id, label:id}",
                       "method": "post",
@@ -31147,7 +31147,7 @@
             "title": "معرف الصفحة",
             "oneOf": [
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:pageId, label:title}",
                   "method": "post",
@@ -31156,7 +31156,7 @@
                 "type": "string"
               },
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:id, label:id}",
                   "method": "post",
@@ -31187,7 +31187,7 @@
             "title": "معرف الصفحة",
             "oneOf": [
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:pageId, label:title}",
                   "method": "post",
@@ -31196,7 +31196,7 @@
                 "type": "string"
               },
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:id, label:id}",
                   "method": "post",
@@ -31723,7 +31723,7 @@
           "parentPageId": {
             "oneOf": [
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:pageId, label:title}",
                   "method": "post",
@@ -31732,7 +31732,7 @@
                 "type": "string"
               },
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:id, label:id}",
                   "method": "post",
@@ -31791,11 +31791,11 @@
       "_namespace_swagger.INotion.IReadPageContentInput": {
         "properties": {
           "block_id": {
-            "description": "يشير إلى معرف الصفحة. يمكنك إعادة إدخال معرف الكتلة في هذا العامل واستخدامه للبحث عن الكتل الفرعية.",
+            "description": "يشير إلى معرف الصفحة. يمكنك إعادة وضع معرف الكتلة في هذا العامل واستخدامه للبحث عن الكتل الفرعية.",
             "title": "معرف الكتلة",
             "oneOf": [
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:pageId, label:title}",
                   "method": "post",
@@ -31804,7 +31804,7 @@
                 "type": "string"
               },
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:id, label:id}",
                   "method": "post",
@@ -32758,7 +32758,7 @@
           "type",
           "people"
         ],
-        "title": "خصائص قاعدة البيانات للأشخاص",
+        "title": "خصائص الأشخاص في قاعدة البيانات",
         "type": "object"
       },
       "_namespace_swagger.INotion.FilesDatabaseProperty": {
@@ -33736,7 +33736,7 @@
         "properties": {
           "bold": {
             "title": "عريض",
-            "description": "عنوان النص غامق",
+            "description": "نص العنوان غامق",
             "type": "boolean"
           },
           "italic": {
@@ -33850,7 +33850,7 @@
           "parentPageId": {
             "oneOf": [
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:pageId, label:title}",
                   "method": "post",
@@ -33859,7 +33859,7 @@
                 "type": "string"
               },
               {
-                "x-wrtn-placeholder": "المزيد من المعلومات.",
+                "x-wrtn-placeholder": "شكرا لك.",
                 "x-wrtn-prerequisite": {
                   "jmesPath": "[].{value:id, label:id}",
                   "method": "post",
@@ -34162,7 +34162,7 @@
                   "const": "23"
                 },
                 {
-                  "title": "ميكارا",
+                  "title": "ميراكا",
                   "const": "24"
                 }
               ]
@@ -38568,7 +38568,7 @@
           "issuetype": {
             "properties": {
               "id": {
-                "description": "معرف المشكلة. في بعض الأحيان، يمكن للمستخدم أن يذكر اسم نوع المشكلة، مثل &quot;bug&quot; أو &quot;story&quot;، ولكن لا يمكنك تحديد نوع المشكلة باستخدام اسم نوع المشكلة. لأنه قد يكون هناك أنواع تحمل نفس الاسم. لذلك، يجب عليك التحقق من نوع المشكلة باستخدام موصل مختلف للتأكد من أنه نوع مشكلة يمكن استخدامه في المشروع. ومع ذلك، إذا سلمت نوع السلسلة الرقمية من البداية، فقد يكون معرف نوع المشكلة.",
+                "description": "معرف المشكلة. في بعض الأحيان، يمكن للمستخدم أن يذكر اسم نوع المشكلة، مثل &quot;bug&quot; أو &quot;story&quot;، ولكن لا يمكنك تحديد نوع المشكلة باستخدام اسم نوع المشكلة. لأنه قد يكون هناك أنواع تحمل نفس الاسم. لذلك، يجب عليك التحقق من نوع المشكلة باستخدام موصل مختلف للتأكد من أنه نوع مشكلة يمكن استخدامه في المشروع. ومع ذلك، إذا قمت بتسليم نوع السلسلة الرقمية من البداية، فقد يكون معرف نوع المشكلة.",
                 "title": "معرف نوع المشكلة",
                 "oneOf": [
                   {
@@ -38806,7 +38806,7 @@
               "issuetype": {
                 "properties": {
                   "id": {
-                    "description": "معرف المشكلة. في بعض الأحيان، يمكن للمستخدم أن يذكر اسم نوع المشكلة، مثل &quot;bug&quot; أو &quot;story&quot;، ولكن لا يمكنك تحديد نوع المشكلة باستخدام اسم نوع المشكلة. لأنه قد يكون هناك أنواع تحمل نفس الاسم. لذلك، يجب عليك التحقق من نوع المشكلة باستخدام موصل مختلف للتأكد من أنه نوع مشكلة يمكن استخدامه في المشروع. ومع ذلك، إذا سلمت نوع السلسلة الرقمية من البداية، فقد يكون معرف نوع المشكلة.",
+                    "description": "معرف المشكلة. في بعض الأحيان، يمكن للمستخدم أن يذكر اسم نوع المشكلة، مثل &quot;bug&quot; أو &quot;story&quot;، ولكن لا يمكنك تحديد نوع المشكلة باستخدام اسم نوع المشكلة. لأنه قد يكون هناك أنواع تحمل نفس الاسم. لذلك، يجب عليك التحقق من نوع المشكلة باستخدام موصل مختلف للتأكد من أنه نوع مشكلة يمكن استخدامه في المشروع. ومع ذلك، إذا قمت بتسليم نوع السلسلة الرقمية من البداية، فقد يكون معرف نوع المشكلة.",
                     "title": "معرف نوع المشكلة",
                     "oneOf": [
                       {
@@ -40193,7 +40193,7 @@
           "traffic"
         ],
         "title": "أفضل ما في الأمر هو الحصول على المال",
-        "description": "هذا هو السبب في أن هذا هو الحال بالنسبة لك..",
+        "description": "هذا هو السبب في أن هذا هو السبب في ذلك..",
         "type": "object"
       },
       "_namespace_swagger.IGoogleTrend.IRequest": {
@@ -44057,7 +44057,7 @@
       "_namespace_swagger.IGithub.ReviewComment": {
         "properties": {
           "pull_request_review_id": {
-            "title": "سحب طلب المراجعة",
+            "title": "معرف طلب المراجعة",
             "type": "integer"
           },
           "diff_hunk": {
@@ -46664,7 +46664,7 @@
             "type": "string"
           },
           "profile_repository": {
-            "title": "الملف الشخصي_المستودع",
+            "title": "الملف الشخصي للمستودع",
             "oneOf": [
               {
                 "type": "null"
@@ -49189,7 +49189,7 @@
       "_namespace_swagger.IDiscord.ICreateDMRequest": {
         "properties": {
           "recipient_id": {
-            "title": "سونما",
+            "title": "سنوبو",
             "description": "DM هو عنوان البريد الإلكتروني الخاص بنا.",
             "x-wrtn-prerequisite": {
               "jmesPath": "[].{value:user.id, label:user.username}",
@@ -49452,7 +49452,7 @@
           "name",
           "secretKey"
         ],
-        "title": "الحصول على بطاقة الائتمان الخاصة بك",
+        "title": "ما عليك سوى الاتصال بنا",
         "type": "object"
       },
       "_namespace_swagger.IDiscord.ISecret": {
@@ -49544,7 +49544,7 @@
           "userId",
           "secretKey"
         ],
-        "title": "أفضل ما في الأمر هو الحصول على بطاقة الائتمان الخاصة بك",
+        "title": "أفضل ما في الأمر هو الحصول على بطاقة الائتمان",
         "type": "object"
       },
       "_namespace_swagger.IDiscord.IModifyChannelRequest": {
@@ -52015,7 +52015,7 @@
             "maxLength": 55,
             "title": "اسم",
             "description": "اسم نوع الحدث",
-            "x-wrtn-placeholder": "اجتماعى",
+            "x-wrtn-placeholder": "اجتماعي",
             "type": "string"
           },
           "host": {
@@ -54616,7 +54616,7 @@
           },
           "GlobalCategoryRank": {
             "title": "التصنيف العالمي للفئة",
-            "description": "التصنيف العالمي للفئة"
+            "description": "تصنيف الفئة العالمية"
           },
           "IsSmall": {
             "title": "هل هو صغير؟",

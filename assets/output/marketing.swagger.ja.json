@@ -156,7 +156,7 @@
           }
         },
         "summary": "キーワード抽出",
-        "description": "与えられた入力に関連性の高いキーワードを抽出します。マーケティングコピーを生成するときに使用するコネクタです。.",
+        "description": "与えられた入力に関連性の高いキーワードを抽出します。マーケティングコピーを生成するときに使用されるコネクタです。.",
         "tags": []
       }
     },
@@ -172,7 +172,7 @@
               }
             }
           },
-          "description": "並べ替える候補者情報",
+          "description": "並べ替える候補情報",
           "required": true
         },
         "responses": {
@@ -188,7 +188,7 @@
           }
         },
         "summary": "条件で並べ替え",
-        "description": "指定されたアイテムの配列を最高スコアの順に並べ替えます",
+        "description": "指定されたアイテムの配列を最高スコア順に並べ替えます",
         "tags": [],
         "deprecated": true
       }
@@ -3222,7 +3222,7 @@
             "description": "イベント情報を含むDTO."
           }
         },
-        "summary": "カカオトーク(카카오톡)カレンダーイベントを取得する",
+        "summary": "カカオトーク(카카오톡)のカレンダーイベントを取得する",
         "description": "KakaoTalk(カカオトーク) カレンダーイベントを取得します。ユーザーは入力パラメータとしてカレンダー ID を指定する必要があります。カレンダーが指定されていない場合は、デフォルトでユーザー自身のカレンダーが取得されます。したがって、この機能はカレンダー ID が指定されていなくても使用できます。イベントを取得するための条件には、イベントを取得する期間の指定が含まれます。このコネクタは、1 週間または 1 か月のデータを表示するように設計されています。KakaoTalk(カカオトーク) は韓国のモバイル メッセージング アプリケーションであり、追加のサービスも提供しています。.",
         "tags": [
           "KakaoTalk"
@@ -5444,7 +5444,7 @@
           }
         },
         "summary": "Rutten を管理者として登録する",
-        "description": "Rutten をユーザーの広告アカウント管理者に指定します。特定の Google アカウントの Google 広告 API を呼び出すには、広告アカウントを所有しているか、管理者として登録されている必要があります。このコネクタは、ユーザーのすべての Google 広告アカウントに、`Wrtn` 広告アカウントを顧客の管理者として登録するための一種の招待状を送信するコネクタです。コネクタを実行すると、顧客アカウントに登録されたメールが Gmail 経由で送信されます。メールを受け取った人は、メールを通じてダッシュボードに移動し、`Wrtn` アカウントに管理者権限を与えることができます。`Wrtn` が管理者として登録されている場合、Google 広告で作成された他の API を使用できるようになります。この管理者指定は、キーワード推奨など、`customerId` を引数として受け取らないコネクタを除くすべての Google 広告コネクタを呼び出す前に行う必要があります。ただし、このコネクタが呼び出されても、ユーザーの承認なしに `Wrtn` が管理者に指定されることはありませんので、心配する必要はありません。関数を呼び出す前に、ユーザーに `customerId` を尋ねる必要があるため、 `customerId` をチェックできるコネクタを提案する必要があります。.",
+        "description": "ユーザーの広告アカウント管理者に Rutten を指定します。特定の Google アカウントの Google 広告 API を呼び出すには、広告アカウントを所有しているか、管理者として登録されている必要があります。このコネクタは、ユーザーのすべての Google 広告アカウントに、`Wrtn` 広告アカウントを顧客の管理者として登録するための一種の招待状を送信するコネクタです。コネクタを実行すると、顧客アカウントに登録されたメールが Gmail 経由で送信されます。メールを受け取った人は、メールを通じてダッシュボードに移動し、`Wrtn` アカウントに管理者権限を与えることができます。`Wrtn` が管理者として登録されている場合、Google 広告で作成された他の API を使用できるようになります。この管理者指定は、キーワード推奨など、`customerId` を引数として受け取らないコネクタを除くすべての Google 広告コネクタを呼び出す前に行う必要があります。ただし、このコネクタが呼び出されても、ユーザーの承認なしに `Wrtn` が管理者として指定されることはありませんので、心配する必要はありません。関数を呼び出す前に、ユーザーに`customerId`を尋ねる必要があるため、`customerId`をチェックできるコネクタを提案する必要があります。.",
         "tags": [
           "Google Ads"
         ]
@@ -5482,7 +5482,7 @@
           }
         },
         "summary": "広告アカウントを取得",
-        "description": "顧客の広告アカウントを取得する ユーザーのアクセストークンを使用して、`Wrtn` が管理者であるアカウントの中から、ユーザーの広告アカウント、つまり `customer` を検索します。ユーザーが広告アカウントを持っていても、`Wrtn` が管理者でない場合はリストされません。したがって、`Wrtn` が管理者として登録されたことがない場合は、`POST connector/google-ads/customerClientLink` コネクタを呼び出す必要があります。また、このコネクタは、韓国の通貨単位 `KRW` を使用していない広告アカウントを除外します。これは、今後、他のキャンペーン予算の変更や広告ステータスの変更コネクタで間違いが発生しないようにするためです。Google Ads コネクタを使用して広告を作成する場合、各アカウントの通貨単位に応じて予算設定で人為的エラーが発生する可能性があります。たとえば、通貨単位が `USD` のアカウントの予算を、通貨単位が `KRW` のアカウントとして登録すると、為替レートの予算差が発生する可能性があります。関数を呼び出す前に、ユーザーに `customerId` を尋ねる必要があるため、 `customerId` をチェックできるコネクタを提案する必要があります。.",
+        "description": "顧客の広告アカウントを取得する ユーザーのアクセストークンを使用して、`Wrtn` が管理者であるアカウントの中から、ユーザーの広告アカウント、つまり `customer` を検索します。ユーザーが広告アカウントを持っていても、`Wrtn` が管理者でない場合はリストされません。したがって、`Wrtn` が管理者として登録されたことがない場合は、`POST connector/google-ads/customerClientLink` コネクタを呼び出す必要があります。また、このコネクタは、韓国の通貨単位 `KRW` を使用していない広告アカウントを除外します。これは、今後、他のキャンペーン予算の変更や広告ステータスの変更コネクタで間違いが発生しないようにするためです。Google Ads コネクタを使用して広告を作成する場合、各アカウントの通貨単位に応じて予算設定で人為的エラーが発生する可能性があります。たとえば、通貨単位が `USD` のアカウントの予算を、通貨単位が `KRW` のアカウントとして登録すると、為替レートの予算差が発生する可能性があります。関数を呼び出す前に、ユーザーに`customerId`を尋ねる必要があるため、`customerId`をチェックできるコネクタを提案する必要があります。.",
         "tags": [
           "Google Ads"
         ]
@@ -8537,7 +8537,7 @@
           }
         },
         "summary": "問題のステータスを確認する",
-        "description": "問題の検索に関する問題のステータスを見つける",
+        "description": "問題を検索するための問題ステータスを見つける",
         "tags": [
           "Jira"
         ]
@@ -12700,7 +12700,7 @@
             "type": "string"
           },
           "type": {
-            "description": "ビデオ、画像、ニュース記事、研究論文 次のいずれかである必要があります: ビデオ、画像、ニュース記事、研究論文",
+            "description": "ビデオ、画像、ニュース記事、研究論文 次のどれかである必要があります: ビデオ、画像、ニュース記事、研究論文",
             "title": "出力タイプ",
             "oneOf": [
               {
@@ -14170,7 +14170,7 @@
         "properties": {
           "url": {
             "title": "シートのURL",
-            "description": "行を読み取るシートの URL.",
+            "description": "行を読み取るシートのURL.",
             "type": "string"
           },
           "workSheetTitle": {
@@ -15548,7 +15548,7 @@
         "properties": {
           "email": {
             "format": "email",
-            "title": "アクセスを許可するユーザーのメールアドレス",
+            "title": "アクセスを許可したいユーザーのメールアドレス",
             "description": "Google ドライブへのアクセスを許可するユーザーのメールアドレス。タイプがユーザータイプの場合にのみ必要です。.",
             "type": "string"
           },
@@ -16396,7 +16396,7 @@
           },
           "labelIds": {
             "title": "フィルタリングするラベルのリスト",
-            "description": "指定されたラベルIDに一致するラベルを持つメールのみを返すラベルのリスト.",
+            "description": "指定されたラベル ID にすべて一致するラベルを持つメールのみを返すラベルのリスト.",
             "items": {
               "type": "string"
             },
@@ -17375,7 +17375,7 @@
           "secretKey",
           "message"
         ],
-        "description": "特定の領域にコメントを追加するためのDTO。一度に1つのコメントを書き込むことができ、座標値、ノード、または親コメント（ルートコメント）を使用してコメントを書き込むことができます。.",
+        "description": "特定の領域にコメントを追加するための DTO。一度に 1 つのコメントを書き込むことができ、座標値、ノード、または親コメント (ルートコメント) を使用してコメントを書き込むことができます。.",
         "type": "object"
       },
       "_namespace_swagger.GetCommentsResponse": {
@@ -19047,7 +19047,7 @@
       "_namespace_swagger.ISweetTracker.TrackingDetail": {
         "properties": {
           "code": {
-            "title": "配送ステータスコード",
+            "title": "配送状況コード",
             "oneOf": [
               {
                 "type": "null"
@@ -19956,7 +19956,7 @@
           "contents": {
             "minItems": 2,
             "maxItems": 3,
-            "title": "リストに表示されるコンテンツの一覧",
+            "title": "リストに表示されるコンテンツのリスト",
             "items": {
               "oneOf": [
                 {
@@ -20473,7 +20473,7 @@
             "type": "integer"
           },
           "after_url": {
-            "title": "友達リストの次のページのURL",
+            "title": "次のページの友達リストのURL",
             "oneOf": [
               {
                 "type": "null"
@@ -21459,7 +21459,7 @@
             "type": "string"
           },
           "road_address_name": {
-            "title": "道路名住所",
+            "title": "完全な道路名住所",
             "type": "string"
           },
           "x": {
@@ -22019,7 +22019,7 @@
                 "const": 21
               },
               {
-                "title": "アラブ首長国連邦5都市",
+                "title": "オーシャンビュー5階",
                 "const": 22
               },
               {
@@ -23511,7 +23511,7 @@
             "type": "boolean"
           },
           "is_culture_benefit": {
-            "title": "文化公演所得控除",
+            "title": "文化パフォーマンス所得控除",
             "type": "boolean"
           },
           "order_made": {
@@ -23544,7 +23544,7 @@
             "type": "integer"
           },
           "member_maximum_purchase_quantity": {
-            "title": "会員ごとの購入最大数量",
+            "title": "会員ごとの購入可能数量",
             "type": "integer"
           },
           "optional_limit_type": {
@@ -24364,7 +24364,7 @@
                 },
                 "AIS_TP_CD_NM": {
                   "title": "供給タイプ名",
-                  "x-wrtn-placeholder": "教育委員会",
+                  "x-wrtn-placeholder": "グーミジョン",
                   "type": "string"
                 },
                 "SBD_LGO_NM": {
@@ -24494,7 +24494,7 @@
             "title": "供給タイプコード",
             "oneOf": [
               {
-                "title": "教育委員会",
+                "title": "グーミジョン",
                 "const": "07"
               },
               {
@@ -24510,7 +24510,7 @@
                 "const": "10"
               },
               {
-                "title": "ジャンク",
+                "title": "ジャグジー",
                 "const": "11"
               },
               {
@@ -24973,7 +24973,7 @@
             ]
           },
           "pmsnoGbCdNm": {
-            "title": "許可番号 分類コード名",
+            "title": "許可番号分類コード名",
             "type": "string"
           },
           "hoCnt": {
@@ -25987,7 +25987,7 @@
           "nx",
           "ny"
         ],
-        "title": "天気予報クエリのリクエスト条件",
+        "title": "天気クエリリクエスト条件",
         "type": "object"
       },
       "_namespace_swagger.KoreaCopyrightCommission.IGetCopyRightOutput": {
@@ -27255,7 +27255,7 @@
                     "const": "AREA_OF_INTEREST_ONLY"
                   },
                   {
-                    "title": "ビヨンド",
+                    "title": "ビシェン",
                     "const": "DISAPPROVED"
                   },
                   {
@@ -27461,7 +27461,7 @@
                     "const": "AREA_OF_INTEREST_ONLY"
                   },
                   {
-                    "title": "ビヨンド",
+                    "title": "ビシェン",
                     "const": "DISAPPROVED"
                   },
                   {
@@ -28354,7 +28354,7 @@
           "businessName": {
             "minLength": 1,
             "maxLength": 25,
-            "title": "事業名とブランド名",
+            "title": "事業名およびブランド名",
             "type": "string"
           },
           "landscapeImages": {
@@ -28789,7 +28789,7 @@
           "businessName": {
             "minLength": 1,
             "maxLength": 25,
-            "title": "事業名とブランド名",
+            "title": "事業名およびブランド名",
             "type": "string"
           },
           "landscapeImages": {
@@ -29178,8 +29178,8 @@
               "display",
               "items"
             ],
-            "title": "Naver Cafe検索結果データ",
-            "description": "Naver Cafe検索結果データ.",
+            "title": "ネイバーカフェ検索結果データ",
+            "description": "ネイバーカフェ検索結果データ.",
             "type": "object"
           }
         },
@@ -29326,7 +29326,7 @@
         "properties": {
           "title": {
             "title": "投稿タイトル",
-            "description": "Naverブログ投稿のタイトル.",
+            "description": "Naverブログ記事のタイトル.",
             "type": "string"
           },
           "link": {
@@ -34187,7 +34187,7 @@
                   "const": "3"
                 },
                 {
-                  "title": "4時間前",
+                  "title": "4月",
                   "const": "4"
                 },
                 {
@@ -34574,7 +34574,7 @@
           "outbound_date": {
             "format": "date",
             "title": "出発日",
-            "description": "出発日を入力してください。今日の日付より後の日付を入力してください.",
+            "description": "出発日を入力してください。本日以降の日付を入力してください.",
             "type": "string"
           },
           "return_date": {
@@ -35640,7 +35640,7 @@
             "type": "string"
           },
           "ts_date": {
-            "title": "`ts`の日付形式これは、現在の時刻値を &#39;ts&#39; で区切って認識しやすくするために ISO 文字列に変更された値です。.",
+            "title": "`ts`の日付形式これは、&#39;ts&#39;で区切ることで現在の時刻値を認識しやすくするためにISO文字列に変更された値です。.",
             "type": "string"
           }
         },
@@ -35860,7 +35860,7 @@
             "type": "number"
           },
           "ts_date": {
-            "title": "`ts`の日付形式これは、現在の時刻値を &#39;ts&#39; で区切って認識しやすくするために ISO 文字列に変更された値です。.",
+            "title": "`ts`の日付形式これは、&#39;ts&#39;で区切ることで現在の時刻値を認識しやすくするためにISO文字列に変更された値です。.",
             "type": "string"
           },
           "links": {
@@ -36052,7 +36052,7 @@
             "type": "number"
           },
           "ts_date": {
-            "title": "`ts`の日付形式これは、現在の時刻値を &#39;ts&#39; で区切って認識しやすくするために ISO 文字列に変更された値です。.",
+            "title": "`ts`の日付形式これは、&#39;ts&#39;で区切ることで現在の時刻値を認識しやすくするためにISO文字列に変更された値です。.",
             "type": "string"
           }
         },
@@ -36621,7 +36621,7 @@
             "type": "array"
           },
           "isLast": {
-            "title": "ウェザーは最後のページです",
+            "title": "天気は最後のページです",
             "type": "boolean"
           },
           "total": {
@@ -39446,7 +39446,7 @@
             "type": "array"
           },
           "isLast": {
-            "title": "ウェザーは最後のページです",
+            "title": "天気は最後のページです",
             "type": "boolean"
           },
           "total": {
@@ -39684,7 +39684,7 @@
             "type": "array"
           },
           "isLast": {
-            "title": "ウェザーは最後のページです",
+            "title": "天気は最後のページです",
             "type": "boolean"
           },
           "total": {
@@ -39821,7 +39821,7 @@
             "type": "array"
           },
           "isLast": {
-            "title": "ウェザーは最後のページです",
+            "title": "天気は最後のページです",
             "type": "boolean"
           },
           "total": {
@@ -40148,7 +40148,7 @@
             "type": "string"
           },
           "name": {
-            "title": "ステータス カテゴリの名前",
+            "title": "ステータスカテゴリの名前",
             "type": "string"
           }
         },
@@ -40218,7 +40218,7 @@
           },
           "place_id": {
             "title": "固有ID",
-            "description": "これはレストランの固有のIDです。これはレビューを検索するために必要な情報です.",
+            "description": "これはレストランの固有IDです。レビューを検索するために必要な情報です.",
             "type": "string"
           },
           "gps_coordinate": {
@@ -40666,7 +40666,7 @@
             "$ref": "#/components/schemas/_namespace_swagger.IGithub.Issue"
           },
           "comment": {
-            "title": "コメント コメントのイベントの場合は、コメント情報を含めます.",
+            "title": "コメント コメントのイベントの場合は、コメント情報を含める.",
             "$ref": "#/components/schemas/_namespace_swagger.IGithub.Comment"
           }
         },
@@ -45550,7 +45550,7 @@
             "type": "string"
           }
         },
-        "description": "T 内のすべてのプロパティをオプションにする",
+        "description": "T のすべてのプロパティをオプションにする",
         "type": "object"
       },
       "_namespace_swagger.IGithub.IFetchRepositoryPullRequestOutput": {
@@ -50048,7 +50048,7 @@
             "type": "boolean"
           }
         },
-        "description": "T 内のすべてのプロパティをオプションにする",
+        "description": "T のすべてのプロパティをオプションにする",
         "type": "object"
       },
       "_namespace_swagger.IDiscord.IGetPinnedMessagesRequest": {
@@ -50457,7 +50457,7 @@
             ]
           },
           "description_html": {
-            "title": "description_html イベントタイプの説明（HTML 形式）",
+            "title": "description_html イベントタイプの説明（HTML形式）",
             "oneOf": [
               {
                 "type": "null"
@@ -51575,7 +51575,7 @@
                 ]
               },
               "utm_content": {
-                "title": "utm_content UTMコンテンツトラッキングパラメータ",
+                "title": "utm_content UTMコンテンツ追跡パラメータ",
                 "oneOf": [
                   {
                     "type": "null"

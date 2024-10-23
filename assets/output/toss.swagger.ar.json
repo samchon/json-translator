@@ -1,0 +1,3641 @@
+{
+  "openapi": "3.1.0",
+  "servers": [
+    {
+      "url": "http://localhost:30771",
+      "description": "مزيف"
+    },
+    {
+      "url": "https://api.tosspayments.com",
+      "description": "حقيقي"
+    }
+  ],
+  "info": {
+    "title": "إرم المدفوعات API",
+    "description": "تم إنشاؤه بواسطة [fake-toss-Payments-server](https://github.com/samchon/fake-toss-Payments-server) مع [nestia](https://github.com/samchon/nestia)",
+    "version": "2.0.0",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "paths": {
+    "/v1/billing/authorizations/card": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "معلومات تسجيل بطاقة الدفع سهلة",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossBilling.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "معلومات بسيطة عن بطاقة الدفع",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossBilling"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "تسجيل بطاقة دفع بسيطة",
+        "description": "تسجيل بطاقة دفع بسيطة. `billing.authorizations.card.store` هي وظيفة واجهة برمجة التطبيقات يتم استدعاؤها عندما يسجل العميل بطاقته الجديدة على الخادم ويريد إجراء الدفع بسهولة دون الحاجة إلى إدخال معلومات البطاقة بشكل متكرر في كل مرة يلزم فيها الدفع. كمرجع، إذا كان تطبيق العميل يستخدم نافذة تسجيل بطاقة الدفع البسيطة التي توفرها Toss Payments، فلن يتم استدعاء `billing.authorizations.card.store` بواسطة خادم الواجهة الخلفية لديك في الخدمة الفعلية. ومع ذلك، يمكن استخدامه على مستوى برنامج أتمتة الاختبار لمحاكاة الموقف حيث يقوم العميل بتسجيل بطاقة دفع بسيطة..",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.billing.authorizations.card.store",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "간편 결제 카드 등록 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "간편 결제 카드 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/v1/billing/authorizations/{billingKey}": {
+      "post": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "billingKey",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "من المعلومات المستهدفة",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "مفتاح معرف العميل",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossBilling.ICustomerKey"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "معلومات طريقة الدفع البسيطة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossBilling"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "تحقق من الطريقة المسجلة للدفع البسيط",
+        "description": "تحقق من الطريقة المسجلة للدفع البسيط. `billing.authorizations.at` هي وظيفة تبحث في طريقة الدفع التي سجلها العميل على خادم Toss Payments للدفع البسيط. بشكل أساسي، عندما يستخدم تطبيق العميل نافذة الدفع التي توفرها Toss Payments نفسها، يرسل التطبيق الأمامي &quot;مفتاح الفواتير&quot; و&quot;مفتاح العميل&quot; فقط إلى خادم الواجهة الخلفية لديك، ويتم استخدامه عند الحاجة إلى معلومات مفصلة عن طريقة الدفع البسيطة..",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.billing.authorizations.at",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "billingKey",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "대상 정보의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "ITossBilling.billingKey",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-toss-payments-server/src/api/structures/ITossBilling.ts",
+                  "textSpan": {
+                    "start": 500,
+                    "length": 19
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "고객 식별자 키",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "간편 결제 수단 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/v1/billing/{billingKey}": {
+      "post": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "billingKey",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "من الطريقة المسجلة للدفع البسيط.",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "طلب المعلومات",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossBilling.IPaymentStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "معلومات الدفع",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossPayment"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "ادفع باستخدام الطريقة المسجلة للدفع البسيط",
+        "description": "ادفع باستخدام الطريقة المسجلة للدفع البسيط. `billing.pay` هي إحدى وظائف واجهة برمجة التطبيقات (API) يتم استدعاؤها عندما تريد إجراء الدفع باستخدام الطريقة المسجلة للدفع البسيط. و&quot;billing.pay&quot; هي طريقة الدفع الوحيدة المستخدمة في الحالات التي لا يتمكن فيها تطبيق العميل من استخدام نافذة الدفع التي توفرها Toss Payments، ويجب على خادم الواجهة الخلفية لديك الاتصال مباشرة بوظيفة واجهة برمجة تطبيقات Toss Payments. لذلك، عند تطوير خوادم خلفية وتطبيقات أمامية ترتبط بـ Toss Payments فيما يتعلق بالمدفوعات البسيطة، يلزم تصميم وتطوير منفصلين لهذا الموقف، لذا يرجى وضع ذلك في الاعتبار. بالإضافة إلى ذلك، `billing.pay` هي وظيفة واجهة برمجة التطبيقات (API) التي يتم استدعاؤها بشكل صارم وفقًا لحكم خادم الواجهة الخلفية لشركتك، لذا فإن الدفعات التي تتم من خلالها لا تتطلب {@link Payments.approve } على الإطلاق. ومع ذلك، نظرًا لأن `billing.pay` يُكمل الدفع على الفور دون الحاجة إلى عملية موافقة ثانوية، فيجب عليك الانتباه جيدًا للظروف التي يتم استدعاؤها.",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.billing.pay",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "billingKey",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "간편 결제에 등록한 수단의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "ITossBilling.billingKey",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-toss-payments-server/src/api/structures/ITossBilling.ts",
+                  "textSpan": {
+                    "start": 500,
+                    "length": 19
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "주문 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/v1/cash-receipts": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "معلومات الإدخال",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossCashReceipt.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "معلومات استلام النقد",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossCashReceipt"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "إصدار إيصال نقدي",
+        "description": "إصدار إيصال نقدي.",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.cash-receipts.store",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "입력 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "현금 영수증 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/v1/cash-receipts/{receiptKey}/cancel": {
+      "post": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "receiptKey",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "إيصال نقدي",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "إلغاء معلومات الإدخال",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossCashReceipt.ICancel"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "معلومات استلام النقد الملغاة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossCashReceipt"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "إلغاء إيصال نقدي",
+        "description": "إلغاء إيصال نقدي.",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.cash-receipts.cancel.cancel",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "receiptKey",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "현금 영수증의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "ITossCashReceipt.receiptKey",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-toss-payments-server/src/api/structures/ITossCashReceipt.ts",
+                  "textSpan": {
+                    "start": 199,
+                    "length": 19
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "취소 입력 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "취소된 현금 영수증 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/internal/webhook": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "معلومات حدث Webhook",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossPaymentWebhook"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "المستمع الوهمي لحدث Webhook",
+        "description": "المستمع الوهمي لحدث Webhook. `internal.webhook` عبارة عن واجهة برمجة تطبيقات غير موجودة في خادم دفع Toss Payments الفعلي. إذا لم يتم تعيين عنوان URL في {@link Configuration.WEBHOOK_URL} لـ `fake-toss- Payments-server`، `fake-toss- الكل. يتم تسليم أنواع أحداث webhook التي تحدث من Payments-server` إلى هذا المكان وتختفي بلا معنى. لذلك، عندما تريد التحقق من الاتصال بخادم Toss Payments مقدمًا باستخدام &quot;fake-toss- Payments-server&quot;، تأكد من تعيين {@link Configuration.WEBHOOK_URL } للتأكد من تسليم حدث webhook بشكل صحيح إلى الواجهة الخلفية لديك الخادم..",
+        "x-nestia-namespace": "internal.webhook.webhook",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "웹훅 이벤트 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/internal/{paymentKey}/deposit": {
+      "get": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "paymentKey",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "معلومات الدفع الخاصة بالحساب الافتراضي المستهدف",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "معلومات الدفع للحساب الافتراضي المودع",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossPayment"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "قم بإيداع الأموال في حسابك الافتراضي",
+        "description": "قم بإيداع الأموال في حسابك الافتراضي. `internal.virtual_accounts.deposit` هي واجهة برمجة تطبيقات غير موجودة في خادم الدفع الفعلي لـ Toss Payments، وهي وظيفة يمكنها محاكاة الموقف حيث يقوم العميل الذي تقدم بطلب للحصول على دفعة من حساب افتراضي بإيداع المبلغ المستهدف لاحقًا في الحساب الافتراضي حساب. بمعنى آخر، يتم استخدام `internal.virtual_accounts.deposit` لاختبار سلسلة من المواقف التي يقوم فيها العميل بإيداع الأموال في حساب صادر له/لها افتراضيًا، وبناءً على ذلك يتم إنشاء حدث webhook على خادم Toss Payments وإرساله إلى خادم الواجهة الخلفية الخاص بك.",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "internal.deposit.deposit",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "paymentKey",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "대상 가상 계좌 결제 정보의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "ITossPayment.paymentKey",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-toss-payments-server/src/api/structures/ITossPayment.ts",
+                  "textSpan": {
+                    "start": 2480,
+                    "length": 19
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "입금 완료된 가상 꼐좌 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "GET"
+      }
+    },
+    "/v1/payments/{paymentKey}": {
+      "get": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "paymentKey",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "معلومات الدفع",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "معلومات الدفع",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossPayment"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "التحقق من معلومات الدفع",
+        "description": "عرض معلومات الدفع. &quot;المدفوعات.at&quot; هي وظيفة تبحث في معلومات الدفع. بشكل أساسي، عندما يستخدم تطبيق العميل نافذة الدفع التي توفرها Toss Payments نفسها، يرسل التطبيق الأمامي فقط كمية صغيرة من معلومات المعرف، مثل &quot;PaymentKey&quot;، إلى خادمك الخلفي، ويتم استخدامه عند الحاجة إلى معلومات دفع مفصلة. يرجى ملاحظة أنه، على عكس شركات الدفع الأخرى التابعة لشركة PG، لا تؤكد Toss Payments على الفور المدفوعات التي تم إجراؤها باستخدام نافذة الدفع Toss Payments في تطبيق العميل. يرجى ملاحظة أنه لن يتم تأكيد الدفع حتى يتحقق خادم الواجهة الخلفية لديك من معلومات الدفع من خلال &quot;المدفوعات.at&quot; الحالية ويوافق عليها مباشرة عن طريق الاتصال بـ {@link موافقة}..",
+        "x-nestia-namespace": "v1.payments.at",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "paymentKey",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "결제 정보의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "ITossPayment.paymentKey",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-toss-payments-server/src/api/structures/ITossPayment.ts",
+                  "textSpan": {
+                    "start": 2480,
+                    "length": 19
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "GET"
+      },
+      "post": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "paymentKey",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "الدفع المستهدف",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "تأكيد معلومات الطلب",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossPayment.IApproval"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "معلومات الدفع المعتمدة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossPayment"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "الموافقة على الدفع",
+        "description": "تفويض الدفع. لا تؤكد Toss Payments الدفعات التي تم إجراؤها في نافذة الدفع للتطبيق الأمامي وليس في الواجهة الخلفية لشركتك حتى تتم الموافقة على الدفع بواسطة الخادم الخلفي للخدمة. &quot;المدفوعات.الموافقة&quot; هي وظيفة توافق على الدفع في هذه الحالة. إذا كنت تحاكي عملية دفع باستخدام `fake-toss-Payments-server`، فاستخدم {@link ITossCardPayment.IStore.__approved } أو {@link ITossVirtualAccountPayment.IStore.__approved } عند استدعاء واجهة برمجة التطبيقات المتعلقة بالدفع عن طريق تعيينها على false ، يمكنك محاكاة هذا الموقف حيث يلزم الحصول على موافقة منفصلة..",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.payments.approve",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "paymentKey",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "대상 결제의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "ITossPayment.paymentKey",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-toss-payments-server/src/api/structures/ITossPayment.ts",
+                  "textSpan": {
+                    "start": 2480,
+                    "length": 19
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "주문 정보 확인",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "승인된 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/v1/payments/key-in": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "معلومات إدخال الدفع بالبطاقة",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossCardPayment.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "معلومات الدفع بالبطاقة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossCardPayment"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "الدفع بالبطاقة",
+        "description": "الدفع عن طريق البطاقة. `المدفوعات.key_in` هي وظيفة واجهة برمجة التطبيقات يتم استدعاؤها عند إجراء الدفع باستخدام البطاقة. كمرجع، إذا كان تطبيق العميل يستخدم نافذة الدفع التي توفرها Toss Payments نفسها، فلن يتم استدعاء &quot;المدفوعات.key_in&quot; بواسطة خادم الواجهة الخلفية لديك في الخدمة الفعلية. ومع ذلك، يمكن استخدامه على مستوى برنامج أتمتة الاختبار لمحاكاة الموقف الذي يدفع فيه العميل بالبطاقة. وإذا كان خادم الواجهة الخلفية الخاص بك يتصل بـ &quot;Payments.key-in&quot; مباشرة، فإن خادم Toss Payments يرى ذلك كدفعة معتمدة بالكامل ويؤكدها على الفور. ولذلك، عند الاتصال بـ `Payments.key-in` مباشرةً، يتطلب الأمر مزيدًا من الاهتمام الدقيق مقارنةً عندما تكون هناك حاجة إلى {@link موافقة } منفصلة باستخدام نافذة الدفع Toss Payments. بالإضافة إلى ذلك، إذا كان خادم الواجهة الخلفية لديك يستخدم &quot;fake-toss- Payments-server&quot; لمحاكاة الدفع ببطاقة العميل، فإنه يعين قيمة {@link ITossCardPayment.IStore.__approved } عمدًا إلى &quot;خطأ&quot; لتأكيد الدفع بالبطاقة تم تجنبه. من خلال هذا، يمكنك محاكاة موقف حيث يلزم {@link موافقة} منفصل في حالة الدفع بالبطاقة باستخدام نافذة الدفع Toss Payments..",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.payments.key-in.key_in",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "카드 결제 입력 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "카드 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/v1/payments/{paymentKey}/cancel": {
+      "post": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "paymentKey",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "معلومات الدفع",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "إلغاء معلومات الإدخال",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossPaymentCancel.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "معلومات الدفع الملغاة",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossPayment"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "إلغاء الدفع",
+        "description": "إلغاء الدفع. &quot;المدفوعات.إلغاء&quot; هي واجهة برمجة التطبيقات (API) التي تلغي الدفعات. في معلومات إدخال إلغاء الدفع {@link ITossPaymentCancel.IStore}، يجب عليك إدخال سبب الإلغاء والمبلغ المراد رده إلى العميل وضريبة القيمة المضافة ومعلومات حساب الاسترداد إذا لزم الأمر..",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.payments.cancel.cancel",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "paymentKey",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "결제 정보의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "ITossPayment.paymentKey",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-toss-payments-server/src/api/structures/ITossPayment.ts",
+                  "textSpan": {
+                    "start": 2480,
+                    "length": 19
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "취소 입력 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "취소된 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/v1/virtual-accounts": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "معلومات تطبيق الدفع الافتراضي.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossVirtualAccountPayment.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "معلومات الدفع بالحساب الافتراضي",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossVirtualAccountPayment"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "تقدم بطلب الدفع باستخدام الحساب الافتراضي",
+        "description": "تقدم بطلب الدفع باستخدام حساب افتراضي. `virtual_accounts.store` هي وظيفة واجهة برمجة التطبيقات يتم استدعاؤها عندما يحدد العميل حسابًا افتراضيًا كطريقة للدفع. بالطبع، إذا اختار العميل حسابًا افتراضيًا مثل هذا، فلن تكتمل عملية الدفع حتى يقوم العميل بإيداع الأموال في الحساب المخصص، وبالتالي تصبح قيمة {@link ITossPayment.status } `WAITING_FOR_DEPOSIT`. كمرجع، إذا كان تطبيق العميل يستخدم نافذة الدفع التي توفرها Toss Payments نفسها، فلن يتم استدعاء &quot;virtual_accounts.store&quot; بواسطة خادم الواجهة الخلفية لديك في الخدمة الفعلية. ومع ذلك، يمكن استخدامه على مستوى برنامج أتمتة الاختبار لمحاكاة موقف يقوم فيه العميل بالدفع باستخدام حساب افتراضي. وعندما يقوم العميل بإيداع الأموال في الحساب المخصص بعد &quot;virtual_accounts.store&quot;، يتم إنشاء حدث webhook من خادم Toss Payments وإرساله إلى خادم الواجهة الخلفية لديك. إذا كان خادم Toss Payments المراد ربطه ليس حقيقيًا ولكنه &quot;خادم مدفوعات مزيف&quot;، فيمكنك محاكاة موقف يقوم فيه العميل بإيداع أموال في حساب افتراضي عن طريق الاتصال بـ {@link Internal.virtual_accounts.deposit }..",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.virtual-accounts.store",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "가상 결제 신청 정보.",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "가상 계좌 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ITossBilling.IStore": {
+        "type": "object",
+        "properties": {
+          "cardNumber": {
+            "description": "رقم البطاقة.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "[0-9]{16}"
+          },
+          "cardExpirationYear": {
+            "description": "سنة انتهاء البطاقة (رقمين).",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "\\d{2}"
+          },
+          "cardExpirationMonth": {
+            "description": "شهر انتهاء البطاقة (رقمين).",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^(0[1-9]|1[012])$"
+          },
+          "cardPassword": {
+            "description": "كلمة مرور البطاقة.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "customerBirthday": {
+            "description": "تاريخ ميلاد العميل. تنسيق التدوين YYMMDD.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^([0-9]{2})(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$"
+          },
+          "consumerName": {
+            "description": "اسم العميل.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "customerEmail": {
+            "description": "البريد الإلكتروني للعميل.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "format": "email"
+          },
+          "vbv": {
+            "$ref": "#/components/schemas/__type"
+          },
+          "customerKey": {
+            "description": "مفتاح معرف العميل. مفتاح معرف تتم إدارته بواسطة الخدمة التي تستخدمه، وليس بواسطة Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "cardNumber",
+          "cardExpirationYear",
+          "cardExpirationMonth",
+          "cardPassword",
+          "customerBirthday",
+          "customerKey"
+        ],
+        "description": "معلومات تسجيل بطاقة الدفع سهلة.",
+        "x-typia-jsDocTags": []
+      },
+      "__type": {
+        "type": "object",
+        "properties": {
+          "cavv": {
+            "description": "قيم المصادقة لجلسات المصادقة الآمنة ثلاثية الأبعاد.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "xid": {
+            "description": "معرف المعاملة.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "eci": {
+            "description": "قيمة الرمز لنتيجة مصادقة 3DS.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "cavv",
+          "xid",
+          "eci"
+        ],
+        "x-typia-jsDocTags": []
+      },
+      "ITossBilling": {
+        "type": "object",
+        "properties": {
+          "mId": {
+            "description": "معرف التاجر. يتم استخدام دفعات القذف حاليًا.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "billingKey": {
+            "description": "مفتاح معرف {@link ITossBilling }.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "method": {
+            "const": "카드",
+            "description": "طريقة الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cardCompany": {
+            "description": "اسم شركة البطاقة.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "cardNumber": {
+            "description": "رقم البطاقة.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "[0-9]{16}"
+          },
+          "authenticatedAt": {
+            "description": "تاريخ ووقت الشهادة.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          "customerKey": {
+            "description": "مفتاح معرف العميل. مفتاح معرف تتم إدارته بواسطة الخدمة التي تستخدمه، وليس بواسطة Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "mId",
+          "billingKey",
+          "method",
+          "cardCompany",
+          "cardNumber",
+          "authenticatedAt",
+          "customerKey"
+        ],
+        "description": "معلومات طريقة تسجيل الدفع البسيطة. &quot;ITossBilling&quot; هي واجهة بنية بيانات تجسد طريقة بسيطة لتسجيل الدفع، ويتم استخدامها عندما يقوم العميل بتسجيل بطاقته الائتمانية على الخادم ويريد إجراء الدفع بسهولة دون الحاجة إلى إدخال معلومات البطاقة بشكل متكرر في كل مرة يتم فيها الدفع. مطلوب.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossBilling.ICustomerKey": {
+        "type": "object",
+        "properties": {
+          "customerKey": {
+            "description": "مفتاح معرف العميل. مفتاح معرف تتم إدارته بواسطة الخدمة التي تستخدمه، وليس بواسطة Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "customerKey"
+        ],
+        "description": "معلومات معرف العميل.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossBilling.IPaymentStore": {
+        "type": "object",
+        "properties": {
+          "method": {
+            "const": "billing",
+            "description": "يشير إلى أن طريقة الدفع هي الدفع البسيط.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "billingKey": {
+            "description": "مفتاح معرف {@link IPaymentStore }.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "مفتاح معرف الطلب. مفتاح معرف تتم إدارته بواسطة الخدمة التي تستخدمه، وليس بواسطة Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "description": "إجمالي الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "customerKey": {
+            "description": "مفتاح معرف العميل. مفتاح معرف تتم إدارته بواسطة الخدمة التي تستخدمه، وليس بواسطة Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "method",
+          "billingKey",
+          "orderId",
+          "amount",
+          "customerKey"
+        ],
+        "description": "معلومات طلب الدفع باستخدام الدفع البسيط.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossPayment": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ITossCardPayment"
+          },
+          {
+            "$ref": "#/components/schemas/ITossGiftCertificatePayment"
+          },
+          {
+            "$ref": "#/components/schemas/ITossMobilePhonePayment"
+          },
+          {
+            "$ref": "#/components/schemas/ITossTransferPayment"
+          },
+          {
+            "$ref": "#/components/schemas/ITossVirtualAccountPayment"
+          }
+        ],
+        "description": "معلومات الدفع. &quot;ITossPayment&quot; عبارة عن بنية بيانات تجسد معلومات الدفع الخاصة بـ Toss Payments وهي واجهة من النوع الموحد عندما يتم تحديد قيمة الطريقة من خلال حالة الشرط، يتم تحديد النوع المشتق تلقائيًا. ```نوع النص إذا (طريقة الدفع === &quot;بطاقة&quot;) Payment.card; // الدفع يكون ITossCardPayment ```",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossCardPayment": {
+        "type": "object",
+        "properties": {
+          "card": {
+            "$ref": "#/components/schemas/ITossCardPayment.ICard"
+          },
+          "discount": {
+            "$ref": "#/components/schemas/ITossCardPayment.IDiscount.Nullable"
+          },
+          "easyPay": {
+            "oneOf": [
+              {
+                "const": "토스결제"
+              },
+              {
+                "const": "페이코"
+              },
+              {
+                "const": "삼성페이"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "إذا تم الدفع من خلال الدفع البسيط، معلومات بسيطة عن نوع الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "method": {
+            "const": "카드",
+            "description": "طريقة الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "type": {
+            "oneOf": [
+              {
+                "const": "NORMAL"
+              },
+              {
+                "const": "BILLING"
+              }
+            ],
+            "description": "نوع الدفع. - عادي: الدفع العادي - الفواتير: دفع بسيط باستخدام بطاقة مسجلة مسبقًا.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "READY"
+              },
+              {
+                "const": "IN_PROGRESS"
+              },
+              {
+                "const": "WAITING_FOR_DEPOSIT"
+              },
+              {
+                "const": "DONE"
+              },
+              {
+                "const": "CANCELED"
+              },
+              {
+                "const": "PARTIAL_CANCELED"
+              },
+              {
+                "const": "ABORTED"
+              },
+              {
+                "const": "EXPIRED"
+              }
+            ],
+            "description": "حالة الدفع. - جاهز - قيد_التقدم - في انتظار_FOR_DEPOSIT - تم - تم إلغاؤه - جزئي_تم إلغاؤه - تم إحباطه - انتهت صلاحيته",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "mId": {
+            "description": "معرف التاجر. يتم استخدام دفعات القذف حاليًا.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "version": {
+            "description": "إصدار Toss Payments API قيد الاستخدام.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "paymentKey": {
+            "description": "رقم التعريف من تفاصيل الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "مفتاح معرف الطلب. مفتاح معرف تتم إدارته بواسطة الخدمة التي تستخدمه، وليس بواسطة Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "transactionKey": {
+            "description": "قيمة رئيسية فريدة للمعاملة. على عكس {@link PaymentKey }، ليست هناك حاجة لاستخدامه..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "اسم الطلب. اسم الطلب الصادر عن الخدمة التي تستخدم Toss Payments، وليس عن طريق Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "currency": {
+            "description": "الوحدة النقدية. حاليًا، يتوفر KRW فقط لمدفوعات Toss..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "totalAmount": {
+            "description": "إجمالي مبلغ الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "balanceAmount": {
+            "description": "المبلغ الذي يمكن إلغاؤه.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "suppliedAmount": {
+            "description": "سعر العرض.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "مبلغ معفاة من الرسوم الجمركية.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vat": {
+            "description": "ضريبة إضافية.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "useEscrow": {
+            "description": "ما إذا كان سيتم استخدام الضمان.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "cultureExpense": {
+            "description": "سواء لإنفاق المال على الثقافة. تذاكر الدخول، وتذاكر الأداء، وتذاكر الدخول إلى المتحف/المعرض الفني، وما إلى ذلك..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "requestedAt": {
+            "description": "تاريخ ووقت طلب الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          "approvedAt": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "تاريخ ووقت الموافقة على الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancels": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ITossPaymentCancel"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "سجل إلغاء الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cashReceipt": {
+            "$ref": "#/components/schemas/ITossCashReceipt.ISummary.Nullable"
+          }
+        },
+        "required": [
+          "card",
+          "discount",
+          "easyPay",
+          "method",
+          "type",
+          "status",
+          "mId",
+          "version",
+          "paymentKey",
+          "orderId",
+          "transactionKey",
+          "orderName",
+          "currency",
+          "totalAmount",
+          "balanceAmount",
+          "suppliedAmount",
+          "taxFreeAmount",
+          "vat",
+          "useEscrow",
+          "cultureExpense",
+          "requestedAt",
+          "approvedAt",
+          "cancels",
+          "cashReceipt"
+        ],
+        "description": "معلومات الدفع بالبطاقة.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossCardPayment.ICard": {
+        "type": "object",
+        "properties": {
+          "company": {
+            "description": "اسم شركة البطاقة.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "number": {
+            "description": "رقم البطاقة.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "[0-9]{16}"
+          },
+          "installmentPlanMonths": {
+            "description": "عدد الأقساط.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "isInterestFree": {
+            "description": "هل يتم تطبيق التقسيط بدون فوائد؟.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "approveNo": {
+            "description": "رقم الموافقة.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "useCardPoint": {
+            "const": false,
+            "description": "ما إذا كان سيتم استخدام نقاط البطاقة.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cardType": {
+            "oneOf": [
+              {
+                "const": "신용"
+              },
+              {
+                "const": "체크"
+              },
+              {
+                "const": "기프트"
+              }
+            ],
+            "description": "نوع البطاقة.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "ownerType": {
+            "oneOf": [
+              {
+                "const": "개인"
+              },
+              {
+                "const": "법인"
+              }
+            ],
+            "description": "نوع صاحب البطاقة.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "acquireStatus": {
+            "oneOf": [
+              {
+                "const": "READY"
+              },
+              {
+                "const": "CANCELED"
+              },
+              {
+                "const": "REQUESTED"
+              },
+              {
+                "const": "COMPLETED"
+              },
+              {
+                "const": "CANCEL_REQUESTED"
+              }
+            ],
+            "description": "حالة شراء الدفع بالبطاقة. - جاهز: في انتظار الشراء - مطلوب: تم طلب الشراء - مكتمل: اكتملت عملية الشراء - CANCEL_REQUESTED: تم طلب إلغاء الشراء - تم الإلغاء: تم إلغاء الشراء",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "receiptUrl": {
+            "description": "عنوان URL للإيصال.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "url"
+          }
+        },
+        "required": [
+          "company",
+          "number",
+          "installmentPlanMonths",
+          "isInterestFree",
+          "approveNo",
+          "useCardPoint",
+          "cardType",
+          "ownerType",
+          "acquireStatus",
+          "receiptUrl"
+        ],
+        "description": "معلومات البطاقة.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossCardPayment.IDiscount.Nullable": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "amount": {
+                "description": "المبلغ المطبق مع عرض الخصم الفوري لشركة البطاقة.",
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "number"
+              }
+            },
+            "required": [
+              "amount"
+            ],
+            "x-typia-jsDocTags": []
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "معلومات ترويجية للخصم الفوري من شركات بطاقات الائتمان.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossPaymentCancel": {
+        "type": "object",
+        "properties": {
+          "cancelAmount": {
+            "description": "إجمالي الإلغاء.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancelReason": {
+            "description": "سبب الإلغاء.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "taxFreeAmount": {
+            "description": "المبلغ المعفى من الضرائب.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxAmount": {
+            "description": "المبلغ الذي يتم التعامل معه على أنه خاضع للضريبة.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "refundableAmount": {
+            "description": "رصيد قابل للاسترداد بعد إلغاء الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "canceledAt": {
+            "description": "تاريخ ووقت الإلغاء.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "cancelAmount",
+          "cancelReason",
+          "taxFreeAmount",
+          "taxAmount",
+          "refundableAmount",
+          "canceledAt"
+        ],
+        "description": "معلومات إلغاء الدفع.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossCashReceipt.ISummary.Nullable": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "$ref": "#/components/schemas/ITossCashReceipt.Type"
+              },
+              "amount": {
+                "description": "مبلغ معالجة إيصال النقد.",
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "number"
+              },
+              "taxFreeAmount": {
+                "description": "المبلغ المعفى من الضرائب.",
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "number"
+              },
+              "issueNumber": {
+                "description": "رقم إصدار إيصال النقدية.",
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              "receiptUrl": {
+                "description": "عنوان صفحة الاستعلام عن إيصال النقد.",
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "amount",
+              "taxFreeAmount",
+              "issueNumber",
+              "receiptUrl"
+            ],
+            "x-typia-jsDocTags": []
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "معلومات ملخص استلام النقد.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossCashReceipt.Type": {
+        "oneOf": [
+          {
+            "const": "소득공제"
+          },
+          {
+            "const": "지출증빙"
+          }
+        ],
+        "description": "أنواع المقبوضات النقدية."
+      },
+      "ITossGiftCertificatePayment": {
+        "type": "object",
+        "properties": {
+          "giftCertificate": {
+            "$ref": "#/components/schemas/ITossGiftCertificatePayment.IGiftCertificate"
+          },
+          "method": {
+            "const": "상품권",
+            "description": "طريقة الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "type": {
+            "const": "NORMAL",
+            "description": "نوع الدفع. - عادي: الدفع العادي - الفواتير: دفع بسيط باستخدام بطاقة مسجلة مسبقًا.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "READY"
+              },
+              {
+                "const": "IN_PROGRESS"
+              },
+              {
+                "const": "WAITING_FOR_DEPOSIT"
+              },
+              {
+                "const": "DONE"
+              },
+              {
+                "const": "CANCELED"
+              },
+              {
+                "const": "PARTIAL_CANCELED"
+              },
+              {
+                "const": "ABORTED"
+              },
+              {
+                "const": "EXPIRED"
+              }
+            ],
+            "description": "حالة الدفع. - جاهز - قيد_التقدم - في انتظار_FOR_DEPOSIT - تم - تم إلغاؤه - جزئي_تم إلغاؤه - تم إحباطه - انتهت صلاحيته",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "mId": {
+            "description": "معرف التاجر. يتم استخدام دفعات القذف حاليًا.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "version": {
+            "description": "إصدار Toss Payments API قيد الاستخدام.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "paymentKey": {
+            "description": "رقم التعريف من تفاصيل الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "مفتاح معرف الطلب. مفتاح معرف تتم إدارته بواسطة الخدمة التي تستخدمه، وليس بواسطة Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "transactionKey": {
+            "description": "قيمة رئيسية فريدة للمعاملة. على عكس {@link PaymentKey }، ليست هناك حاجة لاستخدامه..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "اسم الطلب. اسم الطلب الصادر عن الخدمة التي تستخدم Toss Payments، وليس عن طريق Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "currency": {
+            "description": "الوحدة النقدية. حاليًا، يتوفر KRW فقط لمدفوعات Toss..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "totalAmount": {
+            "description": "إجمالي مبلغ الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "balanceAmount": {
+            "description": "المبلغ الذي يمكن إلغاؤه.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "suppliedAmount": {
+            "description": "سعر العرض.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "مبلغ معفاة من الرسوم الجمركية.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vat": {
+            "description": "ضريبة إضافية.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "useEscrow": {
+            "description": "ما إذا كان سيتم استخدام الضمان.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "cultureExpense": {
+            "description": "سواء لإنفاق المال على الثقافة. تذاكر الدخول، وتذاكر الأداء، وتذاكر الدخول إلى المتحف/المعرض الفني، وما إلى ذلك..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "requestedAt": {
+            "description": "تاريخ ووقت طلب الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          "approvedAt": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "تاريخ ووقت الموافقة على الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancels": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ITossPaymentCancel"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "سجل إلغاء الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cashReceipt": {
+            "$ref": "#/components/schemas/ITossCashReceipt.ISummary.Nullable"
+          }
+        },
+        "required": [
+          "giftCertificate",
+          "method",
+          "type",
+          "status",
+          "mId",
+          "version",
+          "paymentKey",
+          "orderId",
+          "transactionKey",
+          "orderName",
+          "currency",
+          "totalAmount",
+          "balanceAmount",
+          "suppliedAmount",
+          "taxFreeAmount",
+          "vat",
+          "useEscrow",
+          "cultureExpense",
+          "requestedAt",
+          "approvedAt",
+          "cancels",
+          "cashReceipt"
+        ],
+        "description": "معلومات دفع شهادة الهدية.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossGiftCertificatePayment.IGiftCertificate": {
+        "type": "object",
+        "properties": {
+          "approveNo": {
+            "description": "رقم الموافقة.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "settlementStatus": {
+            "oneOf": [
+              {
+                "const": "COMPLETE"
+              },
+              {
+                "const": "INCOMPLETE"
+              }
+            ],
+            "description": "حالة التسوية.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          }
+        },
+        "required": [
+          "approveNo",
+          "settlementStatus"
+        ],
+        "description": "معلومات شهادة الهدية.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossMobilePhonePayment": {
+        "type": "object",
+        "properties": {
+          "mobilePhone": {
+            "$ref": "#/components/schemas/ITossMobilePhonePayment.IMobilePhone"
+          },
+          "method": {
+            "const": "휴대폰",
+            "description": "طريقة الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "type": {
+            "const": "NORMAL",
+            "description": "نوع الدفع. - عادي: الدفع العادي - الفواتير: دفع بسيط باستخدام بطاقة مسجلة مسبقًا.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "READY"
+              },
+              {
+                "const": "IN_PROGRESS"
+              },
+              {
+                "const": "WAITING_FOR_DEPOSIT"
+              },
+              {
+                "const": "DONE"
+              },
+              {
+                "const": "CANCELED"
+              },
+              {
+                "const": "PARTIAL_CANCELED"
+              },
+              {
+                "const": "ABORTED"
+              },
+              {
+                "const": "EXPIRED"
+              }
+            ],
+            "description": "حالة الدفع. - جاهز - قيد_التقدم - في انتظار_FOR_DEPOSIT - تم - تم إلغاؤه - جزئي_تم إلغاؤه - تم إحباطه - انتهت صلاحيته",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "mId": {
+            "description": "معرف التاجر. يتم استخدام دفعات القذف حاليًا.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "version": {
+            "description": "إصدار Toss Payments API قيد الاستخدام.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "paymentKey": {
+            "description": "رقم التعريف من تفاصيل الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "مفتاح معرف الطلب. مفتاح معرف تتم إدارته بواسطة الخدمة التي تستخدمه، وليس بواسطة Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "transactionKey": {
+            "description": "قيمة رئيسية فريدة للمعاملة. على عكس {@link PaymentKey }، ليست هناك حاجة لاستخدامه..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "اسم الطلب. اسم الطلب الصادر عن الخدمة التي تستخدم Toss Payments، وليس عن طريق Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "currency": {
+            "description": "الوحدة النقدية. حاليًا، يتوفر KRW فقط لمدفوعات Toss..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "totalAmount": {
+            "description": "إجمالي مبلغ الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "balanceAmount": {
+            "description": "المبلغ الذي يمكن إلغاؤه.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "suppliedAmount": {
+            "description": "سعر العرض.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "مبلغ معفاة من الرسوم الجمركية.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vat": {
+            "description": "ضريبة إضافية.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "useEscrow": {
+            "description": "ما إذا كان سيتم استخدام الضمان.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "cultureExpense": {
+            "description": "سواء لإنفاق المال على الثقافة. تذاكر الدخول، وتذاكر الأداء، وتذاكر الدخول إلى المتحف/المعرض الفني، وما إلى ذلك..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "requestedAt": {
+            "description": "تاريخ ووقت طلب الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          "approvedAt": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "تاريخ ووقت الموافقة على الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancels": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ITossPaymentCancel"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "سجل إلغاء الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cashReceipt": {
+            "$ref": "#/components/schemas/ITossCashReceipt.ISummary.Nullable"
+          }
+        },
+        "required": [
+          "mobilePhone",
+          "method",
+          "type",
+          "status",
+          "mId",
+          "version",
+          "paymentKey",
+          "orderId",
+          "transactionKey",
+          "orderName",
+          "currency",
+          "totalAmount",
+          "balanceAmount",
+          "suppliedAmount",
+          "taxFreeAmount",
+          "vat",
+          "useEscrow",
+          "cultureExpense",
+          "requestedAt",
+          "approvedAt",
+          "cancels",
+          "cashReceipt"
+        ],
+        "description": "معلومات الدفع عبر الهاتف المحمول.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossMobilePhonePayment.IMobilePhone": {
+        "type": "object",
+        "properties": {
+          "carrier": {
+            "description": "وكالة أنباء.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "customerMobilePhone": {
+            "description": "رقم الهاتف المحمول للعميل.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "settlementStatus": {
+            "oneOf": [
+              {
+                "const": "COMPLETED"
+              },
+              {
+                "const": "INCOMPLETED"
+              }
+            ],
+            "description": "حالة التسوية.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          }
+        },
+        "required": [
+          "carrier",
+          "customerMobilePhone",
+          "settlementStatus"
+        ],
+        "description": "معلومات الهاتف الخليوي.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossTransferPayment": {
+        "type": "object",
+        "properties": {
+          "transfer": {
+            "$ref": "#/components/schemas/ITossTransferPayment.ITransfer"
+          },
+          "method": {
+            "const": "계좌이체",
+            "description": "طريقة الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "type": {
+            "const": "NORMAL",
+            "description": "نوع الدفع. - عادي: الدفع العادي - الفواتير: دفع بسيط باستخدام بطاقة مسجلة مسبقًا.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "READY"
+              },
+              {
+                "const": "IN_PROGRESS"
+              },
+              {
+                "const": "WAITING_FOR_DEPOSIT"
+              },
+              {
+                "const": "DONE"
+              },
+              {
+                "const": "CANCELED"
+              },
+              {
+                "const": "PARTIAL_CANCELED"
+              },
+              {
+                "const": "ABORTED"
+              },
+              {
+                "const": "EXPIRED"
+              }
+            ],
+            "description": "حالة الدفع. - جاهز - قيد_التقدم - في انتظار_FOR_DEPOSIT - تم - تم إلغاؤه - جزئي_تم إلغاؤه - تم إحباطه - انتهت صلاحيته",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "mId": {
+            "description": "معرف التاجر. يتم استخدام دفعات القذف حاليًا.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "version": {
+            "description": "إصدار Toss Payments API قيد الاستخدام.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "paymentKey": {
+            "description": "رقم التعريف من تفاصيل الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "مفتاح معرف الطلب. مفتاح معرف تتم إدارته بواسطة الخدمة التي تستخدمه، وليس بواسطة Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "transactionKey": {
+            "description": "قيمة رئيسية فريدة للمعاملة. على عكس {@link PaymentKey }، ليست هناك حاجة لاستخدامه..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "اسم الطلب. اسم الطلب الصادر عن الخدمة التي تستخدم Toss Payments، وليس عن طريق Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "currency": {
+            "description": "الوحدة النقدية. حاليًا، يتوفر KRW فقط لمدفوعات Toss..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "totalAmount": {
+            "description": "إجمالي مبلغ الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "balanceAmount": {
+            "description": "المبلغ الذي يمكن إلغاؤه.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "suppliedAmount": {
+            "description": "سعر العرض.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "مبلغ معفاة من الرسوم الجمركية.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vat": {
+            "description": "ضريبة إضافية.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "useEscrow": {
+            "description": "ما إذا كان سيتم استخدام الضمان.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "cultureExpense": {
+            "description": "سواء لإنفاق المال على الثقافة. تذاكر الدخول، وتذاكر الأداء، وتذاكر الدخول إلى المتحف/المعرض الفني، وما إلى ذلك..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "requestedAt": {
+            "description": "تاريخ ووقت طلب الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          "approvedAt": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "تاريخ ووقت الموافقة على الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancels": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ITossPaymentCancel"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "سجل إلغاء الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cashReceipt": {
+            "$ref": "#/components/schemas/ITossCashReceipt.ISummary.Nullable"
+          }
+        },
+        "required": [
+          "transfer",
+          "method",
+          "type",
+          "status",
+          "mId",
+          "version",
+          "paymentKey",
+          "orderId",
+          "transactionKey",
+          "orderName",
+          "currency",
+          "totalAmount",
+          "balanceAmount",
+          "suppliedAmount",
+          "taxFreeAmount",
+          "vat",
+          "useEscrow",
+          "cultureExpense",
+          "requestedAt",
+          "approvedAt",
+          "cancels",
+          "cashReceipt"
+        ],
+        "description": "معلومات الدفع عن طريق تحويل الحساب.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossTransferPayment.ITransfer": {
+        "type": "object",
+        "properties": {
+          "bank": {
+            "description": "اسم البنك.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "settlementStatus": {
+            "oneOf": [
+              {
+                "const": "COMPLETED"
+              },
+              {
+                "const": "INCOMPLETED"
+              }
+            ],
+            "description": "حالة النقل.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          }
+        },
+        "required": [
+          "bank",
+          "settlementStatus"
+        ],
+        "description": "معلومات نقل الحساب.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossVirtualAccountPayment": {
+        "type": "object",
+        "properties": {
+          "secret": {
+            "description": "قيمة التحقق من صحة رد اتصال الإيداع المرسل عند الدفع باستخدام حساب افتراضي..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "virtualAccount": {
+            "$ref": "#/components/schemas/ITossVirtualAccountPayment.IVirtualAccount"
+          },
+          "method": {
+            "const": "가상계좌",
+            "description": "طريقة الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "type": {
+            "const": "NORMAL",
+            "description": "نوع الدفع. - عادي: الدفع العادي - الفواتير: دفع بسيط باستخدام بطاقة مسجلة مسبقًا.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "READY"
+              },
+              {
+                "const": "IN_PROGRESS"
+              },
+              {
+                "const": "WAITING_FOR_DEPOSIT"
+              },
+              {
+                "const": "DONE"
+              },
+              {
+                "const": "CANCELED"
+              },
+              {
+                "const": "PARTIAL_CANCELED"
+              },
+              {
+                "const": "ABORTED"
+              },
+              {
+                "const": "EXPIRED"
+              }
+            ],
+            "description": "حالة الدفع. - جاهز - قيد_التقدم - في انتظار_FOR_DEPOSIT - تم - تم إلغاؤه - جزئي_تم إلغاؤه - تم إحباطه - انتهت صلاحيته",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "mId": {
+            "description": "معرف التاجر. يتم استخدام دفعات القذف حاليًا.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "version": {
+            "description": "إصدار Toss Payments API قيد الاستخدام.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "paymentKey": {
+            "description": "رقم التعريف من تفاصيل الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "مفتاح معرف الطلب. مفتاح معرف تتم إدارته بواسطة الخدمة التي تستخدمه، وليس بواسطة Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "transactionKey": {
+            "description": "قيمة رئيسية فريدة للمعاملة. على عكس {@link PaymentKey }، ليست هناك حاجة لاستخدامه..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "اسم الطلب. اسم الطلب الصادر عن الخدمة التي تستخدم Toss Payments، وليس عن طريق Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "currency": {
+            "description": "الوحدة النقدية. حاليًا، يتوفر KRW فقط لمدفوعات Toss..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "totalAmount": {
+            "description": "إجمالي مبلغ الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "balanceAmount": {
+            "description": "المبلغ الذي يمكن إلغاؤه.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "suppliedAmount": {
+            "description": "سعر العرض.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "مبلغ معفاة من الرسوم الجمركية.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vat": {
+            "description": "ضريبة إضافية.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "useEscrow": {
+            "description": "ما إذا كان سيتم استخدام الضمان.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "cultureExpense": {
+            "description": "سواء لإنفاق المال على الثقافة. تذاكر الدخول، وتذاكر الأداء، وتذاكر الدخول إلى المتحف/المعرض الفني، وما إلى ذلك..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "requestedAt": {
+            "description": "تاريخ ووقت طلب الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          "approvedAt": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "تاريخ ووقت الموافقة على الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancels": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ITossPaymentCancel"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "سجل إلغاء الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cashReceipt": {
+            "$ref": "#/components/schemas/ITossCashReceipt.ISummary.Nullable"
+          }
+        },
+        "required": [
+          "secret",
+          "virtualAccount",
+          "method",
+          "type",
+          "status",
+          "mId",
+          "version",
+          "paymentKey",
+          "orderId",
+          "transactionKey",
+          "orderName",
+          "currency",
+          "totalAmount",
+          "balanceAmount",
+          "suppliedAmount",
+          "taxFreeAmount",
+          "vat",
+          "useEscrow",
+          "cultureExpense",
+          "requestedAt",
+          "approvedAt",
+          "cancels",
+          "cashReceipt"
+        ],
+        "description": "معلومات الدفع بالحساب الافتراضي.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossVirtualAccountPayment.IVirtualAccount": {
+        "type": "object",
+        "properties": {
+          "accountNumber": {
+            "description": "رقم الحساب.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "accountType": {
+            "oneOf": [
+              {
+                "const": "일반"
+              },
+              {
+                "const": "고정"
+              }
+            ],
+            "description": "نوع الحساب الافتراضي.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "bank": {
+            "description": "اسم البنك.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "customerName": {
+            "description": "اسم العميل.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "dueDate": {
+            "description": "تاريخ استحقاق الإيداع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date"
+          },
+          "expired": {
+            "description": "هل تنتهي صلاحية حسابك الافتراضي؟.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "settlementStatus": {
+            "oneOf": [
+              {
+                "const": "COMPLETED"
+              },
+              {
+                "const": "INCOMPLETED"
+              }
+            ],
+            "description": "حالة التسوية.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "refundStatus": {
+            "oneOf": [
+              {
+                "const": "COMPLETED"
+              },
+              {
+                "const": "NONE"
+              },
+              {
+                "const": "FAILED"
+              },
+              {
+                "const": "PENDING"
+              },
+              {
+                "const": "PARTIAL_FAILED"
+              }
+            ],
+            "description": "حالة معالجة استرداد الأموال. - لا شيء: لا ينطبق - فشل: فشل استرداد الأموال - معلق: معالجة استرداد الأموال - PARTIAL_FAILED: فشل استرداد جزئي - مكتمل: اكتمل استرداد الأموال",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          }
+        },
+        "required": [
+          "accountNumber",
+          "accountType",
+          "bank",
+          "customerName",
+          "dueDate",
+          "expired",
+          "settlementStatus",
+          "refundStatus"
+        ],
+        "description": "معلومات الحساب الافتراضي.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossCashReceipt.IStore": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "oneOf": [
+              {
+                "const": "소득공제"
+              },
+              {
+                "const": "지출증빙"
+              }
+            ],
+            "description": "أنواع المقبوضات النقدية.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "paymentKey": {
+            "description": "{@link ITossPayment. PaymentKey } للدفعة المنسوبة.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "معرف معرف الطلب.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "اسم الطلب.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "registrationNumber": {
+            "description": "رقم التعريف الشخصي لإصدار الإيصالات النقدية. اعتمادًا على نوع الإيصال النقدي، يمكنك إدخال رقم هاتفك المحمول أو رقم تسجيل المقيم أو رقم تسجيل الأعمال أو رقم البطاقة..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "description": "المبلغ الذي سيتم إصدار إيصال نقدي به.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "مبلغ معفى من الضرائب.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "businessNumber": {
+            "description": "رقم السجل التجاري.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "paymentKey",
+          "orderId",
+          "orderName",
+          "registrationNumber",
+          "amount"
+        ],
+        "description": "معلومات إدخال إيصال النقد.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossCashReceipt": {
+        "type": "object",
+        "properties": {
+          "receiptKey": {
+            "description": "مفتاح معرف لإيصال النقدية.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ITossCashReceipt.Type"
+          },
+          "orderId": {
+            "description": "معرف معرف الطلب.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "اسم الطلب.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "approvalNumber": {
+            "description": "رقم تفويض استلام النقد.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "approvedAt": {
+            "description": "تاريخ ووقت الموافقة على استلام النقد.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          "canceledAt": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "تاريخ ووقت إلغاء استلام النقد.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "receiptUrl": {
+            "description": "عنوان URL للإيصال.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "receiptKey",
+          "type",
+          "orderId",
+          "orderName",
+          "approvalNumber",
+          "approvedAt",
+          "canceledAt",
+          "receiptUrl"
+        ],
+        "description": "معلومات استلام النقد.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossCashReceipt.ICancel": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "description": "مبلغ الإلغاء. إذا لم يتم إدخاله، سيتم إلغاء {@link ITossCashReceipt.amount المبلغ الإجمالي} المذكور في الإيصال النقدي..",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          }
+        },
+        "description": "معلومات إدخال إلغاء إيصال النقد.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossPaymentWebhook": {
+        "type": "object",
+        "properties": {
+          "eventType": {
+            "const": "PAYMENT_STATUS_CHANGED",
+            "description": "نوع الحدث.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "data": {
+            "$ref": "#/components/schemas/ITossPaymentWebhook.IData"
+          }
+        },
+        "required": [
+          "eventType",
+          "data"
+        ],
+        "description": "معلومات حدث Webhook.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossPaymentWebhook.IData": {
+        "type": "object",
+        "properties": {
+          "paymentKey": {
+            "description": "مفتاح معرف {@link ITossPayment }.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "مفتاح معرف الطلب. مفتاح معرف تتم إدارته بواسطة الخدمة التي تستخدمه، وليس بواسطة Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "WAITING_FOR_DEPOSIT"
+              },
+              {
+                "const": "DONE"
+              },
+              {
+                "const": "CANCELED"
+              },
+              {
+                "const": "PARTIAL_CANCELED"
+              }
+            ],
+            "description": "حالة الدفع. - تم: اكتمل الدفع - تم الإلغاء: تم إلغاء الدفع - PARTIAL_CANCELED: تم إلغاء الدفع جزئيًا - WAITING_FOR_DEPOSIT: في انتظار الإيداع",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          }
+        },
+        "required": [
+          "paymentKey",
+          "orderId",
+          "status"
+        ],
+        "description": "بيانات حدث Webhook.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossCardPayment.IStore": {
+        "type": "object",
+        "properties": {
+          "method": {
+            "const": "card",
+            "description": "يعني أن طريقة الدفع هي بطاقة الائتمان.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cardNumber": {
+            "description": "رقم البطاقة.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "[0-9]{16}"
+          },
+          "cardExpirationYear": {
+            "description": "سنة انتهاء البطاقة (رقمين).",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "\\d{2}"
+          },
+          "cardExpirationMonth": {
+            "description": "شهر انتهاء البطاقة (رقمين).",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^(0[1-9]|1[012])$"
+          },
+          "cardPassword": {
+            "description": "كلمة مرور البطاقة.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "cardInstallmentPlan": {
+            "description": "عدد الأقساط.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "amount": {
+            "description": "المبلغ الإجمالي المدفوع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "إجمالي الإعفاء الضريبي.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "orderId": {
+            "description": "مفتاح معرف الطلب. مفتاح معرف تتم إدارته بواسطة الخدمة التي تستخدمه، وليس بواسطة Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "اسم الطلب. اسم الطلب الصادر عن الخدمة التي تستخدم Toss Payments، وليس عن طريق Toss Payments..",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "customerBirthday": {
+            "description": "تاريخ ميلاد العميل. تنسيق التدوين YYMMDD.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "pattern": "^([0-9]{2})(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$"
+          },
+          "customerEmail": {
+            "description": "البريد الإلكتروني للعميل.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "format": "email"
+          },
+          "vbv": {
+            "$ref": "#/components/schemas/__type.o1"
+          },
+          "__approved": {
+            "description": "ما إذا تمت الموافقة على الدفع. يتم استخدام هذه القيمة فقط في خادم المدفوعات الوهمية &quot;Fake-toss- Payments-server&quot;، ويتم استخدامها عند تأخير الموافقة على الدفع عمدًا. إذا قمت بتعيين هذه القيمة على &quot;خطأ&quot;، فيمكنك محاكاة موقف يقوم فيه التطبيق الأمامي بالدفع باستخدام نافذة الدفع التي توفرها Toss Payments. بشكل أساسي، عندما يطلب خادم Toss Payments الدفع مباشرةً باستخدام نافذة الدفع التي توفرها Toss Payments دون المرور عبر الخادم الخلفي في التطبيق الأمامي، فإن الواجهة الخلفية تعالجه بشكل منفصل حتى يتم {@linkfunctional.payments.approve موافقة} لا يتم قبولها كدفعة رسمية. من ناحية أخرى، عندما يستدعي خادم الواجهة الخلفية واجهة برمجة التطبيقات لخادم Toss Payments، فإن Toss Payments يوافق عليها على الفور تحتاج.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "method",
+          "cardNumber",
+          "cardExpirationYear",
+          "cardExpirationMonth",
+          "amount",
+          "orderId"
+        ],
+        "description": "معلومات طلب الدفع باستخدام بطاقة الائتمان.",
+        "x-typia-jsDocTags": []
+      },
+      "__type.o1": {
+        "type": "object",
+        "properties": {
+          "cavv": {
+            "description": "قيم المصادقة لجلسات المصادقة الآمنة ثلاثية الأبعاد.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "xid": {
+            "description": "معرف المعاملة.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "eci": {
+            "description": "قيمة الرمز لنتيجة مصادقة 3DS.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "cavv",
+          "xid",
+          "eci"
+        ],
+        "x-typia-jsDocTags": []
+      },
+      "ITossPayment.IApproval": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "description": "مفتاح معرف الطلب. مفتاح معرف تتم إدارته بواسطة الخدمة التي تستخدمه، وليس بواسطة Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "description": "إجمالي الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          }
+        },
+        "required": [
+          "orderId",
+          "amount"
+        ],
+        "description": "معلومات ترخيص الدفع.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossPaymentCancel.IStore": {
+        "type": "object",
+        "properties": {
+          "paymentKey": {
+            "description": "مفتاح معرف {@link ITossPayment }.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "cancelReason": {
+            "description": "سبب الإلغاء.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "cancelAmount": {
+            "description": "إجمالي الإلغاء.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "refundReceiveAccount": {
+            "$ref": "#/components/schemas/__type.o2"
+          },
+          "taxAmount": {
+            "description": "مبلغ المعاملة الضريبية.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "مبلغ المعاملة المعفاة من الضرائب.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "refundableAmount": {
+            "description": "رصيد قابل للاسترداد بعد إلغاء الدفع.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          }
+        },
+        "required": [
+          "paymentKey",
+          "cancelReason"
+        ],
+        "description": "معلومات طلب إلغاء الدفع.",
+        "x-typia-jsDocTags": []
+      },
+      "__type.o2": {
+        "type": "object",
+        "properties": {
+          "bank": {
+            "description": "معلومات البنك.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "accountNumber": {
+            "description": "رقم الحساب.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^[0-9]{0,20}$"
+          },
+          "holderName": {
+            "description": "المودع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "bank",
+          "accountNumber",
+          "holderName"
+        ],
+        "x-typia-jsDocTags": []
+      },
+      "ITossVirtualAccountPayment.IStore": {
+        "type": "object",
+        "properties": {
+          "method": {
+            "const": "virtual-account",
+            "description": "يعني أن طريقة الدفع هي حساب افتراضي.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "orderId": {
+            "description": "رقم تعريف الطلب. مفتاح معرف تتم إدارته بواسطة الخدمة التي تستخدمه، وليس بواسطة Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "اسم الطلب. اسم الطلب الصادر عن الخدمة التي تستخدم Toss Payments، وليس عن طريق Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "bank": {
+            "description": "اسم البنك.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "customerName": {
+            "description": "اسم العميل.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "description": "إجمالي الدفع.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "__approved": {
+            "description": "ما إذا تمت الموافقة على الدفع. يتم استخدام هذه القيمة فقط في خادم المدفوعات الوهمية &quot;Fake-toss- Payments-server&quot;، ويتم استخدامها عند تأخير الموافقة على الدفع عمدًا. إذا قمت بتعيين هذه القيمة على &quot;خطأ&quot;، فيمكنك محاكاة موقف يقوم فيه التطبيق الأمامي بالدفع باستخدام نافذة الدفع التي توفرها Toss Payments. بشكل أساسي، عندما يطلب خادم Toss Payments الدفع مباشرةً باستخدام نافذة الدفع التي توفرها Toss Payments دون المرور عبر الخادم الخلفي في التطبيق الأمامي، فإن الواجهة الخلفية تعالجه بشكل منفصل حتى يتم {@linkfunctional.payments.approve موافقة} لا يتم قبولها كدفعة رسمية. من ناحية أخرى، عندما يستدعي خادم الواجهة الخلفية واجهة برمجة التطبيقات لخادم Toss Payments، فإن Toss Payments يوافق عليها على الفور تحتاج.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "method",
+          "orderId",
+          "orderName",
+          "bank",
+          "customerName",
+          "amount"
+        ],
+        "description": "معلومات طلب الدفع باستخدام الحساب الافتراضي.",
+        "x-typia-jsDocTags": []
+      }
+    },
+    "securitySchemes": {
+      "basic": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "x-samchon-emended": true
+}

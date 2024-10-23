@@ -658,7 +658,7 @@
             "description": ""
           }
         },
-        "summary": "공격 파일 링크를 활용 셀 생성 및 추가 데이터",
+        "summary": "공격 파일 링크를 가지고 셀 생성 및 추가 데이터 생성",
         "description": "Excel 파일 링크로 Excel 파일에 데이터 추가 Excel에 데이터를 추가할 때 아직 존재하지 않는 시트인 경우 시트 생성이 선행합니다. 따라서 이 기능은 시트 생성에도 사용할 수 있습니다. 시트만 만들고 데이터가 없는 빈 파일을 만들려면 데이터가 없는 시트 이름만 지정하면 됩니다. 기존 시트에 행을 추가할 때는 가장 아래 줄에 추가하도록 되어 있으므로 추가하기 전에 데이터를 확인하는 것이 좋습니다. fileUrl을 제공하면 작업 후 수정할 수 있습니다. 수정 후 파일은 새로운 링크로 발급됩니다. 이전 발화에서 파일 링크를 알고 있거나 사용자로부터 발화에서 파일 링크를 받은 경우 파일을 업로드하지 않고도 파일을 업데이트할 수 있는 커넥터입니다. Excel 파일이 생성된 직후에 Excel 파일에 대한 링크가 생성되므로 업로드를 통해 데이터를 추가하는 것보다 이 커넥터를 호출하는 것이 사용자 경험 측면에서 더 유리합니다..",
         "tags": [
           "Excel"
@@ -4352,7 +4352,7 @@
                             "const": 3
                           },
                           {
-                            "title": "다중 제한 출퇴근",
+                            "title": "다중 제한 운송",
                             "const": 4
                           }
                         ]
@@ -10646,7 +10646,7 @@
             "description": ""
           }
         },
-        "summary": "저장소에 대한 라벨 목록",
+        "summary": "저장소의 라벨 목록",
         "description": "저장소에 대한 레이블 나열 해당 저장소에서 생성되고 사용된 이슈 목록을 봅니다. 각 이슈에는 이 저장소에 이미 등록된 레이블만 있습니다. 물론 이슈를 생성할 때 반드시 여기의 레이블만 사용해야 한다는 것은 아니지만 여기의 레이블을 참조하여 할당하는 것이 좋습니다..",
         "tags": [
           "Github"
@@ -11768,7 +11768,7 @@
           {
             "name": "workspaceId",
             "required": true,
-            "description": "삭제할 작업 공간 ID",
+            "description": "삭제할 작업공간 ID",
             "in": "path",
             "schema": {
               "x-wrtn-prerequisite": {
@@ -12124,7 +12124,7 @@
           }
         },
         "summary": "crunchbase에서 조직 데이터 가져오기",
-        "description": "기업 정보 문의 기업 정보에는 회사에 대한 간략한 소개와 온마크 순위, 산업 그룹, 소셜 미디어, 웹사이트, 자금 조달 금액 및 라운드를 포함한 자금 조달 정보, 연락처, 유사 서비스 및 경쟁자가 포함됩니다. 그 외에도 회사는 언급된 기사 및 직원 수, 창립자 목록을 포함한 모든 전반적인 정보를 얻을 수 있습니다..",
+        "description": "기업 정보 문의 기업 정보에는 기업에 대한 간략한 소개와 온마크 순위, 산업 그룹, 소셜 미디어, 웹사이트, 자금 조달 금액 및 라운드를 포함한 자금 조달 정보, 연락처, 유사 서비스 및 경쟁자가 포함됩니다. 그 외에도 기업은 언급된 기사 및 직원 수, 창립자 목록을 포함한 모든 전반적인 정보를 얻을 수 있습니다..",
         "tags": []
       }
     },
@@ -13648,7 +13648,7 @@
             ]
           },
           "type": {
-            "description": "부여할 권한 유형입니다. user - 특정 사용자. 이 경우 emailAddress 필드에 권한을 부여할 사용자의 이메일 주소를 지정해야 합니다. group - 특정 그룹. 이 경우 emailAddress 필드에 권한을 부여할 그룹의 이메일 주소를 지정해야 합니다. domain - 특정 도메인. 이 경우 domain 필드에 권한을 부여할 도메인을 지정해야 합니다. anyone - 모든 사용자 가능한 값은 &quot;user&quot;, &quot;group&quot;, &quot;domain&quot;, &quot;anyone&quot;의 네 가지뿐입니다..",
+            "description": "부여할 권한 유형. user - 특정 사용자. 이 경우 emailAddress 필드에 권한을 부여할 사용자의 이메일 주소를 지정해야 합니다. group - 특정 그룹. 이 경우 emailAddress 필드에 권한을 부여할 그룹의 이메일 주소를 지정해야 합니다. domain - 특정 도메인. 이 경우 domain 필드에 권한을 부여할 도메인을 지정해야 합니다. anyone - 모든 사용자 가능한 값은 &quot;user&quot;, &quot;group&quot;, &quot;domain&quot;, &quot;anyone&quot;의 네 가지뿐입니다..",
             "title": "허가의 종류",
             "oneOf": [
               {
@@ -13678,7 +13678,7 @@
         "properties": {
           "data": {
             "title": "Google 문서 데이터",
-            "description": "이건 내가 읽은 Google 문서의 데이터입니다..",
+            "description": "내가 읽은 Google 문서의 데이터입니다..",
             "$ref": "#/components/schemas/_namespace_swagger.IGoogleDocs"
           }
         },
@@ -14986,8 +14986,8 @@
       "_namespace_swagger.IGoogleCalendar.ICreateQuickEventInput": {
         "properties": {
           "text": {
-            "title": "빠른 일정 이벤트를 만드는 텍스트입니다.",
-            "description": "빠른 일정 이벤트를 만드는 텍스트입니다..",
+            "title": "빠른 캘린더 이벤트를 만드는 텍스트입니다.",
+            "description": "빠른 캘린더 이벤트를 만드는 텍스트입니다..",
             "type": "string"
           },
           "secretKey": {
@@ -15577,7 +15577,7 @@
             ]
           },
           "type": {
-            "description": "부여할 권한 유형입니다. user - 특정 사용자. 이 경우 emailAddress 필드에 권한을 부여할 사용자의 이메일 주소를 지정해야 합니다. group - 특정 그룹. 이 경우 emailAddress 필드에 권한을 부여할 그룹의 이메일 주소를 지정해야 합니다. domain - 특정 도메인. 이 경우 domain 필드에 권한을 부여할 도메인을 지정해야 합니다. anyone - 모든 사용자 가능한 값은 &quot;user&quot;, &quot;group&quot;, &quot;domain&quot;, &quot;anyone&quot;의 네 가지뿐입니다..",
+            "description": "부여할 권한 유형. user - 특정 사용자. 이 경우 emailAddress 필드에 권한을 부여할 사용자의 이메일 주소를 지정해야 합니다. group - 특정 그룹. 이 경우 emailAddress 필드에 권한을 부여할 그룹의 이메일 주소를 지정해야 합니다. domain - 특정 도메인. 이 경우 domain 필드에 권한을 부여할 도메인을 지정해야 합니다. anyone - 모든 사용자 가능한 값은 &quot;user&quot;, &quot;group&quot;, &quot;domain&quot;, &quot;anyone&quot;의 네 가지뿐입니다..",
             "title": "허가의 종류",
             "oneOf": [
               {
@@ -15839,7 +15839,7 @@
           },
           "lastViewedByMeDate": {
             "format": "date-time",
-            "title": "내가 마지막으로 본 날짜",
+            "title": "lastViewedByMe날짜",
             "type": "string"
           },
           "markedViewedByMeDate": {
@@ -21619,7 +21619,7 @@
                 "const": 101
               },
               {
-                "title": "시작하기 주변을 탐색할 수 없습니다.",
+                "title": "시작 주변 지역을 탐색할 수 없습니다.",
                 "const": 102
               },
               {
@@ -21663,7 +21663,7 @@
                 "const": 205
               },
               {
-                "title": "다중 출발지: 여러분의 외곽의 유고 정보(교통 장애)로 변환 장치",
+                "title": "다중 출발지: 여러분의 외곽의 유고 정보(교통 장애)로 변환 가능",
                 "const": 206
               },
               {
@@ -22091,7 +22091,7 @@
                 "const": 39
               },
               {
-                "title": "로터리에서 11시방향",
+                "title": "로터리에서 11시 방향",
                 "const": 40
               },
               {
@@ -22155,7 +22155,7 @@
                 "const": 73
               },
               {
-                "title": "회전으로 오른쪽 5시 방향",
+                "title": "회전 방향에서 오른쪽 5시 쪽으로",
                 "const": 74
               },
               {
@@ -22163,7 +22163,7 @@
                 "const": 75
               },
               {
-                "title": "회전 거리에서 7시 방향",
+                "title": "회전 방향에서 7시 방향",
                 "const": 76
               },
               {
@@ -22171,7 +22171,7 @@
                 "const": 77
               },
               {
-                "title": "회전교차로에서 왼쪽 9시방향",
+                "title": "회전으로 인해 9시 방향",
                 "const": 78
               },
               {
@@ -23346,7 +23346,7 @@
           },
           "value": {
             "pattern": "^([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)$",
-            "title": "`value_type`이 percent인 경우 백분율로 계산된 Point Value",
+            "title": "`value_type`이 percent인 경우 Point Value는 백분율로 계산됩니다.",
             "type": "string"
           }
         },
@@ -23559,7 +23559,7 @@
                 "const": "limit"
               },
               {
-                "title": "1개만 구매 가능",
+                "title": "하나만 구매 가능",
                 "const": "unique"
               }
             ]
@@ -25360,7 +25360,7 @@
                   "type": "string"
                 },
                 "bjdongCd": {
-                  "title": "법적 동 코드",
+                  "title": "법정동 코드",
                   "description": "도시/마을 코드와 리 코드의 조합",
                   "type": "string"
                 },
@@ -26103,7 +26103,7 @@
         "properties": {
           "user_request": {
             "title": "사용자 요청",
-            "x-wrtn-placeholder": "제품 이름과 제품의 특징을 참고해서 광고 문구를 기발하고 캐릭터러스하게 만들어주세요.",
+            "x-wrtn-placeholder": "제품 이름과 제품의 특징을 참고해서 광고 문안을 기발하고 캐릭터러스하게 만들어주세요.",
             "type": "string"
           },
           "system_prompt": {
@@ -26131,7 +26131,7 @@
             "type": "string"
           },
           "storyLine": {
-            "title": "다음 스토리 라인을 생성할 수 있다면 여기에 제공하세요",
+            "title": "다음 스토리 라인을 생성할 수 있다면 여기에 제공하세요.",
             "description": "다음 스토리 라인을 생성할 수 있다면 여기에 제공하세요. 사용자가 원하는 것이 무엇인지 잘 알고 있을 때만 스토리를 생성하세요. 사용자가 확신하지 못하는 경우 스토리를 제안할 수 있지만 스토리 라인을 생성하기 전에 먼저 사용자에게 물어보세요..",
             "type": "string"
           },
@@ -26747,7 +26747,7 @@
           "customerId": {
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
             "title": "고객 리소스 ID",
-            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 &#39;customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
+            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 `customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
             "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "jmesPath": "[].{value:id, label:id}",
@@ -26801,7 +26801,7 @@
           "customerId": {
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
             "title": "고객 리소스 ID",
-            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 &#39;customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
+            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 `customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
             "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "jmesPath": "[].{value:id, label:id}",
@@ -26846,7 +26846,7 @@
           "customerId": {
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
             "title": "고객 리소스 ID",
-            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 &#39;customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
+            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 `customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
             "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "jmesPath": "[].{value:id, label:id}",
@@ -26876,7 +26876,7 @@
           "customerId": {
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
             "title": "고객 리소스 ID",
-            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 &#39;customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
+            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 `customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
             "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "jmesPath": "[].{value:id, label:id}",
@@ -26919,7 +26919,7 @@
             "type": "string"
           },
           "currencyCode": {
-            "title": "화폐 단위, 통화 코드",
+            "title": "화폐 단위, 화폐 코드",
             "description": "&#39;USD&#39;, &#39;EUR&#39;, &#39;KRW&#39; 등을 의미합니다..",
             "type": "string"
           }
@@ -27384,7 +27384,7 @@
           "customerId": {
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
             "title": "고객 리소스 ID",
-            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 &#39;customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
+            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 `customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
             "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "jmesPath": "[].{value:id, label:id}",
@@ -27536,7 +27536,7 @@
           "customerId": {
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
             "title": "고객 리소스 ID",
-            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 &#39;customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
+            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 `customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
             "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "jmesPath": "[].{value:id, label:id}",
@@ -27654,7 +27654,7 @@
           "customerId": {
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
             "title": "고객 리소스 ID",
-            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 &#39;customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
+            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 `customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
             "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "jmesPath": "[].{value:id, label:id}",
@@ -27831,7 +27831,7 @@
           "customerId": {
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
             "title": "고객 리소스 ID",
-            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 &#39;customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
+            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 `customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
             "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "jmesPath": "[].{value:id, label:id}",
@@ -27886,7 +27886,7 @@
           "customerId": {
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
             "title": "고객 리소스 ID",
-            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 &#39;customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
+            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 `customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
             "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "jmesPath": "[].{value:id, label:id}",
@@ -27931,7 +27931,7 @@
           "customerId": {
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
             "title": "고객 리소스 ID",
-            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 &#39;customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
+            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 `customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
             "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "jmesPath": "[].{value:id, label:id}",
@@ -27980,7 +27980,7 @@
           "customerId": {
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
             "title": "고객 리소스 ID",
-            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 &#39;customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
+            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 `customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
             "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "jmesPath": "[].{value:id, label:id}",
@@ -28185,7 +28185,7 @@
           "customerId": {
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
             "title": "고객 리소스 ID",
-            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 &#39;customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
+            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 `customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
             "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "jmesPath": "[].{value:id, label:id}",
@@ -28215,7 +28215,7 @@
           "customerId": {
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
             "title": "고객 리소스 ID",
-            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 &#39;customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
+            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 `customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
             "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "jmesPath": "[].{value:id, label:id}",
@@ -28300,7 +28300,7 @@
           "customerId": {
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
             "title": "고객 리소스 ID",
-            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 &#39;customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
+            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 `customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
             "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "jmesPath": "[].{value:id, label:id}",
@@ -28473,7 +28473,7 @@
           "customerId": {
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
             "title": "고객 리소스 ID",
-            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 &#39;customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
+            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 `customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
             "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "jmesPath": "[].{value:id, label:id}",
@@ -28530,7 +28530,7 @@
           "customerId": {
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
             "title": "고객 리소스 ID",
-            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 &#39;customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
+            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 `customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
             "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "jmesPath": "[].{value:id, label:id}",
@@ -28588,7 +28588,7 @@
           "customerId": {
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
             "title": "고객 리소스 ID",
-            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 &#39;customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
+            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 `customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
             "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "jmesPath": "[].{value:id, label:id}",
@@ -28717,7 +28717,7 @@
           "customerId": {
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
             "title": "고객 리소스 ID",
-            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 &#39;customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
+            "description": "이는 고객의 리소스 ID입니다. `customers/${number}` 형식에서 `customers/&#39;를 제거한 후 남은 숫자 형식을 의미합니다. `Wrtn`의 `google ads` 관련 커넥터는 `customerId` 속성을 수신하여 고객이 어떤 광고 계정을 가지고 있는지, 즉 고객 중 어떤 광고 계정을 사용할지 결정해야 합니다. 대부분 사용자는 광고 계정이 하나뿐이므로 `customerId`가 인수로 제공되지 않으면 숫자 0으로 검색된 광고 계정이 무조건 사용됩니다. 광고 계정이 두 개 이상인 사용자가 `customerId`를 제공하지 않으면 항상 실패로 간주됩니다..",
             "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "jmesPath": "[].{value:id, label:id}",
@@ -31106,7 +31106,7 @@
           "link_to_page": {
             "properties": {
               "page_id": {
-                "description": "Notion 링크 끝에 페이지 ID를 매개변수로 전달하여 페이지를 조회할 수 있습니다. 예를 들어, &#39;https://www.notion.so/ :pageId&#39; 형식입니다..",
+                "description": "Notion 링크 끝에 페이지 ID를 매개변수로 전달하여 페이지를 조회할 수 있습니다. 예를 들어, &#39;https://www.notion.so/ :pageId&#39; 형식으로.",
                 "title": "페이지_아이디",
                 "oneOf": [
                   {
@@ -34138,7 +34138,7 @@
                   "const": "17"
                 },
                 {
-                  "title": "스파 호텔",
+                  "title": "스파호텔",
                   "const": "18"
                 },
                 {
@@ -35244,7 +35244,7 @@
       "_namespace_swagger.MyPickISlack.Attachmenttitleid": {
         "properties": {
           "title": {
-            "title": "제목 첨부 파일 상단 근처의 큰 제목 텍스트.",
+            "title": "제목 첨부 파일 상단 부근의 큰 제목 텍스트.",
             "type": "string"
           },
           "id": {
@@ -40201,7 +40201,7 @@
           "date": {
             "format": "date",
             "title": "날짜",
-            "description": "데일리로 조회할 데이트입니다. 입력하는 날짜를 관계로 조회합니다. 년-월-일 형식의 날짜 유형 문자열을 연결하는 것입니다.",
+            "description": "데일리로 조회할 데이트입니다. 입력하는 날짜를 관계로 조회합니다. 년-월-일 형식의 날짜 유형 문자열을 연결하기 때문에.",
             "type": "string"
           }
         },
@@ -40453,7 +40453,7 @@
                     },
                     {
                       "title": "공공 이벤트",
-                      "description": "개인 저장소가 공개되면 트리거됩니다..",
+                      "description": "개인 저장소가 공개될 때 트리거됩니다..",
                       "const": "PublicEvent"
                     },
                     {
@@ -40462,7 +40462,7 @@
                       "const": "PullRequestEvent"
                     },
                     {
-                      "title": "PullRequestReviewEvent",
+                      "title": "PullRequestReview이벤트",
                       "description": "풀 리퀘스트에 대한 리뷰가 제출될 때 트리거됨.",
                       "const": "PullRequestReviewEvent"
                     },
@@ -46344,7 +46344,7 @@
             ]
           },
           "sort": {
-            "title": "방향의 조건은 &quot;CREATED_AT&quot;, &quot;UPDATED_AT&quot;, &quot;COMMENTS&quot; 중 하나여야 합니다..",
+            "title": "방향 조건은 &quot;CREATED_AT&quot;, &quot;UPDATED_AT&quot;, &quot;COMMENTS&quot; 중 하나여야 합니다..",
             "oneOf": [
               {
                 "title": "생성됨_시간",
@@ -48082,7 +48082,7 @@
             "type": "string"
           },
           "author": {
-            "title": "작성자 GitHub 사용자 이름 또는 이메일 주소는 커밋 작성자별로 필터링하는 데 사용됩니다..",
+            "title": "작성자 GitHub 사용자 이름 또는 이메일 주소로 커밋 작성자를 필터링하는 데 사용.",
             "type": "string"
           },
           "committer": {
@@ -50055,7 +50055,7 @@
         "properties": {
           "channelId": {
             "title": "채널",
-            "description": "저장된 고정된 로그를 채널을 선택해주세요.",
+            "description": "고정된 로그를 보관하는 채널을 선택해주세요.",
             "x-wrtn-prerequisite": {
               "jmesPath": "[].{value:id, label:name}",
               "method": "post",
@@ -51046,7 +51046,7 @@
           "invitees_counter": {
             "properties": {
               "total": {
-                "title": "총 초대자 수 이벤트에 초대된 총 사람 수(취소된 초대자 포함)",
+                "title": "총 초대자 수 이벤트에 초대된 총 사람 수(취소한 초대자 포함)",
                 "type": "integer"
               },
               "active": {
@@ -51670,7 +51670,7 @@
             "type": "string"
           },
           "routing_form_submission": {
-            "description": "초대자를 예약 페이지로 리디렉션하는 라우팅 양식 제출에 대한 참조.",
+            "description": "초대받은 사람을 예약 페이지로 리디렉션하는 라우팅 양식 제출에 대한 참조.",
             "title": "라우팅_양식_제출",
             "oneOf": [
               {
@@ -52153,7 +52153,7 @@
           },
           "timezone": {
             "title": "시간대",
-            "description": "사용자에게 시간을 표시할 때 사용할 시간대",
+            "description": "사용자에게 시간을 표시할 때 사용할 표준 시간대",
             "x-wrtn-placeholder": "아시아/도쿄",
             "type": "string"
           },
@@ -52344,7 +52344,7 @@
           },
           "name": {
             "title": "양식 이름",
-            "description": "생성된 양식의 이름.",
+            "description": "생성된 폼의 이름.",
             "type": "string"
           },
           "type": {
@@ -54120,7 +54120,7 @@
             ]
           },
           "type": {
-            "title": "value 펀딩 라운드의 유형.",
+            "title": "가치 펀딩 라운드의 유형.",
             "type": "string"
           },
           "value": {
@@ -54645,7 +54645,7 @@
           },
           "IsDataFromGa": {
             "title": "GA에서 가져온 데이터인가",
-            "description": "데이터가 Google Analytics에서 나온 것인지 나타냅니다.",
+            "description": "데이터가 Google Analytics에서 나온 것인지 여부를 나타냅니다.",
             "type": "boolean"
           },
           "Competitors": {

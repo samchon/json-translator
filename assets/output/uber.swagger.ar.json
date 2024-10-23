@@ -1,0 +1,482 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "واجهة برمجة تطبيقات أوبر",
+    "description": "انقل تطبيقك إلى الأمام باستخدام واجهة برمجة تطبيقات Uber",
+    "version": "1.0.0"
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "description": "معرف فريد يمثل منتجًا معينًا لخط عرض وخط طول معينين. على سبيل المثال، سيكون لدى uberX في سان فرانسيسكو معرف منتج مختلف عن uberX في لوس أنجلوس."
+          },
+          "description": {
+            "type": "string",
+            "description": "وصف المنتج."
+          },
+          "display_name": {
+            "type": "string",
+            "description": "اسم العرض للمنتج."
+          },
+          "capacity": {
+            "type": "string",
+            "description": "سعة المنتج. على سبيل المثال، 4 أشخاص."
+          },
+          "image": {
+            "type": "string",
+            "description": "عنوان URL للصورة التي تمثل المنتج."
+          }
+        }
+      },
+      "PriceEstimate": {
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "description": "معرف فريد يمثل منتجًا معينًا لخط عرض وخط طول معينين. على سبيل المثال، سيكون لدى uberX في سان فرانسيسكو معرف منتج مختلف عن uberX في لوس أنجلوس"
+          },
+          "currency_code": {
+            "type": "string",
+            "description": "[ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) رمز العملة."
+          },
+          "display_name": {
+            "type": "string",
+            "description": "اسم العرض للمنتج."
+          },
+          "estimate": {
+            "type": "string",
+            "description": "سلسلة منسقة من التقديرات بالعملة المحلية لموقع البداية. يمكن أن يكون التقدير عبارة عن نطاق أو رقم واحد (سعر ثابت) أو &quot;محدد بالعداد&quot; لسيارات الأجرة."
+          },
+          "low_estimate": {
+            "type": "number",
+            "description": "الحد الأدنى للسعر التقديري."
+          },
+          "high_estimate": {
+            "type": "number",
+            "description": "الحد الأعلى للسعر التقديري."
+          },
+          "surge_multiplier": {
+            "type": "number",
+            "description": "مضاعف الارتفاع المتوقع. يكون الارتفاع نشطًا إذا كان مضاعف الارتفاع أكبر من 1. يأخذ تقدير السعر في الاعتبار بالفعل مضاعف الارتفاع."
+          }
+        }
+      },
+      "Profile": {
+        "properties": {
+          "first_name": {
+            "type": "string",
+            "description": "الاسم الأول لمستخدم أوبر."
+          },
+          "last_name": {
+            "type": "string",
+            "description": "اللقب الخاص بمستخدم أوبر."
+          },
+          "email": {
+            "type": "string",
+            "description": "عنوان البريد الإلكتروني لمستخدم أوبر"
+          },
+          "picture": {
+            "type": "string",
+            "description": "رابط صورة مستخدم أوبر."
+          },
+          "promo_code": {
+            "type": "string",
+            "description": "كود خصم اوبر للمستخدم."
+          }
+        }
+      },
+      "Activity": {
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "description": "معرف فريد للنشاط"
+          }
+        }
+      },
+      "Activities": {
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "format": "int32",
+            "description": "الموضع في الترقيم."
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32",
+            "description": "عدد العناصر المطلوب استرجاعها (100 كحد أقصى)."
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "العدد الإجمالي للعناصر المتاحة."
+          },
+          "history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Activity"
+            }
+          }
+        }
+      },
+      "Error": {
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/products": {
+      "get": {
+        "summary": "أنواع المنتجات",
+        "description": "تعيد نقطة نهاية المنتجات معلومات حول منتجات Uber المعروضة في موقع معين. تتضمن الاستجابة اسم العرض وتفاصيل أخرى حول كل منتج، وتسرد المنتجات بالترتيب الصحيح للعرض.",
+        "parameters": [
+          {
+            "name": "latitude",
+            "in": "query",
+            "description": "مكون خط العرض للموقع.",
+            "schema": {
+              "name": "latitude",
+              "in": "query",
+              "description": "مكون خط العرض للموقع.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          },
+          {
+            "name": "longitude",
+            "in": "query",
+            "description": "مكون خط الطول للموقع.",
+            "schema": {
+              "name": "longitude",
+              "in": "query",
+              "description": "مكون خط الطول للموقع.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "Products"
+        ],
+        "responses": {
+          "200": {
+            "description": "مجموعة من المنتجات",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "خطأ غير متوقع",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/estimates/price": {
+      "get": {
+        "summary": "تقديرات الأسعار",
+        "description": "تعيد نقطة نهاية تقديرات الأسعار نطاق السعر التقديري لكل منتج معروض في موقع معين. يتم توفير تقدير السعر كسلسلة منسقة تتضمن نطاق السعر الكامل ورمز العملة المحلية.<br><br> تتضمن الاستجابة أيضًا تقديرات منخفضة ومرتفعة، ورمز العملة [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) للمواقف التي تتطلب تحويل العملات. عندما يكون surge نشطًا لمنتج معين، فإن مضاعف surge الخاص به سيكون أكبر من 1، لكن تقدير السعر يأخذ هذا المضاعف في الاعتبار بالفعل.",
+        "parameters": [
+          {
+            "name": "start_latitude",
+            "in": "query",
+            "description": "مكون خط العرض لموقع البداية.",
+            "schema": {
+              "name": "start_latitude",
+              "in": "query",
+              "description": "مكون خط العرض لموقع البداية.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          },
+          {
+            "name": "start_longitude",
+            "in": "query",
+            "description": "مكون خط الطول لموقع البداية.",
+            "schema": {
+              "name": "start_longitude",
+              "in": "query",
+              "description": "مكون خط الطول لموقع البداية.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          },
+          {
+            "name": "end_latitude",
+            "in": "query",
+            "description": "مكون خط العرض للموقع النهائي.",
+            "schema": {
+              "name": "end_latitude",
+              "in": "query",
+              "description": "مكون خط العرض للموقع النهائي.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          },
+          {
+            "name": "end_longitude",
+            "in": "query",
+            "description": "مكون خط الطول للموقع النهائي.",
+            "schema": {
+              "name": "end_longitude",
+              "in": "query",
+              "description": "مكون خط الطول للموقع النهائي.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "Estimates"
+        ],
+        "responses": {
+          "200": {
+            "description": "مجموعة من تقديرات الأسعار حسب المنتج",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PriceEstimate"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "خطأ غير متوقع",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/estimates/time": {
+      "get": {
+        "summary": "تقديرات الوقت",
+        "description": "تعيد نقطة نهاية تقديرات الوقت تقديرات الوصول المتوقعة لجميع المنتجات المعروضة في موقع معين، مع التعبير عن الاستجابات كأعداد صحيحة بالثواني. نوصي باستدعاء هذه النقطة النهائية كل دقيقة لتوفير تقديرات الوصول المتوقعة الأكثر دقة وحداثة.",
+        "parameters": [
+          {
+            "name": "start_latitude",
+            "in": "query",
+            "description": "مكون خط العرض لموقع البداية.",
+            "schema": {
+              "name": "start_latitude",
+              "in": "query",
+              "description": "مكون خط العرض لموقع البداية.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          },
+          {
+            "name": "start_longitude",
+            "in": "query",
+            "description": "مكون خط الطول لموقع البداية.",
+            "schema": {
+              "name": "start_longitude",
+              "in": "query",
+              "description": "مكون خط الطول لموقع البداية.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          },
+          {
+            "name": "customer_uuid",
+            "in": "query",
+            "description": "معرف عميل فريد سيتم استخدامه لتخصيص التجربة.",
+            "schema": {
+              "name": "customer_uuid",
+              "in": "query",
+              "type": "string",
+              "format": "uuid",
+              "description": "معرف عميل فريد سيتم استخدامه لتخصيص التجربة."
+            },
+            "required": true
+          },
+          {
+            "name": "product_id",
+            "in": "query",
+            "description": "معرف فريد يمثل منتجًا محددًا لخط عرض وخط طول معينين.",
+            "schema": {
+              "name": "product_id",
+              "in": "query",
+              "type": "string",
+              "description": "معرف فريد يمثل منتجًا محددًا لخط عرض وخط طول معينين."
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "Estimates"
+        ],
+        "responses": {
+          "200": {
+            "description": "مجموعة من المنتجات",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "خطأ غير متوقع",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/me": {
+      "get": {
+        "summary": "الملف الشخصي للمستخدم",
+        "description": "تعيد نقطة نهاية ملف تعريف المستخدم معلومات حول مستخدم Uber الذي تم تفويضه بالتطبيق.",
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "معلومات الملف الشخصي للمستخدم",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "خطأ غير متوقع",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/history": {
+      "get": {
+        "summary": "نشاط المستخدم",
+        "description": "تعيد نقطة نهاية نشاط المستخدم بيانات حول نشاط المستخدم طوال حياته مع أوبر. ستتضمن الاستجابة مواقع وأوقات الاستلام، ومواقع وأوقات التسليم، والمسافة التي قطعتها الطلبات السابقة، ومعلومات حول المنتجات التي تم طلبها.<br><br> سيكون لمصفوفة التاريخ في الاستجابة طول أقصى بناءً على معلمة الحد. قد يتجاوز عدد قيم الاستجابة الحد، وبالتالي قد تكون طلبات API اللاحقة ضرورية.",
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "تعويض قائمة النتائج التي تم إرجاعها بهذا المبلغ. القيمة الافتراضية هي صفر.",
+            "schema": {
+              "name": "offset",
+              "in": "query",
+              "type": "integer",
+              "format": "int32",
+              "description": "تعويض قائمة النتائج التي تم إرجاعها بهذا المبلغ. القيمة الافتراضية هي صفر."
+            },
+            "required": true
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "عدد العناصر المطلوب استرجاعها. الافتراضي هو 5، والحد الأقصى هو 100.",
+            "schema": {
+              "name": "limit",
+              "in": "query",
+              "type": "integer",
+              "format": "int32",
+              "description": "عدد العناصر المطلوب استرجاعها. الافتراضي هو 5، والحد الأقصى هو 100."
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "معلومات التاريخ للمستخدم المحدد",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Activities"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "خطأ غير متوقع",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "api.uber.com"
+    }
+  ],
+  "x-samchon-emended": true
+}

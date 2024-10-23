@@ -1,0 +1,3641 @@
+{
+  "openapi": "3.1.0",
+  "servers": [
+    {
+      "url": "http://localhost:30771",
+      "description": "fake"
+    },
+    {
+      "url": "https://api.tosspayments.com",
+      "description": "real"
+    }
+  ],
+  "info": {
+    "title": "Toss Payments API",
+    "description": "Built by [fake-toss-payments-server](https://github.com/samchon/fake-toss-payments-server) with [nestia](https://github.com/samchon/nestia)",
+    "version": "2.0.0",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "paths": {
+    "/v1/billing/authorizations/card": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Easy Payment Card Registration Information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossBilling.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "Easy Payment Card Information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossBilling"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Register a simple payment card",
+        "description": "Registering a simple payment card. `billing.authorizations.card.store` is an API function called when a customer wants to register his or her personal card on the server and make a simple payment without having to repeatedly enter the card information every time a payment is needed. Please note that `billing.authorizations.card.store` will not be called by your backend server in the actual service if the client application uses the simple payment card registration window provided by Toss Payments. However, it can be used at the test automation program level to simulate a situation where a customer registers a simple payment card..",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.billing.authorizations.card.store",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "간편 결제 카드 등록 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "간편 결제 카드 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/v1/billing/authorizations/{billingKey}": {
+      "post": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "billingKey",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Target information",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "Customer Identifier Key",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossBilling.ICustomerKey"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "Easy payment method information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossBilling"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Check the registered payment method",
+        "description": "Check the payment method registered for easy payment. `billing.authorizations.at` is a function that checks the payment method registered by the customer on the Toss Payments server for easy payment. It is mainly used when the client application uses the payment window provided by Toss Payments itself, so the front application only sends `billingKey` and `customerKey` to your backend server, and detailed easy payment method information is needed..",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.billing.authorizations.at",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "billingKey",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "대상 정보의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "ITossBilling.billingKey",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-toss-payments-server/src/api/structures/ITossBilling.ts",
+                  "textSpan": {
+                    "start": 500,
+                    "length": 19
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "고객 식별자 키",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "간편 결제 수단 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/v1/billing/{billingKey}": {
+      "post": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "billingKey",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The method registered for easy payment",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "Order Information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossBilling.IPaymentStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "Payment Information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossPayment"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Pay using a method registered for easy payment",
+        "description": "Pay with a method registered for easy payment. `billing.pay` is an API function called when you want to make a payment with a method registered for easy payment. And `billing.pay` is the only payment method that is applicable when the client application cannot use the payment window provided by Toss Payments, and your backend server must directly call the API function of Toss Payments. Therefore, when developing a backend server and frontend application that are linked to Toss Payments for easy payment, separate design and development for this situation is required, so please keep this in mind. In addition, `billing.pay` is an API function that is called strictly under the judgment of your company&#39;s backend server, so payments made through it do not require {@link payments.approve} at all. However, since `billing.pay` completes the payment immediately without any secondary approval process, you need to pay close attention to the situation in which it is called.",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.billing.pay",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "billingKey",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "간편 결제에 등록한 수단의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "ITossBilling.billingKey",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-toss-payments-server/src/api/structures/ITossBilling.ts",
+                  "textSpan": {
+                    "start": 500,
+                    "length": 19
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "주문 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/v1/cash-receipts": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Input information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossCashReceipt.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "Cash Receipt Information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossCashReceipt"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Issue a cash receipt",
+        "description": "Issue a cash receipt.",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.cash-receipts.store",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "입력 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "현금 영수증 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/v1/cash-receipts/{receiptKey}/cancel": {
+      "post": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "receiptKey",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Cash receipt",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "Cancellation Input Information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossCashReceipt.ICancel"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "Cancelled Cash Receipt Information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossCashReceipt"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Cancel a cash receipt",
+        "description": "Cancel a cash receipt.",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.cash-receipts.cancel.cancel",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "receiptKey",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "현금 영수증의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "ITossCashReceipt.receiptKey",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-toss-payments-server/src/api/structures/ITossCashReceipt.ts",
+                  "textSpan": {
+                    "start": 199,
+                    "length": 19
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "취소 입력 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "취소된 현금 영수증 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/internal/webhook": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Webhook event information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossPaymentWebhook"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Webhook event dummy listener",
+        "description": "Webhook event dummy listener. `internal.webhook` is an API that does not exist in the actual Toss Payments payment server. If you do not set any URL in {@link Configuration.WEBHOOK_URL } of `fake-toss-payments-server`, all types of webhook events occurring from `fake-toss-payments-server` will be forwarded here and disappear meaninglessly. Therefore, when you want to verify the connection with the Toss Payments server in advance using `fake-toss-payments-server`, be sure to set {@link Configuration.WEBHOOK_URL } to ensure that the webhook event is properly forwarded to your backend server..",
+        "x-nestia-namespace": "internal.webhook.webhook",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "웹훅 이벤트 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/internal/{paymentKey}/deposit": {
+      "get": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "paymentKey",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Target virtual account payment information",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Virtual account payment information for completed deposit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossPayment"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Deposit to virtual account",
+        "description": "Deposit to a virtual account. `internal.virtual_accounts.deposit` is an API that does not exist in the actual Toss Payments payment server. It is a function that can simulate a situation where a customer who applied for a virtual account payment deposits the target amount into the virtual account. In other words, `internal.virtual_accounts.deposit` is a function for testing a series of situations where a customer deposits money into a virtual account issued to him/herself, and a webhook event occurs on the Toss Payments server accordingly, which is then transmitted to your backend server..",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "internal.deposit.deposit",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "paymentKey",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "대상 가상 계좌 결제 정보의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "ITossPayment.paymentKey",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-toss-payments-server/src/api/structures/ITossPayment.ts",
+                  "textSpan": {
+                    "start": 2480,
+                    "length": 19
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "입금 완료된 가상 꼐좌 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "GET"
+      }
+    },
+    "/v1/payments/{paymentKey}": {
+      "get": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "paymentKey",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Payment information",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payment Information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossPayment"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Check payment information",
+        "description": "Check payment information. `payments.at` is a function to check payment information. It is mainly used when the client application uses the payment window provided by Toss Payments itself, so the front application sends only a very small amount of identifier information such as `paymentKey` to your backend server, and detailed payment information is needed. Please note that Toss Payments is different from other payment PG companies in that payments made using the Toss Payments payment window in the client application are not immediately confirmed. Please note that the payment is not confirmed until your backend server checks the payment information through the current `payments.at` and calls {@link approve } to directly approve it..",
+        "x-nestia-namespace": "v1.payments.at",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "paymentKey",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "결제 정보의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "ITossPayment.paymentKey",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-toss-payments-server/src/api/structures/ITossPayment.ts",
+                  "textSpan": {
+                    "start": 2480,
+                    "length": 19
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "GET"
+      },
+      "post": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "paymentKey",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Target payment",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "Check order information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossPayment.IApproval"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "Approved payment information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossPayment"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Authorize payment",
+        "description": "Approve payment. Toss Payments does not confirm payments made in the payment window of the front application, not in your backend, until the payment is approved by the backend server of the service. `payments.approve` is a function that approves the payment in this situation. If you are simulating payment using `fake-toss-payments-server`, you can simulate this situation that requires separate approval by setting {@link ITossCardPayment.IStore.__approved } or {@link ITossVirtualAccountPayment.IStore.__approved } to `false` when calling the payment-related API..",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.payments.approve",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "paymentKey",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "대상 결제의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "ITossPayment.paymentKey",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-toss-payments-server/src/api/structures/ITossPayment.ts",
+                  "textSpan": {
+                    "start": 2480,
+                    "length": 19
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "주문 정보 확인",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "승인된 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/v1/payments/key-in": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Card payment input information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossCardPayment.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "Card Payment Information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossCardPayment"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Pay by card",
+        "description": "Pay by card. `payments.key_in` is an API function called when making a payment using a card. Please note that `payments.key_in` will not be called by your backend server in the actual service if the client application uses the payment window provided by Toss Payments itself. However, it can be used at the test automation program level to simulate a situation where a customer pays using a card. Also, if your backend server directly calls `payments.key-in`, the Toss Payments server sees it as a fully approved payment and confirms it right away. Therefore, if you call `payments.key-in` directly, you need to be much more careful than when you use the payment window of Toss Payments, which requires a separate {@link approve}. In addition, if your backend server simulates a customer&#39;s card payment using `fake-toss-payments-server`, you can intentionally avoid confirming the card payment by setting the {@link ITossCardPayment.IStore.__approved} value to `false`. This allows you to simulate a situation where a separate {@link approve} is required for card payments using the Toss Payments payment window..",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.payments.key-in.key_in",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "카드 결제 입력 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "카드 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/v1/payments/{paymentKey}/cancel": {
+      "post": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "paymentKey",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Payment information",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "Cancellation Input Information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossPaymentCancel.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "Cancelled Payment Information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossPayment"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Cancel payment",
+        "description": "Cancel payment. `payments.cancel` is an API for canceling payments. The payment cancellation input information {@link ITossPaymentCancel.IStore} contains the reason for cancellation, the amount to be refunded to the customer, VAT, and refund account information if necessary..",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.payments.cancel.cancel",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "paymentKey",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "결제 정보의 ",
+                "kind": "text"
+              },
+              {
+                "text": "{@link ",
+                "kind": "link"
+              },
+              {
+                "text": "ITossPayment.paymentKey",
+                "kind": "linkName",
+                "target": {
+                  "fileName": "C:/github/samchon/fake-toss-payments-server/src/api/structures/ITossPayment.ts",
+                  "textSpan": {
+                    "start": 2480,
+                    "length": 19
+                  }
+                }
+              },
+              {
+                "text": "}",
+                "kind": "link"
+              }
+            ]
+          },
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "취소 입력 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "취소된 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    },
+    "/v1/virtual-accounts": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Virtual Payment Application Information.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITossVirtualAccountPayment.IStore"
+              }
+            }
+          },
+          "required": true,
+          "x-nestia-encrypted": false
+        },
+        "responses": {
+          "201": {
+            "description": "Virtual Account Payment Information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITossVirtualAccountPayment"
+                }
+              }
+            },
+            "x-nestia-encrypted": false
+          }
+        },
+        "summary": "Apply for payment with a virtual account",
+        "description": "Apply for payment with a virtual account. `virtual_accounts.store` is an API function called when a customer selects a virtual account as a payment method. Of course, when a customer selects a virtual account in this way, the payment is not completed until the customer deposits money into the designated account, so the {@link ITossPayment.status} value becomes `WAITING_FOR_DEPOSIT`. As a reference, `virtual_accounts.store` will not be called by your backend server in the actual service if the client application uses the payment window provided by Toss Payments itself. However, it can be used at the test automation program level to simulate a situation where a customer makes a payment with a virtual account. And after `virtual_accounts.store`, if the customer deposits money into the designated account, a webhook event is generated from the Toss Payments server and sent to your backend server. If the linked target Toss Payments server is not real but `fake-toss-payments-server`, you can simulate a situation where a customer deposits money into a virtual account by calling {@link internal.virtual_accounts.deposit}..",
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "x-nestia-namespace": "v1.virtual-accounts.store",
+        "x-nestia-jsDocTags": [
+          {
+            "name": "param",
+            "text": [
+              {
+                "text": "input",
+                "kind": "parameterName"
+              },
+              {
+                "text": " ",
+                "kind": "space"
+              },
+              {
+                "text": "가상 결제 신청 정보.",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "returns",
+            "text": [
+              {
+                "text": "가상 계좌 결제 정보",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "security",
+            "text": [
+              {
+                "text": "basic",
+                "kind": "text"
+              }
+            ]
+          },
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ],
+        "x-nestia-method": "POST"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ITossBilling.IStore": {
+        "type": "object",
+        "properties": {
+          "cardNumber": {
+            "description": "Card number.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "[0-9]{16}"
+          },
+          "cardExpirationYear": {
+            "description": "Card expiration year (2 digits).",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "\\d{2}"
+          },
+          "cardExpirationMonth": {
+            "description": "Card expiration month (2 digits).",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^(0[1-9]|1[012])$"
+          },
+          "cardPassword": {
+            "description": "Card password.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "customerBirthday": {
+            "description": "Customer&#39;s date of birth. Format YYMMDD.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^([0-9]{2})(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$"
+          },
+          "consumerName": {
+            "description": "Customer&#39;s name.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "customerEmail": {
+            "description": "Customer&#39;s Email.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "format": "email"
+          },
+          "vbv": {
+            "$ref": "#/components/schemas/__type"
+          },
+          "customerKey": {
+            "description": "Customer identifier key. An identifier key managed by the service that uses it, not by Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "cardNumber",
+          "cardExpirationYear",
+          "cardExpirationMonth",
+          "cardPassword",
+          "customerBirthday",
+          "customerKey"
+        ],
+        "description": "Easy Payment Card Registration Information.",
+        "x-typia-jsDocTags": []
+      },
+      "__type": {
+        "type": "object",
+        "properties": {
+          "cavv": {
+            "description": "Authentication values for 3D Secure authentication sessions.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "xid": {
+            "description": "Transaction ID.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "eci": {
+            "description": "Code value for 3DS authentication result.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "cavv",
+          "xid",
+          "eci"
+        ],
+        "x-typia-jsDocTags": []
+      },
+      "ITossBilling": {
+        "type": "object",
+        "properties": {
+          "mId": {
+            "description": "Merchant ID. Currently tosspayments is used..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "billingKey": {
+            "description": "Identifier key of {@link ITossBilling }.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "method": {
+            "const": "카드",
+            "description": "payment method.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cardCompany": {
+            "description": "Card company name.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "cardNumber": {
+            "description": "Card number.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "[0-9]{16}"
+          },
+          "authenticatedAt": {
+            "description": "Date of certification.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          "customerKey": {
+            "description": "Customer identifier key. An identifier key managed by the service that uses it, not by Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "mId",
+          "billingKey",
+          "method",
+          "cardCompany",
+          "cardNumber",
+          "authenticatedAt",
+          "customerKey"
+        ],
+        "description": "Easy payment registration method information. `ITossBilling` is a data structure interface that visualizes an easy payment registration method. It is used when a customer wants to register his or her credit card on the server and easily make a payment without having to repeatedly enter card information every time a payment is needed..",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossBilling.ICustomerKey": {
+        "type": "object",
+        "properties": {
+          "customerKey": {
+            "description": "Customer identifier key. An identifier key managed by the service that uses it, not by Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "customerKey"
+        ],
+        "description": "Customer Identifier Information.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossBilling.IPaymentStore": {
+        "type": "object",
+        "properties": {
+          "method": {
+            "const": "billing",
+            "description": "This means that the payment method is simple payment..",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "billingKey": {
+            "description": "Identifier key of {@link IPaymentStore}.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "Order identifier key. An identifier key managed by the service that uses it, not by Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "description": "Total payment amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "customerKey": {
+            "description": "Customer identifier key. An identifier key managed by the service that uses it, not by Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "method",
+          "billingKey",
+          "orderId",
+          "amount",
+          "customerKey"
+        ],
+        "description": "Payment application information using simple payment.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossPayment": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ITossCardPayment"
+          },
+          {
+            "$ref": "#/components/schemas/ITossGiftCertificatePayment"
+          },
+          {
+            "$ref": "#/components/schemas/ITossMobilePhonePayment"
+          },
+          {
+            "$ref": "#/components/schemas/ITossTransferPayment"
+          },
+          {
+            "$ref": "#/components/schemas/ITossVirtualAccountPayment"
+          }
+        ],
+        "description": "Payment information. `ITossPayment` is a data structure that visualizes the payment information of Toss Payments and is a union type interface. If the method value is specified through the if condition, the derived type is automatically specified. ```typescript if (payment.method === &quot;card&quot;) payment.card; // payment be ITossCardPayment ```",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossCardPayment": {
+        "type": "object",
+        "properties": {
+          "card": {
+            "$ref": "#/components/schemas/ITossCardPayment.ICard"
+          },
+          "discount": {
+            "$ref": "#/components/schemas/ITossCardPayment.IDiscount.Nullable"
+          },
+          "easyPay": {
+            "oneOf": [
+              {
+                "const": "토스결제"
+              },
+              {
+                "const": "페이코"
+              },
+              {
+                "const": "삼성페이"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "If you pay with simple payment, simple payment type information.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "method": {
+            "const": "카드",
+            "description": "payment method.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "type": {
+            "oneOf": [
+              {
+                "const": "NORMAL"
+              },
+              {
+                "const": "BILLING"
+              }
+            ],
+            "description": "Payment Type. - NORMAL: General payment - BILLING: Easy payment using a pre-registered card.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "READY"
+              },
+              {
+                "const": "IN_PROGRESS"
+              },
+              {
+                "const": "WAITING_FOR_DEPOSIT"
+              },
+              {
+                "const": "DONE"
+              },
+              {
+                "const": "CANCELED"
+              },
+              {
+                "const": "PARTIAL_CANCELED"
+              },
+              {
+                "const": "ABORTED"
+              },
+              {
+                "const": "EXPIRED"
+              }
+            ],
+            "description": "Payment status. - READY - IN_PROGRESS - WAITING_FOR_DEPOSIT - DONE - CANCELED - PARTIAL_CANCELED - ABORTED - EXPIRED",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "mId": {
+            "description": "Merchant ID. Currently tosspayments is used..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "version": {
+            "description": "The version of Toss Payments API you are using.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "paymentKey": {
+            "description": "Identifier number of payment details.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "Order identifier key. An identifier key managed by the service that uses it, not by Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "transactionKey": {
+            "description": "A unique key value for the transaction. Unlike {@link paymentKey }, this is not used..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "Order name. The order name issued by the service that uses it, not Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "currency": {
+            "description": "Currency unit. Currently, Toss Payments only accepts KRW..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "totalAmount": {
+            "description": "Total payment amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "balanceAmount": {
+            "description": "Amount that can be cancelled.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "suppliedAmount": {
+            "description": "Supply price.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "Duty Free Amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vat": {
+            "description": "surtax.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "useEscrow": {
+            "description": "Whether to use escrow.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "cultureExpense": {
+            "description": "Whether you spend money on cultural expenses, such as a stone tablet, performance tickets, museum/art gallery admission tickets, etc..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "requestedAt": {
+            "description": "Payment request date and time.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          "approvedAt": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Payment approval date and time.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancels": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ITossPaymentCancel"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Payment Cancellation History.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cashReceipt": {
+            "$ref": "#/components/schemas/ITossCashReceipt.ISummary.Nullable"
+          }
+        },
+        "required": [
+          "card",
+          "discount",
+          "easyPay",
+          "method",
+          "type",
+          "status",
+          "mId",
+          "version",
+          "paymentKey",
+          "orderId",
+          "transactionKey",
+          "orderName",
+          "currency",
+          "totalAmount",
+          "balanceAmount",
+          "suppliedAmount",
+          "taxFreeAmount",
+          "vat",
+          "useEscrow",
+          "cultureExpense",
+          "requestedAt",
+          "approvedAt",
+          "cancels",
+          "cashReceipt"
+        ],
+        "description": "Card Payment Information.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossCardPayment.ICard": {
+        "type": "object",
+        "properties": {
+          "company": {
+            "description": "Card company name.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "number": {
+            "description": "Card number.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "[0-9]{16}"
+          },
+          "installmentPlanMonths": {
+            "description": "Number of installment months.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "isInterestFree": {
+            "description": "Whether interest-free installment applies.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "approveNo": {
+            "description": "Approval Number.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "useCardPoint": {
+            "const": false,
+            "description": "Whether to use card points.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cardType": {
+            "oneOf": [
+              {
+                "const": "신용"
+              },
+              {
+                "const": "체크"
+              },
+              {
+                "const": "기프트"
+              }
+            ],
+            "description": "Card Type.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "ownerType": {
+            "oneOf": [
+              {
+                "const": "개인"
+              },
+              {
+                "const": "법인"
+              }
+            ],
+            "description": "Card owner type.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "acquireStatus": {
+            "oneOf": [
+              {
+                "const": "READY"
+              },
+              {
+                "const": "CANCELED"
+              },
+              {
+                "const": "REQUESTED"
+              },
+              {
+                "const": "COMPLETED"
+              },
+              {
+                "const": "CANCEL_REQUESTED"
+              }
+            ],
+            "description": "Card payment purchase status. - READY: Purchase pending - REQUESTED: Purchase requested - COMPLETED: Purchase completed - CANCEL_REQUESTED: Purchase cancellation requested - CANCELD: Purchase cancelled",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "receiptUrl": {
+            "description": "Receipt URL.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "url"
+          }
+        },
+        "required": [
+          "company",
+          "number",
+          "installmentPlanMonths",
+          "isInterestFree",
+          "approveNo",
+          "useCardPoint",
+          "cardType",
+          "ownerType",
+          "acquireStatus",
+          "receiptUrl"
+        ],
+        "description": "Card information.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossCardPayment.IDiscount.Nullable": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "amount": {
+                "description": "Amount subject to the card company&#39;s immediate discount promotion.",
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "number"
+              }
+            },
+            "required": [
+              "amount"
+            ],
+            "x-typia-jsDocTags": []
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Information on instant discount promotions from credit card companies.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossPaymentCancel": {
+        "type": "object",
+        "properties": {
+          "cancelAmount": {
+            "description": "Cancellation Total.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "cancelReason": {
+            "description": "Reason for cancellation.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "taxFreeAmount": {
+            "description": "Tax-exempt amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxAmount": {
+            "description": "Amount taxed.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "refundableAmount": {
+            "description": "Refundable balance after cancellation.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "canceledAt": {
+            "description": "Cancellation date.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "cancelAmount",
+          "cancelReason",
+          "taxFreeAmount",
+          "taxAmount",
+          "refundableAmount",
+          "canceledAt"
+        ],
+        "description": "Payment Cancellation Information.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossCashReceipt.ISummary.Nullable": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "$ref": "#/components/schemas/ITossCashReceipt.Type"
+              },
+              "amount": {
+                "description": "Cash receipt processed amount.",
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "number"
+              },
+              "taxFreeAmount": {
+                "description": "Tax-exempt amount.",
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "number"
+              },
+              "issueNumber": {
+                "description": "Cash receipt issuance number.",
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              },
+              "receiptUrl": {
+                "description": "Cash receipt inquiry page address.",
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "amount",
+              "taxFreeAmount",
+              "issueNumber",
+              "receiptUrl"
+            ],
+            "x-typia-jsDocTags": []
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Cash Receipt Summary Information.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossCashReceipt.Type": {
+        "oneOf": [
+          {
+            "const": "소득공제"
+          },
+          {
+            "const": "지출증빙"
+          }
+        ],
+        "description": "Types of Cash Receipts."
+      },
+      "ITossGiftCertificatePayment": {
+        "type": "object",
+        "properties": {
+          "giftCertificate": {
+            "$ref": "#/components/schemas/ITossGiftCertificatePayment.IGiftCertificate"
+          },
+          "method": {
+            "const": "상품권",
+            "description": "payment method.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "type": {
+            "const": "NORMAL",
+            "description": "Payment Type. - NORMAL: General payment - BILLING: Easy payment using a pre-registered card.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "READY"
+              },
+              {
+                "const": "IN_PROGRESS"
+              },
+              {
+                "const": "WAITING_FOR_DEPOSIT"
+              },
+              {
+                "const": "DONE"
+              },
+              {
+                "const": "CANCELED"
+              },
+              {
+                "const": "PARTIAL_CANCELED"
+              },
+              {
+                "const": "ABORTED"
+              },
+              {
+                "const": "EXPIRED"
+              }
+            ],
+            "description": "Payment status. - READY - IN_PROGRESS - WAITING_FOR_DEPOSIT - DONE - CANCELED - PARTIAL_CANCELED - ABORTED - EXPIRED",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "mId": {
+            "description": "Merchant ID. Currently tosspayments is used..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "version": {
+            "description": "The version of Toss Payments API you are using.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "paymentKey": {
+            "description": "Identifier number of payment details.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "Order identifier key. An identifier key managed by the service that uses it, not by Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "transactionKey": {
+            "description": "A unique key value for the transaction. Unlike {@link paymentKey }, this is not used..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "Order name. The order name issued by the service that uses it, not Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "currency": {
+            "description": "Currency unit. Currently, Toss Payments only accepts KRW..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "totalAmount": {
+            "description": "Total payment amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "balanceAmount": {
+            "description": "Amount that can be cancelled.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "suppliedAmount": {
+            "description": "Supply price.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "Duty Free Amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vat": {
+            "description": "surtax.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "useEscrow": {
+            "description": "Whether to use escrow.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "cultureExpense": {
+            "description": "Whether you spend money on cultural expenses, such as a stone tablet, performance tickets, museum/art gallery admission tickets, etc..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "requestedAt": {
+            "description": "Payment request date and time.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          "approvedAt": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Payment approval date and time.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancels": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ITossPaymentCancel"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Payment Cancellation History.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cashReceipt": {
+            "$ref": "#/components/schemas/ITossCashReceipt.ISummary.Nullable"
+          }
+        },
+        "required": [
+          "giftCertificate",
+          "method",
+          "type",
+          "status",
+          "mId",
+          "version",
+          "paymentKey",
+          "orderId",
+          "transactionKey",
+          "orderName",
+          "currency",
+          "totalAmount",
+          "balanceAmount",
+          "suppliedAmount",
+          "taxFreeAmount",
+          "vat",
+          "useEscrow",
+          "cultureExpense",
+          "requestedAt",
+          "approvedAt",
+          "cancels",
+          "cashReceipt"
+        ],
+        "description": "Gift Certificate Payment Information.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossGiftCertificatePayment.IGiftCertificate": {
+        "type": "object",
+        "properties": {
+          "approveNo": {
+            "description": "Approval Number.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "settlementStatus": {
+            "oneOf": [
+              {
+                "const": "COMPLETE"
+              },
+              {
+                "const": "INCOMPLETE"
+              }
+            ],
+            "description": "Settlement status.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          }
+        },
+        "required": [
+          "approveNo",
+          "settlementStatus"
+        ],
+        "description": "Gift Certificate Information.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossMobilePhonePayment": {
+        "type": "object",
+        "properties": {
+          "mobilePhone": {
+            "$ref": "#/components/schemas/ITossMobilePhonePayment.IMobilePhone"
+          },
+          "method": {
+            "const": "휴대폰",
+            "description": "payment method.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "type": {
+            "const": "NORMAL",
+            "description": "Payment Type. - NORMAL: General payment - BILLING: Easy payment using a pre-registered card.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "READY"
+              },
+              {
+                "const": "IN_PROGRESS"
+              },
+              {
+                "const": "WAITING_FOR_DEPOSIT"
+              },
+              {
+                "const": "DONE"
+              },
+              {
+                "const": "CANCELED"
+              },
+              {
+                "const": "PARTIAL_CANCELED"
+              },
+              {
+                "const": "ABORTED"
+              },
+              {
+                "const": "EXPIRED"
+              }
+            ],
+            "description": "Payment status. - READY - IN_PROGRESS - WAITING_FOR_DEPOSIT - DONE - CANCELED - PARTIAL_CANCELED - ABORTED - EXPIRED",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "mId": {
+            "description": "Merchant ID. Currently tosspayments is used..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "version": {
+            "description": "The version of Toss Payments API you are using.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "paymentKey": {
+            "description": "Identifier number of payment details.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "Order identifier key. An identifier key managed by the service that uses it, not by Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "transactionKey": {
+            "description": "A unique key value for the transaction. Unlike {@link paymentKey }, this is not used..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "Order name. The order name issued by the service that uses it, not Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "currency": {
+            "description": "Currency unit. Currently, Toss Payments only accepts KRW..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "totalAmount": {
+            "description": "Total payment amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "balanceAmount": {
+            "description": "Amount that can be cancelled.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "suppliedAmount": {
+            "description": "Supply price.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "Duty Free Amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vat": {
+            "description": "surtax.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "useEscrow": {
+            "description": "Whether to use escrow.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "cultureExpense": {
+            "description": "Whether you spend money on cultural expenses, such as a stone tablet, performance tickets, museum/art gallery admission tickets, etc..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "requestedAt": {
+            "description": "Payment request date and time.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          "approvedAt": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Payment approval date and time.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancels": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ITossPaymentCancel"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Payment Cancellation History.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cashReceipt": {
+            "$ref": "#/components/schemas/ITossCashReceipt.ISummary.Nullable"
+          }
+        },
+        "required": [
+          "mobilePhone",
+          "method",
+          "type",
+          "status",
+          "mId",
+          "version",
+          "paymentKey",
+          "orderId",
+          "transactionKey",
+          "orderName",
+          "currency",
+          "totalAmount",
+          "balanceAmount",
+          "suppliedAmount",
+          "taxFreeAmount",
+          "vat",
+          "useEscrow",
+          "cultureExpense",
+          "requestedAt",
+          "approvedAt",
+          "cancels",
+          "cashReceipt"
+        ],
+        "description": "Mobile phone payment information.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossMobilePhonePayment.IMobilePhone": {
+        "type": "object",
+        "properties": {
+          "carrier": {
+            "description": "news agency.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "customerMobilePhone": {
+            "description": "Customer mobile phone number.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "settlementStatus": {
+            "oneOf": [
+              {
+                "const": "COMPLETED"
+              },
+              {
+                "const": "INCOMPLETED"
+              }
+            ],
+            "description": "Settlement status.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          }
+        },
+        "required": [
+          "carrier",
+          "customerMobilePhone",
+          "settlementStatus"
+        ],
+        "description": "Mobile phone information.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossTransferPayment": {
+        "type": "object",
+        "properties": {
+          "transfer": {
+            "$ref": "#/components/schemas/ITossTransferPayment.ITransfer"
+          },
+          "method": {
+            "const": "계좌이체",
+            "description": "payment method.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "type": {
+            "const": "NORMAL",
+            "description": "Payment Type. - NORMAL: General payment - BILLING: Easy payment using a pre-registered card.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "READY"
+              },
+              {
+                "const": "IN_PROGRESS"
+              },
+              {
+                "const": "WAITING_FOR_DEPOSIT"
+              },
+              {
+                "const": "DONE"
+              },
+              {
+                "const": "CANCELED"
+              },
+              {
+                "const": "PARTIAL_CANCELED"
+              },
+              {
+                "const": "ABORTED"
+              },
+              {
+                "const": "EXPIRED"
+              }
+            ],
+            "description": "Payment status. - READY - IN_PROGRESS - WAITING_FOR_DEPOSIT - DONE - CANCELED - PARTIAL_CANCELED - ABORTED - EXPIRED",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "mId": {
+            "description": "Merchant ID. Currently tosspayments is used..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "version": {
+            "description": "The version of Toss Payments API you are using.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "paymentKey": {
+            "description": "Identifier number of payment details.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "Order identifier key. An identifier key managed by the service that uses it, not by Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "transactionKey": {
+            "description": "A unique key value for the transaction. Unlike {@link paymentKey }, this is not used..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "Order name. The order name issued by the service that uses it, not Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "currency": {
+            "description": "Currency unit. Currently, Toss Payments only accepts KRW..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "totalAmount": {
+            "description": "Total payment amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "balanceAmount": {
+            "description": "Amount that can be cancelled.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "suppliedAmount": {
+            "description": "Supply price.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "Duty Free Amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vat": {
+            "description": "surtax.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "useEscrow": {
+            "description": "Whether to use escrow.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "cultureExpense": {
+            "description": "Whether you spend money on cultural expenses, such as a stone tablet, performance tickets, museum/art gallery admission tickets, etc..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "requestedAt": {
+            "description": "Payment request date and time.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          "approvedAt": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Payment approval date and time.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancels": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ITossPaymentCancel"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Payment Cancellation History.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cashReceipt": {
+            "$ref": "#/components/schemas/ITossCashReceipt.ISummary.Nullable"
+          }
+        },
+        "required": [
+          "transfer",
+          "method",
+          "type",
+          "status",
+          "mId",
+          "version",
+          "paymentKey",
+          "orderId",
+          "transactionKey",
+          "orderName",
+          "currency",
+          "totalAmount",
+          "balanceAmount",
+          "suppliedAmount",
+          "taxFreeAmount",
+          "vat",
+          "useEscrow",
+          "cultureExpense",
+          "requestedAt",
+          "approvedAt",
+          "cancels",
+          "cashReceipt"
+        ],
+        "description": "Account transfer payment information.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossTransferPayment.ITransfer": {
+        "type": "object",
+        "properties": {
+          "bank": {
+            "description": "Bank name.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "settlementStatus": {
+            "oneOf": [
+              {
+                "const": "COMPLETED"
+              },
+              {
+                "const": "INCOMPLETED"
+              }
+            ],
+            "description": "Transfer status.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          }
+        },
+        "required": [
+          "bank",
+          "settlementStatus"
+        ],
+        "description": "Account transfer information.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossVirtualAccountPayment": {
+        "type": "object",
+        "properties": {
+          "secret": {
+            "description": "A value to verify the deposit callback sent when making a payment to a virtual account..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "virtualAccount": {
+            "$ref": "#/components/schemas/ITossVirtualAccountPayment.IVirtualAccount"
+          },
+          "method": {
+            "const": "가상계좌",
+            "description": "payment method.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "type": {
+            "const": "NORMAL",
+            "description": "Payment Type. - NORMAL: General payment - BILLING: Easy payment using a pre-registered card.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "READY"
+              },
+              {
+                "const": "IN_PROGRESS"
+              },
+              {
+                "const": "WAITING_FOR_DEPOSIT"
+              },
+              {
+                "const": "DONE"
+              },
+              {
+                "const": "CANCELED"
+              },
+              {
+                "const": "PARTIAL_CANCELED"
+              },
+              {
+                "const": "ABORTED"
+              },
+              {
+                "const": "EXPIRED"
+              }
+            ],
+            "description": "Payment status. - READY - IN_PROGRESS - WAITING_FOR_DEPOSIT - DONE - CANCELED - PARTIAL_CANCELED - ABORTED - EXPIRED",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "mId": {
+            "description": "Merchant ID. Currently tosspayments is used..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "version": {
+            "description": "The version of Toss Payments API you are using.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "paymentKey": {
+            "description": "Identifier number of payment details.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "Order identifier key. An identifier key managed by the service that uses it, not by Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "transactionKey": {
+            "description": "A unique key value for the transaction. Unlike {@link paymentKey }, this is not used..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "Order name. The order name issued by the service that uses it, not Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "currency": {
+            "description": "Currency unit. Currently, Toss Payments only accepts KRW..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "totalAmount": {
+            "description": "Total payment amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "balanceAmount": {
+            "description": "Amount that can be cancelled.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "suppliedAmount": {
+            "description": "Supply price.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "Duty Free Amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "vat": {
+            "description": "surtax.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "useEscrow": {
+            "description": "Whether to use escrow.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "cultureExpense": {
+            "description": "Whether you spend money on cultural expenses, such as a stone tablet, performance tickets, museum/art gallery admission tickets, etc..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "requestedAt": {
+            "description": "Payment request date and time.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          "approvedAt": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Payment approval date and time.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cancels": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ITossPaymentCancel"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Payment Cancellation History.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cashReceipt": {
+            "$ref": "#/components/schemas/ITossCashReceipt.ISummary.Nullable"
+          }
+        },
+        "required": [
+          "secret",
+          "virtualAccount",
+          "method",
+          "type",
+          "status",
+          "mId",
+          "version",
+          "paymentKey",
+          "orderId",
+          "transactionKey",
+          "orderName",
+          "currency",
+          "totalAmount",
+          "balanceAmount",
+          "suppliedAmount",
+          "taxFreeAmount",
+          "vat",
+          "useEscrow",
+          "cultureExpense",
+          "requestedAt",
+          "approvedAt",
+          "cancels",
+          "cashReceipt"
+        ],
+        "description": "Virtual Account Payment Information.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossVirtualAccountPayment.IVirtualAccount": {
+        "type": "object",
+        "properties": {
+          "accountNumber": {
+            "description": "account number.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "accountType": {
+            "oneOf": [
+              {
+                "const": "일반"
+              },
+              {
+                "const": "고정"
+              }
+            ],
+            "description": "Virtual account type.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "bank": {
+            "description": "Bank name.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "customerName": {
+            "description": "Customer Name.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "dueDate": {
+            "description": "Deposit deadline.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date"
+          },
+          "expired": {
+            "description": "Whether the virtual account has expired.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "boolean"
+          },
+          "settlementStatus": {
+            "oneOf": [
+              {
+                "const": "COMPLETED"
+              },
+              {
+                "const": "INCOMPLETED"
+              }
+            ],
+            "description": "Settlement status.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "refundStatus": {
+            "oneOf": [
+              {
+                "const": "COMPLETED"
+              },
+              {
+                "const": "NONE"
+              },
+              {
+                "const": "FAILED"
+              },
+              {
+                "const": "PENDING"
+              },
+              {
+                "const": "PARTIAL_FAILED"
+              }
+            ],
+            "description": "Refund processing status. - NONE: Not applicable - FAILED: Refund failed - PENDING: Refund processing in progress - PARTIAL_FAILED: Partial refund failed - COMPLETED: Refund completed",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          }
+        },
+        "required": [
+          "accountNumber",
+          "accountType",
+          "bank",
+          "customerName",
+          "dueDate",
+          "expired",
+          "settlementStatus",
+          "refundStatus"
+        ],
+        "description": "Virtual account information.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossCashReceipt.IStore": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "oneOf": [
+              {
+                "const": "소득공제"
+              },
+              {
+                "const": "지출증빙"
+              }
+            ],
+            "description": "Types of Cash Receipts.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "paymentKey": {
+            "description": "{@link ITossPayment.paymentKey } for the attributed payment.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "Order identifier ID.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "Order name.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "registrationNumber": {
+            "description": "Personal identification number for issuing cash receipts. Depending on the type of cash receipt, you can enter your mobile phone number, resident registration number, business registration number, or card number..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "description": "Amount for which a cash receipt will be issued.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "Tax-free amount.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "businessNumber": {
+            "description": "Business registration number.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "paymentKey",
+          "orderId",
+          "orderName",
+          "registrationNumber",
+          "amount"
+        ],
+        "description": "Cash receipt entry information.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossCashReceipt": {
+        "type": "object",
+        "properties": {
+          "receiptKey": {
+            "description": "Identifier key of cash receipt.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ITossCashReceipt.Type"
+          },
+          "orderId": {
+            "description": "Order identifier ID.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "Order name.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "approvalNumber": {
+            "description": "Cash Receipt Authorization Number.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "approvedAt": {
+            "description": "Cash receipt approval date and time.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          "canceledAt": {
+            "oneOf": [
+              {
+                "x-typia-required": true,
+                "x-typia-optional": false,
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Cash receipt cancellation date.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "receiptUrl": {
+            "description": "Receipt URL.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "receiptKey",
+          "type",
+          "orderId",
+          "orderName",
+          "approvalNumber",
+          "approvedAt",
+          "canceledAt",
+          "receiptUrl"
+        ],
+        "description": "Cash Receipt Information.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossCashReceipt.ICancel": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "description": "Cancellation amount. If not entered, {@link ITossCashReceipt.amount total amount} written on the cash receipt will be cancelled..",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          }
+        },
+        "description": "Cash Receipt Cancellation Input Information.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossPaymentWebhook": {
+        "type": "object",
+        "properties": {
+          "eventType": {
+            "const": "PAYMENT_STATUS_CHANGED",
+            "description": "Event Type.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "data": {
+            "$ref": "#/components/schemas/ITossPaymentWebhook.IData"
+          }
+        },
+        "required": [
+          "eventType",
+          "data"
+        ],
+        "description": "Webhook event information.",
+        "x-typia-jsDocTags": [
+          {
+            "name": "author",
+            "text": [
+              {
+                "text": "Jeongho Nam - https://github.com/samchon",
+                "kind": "text"
+              }
+            ]
+          }
+        ]
+      },
+      "ITossPaymentWebhook.IData": {
+        "type": "object",
+        "properties": {
+          "paymentKey": {
+            "description": "Identifier key of {@link ITossPayment }.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderId": {
+            "description": "Order identifier key. An identifier key managed by the service that uses it, not by Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "WAITING_FOR_DEPOSIT"
+              },
+              {
+                "const": "DONE"
+              },
+              {
+                "const": "CANCELED"
+              },
+              {
+                "const": "PARTIAL_CANCELED"
+              }
+            ],
+            "description": "Payment status. - DONE: Payment completed - CANCELED: Payment canceled - PARTIAL_CANCELED: Payment partially canceled - WAITING_FOR_DEPOSIT: Waiting for deposit",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          }
+        },
+        "required": [
+          "paymentKey",
+          "orderId",
+          "status"
+        ],
+        "description": "Webhook event data.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossCardPayment.IStore": {
+        "type": "object",
+        "properties": {
+          "method": {
+            "const": "card",
+            "description": "Indicates that the payment method is a credit card.",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "cardNumber": {
+            "description": "Card number.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "[0-9]{16}"
+          },
+          "cardExpirationYear": {
+            "description": "Card expiration year (2 digits).",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "\\d{2}"
+          },
+          "cardExpirationMonth": {
+            "description": "Card expiration month (2 digits).",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^(0[1-9]|1[012])$"
+          },
+          "cardPassword": {
+            "description": "Card password.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "cardInstallmentPlan": {
+            "description": "Number of installment months.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "amount": {
+            "description": "Total amount paid.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "Total amount of tax exemption.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "orderId": {
+            "description": "Order identifier key. An identifier key managed by the service that uses it, not by Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "Order name. The order name issued by the service that uses it, not Toss Payments..",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string"
+          },
+          "customerBirthday": {
+            "description": "Customer&#39;s date of birth. Format YYMMDD.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "pattern": "^([0-9]{2})(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$"
+          },
+          "customerEmail": {
+            "description": "Customer&#39;s Email.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "string",
+            "format": "email"
+          },
+          "vbv": {
+            "$ref": "#/components/schemas/__type.o1"
+          },
+          "__approved": {
+            "description": "Payment approval status. This value is only used by the fake payments server `fake-toss-payments-server`, and is used when intentionally delaying payment approval. If this value is `false`, you can simulate a situation where the front application uses the payment window provided by Toss Payments to proceed with payment. Originally, Toss Payments Server does not accept payment as official payment until the backend separately processes {@link functional.payments.approve approval} when the front application directly requests payment using the payment window provided by Toss Payments without going through the backend server. On the other hand, when the backend server calls the Toss Payments Server API, Toss Payments approves it immediately, so this property is necessary to simulate a situation where separate approval processing is required in `fake-toss-payments-server`..",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "method",
+          "cardNumber",
+          "cardExpirationYear",
+          "cardExpirationMonth",
+          "amount",
+          "orderId"
+        ],
+        "description": "Information on applying for payment using a credit card.",
+        "x-typia-jsDocTags": []
+      },
+      "__type.o1": {
+        "type": "object",
+        "properties": {
+          "cavv": {
+            "description": "Authentication values for 3D Secure authentication sessions.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "xid": {
+            "description": "Transaction ID.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "eci": {
+            "description": "Code value for 3DS authentication result.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "cavv",
+          "xid",
+          "eci"
+        ],
+        "x-typia-jsDocTags": []
+      },
+      "ITossPayment.IApproval": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "description": "Order identifier key. An identifier key managed by the service that uses it, not by Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "description": "Total payment amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          }
+        },
+        "required": [
+          "orderId",
+          "amount"
+        ],
+        "description": "Payment Authorization Information.",
+        "x-typia-jsDocTags": []
+      },
+      "ITossPaymentCancel.IStore": {
+        "type": "object",
+        "properties": {
+          "paymentKey": {
+            "description": "Identifier key of {@link ITossPayment }.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "cancelReason": {
+            "description": "Reason for cancellation.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "cancelAmount": {
+            "description": "Cancellation Total.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "refundReceiveAccount": {
+            "$ref": "#/components/schemas/__type.o2"
+          },
+          "taxAmount": {
+            "description": "Taxable amount.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "taxFreeAmount": {
+            "description": "Tax-free processing amount.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          },
+          "refundableAmount": {
+            "description": "Refundable balance after cancellation.",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "number"
+          }
+        },
+        "required": [
+          "paymentKey",
+          "cancelReason"
+        ],
+        "description": "Payment Cancellation Request Information.",
+        "x-typia-jsDocTags": []
+      },
+      "__type.o2": {
+        "type": "object",
+        "properties": {
+          "bank": {
+            "description": "Bank information.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "accountNumber": {
+            "description": "account number.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string",
+            "pattern": "^[0-9]{0,20}$"
+          },
+          "holderName": {
+            "description": "Depositor.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          }
+        },
+        "required": [
+          "bank",
+          "accountNumber",
+          "holderName"
+        ],
+        "x-typia-jsDocTags": []
+      },
+      "ITossVirtualAccountPayment.IStore": {
+        "type": "object",
+        "properties": {
+          "method": {
+            "const": "virtual-account",
+            "description": "This means that the payment method is a virtual account..",
+            "x-typia-required": true,
+            "x-typia-optional": false
+          },
+          "orderId": {
+            "description": "Order identifier number. An identifier key managed by the service that uses it, not by Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "orderName": {
+            "description": "Order name. The order name issued by the service that uses it, not Toss Payments..",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "bank": {
+            "description": "Bank name.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "customerName": {
+            "description": "Customer Name.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "string"
+          },
+          "amount": {
+            "description": "Total payment amount.",
+            "x-typia-required": true,
+            "x-typia-optional": false,
+            "type": "number"
+          },
+          "__approved": {
+            "description": "Payment approval status. This value is only used by the fake payments server `fake-toss-payments-server`, and is used when intentionally delaying payment approval. If this value is `false`, you can simulate a situation where the front application uses the payment window provided by Toss Payments to proceed with payment. Originally, Toss Payments Server does not accept payment as official payment until the backend separately processes {@link functional.payments.approve approval} when the front application directly requests payment using the payment window provided by Toss Payments without going through the backend server. On the other hand, when the backend server calls the Toss Payments Server API, Toss Payments approves it immediately, so this property is necessary to simulate a situation where separate approval processing is required in `fake-toss-payments-server`..",
+            "x-typia-required": false,
+            "x-typia-optional": true,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "method",
+          "orderId",
+          "orderName",
+          "bank",
+          "customerName",
+          "amount"
+        ],
+        "description": "Payment application information using a virtual account.",
+        "x-typia-jsDocTags": []
+      }
+    },
+    "securitySchemes": {
+      "basic": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "x-samchon-emended": true
+}

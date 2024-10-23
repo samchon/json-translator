@@ -1,0 +1,482 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "우버 API",
+    "description": "Uber API로 앱을 한 단계 발전시키세요",
+    "version": "1.0.0"
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "description": "주어진 위도 및 경도에 대한 특정 제품을 나타내는 고유 식별자입니다. 예를 들어, 샌프란시스코의 uberX는 로스앤젤레스의 uberX와 다른 product_id를 갖습니다.."
+          },
+          "description": {
+            "type": "string",
+            "description": "제품 설명."
+          },
+          "display_name": {
+            "type": "string",
+            "description": "제품의 표시 이름."
+          },
+          "capacity": {
+            "type": "string",
+            "description": "제품 용량. 예를 들어, 4명."
+          },
+          "image": {
+            "type": "string",
+            "description": "제품을 나타내는 이미지 URL."
+          }
+        }
+      },
+      "PriceEstimate": {
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "description": "주어진 위도 및 경도에 대한 특정 제품을 나타내는 고유 식별자입니다. 예를 들어, 샌프란시스코의 uberX는 로스앤젤레스의 uberX와 다른 product_id를 갖습니다."
+          },
+          "currency_code": {
+            "type": "string",
+            "description": "[ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) 통화 코드."
+          },
+          "display_name": {
+            "type": "string",
+            "description": "제품의 표시 이름."
+          },
+          "estimate": {
+            "type": "string",
+            "description": "시작 위치의 현지 통화로 된 추정치의 형식화된 문자열. 추정치는 범위, 단일 숫자(정액 요금) 또는 택시의 경우 &quot;미터링&quot;일 수 있습니다.."
+          },
+          "low_estimate": {
+            "type": "number",
+            "description": "추정 가격의 하한."
+          },
+          "high_estimate": {
+            "type": "number",
+            "description": "예상 가격의 상한."
+          },
+          "surge_multiplier": {
+            "type": "number",
+            "description": "예상 서지 승수. 서지는 surge_multiplier가 1보다 큰 경우 활성화됩니다. 가격 추정에는 이미 서지 승수가 반영됩니다.."
+          }
+        }
+      },
+      "Profile": {
+        "properties": {
+          "first_name": {
+            "type": "string",
+            "description": "Uber 사용자의 이름."
+          },
+          "last_name": {
+            "type": "string",
+            "description": "Uber 사용자의 성."
+          },
+          "email": {
+            "type": "string",
+            "description": "Uber 사용자의 이메일 주소"
+          },
+          "picture": {
+            "type": "string",
+            "description": "Uber 사용자의 이미지 URL."
+          },
+          "promo_code": {
+            "type": "string",
+            "description": "우버 사용자의 프로모 코드."
+          }
+        }
+      },
+      "Activity": {
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "description": "활동에 대한 고유 식별자"
+          }
+        }
+      },
+      "Activities": {
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "format": "int32",
+            "description": "페이지 번호의 위치."
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32",
+            "description": "검색할 항목 수(최대 100개)."
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "사용 가능한 총 항목 수."
+          },
+          "history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Activity"
+            }
+          }
+        }
+      },
+      "Error": {
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/products": {
+      "get": {
+        "summary": "제품 유형",
+        "description": "Products 엔드포인트는 주어진 위치에서 제공되는 Uber 제품에 대한 정보를 반환합니다. 응답에는 각 제품에 대한 표시 이름과 기타 세부 정보가 포함되며 적절한 표시 순서로 제품을 나열합니다..",
+        "parameters": [
+          {
+            "name": "latitude",
+            "in": "query",
+            "description": "위치의 위도 구성 요소.",
+            "schema": {
+              "name": "latitude",
+              "in": "query",
+              "description": "위치의 위도 구성 요소.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          },
+          {
+            "name": "longitude",
+            "in": "query",
+            "description": "위치의 경도 구성 요소.",
+            "schema": {
+              "name": "longitude",
+              "in": "query",
+              "description": "위치의 경도 구성 요소.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "Products"
+        ],
+        "responses": {
+          "200": {
+            "description": "다양한 제품",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "예상치 못한 오류",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/estimates/price": {
+      "get": {
+        "summary": "가격 추정",
+        "description": "가격 추정 엔드포인트는 주어진 위치에서 제공되는 각 제품에 대한 추정 가격 범위를 반환합니다. 가격 추정은 전체 가격 범위와 현지화된 통화 기호가 있는 형식화된 문자열로 제공됩니다.<br><br> 응답에는 낮은 추정치와 높은 추정치, 그리고 통화 변환이 필요한 상황을 위한 [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) 통화 코드도 포함됩니다. 특정 제품에 대해 서지가 활성화되면 해당 서지_승수는 1보다 크지만 가격 추정치는 이미 이 승수를 고려합니다..",
+        "parameters": [
+          {
+            "name": "start_latitude",
+            "in": "query",
+            "description": "시작 위치의 위도 구성 요소.",
+            "schema": {
+              "name": "start_latitude",
+              "in": "query",
+              "description": "시작 위치의 위도 구성 요소.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          },
+          {
+            "name": "start_longitude",
+            "in": "query",
+            "description": "시작 위치의 경도 구성 요소.",
+            "schema": {
+              "name": "start_longitude",
+              "in": "query",
+              "description": "시작 위치의 경도 구성 요소.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          },
+          {
+            "name": "end_latitude",
+            "in": "query",
+            "description": "최종 위치의 위도 구성 요소.",
+            "schema": {
+              "name": "end_latitude",
+              "in": "query",
+              "description": "최종 위치의 위도 구성 요소.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          },
+          {
+            "name": "end_longitude",
+            "in": "query",
+            "description": "종료 위치의 경도 구성 요소.",
+            "schema": {
+              "name": "end_longitude",
+              "in": "query",
+              "description": "종료 위치의 경도 구성 요소.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "Estimates"
+        ],
+        "responses": {
+          "200": {
+            "description": "제품별 다양한 가격 추정",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PriceEstimate"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "예상치 못한 오류",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/estimates/time": {
+      "get": {
+        "summary": "시간 추정",
+        "description": "Time Estimates 엔드포인트는 주어진 위치에서 제공되는 모든 제품에 대한 ETA를 반환하며, 응답은 초 단위의 정수로 표현됩니다. 가장 정확하고 최신의 ETA를 제공하기 위해 이 엔드포인트를 매분 호출하는 것이 좋습니다..",
+        "parameters": [
+          {
+            "name": "start_latitude",
+            "in": "query",
+            "description": "시작 위치의 위도 구성 요소.",
+            "schema": {
+              "name": "start_latitude",
+              "in": "query",
+              "description": "시작 위치의 위도 구성 요소.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          },
+          {
+            "name": "start_longitude",
+            "in": "query",
+            "description": "시작 위치의 경도 구성 요소.",
+            "schema": {
+              "name": "start_longitude",
+              "in": "query",
+              "description": "시작 위치의 경도 구성 요소.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          },
+          {
+            "name": "customer_uuid",
+            "in": "query",
+            "description": "사용자 경험 맞춤화를 위해 사용할 고유 고객 식별자.",
+            "schema": {
+              "name": "customer_uuid",
+              "in": "query",
+              "type": "string",
+              "format": "uuid",
+              "description": "사용자 경험 맞춤화를 위해 사용할 고유 고객 식별자."
+            },
+            "required": true
+          },
+          {
+            "name": "product_id",
+            "in": "query",
+            "description": "지정된 위도 및 경도에 대한 특정 제품을 나타내는 고유 식별자.",
+            "schema": {
+              "name": "product_id",
+              "in": "query",
+              "type": "string",
+              "description": "지정된 위도 및 경도에 대한 특정 제품을 나타내는 고유 식별자."
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "Estimates"
+        ],
+        "responses": {
+          "200": {
+            "description": "다양한 제품",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "예상치 못한 오류",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/me": {
+      "get": {
+        "summary": "사용자 프로필",
+        "description": "사용자 프로필 엔드포인트는 애플리케이션에 권한이 부여된 Uber 사용자에 대한 정보를 반환합니다..",
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "사용자의 프로필 정보",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "예상치 못한 오류",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/history": {
+      "get": {
+        "summary": "사용자 활동",
+        "description": "사용자 활동 엔드포인트는 Uber에서 사용자의 평생 활동에 대한 데이터를 반환합니다. 응답에는 픽업 위치 및 시간, 하차 위치 및 시간, 이전 요청의 거리, 요청된 제품에 대한 정보가 포함됩니다.<br><br> 응답의 history 배열은 limit 매개변수에 따라 최대 길이를 갖습니다. 응답 값 개수가 limit을 초과할 수 있으므로 후속 API 요청이 필요할 수 있습니다..",
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "반환된 결과 목록을 이 양만큼 오프셋합니다. 기본값은 0입니다..",
+            "schema": {
+              "name": "offset",
+              "in": "query",
+              "type": "integer",
+              "format": "int32",
+              "description": "반환된 결과 목록을 이 양만큼 오프셋합니다. 기본값은 0입니다.."
+            },
+            "required": true
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "검색할 항목 수. 기본값은 5이고 최대값은 100입니다..",
+            "schema": {
+              "name": "limit",
+              "in": "query",
+              "type": "integer",
+              "format": "int32",
+              "description": "검색할 항목 수. 기본값은 5이고 최대값은 100입니다.."
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "지정된 사용자에 대한 기록 정보",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Activities"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "예상치 못한 오류",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "api.uber.com"
+    }
+  ],
+  "x-samchon-emended": true
+}

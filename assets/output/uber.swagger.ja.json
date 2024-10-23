@@ -1,0 +1,482 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ウーバーAPI",
+    "description": "Uber API でアプリを前進させましょう",
+    "version": "1.0.0"
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "description": "特定の緯度と経度に対応する特定の製品を表す一意の識別子。たとえば、サンフランシスコの uberX は、ロサンゼルスの uberX とは異なる product_id を持ちます。."
+          },
+          "description": {
+            "type": "string",
+            "description": "製品の説明."
+          },
+          "display_name": {
+            "type": "string",
+            "description": "製品の表示名."
+          },
+          "capacity": {
+            "type": "string",
+            "description": "製品の収容人数。例：4人."
+          },
+          "image": {
+            "type": "string",
+            "description": "製品を表す画像のURL."
+          }
+        }
+      },
+      "PriceEstimate": {
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "description": "特定の緯度と経度に対応する特定の製品を表す一意の識別子。たとえば、サンフランシスコの uberX は、ロサンゼルスの uberX とは異なる product_id を持ちます。"
+          },
+          "currency_code": {
+            "type": "string",
+            "description": "[ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) 通貨コード."
+          },
+          "display_name": {
+            "type": "string",
+            "description": "製品の表示名."
+          },
+          "estimate": {
+            "type": "string",
+            "description": "出発地の現地通貨での見積りのフォーマットされた文字列。見積りは範囲、単一の数字（定額）またはタクシーの「従量制」になります。."
+          },
+          "low_estimate": {
+            "type": "number",
+            "description": "推定価格の下限."
+          },
+          "high_estimate": {
+            "type": "number",
+            "description": "推定価格の上限."
+          },
+          "surge_multiplier": {
+            "type": "number",
+            "description": "予想されるサージ乗数。サージは、surge_multiplier が 1 より大きい場合にアクティブになります。価格見積もりにはサージ乗数がすでに考慮されています。."
+          }
+        }
+      },
+      "Profile": {
+        "properties": {
+          "first_name": {
+            "type": "string",
+            "description": "Uberユーザーの名."
+          },
+          "last_name": {
+            "type": "string",
+            "description": "Uberユーザーの姓."
+          },
+          "email": {
+            "type": "string",
+            "description": "Uberユーザーのメールアドレス"
+          },
+          "picture": {
+            "type": "string",
+            "description": "Uberユーザーの画像URL."
+          },
+          "promo_code": {
+            "type": "string",
+            "description": "Uberユーザーのプロモーションコード."
+          }
+        }
+      },
+      "Activity": {
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "description": "アクティビティの一意の識別子"
+          }
+        }
+      },
+      "Activities": {
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "format": "int32",
+            "description": "ページネーションの位置."
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32",
+            "description": "取得するアイテムの数（最大 100 個）."
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "入手可能なアイテムの総数."
+          },
+          "history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Activity"
+            }
+          }
+        }
+      },
+      "Error": {
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/products": {
+      "get": {
+        "summary": "製品タイプ",
+        "description": "製品エンドポイントは、特定の場所で提供されている Uber 製品に関する情報を返します。応答には、各製品の表示名やその他の詳細が含まれ、適切な表示順序で製品がリストされます。.",
+        "parameters": [
+          {
+            "name": "latitude",
+            "in": "query",
+            "description": "場所の緯度成分.",
+            "schema": {
+              "name": "latitude",
+              "in": "query",
+              "description": "場所の緯度成分.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          },
+          {
+            "name": "longitude",
+            "in": "query",
+            "description": "位置の経度成分.",
+            "schema": {
+              "name": "longitude",
+              "in": "query",
+              "description": "位置の経度成分.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "Products"
+        ],
+        "responses": {
+          "200": {
+            "description": "さまざまな製品",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "予期しないエラー",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/estimates/price": {
+      "get": {
+        "summary": "価格見積もり",
+        "description": "価格見積エンドポイントは、特定の場所で提供される各製品の見積価格範囲を返します。価格見積は、完全な価格範囲とローカライズされた通貨記号を含むフォーマットされた文字列として提供されます。<br><br>応答には、低い見積もりと高い見積もり、および通貨換算が必要な場合のための [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) 通貨コードも含まれています。特定の製品に対してサージがアクティブになっている場合、そのサージ乗数は 1 より大きくなりますが、価格見積もりにはすでにこの乗数が考慮されています。.",
+        "parameters": [
+          {
+            "name": "start_latitude",
+            "in": "query",
+            "description": "出発地の緯度成分.",
+            "schema": {
+              "name": "start_latitude",
+              "in": "query",
+              "description": "出発地の緯度成分.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          },
+          {
+            "name": "start_longitude",
+            "in": "query",
+            "description": "開始位置の経度成分.",
+            "schema": {
+              "name": "start_longitude",
+              "in": "query",
+              "description": "開始位置の経度成分.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          },
+          {
+            "name": "end_latitude",
+            "in": "query",
+            "description": "終了位置の緯度成分.",
+            "schema": {
+              "name": "end_latitude",
+              "in": "query",
+              "description": "終了位置の緯度成分.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          },
+          {
+            "name": "end_longitude",
+            "in": "query",
+            "description": "終了位置の経度成分.",
+            "schema": {
+              "name": "end_longitude",
+              "in": "query",
+              "description": "終了位置の経度成分.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "Estimates"
+        ],
+        "responses": {
+          "200": {
+            "description": "製品別の価格見積もり",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PriceEstimate"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "予期しないエラー",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/estimates/time": {
+      "get": {
+        "summary": "所要時間",
+        "description": "時間見積エンドポイントは、特定の場所で提供されるすべての製品の到着予定時刻を秒単位の整数で返します。最も正確で最新の到着予定時刻を提供するために、このエンドポイントを1分ごとに呼び出すことをお勧めします。.",
+        "parameters": [
+          {
+            "name": "start_latitude",
+            "in": "query",
+            "description": "出発地の緯度成分.",
+            "schema": {
+              "name": "start_latitude",
+              "in": "query",
+              "description": "出発地の緯度成分.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          },
+          {
+            "name": "start_longitude",
+            "in": "query",
+            "description": "開始位置の経度成分.",
+            "schema": {
+              "name": "start_longitude",
+              "in": "query",
+              "description": "開始位置の経度成分.",
+              "required": true,
+              "type": "number",
+              "format": "double"
+            },
+            "required": true
+          },
+          {
+            "name": "customer_uuid",
+            "in": "query",
+            "description": "エクスペリエンスのカスタマイズに使用される固有の顧客識別子.",
+            "schema": {
+              "name": "customer_uuid",
+              "in": "query",
+              "type": "string",
+              "format": "uuid",
+              "description": "エクスペリエンスのカスタマイズに使用される固有の顧客識別子."
+            },
+            "required": true
+          },
+          {
+            "name": "product_id",
+            "in": "query",
+            "description": "特定の緯度と経度に対応する特定の製品を表す一意の識別子.",
+            "schema": {
+              "name": "product_id",
+              "in": "query",
+              "type": "string",
+              "description": "特定の緯度と経度に対応する特定の製品を表す一意の識別子."
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "Estimates"
+        ],
+        "responses": {
+          "200": {
+            "description": "さまざまな製品",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "予期しないエラー",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/me": {
+      "get": {
+        "summary": "ユーザープロフィール",
+        "description": "ユーザープロファイルエンドポイントは、アプリケーションで認証されたUberユーザーに関する情報を返します。.",
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "ユーザーのプロフィール情報",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "予期しないエラー",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/history": {
+      "get": {
+        "summary": "ユーザーアクティビティ",
+        "description": "ユーザー アクティビティ エンドポイントは、Uber でのユーザーの生涯アクティビティに関するデータを返します。応答には、乗車場所と時間、降車場所と時間、過去のリクエストの距離、リクエストされた製品に関する情報が含まれます。<br><br>応答の履歴配列は、制限パラメータに基づいて最大長を持ちます。応答値の数が制限を超える可能性があるため、後続のAPIリクエストが必要になる場合があります。.",
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "返される結果のリストをこの量だけオフセットします。デフォルトはゼロです.",
+            "schema": {
+              "name": "offset",
+              "in": "query",
+              "type": "integer",
+              "format": "int32",
+              "description": "返される結果のリストをこの量だけオフセットします。デフォルトはゼロです."
+            },
+            "required": true
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "取得するアイテムの数。デフォルトは 5、最大は 100 です。.",
+            "schema": {
+              "name": "limit",
+              "in": "query",
+              "type": "integer",
+              "format": "int32",
+              "description": "取得するアイテムの数。デフォルトは 5、最大は 100 です。."
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "指定されたユーザーの履歴情報",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Activities"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "予期しないエラー",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "api.uber.com"
+    }
+  ],
+  "x-samchon-emended": true
+}

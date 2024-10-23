@@ -1,0 +1,2582 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ClickHouse Cloud를 위한 OpenAPI 사양",
+    "version": "1.0",
+    "contact": {
+      "name": "ClickHouse Support",
+      "url": "https://clickhouse.com/docs/en/cloud/manage/openapi?referrer=openapi-82913",
+      "email": "support@clickhouse.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.clickhouse.cloud"
+    }
+  ],
+  "paths": {
+    "/v1/organizations": {
+      "get": {
+        "summary": "사용 가능한 조직 목록 가져오기",
+        "description": "요청의 API 키와 연결된 단일 조직이 포함된 목록을 반환합니다..",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Organization"
+                      }
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId": {
+      "get": {
+        "summary": "조직 세부 정보 가져오기",
+        "description": "단일 조직의 세부 정보를 반환합니다. 세부 정보를 얻으려면 auth 키가 조직에 속해야 합니다..",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "요청하신 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Organization"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "조직 세부 정보 업데이트",
+        "description": "조직 필드를 업데이트합니다. ADMIN 인증 키 역할이 필요합니다..",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "업데이트할 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationPatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Organization"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId/services": {
+      "get": {
+        "summary": "조직 서비스 목록",
+        "description": "조직의 모든 서비스 목록을 반환합니다..",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "요청하신 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Service"
+                      }
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "새로운 서비스 만들기",
+        "description": "조직에서 새 서비스를 만들고 현재 서비스 상태와 서비스에 액세스하기 위한 비밀번호를 반환합니다. 서비스는 비동기적으로 시작됩니다..",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "서비스를 소유할 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServicePostRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/ServicePostResponse"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId/services/:serviceId": {
+      "get": {
+        "summary": "서비스 세부 정보 받기",
+        "description": "조직에 속한 서비스를 반환합니다.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "서비스를 소유한 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Service ID",
+            "description": "요청된 서비스의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Service"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "서비스 기본 세부 정보 업데이트.",
+        "description": "서비스 이름이나 IP 액세스 목록과 같은 기본 서비스 세부 정보를 업데이트합니다..",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "서비스를 소유한 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Service ID",
+            "description": "업데이트할 서비스의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServicePatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Service"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "서비스 삭제.",
+        "description": "서비스를 삭제합니다. 서비스는 중지된 상태여야 하며 이 메서드 호출 후 비동기적으로 삭제됩니다..",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "서비스를 소유한 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Service ID",
+            "description": "삭제할 서비스의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/organizations/:organizationId/services/:serviceId/state": {
+      "patch": {
+        "summary": "서비스 상태 업데이트.",
+        "description": "서비스를 시작하거나 중지합니다",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "서비스를 소유한 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Service ID",
+            "description": "상태를 업데이트할 서비스의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceStatePatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Service"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId/services/:serviceId/scaling": {
+      "patch": {
+        "summary": "서비스 자동 확장 설정 업데이트.",
+        "description": "서비스에 대한 최소 및 최대 총 메모리 제한과 유휴 모드 확장 동작을 업데이트합니다. 메모리 설정은 &quot;생산&quot; 서비스에만 사용할 수 있으며 24GB부터 시작하여 12의 배수여야 합니다..",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "서비스를 소유한 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Service ID",
+            "description": "스케일링 매개변수를 업데이트할 서비스의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceScalingPatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Service"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId/services/:serviceId/password": {
+      "patch": {
+        "summary": "서비스 비밀번호 업데이트.",
+        "description": "서비스에 대한 새 암호를 설정합니다",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "서비스를 소유한 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Service ID",
+            "description": "비밀번호를 업데이트할 서비스의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServicePasswordPatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/ServicePasswordPatchResponse"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId/services/:serviceId/backups": {
+      "get": {
+        "summary": "서비스 백업 목록",
+        "description": "서비스에 대한 모든 백업 목록을 반환합니다..",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "백업을 소유한 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Service ID",
+            "description": "백업이 생성된 서비스의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Backup"
+                      }
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId/services/:serviceId/backups/:backupId": {
+      "get": {
+        "summary": "백업 세부 정보 가져오기",
+        "description": "단일 백업 정보를 반환합니다..",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "백업을 소유한 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Service ID",
+            "description": "백업이 생성된 서비스의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Service backup ID",
+            "description": "요청된 백업의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Backup"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId/keys": {
+      "get": {
+        "summary": "모든 키 목록 가져오기",
+        "description": "조직의 모든 키 목록을 반환합니다..",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "요청하신 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ApiKey"
+                      }
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "키 생성",
+        "description": "새로운 API 키를 생성합니다.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "키를 소유할 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiKeyPostRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/ApiKeyPostResponse"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId/keys/:keyId": {
+      "get": {
+        "summary": "주요 세부 정보를 얻으세요",
+        "description": "단일 키 세부 정보를 반환합니다..",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "요청하신 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "API key ID",
+            "description": "요청된 키의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/ApiKey"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "업데이트 키",
+        "description": "API 키 속성 업데이트.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "키를 소유한 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "API key ID",
+            "description": "업데이트할 키의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiKeyPatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/ApiKey"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "삭제 키",
+        "description": "API 키를 삭제합니다. 활성 요청을 인증하는 데 사용되지 않는 키만 삭제할 수 있습니다..",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "키를 소유한 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "API key ID",
+            "description": "삭제할 키의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/organizations/:organizationId/members": {
+      "get": {
+        "summary": "조직 구성원 목록",
+        "description": "조직의 모든 구성원 목록을 반환합니다..",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "요청하신 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Member"
+                      }
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId/members/:userId": {
+      "get": {
+        "summary": "회원 정보 받기",
+        "description": "단일 조직 구성원 세부 정보를 반환합니다..",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "회원이 속한 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "User ID",
+            "description": "요청하신 사용자의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Member"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "조직 구성원 업데이트.",
+        "description": "조직 구성원 역할 업데이트.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "회원이 속한 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "User ID",
+            "description": "패치할 사용자의 ID",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MemberPatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Member"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "조직 구성원 제거",
+        "description": "조직에서 사용자를 제거합니다.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "요청하신 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "User ID",
+            "description": "요청하신 사용자의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/organizations/:organizationId/invitations": {
+      "get": {
+        "summary": "모든 초대장을 나열하세요",
+        "description": "모든 조직 초대 목록을 반환합니다..",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "요청하신 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Invitation"
+                      }
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "초대장 만들기",
+        "description": "조직 초대장을 만듭니다.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "사용자를 초대할 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvitationPostRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Invitation"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId/invitations/:invitationId": {
+      "get": {
+        "summary": "초대장 세부 정보 받기",
+        "description": "단일 조직 초대에 대한 세부 정보를 반환합니다..",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "요청하신 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Organization invitation ID",
+            "description": "요청하신 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Invitation"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "조직 초대 삭제",
+        "description": "단일 조직 초대를 삭제합니다..",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "초대장을 받은 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Organization invitation ID",
+            "description": "요청하신 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/organizations/:organizationId/activities": {
+      "get": {
+        "summary": "조직활동 목록",
+        "description": "모든 조직 활동 목록을 반환합니다..",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "요청하신 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Activity"
+                      }
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/:organizationId/activities/:activityId": {
+      "get": {
+        "summary": "조직 활동",
+        "description": "ID별로 단일 조직 활동을 반환합니다..",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Organization ID",
+            "description": "요청하신 조직의 ID.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "in": "path",
+            "name": "Activity ID",
+            "description": "요청된 활동의 ID.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공적인 응답",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "$ref": "#/components/schemas/Activity"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 200
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "description": "모든 요청에 고유한 ID가 할당됨. UUIDv4",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "클라이언트 오류로 인식되는 사항으로 인해 서버가 요청을 처리할 수 없거나 처리하지 않습니다..",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP 상태 코드.",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "자세한 오류 설명."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ServiceEndpoint": {
+        "properties": {
+          "protocol": {
+            "type": "string",
+            "description": "엔드포인트 프로토콜: &#39;https&#39;, &#39;nativesecure&#39;, &#39;mysql&#39;.",
+            "enum": [
+              "https",
+              "nativesecure",
+              "mysql"
+            ]
+          },
+          "host": {
+            "type": "string",
+            "description": "서비스 호스트 이름"
+          },
+          "port": {
+            "type": "number",
+            "description": "숫자 포트"
+          }
+        }
+      },
+      "IpAccessListEntry": {
+        "properties": {
+          "source": {
+            "type": "string",
+            "description": "IP 또는 CIDR"
+          },
+          "description": {
+            "type": "string",
+            "description": "액세스를 허용하려면 IPv4 주소 또는 IPv4 CIDR을 사용하세요."
+          }
+        }
+      },
+      "Service": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "고유한 서비스 ID.",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "서비스 이름."
+          },
+          "provider": {
+            "type": "string",
+            "description": "클라우드 제공자",
+            "enum": [
+              "aws",
+              "gcp"
+            ]
+          },
+          "region": {
+            "type": "string",
+            "description": "서비스 지역.",
+            "enum": [
+              "ap-south-1",
+              "ap-southeast-1",
+              "eu-central-1",
+              "eu-west-1",
+              "us-east-1",
+              "us-east-2",
+              "us-west-2",
+              "ap-southeast-2",
+              "us-east1",
+              "us-central1",
+              "europe-west4",
+              "asia-southeast1"
+            ]
+          },
+          "state": {
+            "type": "string",
+            "description": "현재 서비스 상태.",
+            "enum": [
+              "starting",
+              "stopping",
+              "terminating",
+              "provisioning",
+              "running",
+              "stopped",
+              "terminated",
+              "degraded",
+              "failed",
+              "idle"
+            ]
+          },
+          "endpoints": {
+            "type": "array",
+            "description": "모든 서비스 엔드포인트 목록.",
+            "items": {
+              "$ref": "#/components/schemas/ServiceEndpoint"
+            }
+          },
+          "tier": {
+            "type": "string",
+            "description": "서비스 계층: &#39;개발&#39;, &#39;생산&#39;, &#39;전용_고_메모리&#39;, &#39;전용_고_CPU&#39;, &#39;전용_표준&#39;. 생산 서비스 규모, 개발은 고정 크기.",
+            "enum": [
+              "development",
+              "production",
+              "dedicated_high_mem",
+              "dedicated_high_cpu",
+              "dedicated_standard"
+            ]
+          },
+          "minTotalMemoryGb": {
+            "type": "number",
+            "description": "자동 확장 중 모든 작업자의 최소 총 메모리(GB). &#39;production&#39; 서비스에만 사용 가능합니다. 12의 배수여야 하며 24보다 커야 합니다..",
+            "minimum": 24,
+            "maximum": 720,
+            "multipleOf": 12,
+            "example": 48
+          },
+          "maxTotalMemoryGb": {
+            "type": "number",
+            "description": "자동 확장 중 모든 작업자의 최대 총 메모리(Gb). &#39;production&#39; 서비스에만 사용 가능합니다. 비유료 서비스의 경우 12의 배수여야 하며 360보다 작아야 하고 유료 서비스의 경우 720보다 작아야 합니다..",
+            "minimum": 24,
+            "maximum": 720,
+            "multipleOf": 12,
+            "example": 360
+          },
+          "idleScaling": {
+            "type": "boolean",
+            "description": "true로 설정하면 서비스는 유휴 상태일 때 0으로 축소할 수 있습니다. 개발 서비스의 경우 항상 true입니다.."
+          },
+          "idleTimeoutMinutes": {
+            "type": "number",
+            "description": "최소 유휴 시간 초과(분)를 설정합니다. 5분 이상이어야 합니다.."
+          },
+          "ipAccessList": {
+            "type": "array",
+            "description": "서비스에 접근이 허용된 IP 주소 목록",
+            "items": {
+              "$ref": "#/components/schemas/IpAccessListEntry"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "서비스 생성 타임스탬프. ISO-8601.",
+            "format": "date-time"
+          }
+        }
+      },
+      "IpAccessListPatch": {
+        "properties": {
+          "add": {
+            "type": "array",
+            "description": "추가할 요소입니다. &quot;제거&quot; 부분이 처리된 후 실행됩니다..",
+            "items": {
+              "$ref": "#/components/schemas/IpAccessListEntry"
+            }
+          },
+          "remove": {
+            "type": "array",
+            "description": "제거할 요소입니다. &quot;add&quot; 부분이 처리되기 전에 실행됩니다..",
+            "items": {
+              "$ref": "#/components/schemas/IpAccessListEntry"
+            }
+          }
+        }
+      },
+      "Activity": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "고유 활동 ID."
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "활동의 타임스탬프. ISO-8601.",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "string",
+            "description": "활동 유형.",
+            "enum": [
+              "organization_update_name",
+              "organization_invite_create",
+              "organization_invite_delete",
+              "organization_member_join",
+              "organization_member_add",
+              "organization_member_leave",
+              "organization_member_delete",
+              "organization_member_update_role",
+              "key_create",
+              "key_delete",
+              "service_create",
+              "service_start",
+              "service_stop",
+              "service_delete",
+              "service_update_name",
+              "service_update_ip_access_list",
+              "service_update_autoscaling_memory",
+              "service_update_autoscaling_idling",
+              "service_update_password",
+              "backup_delete"
+            ]
+          },
+          "actorType": {
+            "type": "string",
+            "description": "액터 유형: &#39;사용자&#39;, &#39;지원&#39;, &#39;시스템&#39;, &#39;api&#39;.",
+            "enum": [
+              "user",
+              "support",
+              "system",
+              "api"
+            ]
+          },
+          "actorId": {
+            "type": "string",
+            "description": "고유 배우 ID."
+          },
+          "actorDetails": {
+            "type": "string",
+            "description": "배우에 대한 추가 정보."
+          },
+          "actorIpAddress": {
+            "type": "string",
+            "description": "액터의 IP 주소입니다. &#39;user&#39; 및 &#39;api&#39; 액터 유형에 대해 정의됨."
+          },
+          "organizationId": {
+            "type": "string",
+            "description": "활동 범위: 이 활동이 관련된 조직 ID."
+          },
+          "serviceId": {
+            "type": "string",
+            "description": "활동 범위: 이 활동이 관련된 서비스 ID."
+          }
+        }
+      },
+      "Backup": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "고유한 백업 ID.",
+            "format": "uuid"
+          },
+          "status": {
+            "type": "string",
+            "description": "백업 상태: &#39;완료&#39;, &#39;오류&#39;, &#39;진행 중&#39;.",
+            "enum": [
+              "done",
+              "error",
+              "in_progress"
+            ]
+          },
+          "serviceId": {
+            "type": "string",
+            "description": "이름"
+          },
+          "startedAt": {
+            "type": "string",
+            "description": "백업 시작 타임스탬프. ISO-8601.",
+            "format": "date-time"
+          },
+          "finishedAt": {
+            "type": "string",
+            "description": "백업 완료 타임스탬프. ISO-8601. 완료된 백업에만 사용 가능",
+            "format": "date-time"
+          }
+        }
+      },
+      "Organization": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "고유한 조직 ID.",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "조직이 생성된 타임스탬프입니다. ISO-8601.",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string",
+            "description": "조직의 이름."
+          }
+        }
+      },
+      "Member": {
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "고유한 사용자 ID. 사용자가 여러 조직의 멤버인 경우 이 ID는 동일하게 유지됩니다.."
+          },
+          "name": {
+            "type": "string",
+            "description": "개인 사용자 프로필을 설정한 회원 이름."
+          },
+          "email": {
+            "type": "string",
+            "description": "개인 사용자 프로필에 설정된 회원의 이메일.",
+            "format": "email"
+          },
+          "role": {
+            "type": "string",
+            "description": "조직 내 구성원의 역할.",
+            "enum": [
+              "admin",
+              "developer"
+            ]
+          },
+          "joinedAt": {
+            "type": "string",
+            "description": "회원이 조직에 가입한 타임스탬프. ISO-8601.",
+            "format": "date-time"
+          }
+        }
+      },
+      "Invitation": {
+        "properties": {
+          "role": {
+            "type": "string",
+            "description": "조직 내 구성원의 역할.",
+            "enum": [
+              "admin",
+              "developer"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "description": "고유 초대 ID.",
+            "format": "uuid"
+          },
+          "email": {
+            "type": "string",
+            "description": "초대된 사용자의 이메일. 이 이메일을 가진 사용자만 초대장을 사용하여 가입할 수 있습니다. 이메일은 소문자 형태로 저장됩니다..",
+            "format": "email"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "초대장 생성 타임스탬프. ISO-8601.",
+            "format": "date-time"
+          },
+          "expireAt": {
+            "type": "string",
+            "description": "초대장이 만료되는 타임스탬프입니다. ISO-8601.",
+            "format": "date-time"
+          }
+        }
+      },
+      "ApiKey": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "고유한 API 키 ID.",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "키의 이름"
+          },
+          "state": {
+            "type": "string",
+            "description": "키 상태: &#39;활성화됨&#39;, &#39;비활성화됨&#39;.",
+            "enum": [
+              "enabled",
+              "disabled"
+            ]
+          },
+          "roles": {
+            "type": "array",
+            "description": "키에 할당된 역할 목록입니다. 최소 1개의 요소를 포함합니다..",
+            "items": {
+              "type": "string",
+              "enum": [
+                "admin",
+                "developer"
+              ]
+            }
+          },
+          "keySuffix": {
+            "type": "string",
+            "description": "키의 마지막 4글자."
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "키가 생성된 타임스탬프. ISO-8601.",
+            "format": "date-time"
+          },
+          "expireAt": {
+            "type": "string",
+            "description": "키가 만료되는 타임스탬프입니다. 존재하지 않거나 비어 있으면 키가 만료되지 않습니다. ISO-8601.",
+            "format": "date-time"
+          },
+          "usedAt": {
+            "type": "string",
+            "description": "타임스탬프 키가 마지막으로 사용된 시간입니다. 없으면 키가 사용되지 않은 것입니다. ISO-8601.",
+            "format": "date-time"
+          }
+        }
+      },
+      "ApiKeyHashData": {
+        "properties": {
+          "keyIdHash": {
+            "type": "string",
+            "description": "키 ID의 해시."
+          },
+          "keyIdSuffix": {
+            "type": "string",
+            "description": "키 ID의 마지막 4자리. 알고리즘: echo -n &quot;yourpassword&quot; | sha256sum | tr -d &#39;-&#39; | xxd -r -p | base64"
+          },
+          "keySecretHash": {
+            "type": "string",
+            "description": "키 비밀의 해시. 알고리즘: echo -n &quot;yourpassword&quot; | sha256sum | tr -d &#39;-&#39; | xxd -r -p | base64"
+          }
+        }
+      },
+      "OrganizationPatchRequest": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "조직의 이름."
+          }
+        }
+      },
+      "ServicePostRequest": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "서비스 이름."
+          },
+          "provider": {
+            "type": "string",
+            "description": "클라우드 제공자",
+            "enum": [
+              "aws",
+              "gcp"
+            ]
+          },
+          "region": {
+            "type": "string",
+            "description": "서비스 지역.",
+            "enum": [
+              "ap-south-1",
+              "ap-southeast-1",
+              "eu-central-1",
+              "eu-west-1",
+              "us-east-1",
+              "us-east-2",
+              "us-west-2",
+              "ap-southeast-2",
+              "us-east1",
+              "us-central1",
+              "europe-west4",
+              "asia-southeast1"
+            ]
+          },
+          "tier": {
+            "type": "string",
+            "description": "서비스 계층: &#39;개발&#39;, &#39;생산&#39;, &#39;전용_고_메모리&#39;, &#39;전용_고_CPU&#39;, &#39;전용_표준&#39;. 생산 서비스 규모, 개발은 고정 크기.",
+            "enum": [
+              "development",
+              "production",
+              "dedicated_high_mem",
+              "dedicated_high_cpu",
+              "dedicated_standard"
+            ]
+          },
+          "ipAccessList": {
+            "type": "array",
+            "description": "서비스에 접근이 허용된 IP 주소 목록",
+            "items": {
+              "$ref": "#/components/schemas/IpAccessListEntry"
+            }
+          },
+          "minTotalMemoryGb": {
+            "type": "number",
+            "description": "자동 확장 중 모든 작업자의 최소 총 메모리(GB). &#39;production&#39; 서비스에만 사용 가능합니다. 12의 배수여야 하며 24보다 커야 합니다..",
+            "minimum": 24,
+            "maximum": 720,
+            "multipleOf": 12,
+            "example": 48
+          },
+          "maxTotalMemoryGb": {
+            "type": "number",
+            "description": "자동 확장 중 모든 작업자의 최대 총 메모리(Gb). &#39;production&#39; 서비스에만 사용 가능합니다. 비유료 서비스의 경우 12의 배수여야 하며 360보다 작아야 하고 유료 서비스의 경우 720보다 작아야 합니다..",
+            "minimum": 24,
+            "maximum": 720,
+            "multipleOf": 12,
+            "example": 360
+          },
+          "idleScaling": {
+            "type": "boolean",
+            "description": "true로 설정하면 서비스는 유휴 상태일 때 0으로 축소할 수 있습니다. 개발 서비스의 경우 항상 true입니다.."
+          },
+          "idleTimeoutMinutes": {
+            "type": "number",
+            "description": "최소 유휴 시간 초과(분)를 설정합니다. 5분 이상이어야 합니다.."
+          },
+          "backupId": {
+            "type": "string",
+            "description": "새 서비스의 초기 상태로 사용되는 선택적 백업 ID입니다. 사용할 경우 새 인스턴스의 지역 및 계층은 원래 인스턴스의 값과 동일해야 합니다..",
+            "format": "uuid"
+          }
+        }
+      },
+      "ServicePostResponse": {
+        "properties": {
+          "service": {
+            "$ref": "#/components/schemas/Service"
+          },
+          "password": {
+            "type": "string",
+            "description": "새로 생성된 서비스의 비밀번호."
+          }
+        }
+      },
+      "ServicePatchRequest": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "서비스 이름."
+          },
+          "ipAccessList": {
+            "$ref": "#/components/schemas/IpAccessListPatch"
+          }
+        }
+      },
+      "ServiceStatePatchRequest": {
+        "properties": {
+          "command": {
+            "type": "string",
+            "description": "상태를 변경하는 명령: &#39;시작&#39;, &#39;중지&#39;.",
+            "enum": [
+              "start",
+              "stop"
+            ]
+          }
+        }
+      },
+      "ServiceScalingPatchRequest": {
+        "properties": {
+          "minTotalMemoryGb": {
+            "type": "number",
+            "description": "자동 확장 중 모든 작업자의 최소 총 메모리(GB). &#39;production&#39; 서비스에만 사용 가능합니다. 12의 배수여야 하며 24보다 커야 합니다..",
+            "minimum": 24,
+            "maximum": 720,
+            "multipleOf": 12,
+            "example": 48
+          },
+          "maxTotalMemoryGb": {
+            "type": "number",
+            "description": "자동 확장 중 모든 작업자의 최대 총 메모리(Gb). &#39;production&#39; 서비스에만 사용 가능합니다. 비유료 서비스의 경우 12의 배수여야 하며 360보다 작아야 하고 유료 서비스의 경우 720보다 작아야 합니다..",
+            "minimum": 24,
+            "maximum": 720,
+            "multipleOf": 12,
+            "example": 360
+          },
+          "idleScaling": {
+            "type": "boolean",
+            "description": "true로 설정하면 서비스는 유휴 상태일 때 0으로 축소할 수 있습니다. 개발 서비스의 경우 항상 true입니다.."
+          },
+          "idleTimeoutMinutes": {
+            "type": "number",
+            "description": "최소 유휴 시간 초과(분)를 설정합니다. 5분 이상이어야 합니다.."
+          }
+        }
+      },
+      "ServicePasswordPatchRequest": {
+        "properties": {
+          "newPasswordHash": {
+            "type": "string",
+            "description": "선택 사항인 비밀번호 해시입니다. 네트워크를 통한 비밀번호 전송을 방지하는 데 사용됩니다. 제공되지 않으면 새 비밀번호가 생성되어 응답에 제공됩니다. 그렇지 않으면 이 해시가 사용됩니다. 알고리즘: echo -n &quot;yourpassword&quot; | sha256sum | tr -d &#39;-&#39; | xxd -r -p | base64"
+          },
+          "newDoubleSha1Hash": {
+            "type": "string",
+            "description": "MySQL 프로토콜에 대한 선택적 이중 SHA1 암호 해시. newPasswordHash가 제공되지 않으면 이 키는 무시되고 생성된 암호가 사용됩니다. 이 필드를 활성화하려면 실험적이므로 지원팀에 문의하세요. 알고리즘: echo -n &quot;yourpassword&quot; | sha1sum | tr -d &#39;-&#39; | xxd -r -p | sha1sum | tr -d &#39;-&#39;"
+          }
+        }
+      },
+      "ServicePasswordPatchResponse": {
+        "properties": {
+          "password": {
+            "type": "string",
+            "description": "새로운 서비스 비밀번호. 요청에 &#39;newPasswordHash&#39;가 없는 경우에만 제공됩니다."
+          }
+        }
+      },
+      "ApiKeyPostRequest": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "키의 이름."
+          },
+          "expireAt": {
+            "type": "string",
+            "description": "키가 만료되는 타임스탬프입니다. 존재하지 않거나 비어 있으면 키가 만료되지 않습니다. ISO-8601.",
+            "format": "date-time"
+          },
+          "state": {
+            "type": "string",
+            "description": "키의 초기 상태: &#39;활성화됨&#39;, &#39;비활성화됨&#39;. 제공되지 않으면 새 키는 &#39;활성화됨&#39;이 됩니다..",
+            "enum": [
+              "enabled",
+              "disabled"
+            ]
+          },
+          "hashData": {
+            "$ref": "#/components/schemas/ApiKeyHashData"
+          },
+          "roles": {
+            "type": "array",
+            "description": "키에 할당된 역할 목록입니다. 최소 1개의 요소를 포함합니다..",
+            "items": {
+              "type": "string",
+              "enum": [
+                "admin",
+                "developer"
+              ]
+            }
+          }
+        }
+      },
+      "ApiKeyPostResponse": {
+        "properties": {
+          "key": {
+            "$ref": "#/components/schemas/ApiKey"
+          },
+          "keyId": {
+            "type": "string",
+            "description": "생성된 키 ID. 요청에 &#39;hashData&#39;가 없는 경우에만 제공됩니다.."
+          },
+          "keySecret": {
+            "type": "string",
+            "description": "생성된 키 비밀. 요청에 &#39;hashData&#39;가 없는 경우에만 제공됩니다.."
+          }
+        }
+      },
+      "ApiKeyPatchRequest": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "키의 이름"
+          },
+          "roles": {
+            "type": "array",
+            "description": "키에 할당된 역할 목록입니다. 최소 1개의 요소를 포함합니다..",
+            "items": {
+              "type": "string",
+              "enum": [
+                "admin",
+                "developer"
+              ]
+            }
+          },
+          "expireAt": {
+            "type": "string",
+            "description": "키가 만료되는 타임스탬프입니다. 존재하지 않거나 비어 있으면 키가 만료되지 않습니다. ISO-8601.",
+            "format": "date-time"
+          },
+          "state": {
+            "type": "string",
+            "description": "키 상태: &#39;활성화됨&#39;, &#39;비활성화됨&#39;.",
+            "enum": [
+              "enabled",
+              "disabled"
+            ]
+          }
+        }
+      },
+      "MemberPatchRequest": {
+        "properties": {
+          "role": {
+            "type": "string",
+            "description": "조직 내 구성원의 역할.",
+            "enum": [
+              "admin",
+              "developer"
+            ]
+          }
+        }
+      },
+      "InvitationPostRequest": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "초대된 사용자의 이메일. 이 이메일을 가진 사용자만 초대장을 사용하여 가입할 수 있습니다. 이메일은 소문자 형태로 저장됩니다..",
+            "format": "email"
+          },
+          "role": {
+            "type": "string",
+            "description": "조직 내 구성원의 역할.",
+            "enum": [
+              "admin",
+              "developer"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "x-samchon-emended": true
+}
