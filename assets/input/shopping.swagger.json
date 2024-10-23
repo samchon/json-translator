@@ -8360,7 +8360,7 @@
           }
         ],
         "requestBody": {
-          "description": "Ceate info of the supplement",
+          "description": "Create info of the supplement",
           "content": {
             "application/json": {
               "schema": {

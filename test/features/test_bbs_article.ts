@@ -12,7 +12,7 @@ export const test_bbs_article = async (
     const output: IBbsArticle = await translator.translate({
       input,
       target: lang,
-      // filter: ({ key }) => key === "title" || key === "body",
+      filter: ({ key }) => key === "title" || key === "body",
     });
     typia.assert(output);
     await fs.promises.writeFile(

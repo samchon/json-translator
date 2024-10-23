@@ -1,4 +1,7 @@
-import { Translate } from "@google-cloud/translate/build/src/v2";
+import {
+  Translate,
+  TranslateConfig,
+} from "@google-cloud/translate/build/src/v2";
 
 import { JsonTranslateComposer } from "./internal/JsonTranslateComposer";
 
@@ -16,10 +19,12 @@ import { JsonTranslateComposer } from "./internal/JsonTranslateComposer";
  * @author Jeongho Nam - https://github.com/samchon
  */
 export class JsonTranslator {
+  private readonly options_: JsonTranslator.IOptions;
   private readonly service_: Translate;
 
-  public constructor(options?: ConstructorParameters<typeof Translate>[0]) {
-    this.service_ = new Translate(options);
+  public constructor(options?: JsonTranslator.IOptions) {
+    this.options_ = options ?? {};
+    this.service_ = new Translate(this.options_);
   }
 
   /**
@@ -60,6 +65,28 @@ export class JsonTranslator {
             to: props.target,
           },
         );
+        const expected: number = queue
+          .map((p) => p.text.split(SEPARATOR).length)
+          .reduce((x, y) => x + y, 0);
+        const actual: number = response
+          .map((s) => s.split(SEPARATOR).length)
+          .reduce((x, y) => x + y, 0);
+        if (expected !== actual) {
+          queue.forEach((q, i) => {
+            const input: string[] = q.text.split(SEPARATOR);
+            const output: string[] = response[i].split(SEPARATOR);
+            if (input.length !== output.length)
+              console.log({
+                from: q.text,
+                to: response[i],
+                input: Object.fromEntries(input.map((s, i) => [i, s])),
+                output: Object.fromEntries(output.map((s, i) => [i, s])),
+              });
+          });
+          throw new Error(
+            `Mismatched translation count. Delivered ${expected} count string values to the Google Translate API, but received number is ${actual}.`,
+          );
+        }
         translated.push(...response);
       }
       queue = [];
@@ -149,6 +176,11 @@ export class JsonTranslator {
   }
 }
 export namespace JsonTranslator {
+  /**
+   * Options for the JSON Translator consturctor.
+   */
+  export type IOptions = TranslateConfig;
+
   /**
    * Properties for the translation.
    *
@@ -303,4 +335,4 @@ interface IPiece {
 /**
  * @internal
  */
-const SEPARATOR = " //|-0-|\\ ";
+const SEPARATOR = `<span translate="no"></span>`;
