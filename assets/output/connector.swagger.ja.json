@@ -73,7 +73,7 @@
     },
     "/workflow/run/{workflowRunId}": {
       "get": {
-        "description": "1回のワークフロー実行のステータスを返す",
+        "description": "1つのワークフロー実行のステータスを返す",
         "tags": [],
         "parameters": [
           {
@@ -462,7 +462,7 @@
     },
     "/connector/hwp/parse": {
       "post": {
-        "summary": " Hwpファイルを解析する",
+        "summary": "Hwpファイルを解析する",
         "description": "hwpファイルを解析する",
         "tags": [
           "Hwp"
@@ -532,7 +532,7 @@
     },
     "/connector/excel/read": {
       "post": {
-        "summary": " Excelファイルの内容を取得する",
+        "summary": "Excelファイルの内容を取得する",
         "description": "入力ファイル情報に基づいて対応するExcelファイルの内容を取得します",
         "tags": [
           "Excel"
@@ -585,7 +585,7 @@
         },
         "responses": {
           "201": {
-            "description": " Excelワークシートのリスト.",
+            "description": "Excelワークシートのリスト.",
             "content": {
               "application/json": {
                 "schema": {
@@ -668,7 +668,7 @@
     },
     "/connector/excel": {
       "post": {
-        "summary": " Excelファイルとシートを追加する",
+        "summary": "Excelファイルとシートを追加する",
         "description": "Excelファイルとシートを追加 Excelファイルを作成し、リンクを取得します。このリンクを次のコネクタに転送して、さらに変更を反映することもできます。この機能を使用してシートを作成すると、シート名が「Sheet1」の場合は、デフォルト名「Sheet1」が作成されます。提供されていない.",
         "deprecated": true,
         "tags": [
@@ -800,7 +800,7 @@
         },
         "responses": {
           "201": {
-            "description": " Google ドキュメントのコンテンツ",
+            "description": "Google ドキュメントのコンテンツ",
             "content": {
               "application/json": {
                 "schema": {
@@ -849,8 +849,8 @@
     },
     "/connector/google-docs/{id}": {
       "delete": {
-        "summary": " Googleドキュメントを削除する",
-        "description": " Googleドキュメントを削除する",
+        "summary": "Googleドキュメントを削除する",
+        "description": "Googleドキュメントを削除する",
         "tags": [
           "Google Docs"
         ],
@@ -893,8 +893,8 @@
     },
     "/connector/google-docs/get-list": {
       "post": {
-        "summary": " Googleドキュメントのリストを取得する",
-        "description": " Googleドキュメントのリストを取得する",
+        "summary": "Googleドキュメントのリストを取得する",
+        "description": "Googleドキュメントのリストを取得する",
         "tags": [
           "Google Docs"
         ],
@@ -1075,8 +1075,8 @@
     },
     "/connector/google-sheet/permission": {
       "post": {
-        "summary": " Google スプレッドシートに権限を付与する",
-        "description": " Google スプレッドシートに権限を付与する",
+        "summary": "Google スプレッドシートに権限を付与する",
+        "description": "Google スプレッドシートに権限を付与する",
         "tags": [
           "Google Sheet"
         ],
@@ -1172,8 +1172,8 @@
     },
     "/connector/google-sheet/get-rows": {
       "post": {
-        "summary": " Google スプレッドシートから行情報を取得する",
-        "description": " Google スプレッドシートから行情報を取得する",
+        "summary": "Google スプレッドシートから行情報を取得する",
+        "description": "Google スプレッドシートから行情報を取得する",
         "tags": [
           "Google Sheet"
         ],
@@ -1322,7 +1322,7 @@
     },
     "/connector/google-calendar/{calendarId}/get-events": {
       "post": {
-        "summary": " Googleカレンダーのイベントリストを取得する",
+        "summary": "Googleカレンダーのイベントリストを取得する",
         "description": "Googleカレンダーのイベントリストを取得する",
         "tags": [
           "Google Calendar"
@@ -1584,7 +1584,7 @@
     },
     "/connector/google-calendar/{calendarId}/event/{eventId}/attendees": {
       "put": {
-        "summary": " Googleカレンダーのイベントに参加者を追加する",
+        "summary": "Googleカレンダーのイベントに参加者を追加する",
         "description": "イベントに参加者を追加する",
         "tags": [
           "Google Calendar"
@@ -1749,7 +1749,7 @@
     },
     "/connector/google-drive/file": {
       "post": {
-        "summary": " Googleドライブファイルを作成する",
+        "summary": "Googleドライブファイルを作成する",
         "description": "Google ドライブに新しいファイルを作成する",
         "tags": [
           "Google Drive"
@@ -1783,7 +1783,7 @@
     },
     "/connector/google-drive/file/{id}": {
       "delete": {
-        "summary": " Google ドライブのファイルを削除する",
+        "summary": "Google ドライブのファイルを削除する",
         "description": "Google ドライブ内のファイルを削除する",
         "tags": [
           "Google Drive"
@@ -1827,7 +1827,7 @@
     },
     "/connector/google-drive/folder/{id}": {
       "delete": {
-        "summary": " Google ドライブ フォルダを削除する",
+        "summary": "Google ドライブ フォルダを削除する",
         "description": "Google ドライブのフォルダを削除する",
         "tags": [
           "Google Drive"
@@ -1871,7 +1871,7 @@
     },
     "/connector/google-drive/permission": {
       "post": {
-        "summary": " Googleドライブの権限を付与する",
+        "summary": "Googleドライブの権限を付与する",
         "description": "ファイルまたはフォルダにアクセスする権限を付与します",
         "tags": [
           "Google Drive"
@@ -2018,7 +2018,7 @@
     },
     "/connector/gmail/draft": {
       "post": {
-        "summary": " GMAIL 下書きを作成",
+        "summary": "GMAIL 下書きを作成",
         "description": "メールの下書きを作成する Gmail は Google が提供する無料の Web ベースのメール サービスです。このコネクタはメールを送信するためのもので、単純なテキストで送信すると文章が 1 行の長い行として表示されるため、改行文字を挿入する必要があります。現在の形式では、content-type として `text/html; charset=utf-8` を使用します。場合によっては、html 形式を使用できます。ファイルを添付する場合は、ファイル名と保存先のアドレスを指定する必要があります。保存されたファイルは関数内で GET リクエストとして読み込まれ、エンコードされて処理されます。.",
         "tags": [
           "Gmail"
@@ -2178,7 +2178,7 @@
     "/connector/gmail/{id}/hardDelete": {
       "delete": {
         "summary": "メールを削除",
-        "description": "メールを削除するGmailはGoogleが提供する無料のウェブベースのメールサービスです。この機能はメールをゴミ箱に移動するのではなく永久に削除するため、特別な注意が必要です。ほとんどのユーザーは、すでにゴミ箱にあるメールを削除したいでしょう。したがって、ユーザーが削除したい場合は、メールをゴミ箱に移動するように誘導するのが良いですが、それでも削除したい場合は、ゴミ箱をターゲットにするのが正しいです。.",
+        "description": "メールを削除するGmailはGoogleが提供する無料のウェブベースのメールサービスです。この機能はメールをゴミ箱に移動するのではなく、完全に削除するため、特別な注意が必要です。ほとんどのユーザーは、すでにゴミ箱にあるメールを削除したいでしょう。したがって、ユーザーが削除したい場合は、メールをゴミ箱に移動するように誘導するのが良いですが、それでも削除したい場合は、ゴミ箱をターゲットにするのが正しいです。.",
         "tags": [
           "Gmail"
         ],
@@ -2220,7 +2220,7 @@
     },
     "/connector/gmail/{id}": {
       "delete": {
-        "summary": " GMAILを削除する",
+        "summary": "GMAILを削除する",
         "description": "メールをゴミ箱に移動 GmailはGoogleが提供する無料のウェブベースのメールサービスです.",
         "tags": [
           "Gmail"
@@ -2264,7 +2264,7 @@
     },
     "/connector/gmail/label": {
       "post": {
-        "summary": " GMAILラベルを作成する",
+        "summary": "GMAILラベルを作成する",
         "description": "ラベルを作成する GmailはGoogleが提供する無料のウェブベースのメールサービスです.",
         "tags": [
           "Gmail"
@@ -2299,7 +2299,7 @@
     },
     "/connector/gmail/label/{mailId}": {
       "post": {
-        "summary": " GMAIL ラベルの割り当て",
+        "summary": "GMAIL ラベルの割り当て",
         "description": "メールにラベルを割り当てるGmailはGoogleが提供する無料のウェブベースのメールサービスです.",
         "tags": [
           "Gmail"
@@ -3239,7 +3239,7 @@
         ],
         "parameters": [],
         "requestBody": {
-          "description": " DTOにカレンダーの取得をリクエストする.",
+          "description": "DTOにカレンダーの取得をリクエストする.",
           "content": {
             "application/json": {
               "schema": {
@@ -3521,7 +3521,7 @@
     },
     "/connector/google-slides/presentations/{id}/slides/quarter-divisions": {
       "put": {
-        "summary": " Google スライドのプレゼンテーションに「QuarterDivision」タイプの画像スライドを追加する",
+        "summary": "Google スライドのプレゼンテーションに「QuarterDivision」タイプの画像スライドを追加する",
         "description": "Google スライドのプレゼンテーションに「QuarterDivision」タイプのスライドを追加する 「QuarterDivision」タイプのスライドは、4 カットの漫画のように、左上、右上、左下、右下に画像とテキストを配置するように設計されたテンプレートです。このテンプレートには 4 つの画像が必要で、テキストは各画像のすぐ下に配置されます。ユーザーからスライドの追加を求められたときに画像が必要になる場合があります。この場合、任意の画像を挿入するのではなく、まず検索コネクタまたは画像作成コネクタを使用して画像を確保する必要があります。このプロセスに対するユーザーの同意を求めるのが安全です。.",
         "tags": [
           "Google Slide"
@@ -4222,7 +4222,7 @@
         ],
         "parameters": [],
         "requestBody": {
-          "description": "天気クエリの場所の DTO",
+          "description": "天気予報クエリの場所の DTO",
           "content": {
             "application/json": {
               "schema": {
@@ -4600,7 +4600,7 @@
     },
     "/connector/dall-e-3/generate": {
       "post": {
-        "summary": " dall-e-3 画像ジェネレータノード",
+        "summary": "dall-e-3 画像ジェネレータノード",
         "description": "dall-e-3 モデルを使用して画像を生成する",
         "tags": [
           "Dall-e-3"
@@ -5319,7 +5319,7 @@
     "/connector/google-ads/generateKeywordIdeas/keywordsAndUrl": {
       "post": {
         "summary": "キーワードとURLを使用してキーワードを作成する",
-        "description": "Google 広告のキーワードを推奨する Google 広告で広告を実行するには、キーワードを登録する必要があります。キーワードは広告のエンドユーザーをターゲットにするために登録する必要があり、Google 広告のリソースのうち `adGroup` にマッピングされている `adGroupCriteria` の 1 つです。このコネクタは、そのようなキーワードを推奨する機能で、ユーザーが登録したいキーワードと URL を入力すると、そこから派生できる他のキーワードを推奨します。リクエスト結果は、広告登録時のキーワードの一覧、競合指数、単価、キーワードごとの期待指数値です。このコネクタは、アダルト広告のキーワードを除外し、言語条件は韓国語、地域条件は韓国 (大韓民国) に設定されています。機能を呼び出す前に、ユーザーに `customerId` を尋ねる必要があるため、`customerId` を確認できるコネクタを提案する必要があります。.",
+        "description": "Google 広告のキーワードを推奨する Google 広告で広告を実行するには、キーワードを登録する必要があります。キーワードは広告のエンドユーザーをターゲットにするために登録する必要があり、Google 広告のリソースのうち `adGroup` にマッピングされている `adGroupCriteria` の 1 つです。このコネクタは、そのようなキーワードを推奨する機能で、ユーザーが登録したいキーワードと URL を入力すると、そこから派生できる他のキーワードを推奨します。リクエスト結果は、広告登録時のキーワードの一覧、競合指数、単価、キーワードごとの予想指数値です。このコネクタは、アダルト広告のキーワードを除外し、言語条件は韓国語、地域条件は韓国 (大韓民国) に設定されています。機能を呼び出す前に、ユーザーに `customerId` を尋ねる必要があるため、`customerId` を確認できるコネクタを提案する必要があります。.",
         "tags": [
           "Google Ads"
         ],
@@ -5454,7 +5454,7 @@
     "/connector/google-ads/get-customers": {
       "post": {
         "summary": "広告アカウントを取得",
-        "description": "顧客の広告アカウントを取得する ユーザーのアクセストークンを使用して、`Wrtn` が管理者であるアカウントの中から、ユーザーの広告アカウント、つまり `customer` を検索します。ユーザーが広告アカウントを持っていても、`Wrtn` が管理者でない場合はリストされません。したがって、`Wrtn` が管理者として登録されたことがない場合は、`POST connector/google-ads/customerClientLink` コネクタを呼び出す必要があります。また、このコネクタは、韓国の通貨単位 `KRW` を使用していない広告アカウントを除外します。これは、今後、他のキャンペーン予算の変更や広告ステータスの変更コネクタで間違いが発生しないようにするためです。Google Ads コネクタを使用して広告を作成する場合、各アカウントの通貨単位に応じて予算設定で人為的エラーが発生する可能性があります。たとえば、通貨単位が `USD` のアカウントの予算を、通貨単位が `KRW` のアカウントとして登録すると、為替レートの予算差が発生する可能性があります。関数を呼び出す前に、ユーザーに `customerId` を尋ねる必要があるため、 `customerId` をチェックできるコネクタを提案する必要があります。.",
+        "description": "顧客の広告アカウントを取得する ユーザーのアクセストークンを使用して、`Wrtn` が管理者であるアカウントの中から、ユーザーの広告アカウント、つまり `customer` を検索します。ユーザーが広告アカウントを持っていても、`Wrtn` が管理者でない場合はリストされません。したがって、`Wrtn` が管理者として登録されたことがない場合は、`POST connector/google-ads/customerClientLink` コネクタを呼び出す必要があります。また、このコネクタは、韓国の通貨単位 `KRW` を使用していない広告アカウントを除外します。これは、今後、他のキャンペーン予算の変更や広告ステータスの変更コネクタで間違いが発生しないようにするためです。Google Ads コネクタを使用して広告を作成する場合、各アカウントの通貨単位に応じて予算設定で人為的エラーが発生する可能性があります。たとえば、通貨単位が `USD` のアカウントの予算を、通貨単位が `KRW` のアカウントとして登録すると、為替レートの予算差が発生する可能性があります。関数を呼び出す前に、ユーザーに`customerId`を尋ねる必要があるため、`customerId`をチェックできるコネクタを提案する必要があります。.",
         "tags": [
           "Google Ads"
         ],
@@ -5884,7 +5884,7 @@
       },
       "post": {
         "summary": "キャンペーンを作成する",
-        "description": "Google 顧客アカウントの広告キャンペーンを作成します。キャンペーン (= キャンペーン) を作成します。キャンペーンは Google 広告でアカウントの下位にあり、キャンペーン、広告グループ、広告で構成されるツリー構造の最上位にあります。キャンペーンは広告グループをグループ化する親オブジェクトで、広告の期間、予算、目的、チャネルなどを担当します。キャンペーン名を指定しないと、ランダムな名前が割り当てられます。この場合、識別が困難になる可能性があります。したがって、各キャンペーンには目的に応じて異なる名前を付けて区別できるようにすることをお勧めします。キャンペーンの名前は、ユーザーが簡単に識別できるようにするためのものであり、広告の効果にはまったく影響しませんので、安心してください。`customerId` を渡さない場合は、ユーザーから `Wrtn` にアクセスできる広告アカウントが 1 つしかない場合にのみ自動的に選択されます。関数を呼び出す前にユーザーに `customerId` を尋ねる必要があるため、`customerId` を確認できるコネクタを提案する必要があります。当初は金額制限はなかったが、緊急事態に備えて現在はキャンペーンごとに10万ウォンに制限されている。.",
+        "description": "Google 顧客アカウントの広告キャンペーンを作成します。キャンペーン (= キャンペーン) を作成します。キャンペーンは Google 広告でアカウントの下位にあり、キャンペーン、広告グループ、広告で構成されるツリー構造の最上位にあります。キャンペーンは広告グループをグループ化する親オブジェクトで、広告の期間、予算、目的、チャネルなどを担います。キャンペーン名を指定しないと、ランダムな名前が割り当てられます。この場合、識別が困難になる可能性があります。したがって、各キャンペーンには目的に応じて異なる名前を付けて区別できるようにすることをお勧めします。キャンペーンの名前は、ユーザーが簡単に識別できるようにするためのものであり、広告の効果にはまったく影響しませんので、安心してください。`customerId` を渡さない場合は、ユーザーから `Wrtn` にアクセスできる広告アカウントが 1 つしかない場合にのみ自動的に選択されます。関数を呼び出す前にユーザーに `customerId` を尋ねる必要があるため、`customerId` を確認できるコネクタを提案する必要があります。当初は金額制限はなかったが、緊急事態に備えて現在はキャンペーンごとに10万ウォンに制限されている。.",
         "tags": [
           "Google Ads"
         ],
@@ -6199,7 +6199,7 @@
         ],
         "parameters": [],
         "requestBody": {
-          "description": " YouTube動画検索の条件",
+          "description": "YouTube動画検索の条件",
           "content": {
             "application/json": {
               "schema": {
@@ -8272,7 +8272,7 @@
     },
     "/connector/jira/issues/{id}": {
       "put": {
-        "summary": " Jira の更新の問題",
+        "summary": "Jira の更新の問題",
         "description": "問題の更新 フィールド内の任意の要素を変更できます。問題の種類、担当者、概要、説明を変更するために使用できます。問題の本文を書くには、いくつかのブロックを組み立てるように本文を作成する必要があります。事前に指定されたコンテンツタイプがありますので、このタイプ情報を注意深く確認してください.",
         "tags": [
           "Jira"
@@ -8514,7 +8514,7 @@
     "/connector/jira/get-issue-statuses": {
       "post": {
         "summary": "問題のステータスを確認する",
-        "description": "問題を検索するための問題ステータスを見つける",
+        "description": "問題の検索に関する問題のステータスを見つける",
         "tags": [
           "Jira"
         ],
@@ -9213,7 +9213,7 @@
     "/connector/github/repos/get-contents/bulk": {
       "post": {
         "summary": "リポジトリファイルの検索(一括)",
-        "description": "リポジトリのファイルを検索する(一括) 照会したいファイルがフォルダの場合は、内部のファイルを配列で提供し、ファイルの場合は、ファイルのエンコード方式とファイル本体の内容を問い合わせます。githubリポジトリには無数のファイルやフォルダが存在する可能性があるため、レート制限を超えるファイルが多く存在する可能性があります。この場合、対応するコネクタを使用してフォルダを1つずつ順番に見つけることで、この問題を解決してみてください。複数のファイルパスを渡して、複数のファイルを同時に表示できます。ファイル数に制限はありません。特定のブランチ上のファイルを表示するのに適していますが、コードレビューやPRの詳細を表示する目的の場合は、別のコネクタを使用することをお勧めします。PRで変更されたファイルの一覧を表示したり、変更内容を確認したりするコネクタがあります。.",
+        "description": "リポジトリのファイルを検索する(一括) 照会したいファイルがフォルダの場合は、内部のファイルを配列で提供し、ファイルの場合は、ファイルのエンコード方式とファイル本体の内容を問い合わせます。 githubリポジトリには無数のファイルやフォルダが存在する可能性があるため、レート制限を超えるファイルが多く存在する可能性があります。 この場合は、対応するコネクタを使用してフォルダを1つずつ順番に見つけることで、この問題を解決してみてください。 複数のファイルパスを渡すと、複数のファイルを同時に表示できます。 ファイル数に制限はありません。 特定のブランチ上のファイルを表示するのに適していますが、コードレビューやPRの詳細を表示する目的の場合は、別のコネクタを使用することをお勧めします。 PRで変更されたファイルの一覧を表示したり、変更内容を確認したりするコネクタがあります。.",
         "tags": [
           "Github"
         ],
@@ -9741,7 +9741,7 @@
     },
     "/connector/github/repositories/pull-requests/get-requested-reviewers": {
       "post": {
-        "summary": "プルリクエストに要求されたすべてのレビュー担当者を取得する",
+        "summary": "プルリクエストに対して要求されたすべてのレビュー担当者を取得する",
         "description": "リクエストされたすべてのレビュー担当者を取得 プル リクエストのレビューがリクエストされているユーザーまたはチームを取得します。リクエストされたレビュー担当者がレビューを送信すると、そのレビュー担当者はリクエストされたレビュー担当者とは見なされなくなります。代わりに、プル リクエストのレビューの一覧表示操作によって、そのレビューが返されます。requested_reviewers は、レビューを依頼されたがまだレビューしていないユーザーです。そのため、PR をレビューしたユーザーが表示された場合、そのユーザーがすでにレビューを終了している場合は、requested_reviewers ではなく、レビュー担当者の一部になります。したがって、レビュー担当者を確認するときは、まだレビューしていないユーザーとレビューした 1 人のユーザーを別々に確認する必要があります。また、他の機能を呼び出して、一緒に確認する必要があります。コネクタ `:post /connector/github/repositories/pull-requests/get-reviews` を参照してください。.",
         "tags": [
           "Github"
@@ -10443,7 +10443,7 @@
         },
         "responses": {
           "201": {
-            "description": "指定されたコミットを含むブランチ名の配列に解決されるプロミス.",
+            "description": "指定されたコミットを含むブランチ名の配列を解決するプロミス.",
             "content": {
               "application/json": {
                 "schema": {
@@ -10525,7 +10525,7 @@
     "/connector/github/get-commit-list": {
       "post": {
         "summary": "特定のリポジトリ、特定のブランチのコミットメントのリストを検索する",
-        "description": "特定のリポジトリ、特定のブランチのコミットリストを参照する この機能は、ブランチ単位でコミットリストを見るため、一般的に使用できますが、ユーザーがPR単位で見たい場合は、別のコネクタを使用することをお勧めします。ユーザーがPR単位で表示するように指定した場合は、他の場所にPR単位でファイル、コミットリスト、変更を表示するためのコネクタがあるため、他のコネクタを使用します。.",
+        "description": "特定のリポジトリ、特定のブランチのコミットリストを参照する この機能は、ブランチ単位でコミットリストを見るため、一般的に使用できますが、ユーザーがPR単位で見たい場合は、別のコネクタを使用することをお勧めします。ユーザーがPR単位で表示するように指定した場合は、他の場所にPR単位でのファイル、コミットリスト、変更を表示するためのコネクタがあるため、他のコネクタを使用します。.",
         "tags": [
           "Github"
         ],
@@ -11764,7 +11764,7 @@
     },
     "/connector/typeform/workspace/{workspaceId}": {
       "delete": {
-        "summary": " Typeformワークスペースを削除する",
+        "summary": "Typeformワークスペースを削除する",
         "description": "ワークスペースを削除する",
         "tags": [
           "Typeform"
@@ -11808,7 +11808,7 @@
     },
     "/connector/typeform/get-workspaces": {
       "post": {
-        "summary": " Typeformワークスペース情報を取得する",
+        "summary": "Typeformワークスペース情報を取得する",
         "description": "ワークスペース情報を取得する",
         "tags": [
           "Typeform"
@@ -11844,7 +11844,7 @@
     },
     "/connector/typeform/empty-form": {
       "post": {
-        "summary": " Typeform 空のフォームを作成する",
+        "summary": "Typeform 空のフォームを作成する",
         "description": "ワークスペースに空のフォームを作成する",
         "tags": [
           "Typeform"
@@ -12062,7 +12062,7 @@
     },
     "/connector/marp/convert-to-ppt": {
       "post": {
-        "summary": " Marp マークダウンを PPT に変換する",
+        "summary": "Marp マークダウンを PPT に変換する",
         "description": "Marp マークダウンを PPT に変換して S3 に保存する marp 文法に従ってマークダウンを記述すると、それを変換してそのコンテンツがすべて含まれる html ファイルを作成します。ユーザーはマークダウンと marp 文法を知らないため、これは LLM によって自動的に生成され、ユーザーは必要な形式、画像、テキストなどを提供するだけで済みます。そのため、ユーザーに marp または markdown 文法を提供するように依頼するのではなく、テンプレートの整理方法とデプロイ方法に関するヒントを求めます。ユーザーに直接 Marp 文法に従って記述するように依頼するのは、相手が開発者であっても難しい場合があります。pptx、google slides、html、markdown (marp)、hanshow などのスライドでプレゼンテーション資料を作成したりコンテンツを整理したりするすべてのタスクは、marp をこの pptx に変換するコネクタを経由する必要がある場合があります。警告: 1 つのスライドに多くのコンテンツを配置すると、コンテンツが切り取られて見えなくなる可能性があります。コンテンツを複数のスライドに分割する.",
         "tags": [
           "Marp",
@@ -12192,7 +12192,7 @@
     },
     "/swagger/update": {
       "post": {
-        "description": " Swagger.json の更新",
+        "description": "Swagger.json の更新",
         "tags": [],
         "parameters": [],
         "responses": {
@@ -12417,7 +12417,7 @@
           "url": {
             "type": "string",
             "format": "iri",
-            "title": " URLアドレス",
+            "title": "URLアドレス",
             "description": "出力のURLアドレス"
           },
           "contents": {
@@ -12793,7 +12793,7 @@
               "$ref": "#/components/schemas/ITableRowData"
             },
             "title": "参考データ",
-            "description": "これは、寿命データを作成するときに参照するテーブルのデータです."
+            "description": "これは、寿命データを作成するときに参照するテーブルのデータです。."
           }
         },
         "required": [
@@ -12856,7 +12856,7 @@
           "reference_data": {
             "$ref": "#/components/schemas/ITableRowData",
             "title": "参考データ",
-            "description": "これは、寿命データを作成するときに参照するテーブルのデータです."
+            "description": "これは、寿命データを作成するときに参照するテーブルのデータです。."
           }
         },
         "required": [
@@ -12871,13 +12871,13 @@
           "chatId": {
             "type": "string",
             "title": "チャットID",
-            "description": " RAG 生成結果に必要なチャット ID。RAG によって分析されたファイルのチャット結果を生成するために、分析されたファイルのチャット ID を返します。複数のファイルを分析して、同じチャットで複数のファイルの結果を生成するには、同じチャット ID が必要です。."
+            "description": "RAG 生成結果に必要なチャット ID。RAG によって分析されたファイルのチャット結果を生成するために、分析されたファイルのチャット ID を返します。複数のファイルを分析して、同じチャットで複数のファイルの結果を生成するには、同じチャット ID が必要です。."
           }
         },
         "required": [
           "chatId"
         ],
-        "title": " RAG分析結果"
+        "title": "RAG分析結果"
       },
       "IRag.IAnalyzeInput": {
         "type": "object",
@@ -13100,7 +13100,7 @@
         "required": [
           "fileUrl"
         ],
-        "title": " Excel の行追加結果"
+        "title": "Excel の行追加結果"
       },
       "IExcel.IInsertExcelRowByUploadInput": {
         "type": "object",
@@ -13211,7 +13211,7 @@
         "required": [
           "id"
         ],
-        "title": " Googleドキュメント作成結果"
+        "title": "Googleドキュメント作成結果"
       },
       "IGoogleDocs.ICreateGoogleDocsInput": {
         "type": "object",
@@ -13275,7 +13275,7 @@
           "permissions",
           "secretKey"
         ],
-        "title": " Google ドキュメントの権限を付与するために必要な情報"
+        "title": "Google ドキュメントの権限を付与するために必要な情報"
       },
       "IPermission": {
         "type": "object",
@@ -13405,7 +13405,7 @@
         "required": [
           "id"
         ],
-        "title": " Google ドキュメントの複製結果"
+        "title": "Google ドキュメントの複製結果"
       },
       "IGoogleDocs.ICreateDocByTemplateInput": {
         "type": "object",
@@ -13628,7 +13628,7 @@
           "spreadsheetId",
           "spreadsheetUrl"
         ],
-        "title": " Google スプレッドシートの作成結果"
+        "title": "Google スプレッドシートの作成結果"
       },
       "IGoogleSheet.ICreateGoogleSheetInput": {
         "type": "object",
@@ -13688,7 +13688,7 @@
           "permissions",
           "secretKey"
         ],
-        "title": " Google スプレッドシートの権限を付与するために必要な情報"
+        "title": "Google スプレッドシートの権限を付与するために必要な情報"
       },
       "IPermission.o1": {
         "type": "object",
@@ -13834,7 +13834,7 @@
           "url": {
             "type": "string",
             "title": "シートのURL",
-            "description": "行を読み取るシートのURL."
+            "description": "行を読み取るシートの URL."
           },
           "workSheetTitle": {
             "type": "string",
@@ -14861,7 +14861,7 @@
                 "const": "public"
               }
             ],
-            "title": "イベントの公開状況",
+            "title": "イベントの公開ステータス",
             "description": "イベントの公開ステータス。デフォルト - デフォルトの公開ステータス 公開 - イベントは公開されており、イベントの詳細はカレンダーのすべての閲覧者に表示されます 非公開 - イベントは非公開であり、イベントの参加者のみがイベントの詳細を見ることができます 指定できる値は、「デフォルト」、「公開」、「非公開」の 3 つだけです。."
           },
           "colorId": {
@@ -14947,8 +14947,8 @@
                       "type": "string"
                     }
                   ],
-                  "title": " Google ドライブのフォルダ名",
-                  "description": " Google ドライブのフォルダ名."
+                  "title": "Google ドライブのフォルダ名",
+                  "description": "Google ドライブのフォルダ名."
                 }
               }
             },
@@ -15008,7 +15008,7 @@
                       "type": "string"
                     }
                   ],
-                  "title": " Google ドライブのファイル名",
+                  "title": "Google ドライブのファイル名",
                   "description": "Googleドライブのファイルの名前."
                 },
                 "webContentLink": {
@@ -15074,14 +15074,14 @@
         "required": [
           "id"
         ],
-        "title": " Google ドライブ フォルダ作成結果"
+        "title": "Google ドライブ フォルダ作成結果"
       },
       "IGoogleDrive.ICreateFolderGoogleDriveInput": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
-            "title": " Google ドライブのフォルダ名",
+            "title": "Google ドライブのフォルダ名",
             "description": "作成するドライブフォルダ名."
           },
           "secretKey": {
@@ -15112,14 +15112,14 @@
         "required": [
           "id"
         ],
-        "title": " Google ドライブにファイルを作成した結果"
+        "title": "Google ドライブにファイルを作成した結果"
       },
       "IGoogleDrive.IUploadFileInput": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
-            "title": " Google ドライブのファイル名",
+            "title": "Google ドライブのファイル名",
             "description": "ドライブに作成されるファイル名."
           },
           "folderIds": {
@@ -15204,7 +15204,7 @@
           "permissions",
           "secretKey"
         ],
-        "title": " Google ドライブのアクセス権限に必要な情報"
+        "title": "Google ドライブのアクセス権限に必要な情報"
       },
       "IGoogleDrive.IPermission": {
         "type": "object",
@@ -15237,7 +15237,7 @@
               }
             ],
             "title": "許可を与える",
-            "description": "付与する権限の種類。所有者: 所有者権限を付与します。この権限を持つユーザーは、ファイルまたはフォルダを削除したり、他のユーザーに権限を付与したりできます。主催者: ドライブのオペレータ権限を付与します。この権限を持つユーザーは、ドライブの編成を管理できます。ファイルオーガナイザー: ドライブ上のファイルのオペレータ権限を付与します。この権限を持つユーザーは、ファイルを追加または削除できます。ライター: 書き込み権限を付与します。この権限を持つユーザーは、ファイルを変更または削除できます。コメント者: コメント権限を付与します。この権限を持つユーザーは、ファイルを読み取ったり、コメントしたりできます。読者: 読み取り権限を付与します。この権限を持つユーザーは、ファイルを読み取ることができます。指定できる値は、「所有者」、「主催者」、「ファイルオーガナイザー」、「ライター」、「コメント者」、「読者」の 6 つだけです。."
+            "description": "付与する権限の種類。所有者: 所有者権限を付与します。この権限を持つユーザーは、ファイルまたはフォルダを削除したり、他のユーザーに権限を付与したりできます。主催者: ドライブのオペレータ権限を付与します。この権限を持つユーザーは、ドライブの編成を管理できます。ファイルオーガナイザー: ドライブ上のファイルのオペレータ権限を付与します。この権限を持つユーザーは、ファイルを追加または削除できます。ライター: 書き込み権限を付与します。この権限を持つユーザーは、ファイルを変更または削除できます。コメント者: コメント権限を付与します。この権限を持つユーザーは、ファイルを読み取ったり、コメントしたりできます。読者: 読み取り権限を付与します。この権限を持つユーザーは、ファイルを読み取ることができます。指定できる値は、「所有者」、「オーガナイザー」、「ファイルオーガナイザー」、「ライター」、「コメント者」、「読者」の 6 つだけです。."
           },
           "type": {
             "oneOf": [
@@ -15431,7 +15431,7 @@
           },
           "copyRequiresWriterPermission": {
             "type": "boolean",
-            "title": "コピーには書き込み権限が必要"
+            "title": "コピーにはWriterPermissionが必要"
           },
           "spaces": {
             "type": "array",
@@ -16063,7 +16063,7 @@
               "type": "string"
             },
             "title": "フィルタリングするラベルのリスト",
-            "description": "指定されたラベルIDに一致するラベルを持つメールのみを返すラベルのリスト."
+            "description": "指定されたラベル ID にすべて一致するラベルを持つメールのみを返すラベルのリスト."
           },
           "secretKey": {
             "type": "string",
@@ -16929,7 +16929,7 @@
           "region_height",
           "region_width"
         ],
-        "description": "領域コメントが添付されているフレームに対する位置."
+        "description": "領域コメントが添付されているフレームに対する相対的な位置."
       },
       "User": {
         "type": "object",
@@ -17401,7 +17401,7 @@
           "pre_schedule": {
             "type": "boolean",
             "default": false,
-            "title": " `GSuite` アプリ経由でスケジュールされた会議を作成するかどうか"
+            "title": "`GSuite` アプリ経由でスケジュールされた会議を作成するかどうか"
           },
           "assistant_id": {
             "type": "string",
@@ -17432,7 +17432,7 @@
           },
           "pstn_password": {
             "type": "string",
-            "title": " PSTN経由で会議に参加するためのパスワード"
+            "title": "PSTN経由で会議に参加するためのパスワード"
           },
           "h323_password": {
             "type": "string",
@@ -17476,11 +17476,11 @@
             "type": "string",
             "format": "url",
             "title": "会議の主催者として参加できるURL",
-            "description": "このURLはミーティング主催者のみが使用し、他の参加者と共有しないでください。このURLを知っている人は誰でも主催者権限でZoomクライアントにログインできます。."
+            "description": "このURLはミーティング主催者のみが使用し、他の参加者と共有しないでください。このURLを知っている人は誰でも、主催者権限でZoomクライアントにログインできます。."
           },
           "timezone": {
             "type": "string",
-            "title": " `start_time` のタイムゾーン"
+            "title": "`start_time` のタイムゾーン"
           },
           "topic": {
             "type": "string",
@@ -18085,8 +18085,8 @@
           },
           "meeting_authentication": {
             "type": "boolean",
-            "title": " trueの場合、認証されたユーザーのみが会議に参加できます",
-            "description": " trueの場合、認証されたユーザーのみが会議に参加できます."
+            "title": "trueの場合、認証されたユーザーのみが会議に参加できます",
+            "description": "trueの場合、認証されたユーザーのみが会議に参加できます."
           },
           "mute_upon_entry": {
             "type": "boolean",
@@ -18343,7 +18343,7 @@
         "properties": {
           "field": {
             "type": "string",
-            "title": " `TrackingField` のラベル"
+            "title": "`TrackingField` のラベル"
           },
           "value": {
             "type": "string",
@@ -18351,7 +18351,7 @@
           },
           "visible": {
             "type": "boolean",
-            "title": "`TrackingField`が公開されているかどうか"
+            "title": "`TrackingField` が公開されているかどうか"
           }
         },
         "required": [
@@ -18642,7 +18642,7 @@
               {
                 "const": "N",
                 "title": "バンソウチュウ",
-                "description": " 배송이 완료되지 않은 경우에는 N으로 표기된다."
+                "description": "배송이 완료되지 않은 경우에는 N으로 표기된다."
               }
             ],
             "title": "配達完了"
@@ -18738,7 +18738,7 @@
                 "type": "string"
               }
             ],
-            "title": "配送状況コード"
+            "title": "配送ステータスコード"
           },
           "kind": {
             "oneOf": [
@@ -20165,7 +20165,7 @@
                 "format": "iri"
               }
             ],
-            "title": "友達リストの次のページのURL"
+            "title": "次のページの友達リストのURL"
           },
           "before_url": {
             "oneOf": [
@@ -20601,7 +20601,7 @@
           }
         },
         "title": "トークカレンダー",
-        "description": "KakaoTalk には 2 種類のカレンダーがあります: 1. 基本カレンダー: これは個人用カレンダーです。個人用ではありますが、自分のイベントだけを表示するのではなく、友達が共有したイベントや招待されたイベントを表示できます。2. サブスクリプションカレンダー: これはチャットルームのメンバーグループによって管理される共有カレンダーです。参加しているチャットルームのカレンダーを表示できます。."
+        "description": "KakaoTalk には 2 種類のカレンダーがあります: 1. 基本カレンダー: これは個人用カレンダーです。個人用ではありますが、自分のイベントだけを表示するのではなく、友達が共有したイベントや招待されたイベントも表示できます。2. サブスクリプションカレンダー: これはチャットルームのメンバーグループによって管理される共有カレンダーです。参加しているチャットルームのカレンダーを表示できます。."
       },
       "IKakaoTalk.Calendar": {
         "type": "object",
@@ -20902,7 +20902,7 @@
         "required": [
           "code"
         ],
-        "title": " Kakaoログイン後に受け取ったコードのDTO"
+        "title": "Kakaoログイン後に受け取ったコードのDTO"
       },
       "IKakaoTalk.IRefreshAccessTokenOutput": {
         "type": "object",
@@ -21156,7 +21156,7 @@
           },
           "y": {
             "type": "string",
-            "title": " Y座標値",
+            "title": "Y座標値",
             "description": "経度と緯度の場合は緯度"
           },
           "place_url": {
@@ -21298,15 +21298,15 @@
               },
               {
                 "const": 1,
-                "title": " 길찾기 결과를 찾을 수 없음"
+                "title": "길찾기 결과를 찾을 수 없음"
               },
               {
                 "const": 101,
-                "title": " 경유지 지점 주변의 도로를 탐색할 수 없음"
+                "title": "경유지 지점 주변의 도로를 탐색할 수 없음"
               },
               {
                 "const": 102,
-                "title": " 시작 지점 주변의 도로를 탐색할 수 없음"
+                "title": "시작 지점 주변의 도로를 탐색할 수 없음"
               },
               {
                 "const": 103,
@@ -21314,19 +21314,19 @@
               },
               {
                 "const": 104,
-                "title": " 출발지와 도착지가 5 m 이내로 설정된 경우 경로를 탐색할 수 없음"
+                "title": "출발지와 도착지가 5 m 이내로 설정된 경우 경로를 탐색할 수 없음"
               },
               {
                 "const": 105,
-                "title": " 시작 지점 주변의 도로에 유고 정보(교통 장애)가 있음"
+                "title": "시작 지점 주변의 도로에 유고 정보(교통 장애)가 있음"
               },
               {
                 "const": 106,
-                "title": " 도착 지점 주변의 도로에 유고 정보(교통 장애)가 있음"
+                "title": "도착 지점 주변의 도로에 유고 정보(교통 장애)가 있음"
               },
               {
                 "const": 107,
-                "title": " 경유지 주변의 도로에 유고 정보(교통 장애)가 있음."
+                "title": "경유지 주변의 도로에 유고 정보(교통 장애)가 있음."
               },
               {
                 "const": 201,
@@ -21459,7 +21459,7 @@
           },
           "y": {
             "type": "number",
-            "title": " Y座標（緯度）"
+            "title": "Y座標（緯度）"
           }
         },
         "required": [
@@ -21630,7 +21630,7 @@
               },
               {
                 "const": 1,
-                "title": " 좌회전"
+                "title": "좌회전"
               },
               {
                 "const": 2,
@@ -21658,7 +21658,7 @@
               },
               {
                 "const": 9,
-                "title": " 오른쪽에 고속 도로 출구"
+                "title": "오른쪽에 고속 도로 출구"
               },
               {
                 "const": 10,
@@ -21670,7 +21670,7 @@
               },
               {
                 "const": 12,
-                "title": " 오른쪽에 고속 도로 입구"
+                "title": "오른쪽에 고속 도로 입구"
               },
               {
                 "const": 14,
@@ -21742,19 +21742,19 @@
               },
               {
                 "const": 31,
-                "title": " 로터리에서 오른쪽 2시 방향"
+                "title": "로터리에서 오른쪽 2시 방향"
               },
               {
                 "const": 32,
-                "title": " 로터리에서 오른쪽 3시 방향"
+                "title": "로터리에서 오른쪽 3시 방향"
               },
               {
                 "const": 33,
-                "title": " 로터리에서 오른쪽 4시 방향"
+                "title": "로터리에서 오른쪽 4시 방향"
               },
               {
                 "const": 34,
-                "title": " 로터리에서 오른쪽 5시 방향"
+                "title": "로터리에서 오른쪽 5시 방향"
               },
               {
                 "const": 35,
@@ -21766,15 +21766,15 @@
               },
               {
                 "const": 37,
-                "title": " 로터리에서 왼쪽 8시 방향"
+                "title": "로터리에서 왼쪽 8시 방향"
               },
               {
                 "const": 38,
-                "title": " 로터리에서 왼쪽 9시 방향"
+                "title": "로터리에서 왼쪽 9시 방향"
               },
               {
                 "const": 39,
-                "title": " 로터리에서 왼쪽 10시 방향"
+                "title": "로터리에서 왼쪽 10시 방향"
               },
               {
                 "const": 40,
@@ -21794,7 +21794,7 @@
               },
               {
                 "const": 44,
-                "title": " 오른쪽에 도시 고속 도로 출구"
+                "title": "오른쪽에 도시 고속 도로 출구"
               },
               {
                 "const": 45,
@@ -21806,7 +21806,7 @@
               },
               {
                 "const": 47,
-                "title": " 오른쪽에 도시 고속 도로 입구"
+                "title": "오른쪽에 도시 고속 도로 입구"
               },
               {
                 "const": 48,
@@ -21830,7 +21830,7 @@
               },
               {
                 "const": 71,
-                "title": " 회전 교차로에서 오른쪽 2시 방향"
+                "title": "회전 교차로에서 오른쪽 2시 방향"
               },
               {
                 "const": 72,
@@ -21838,43 +21838,43 @@
               },
               {
                 "const": 73,
-                "title": " 회전 교차로에서 오른쪽 4시 방향"
+                "title": "회전 교차로에서 오른쪽 4시 방향"
               },
               {
                 "const": 74,
-                "title": " 회전 교차로에서 오른쪽 5시 방향"
+                "title": "회전 교차로에서 오른쪽 5시 방향"
               },
               {
                 "const": 75,
-                "title": " 회전 교차로에서 6시방향"
+                "title": "회전 교차로에서 6시방향"
               },
               {
                 "const": 76,
-                "title": " 회전 교차로에서 왼쪽 7시 방향"
+                "title": "회전 교차로에서 왼쪽 7시 방향"
               },
               {
                 "const": 77,
-                "title": " 회전 교차로에서 왼쪽 8시 방향"
+                "title": "회전 교차로에서 왼쪽 8시 방향"
               },
               {
                 "const": 78,
-                "title": " 회전 교차로에서 왼쪽 9시 방향"
+                "title": "회전 교차로에서 왼쪽 9시 방향"
               },
               {
                 "const": 79,
-                "title": " 회전 교차로에서 왼쪽 10시 방향"
+                "title": "회전 교차로에서 왼쪽 10시 방향"
               },
               {
                 "const": 80,
-                "title": " 회전 교차로에서 왼쪽 11시 방향"
+                "title": "회전 교차로에서 왼쪽 11시 방향"
               },
               {
                 "const": 81,
-                "title": " 회전 교차로에서 12시방향"
+                "title": "회전 교차로에서 12시방향"
               },
               {
                 "const": 82,
-                "title": " 왼쪽직진（英語）"
+                "title": "왼쪽직진（英語）"
               },
               {
                 "const": 83,
@@ -21933,7 +21933,7 @@
           },
           "y": {
             "type": "number",
-            "title": " Y座標（緯度）"
+            "title": "Y座標（緯度）"
           },
           "duration": {
             "type": "integer",
@@ -21968,14 +21968,14 @@
           "origin": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?,[+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 127.111202,37.394912",
+            "x-wrtn-placeholder": "127.111202,37.394912",
             "title": "起源",
             "description": "X、Y座標形式の経度と緯度の値"
           },
           "destination": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?,[+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 127.111202,37.394912",
+            "x-wrtn-placeholder": "127.111202,37.394912",
             "title": "行き先",
             "description": "X、Y座標形式の経度と緯度の値"
           }
@@ -22101,7 +22101,7 @@
               {
                 "const": "EMU",
                 "title": "イギリス鉄道 (EMU)",
-                "description": " 는 1센티미터의 1/360,000으로 정의되므로 914,400 EMU 및 포인트당 12,700 EMU가 있습니다."
+                "description": "는 1센티미터의 1/360,000으로 정의되므로 914,400 EMU 및 포인트당 12,700 EMU가 있습니다."
               },
               {
                 "const": "PT",
@@ -22687,7 +22687,7 @@
         "required": [
           "secretKey"
         ],
-        "title": " Google スライドでプレゼンテーションを生成するための DTO をリクエストする"
+        "title": "Google スライドでプレゼンテーションを生成するための DTO をリクエストする"
       },
       "IImweb.Product": {
         "type": "object",
@@ -23199,7 +23199,7 @@
           },
           "is_culture_benefit": {
             "type": "boolean",
-            "title": "文化公演所得控除"
+            "title": "文化パフォーマンス所得控除"
           },
           "order_made": {
             "type": "boolean",
@@ -23315,11 +23315,11 @@
           },
           "key": {
             "type": "string",
-            "title": " APIキーは「Imweb」の設定で確認できます。."
+            "title": "APIキーは「Imweb」の設定で確認できます。."
           },
           "secret": {
             "type": "string",
-            "title": "APIシークレットキーは、`Imweb`の設定で確認できます。."
+            "title": "APIシークレットキーこれは、Imwebの設定で確認できます。."
           }
         },
         "required": [
@@ -23361,19 +23361,19 @@
         "properties": {
           "key": {
             "type": "string",
-            "title": " APIキーは「Imweb」の設定で確認できます。."
+            "title": "APIキーは「Imweb」の設定で確認できます。."
           },
           "secret": {
             "type": "string",
-            "title": "APIシークレットキーは、`Imweb`の設定で確認できます。."
+            "title": "APIシークレットキーこれは、Imwebの設定で確認できます。."
           }
         },
         "required": [
           "key",
           "secret"
         ],
-        "title": " Imweb アクセストークンリクエスト DTO",
-        "description": " Rest APIを使用するには、まずAPIキーとシークレットキーを発行する必要があります。これらのキーはサイトごとに生成されます。."
+        "title": "Imweb アクセストークンリクエスト DTO",
+        "description": "Rest APIを使用するには、まずAPIキーとシークレットキーを発行する必要があります。これらのキーはサイトごとに生成されます。."
       },
       "IMSIT.IGetAddressOutput": {
         "type": "object",
@@ -24033,7 +24033,7 @@
                 },
                 "RNUM": {
                   "type": "string",
-                  "x-wrtn-placeholder": " 1",
+                  "x-wrtn-placeholder": "1",
                   "title": "注文"
                 },
                 "HSH_CNT": {
@@ -24073,7 +24073,7 @@
                 },
                 "MVIN_XPC_YM": {
                   "type": "string",
-                  "x-wrtn-placeholder": " 201311",
+                  "x-wrtn-placeholder": "201311",
                   "title": "研修1年目"
                 }
               },
@@ -24304,7 +24304,7 @@
           },
           "enforceSe": {
             "type": "string",
-            "title": "字幕施行区分"
+            "title": "字幕施行分類"
           },
           "operDay": {
             "type": "string",
@@ -25665,7 +25665,7 @@
           "ny": {
             "type": "number",
             "maximum": 180,
-            "title": "緯度またはy_位置",
+            "title": "緯度またはy位置",
             "description": "このオブジェクトの type プロパティが &#39;latitude_and_longitude&#39; の場合、この値は緯度を意味します。そうでない場合は、韓国のグリッド座標の y 位置の値を使用します。."
           }
         },
@@ -25674,7 +25674,7 @@
           "nx",
           "ny"
         ],
-        "title": "天気予報クエリのリクエスト条件"
+        "title": "天気クエリリクエスト条件"
       },
       "KoreaCopyrightCommission.IGetCopyRightOutput": {
         "type": "object",
@@ -25955,7 +25955,7 @@
             "oneOf": [
               {
                 "const": "3d-model",
-                "title": " 3Dモデル"
+                "title": "3Dモデル"
               },
               {
                 "const": "analog-film",
@@ -26066,12 +26066,12 @@
               {
                 "const": "landscape",
                 "title": "ピン",
-                "description": " 1792x1024"
+                "description": "1792x1024"
               },
               {
                 "const": "portrait",
                 "title": "インターネット",
-                "description": " 1024x1792"
+                "description": "1024x1792"
               }
             ],
             "title": "画像サイズ",
@@ -26290,8 +26290,8 @@
               },
               {
                 "const": "HIGH",
-                "title": " 높음",
-                "description": " 치열합니다。 경쟁 지수 범위는 [67, 100]입니다."
+                "title": "높음",
+                "description": "치열합니다。 경쟁 지수 범위는 [67, 100]입니다."
               }
             ],
             "title": "検索用語の競争レベル"
@@ -26336,7 +26336,7 @@
             "oneOf": [
               {
                 "const": "JANUARY",
-                "title": " 1月"
+                "title": "1月"
               },
               {
                 "const": "FEBRUARY",
@@ -26434,7 +26434,7 @@
           "customerId": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 1",
+            "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "method": "post",
               "path": "connector/google-ads/get-customers",
@@ -26488,7 +26488,7 @@
           "customerId": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 1",
+            "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "method": "post",
               "path": "connector/google-ads/get-customers",
@@ -26533,7 +26533,7 @@
           "customerId": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 1",
+            "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "method": "post",
               "path": "connector/google-ads/get-customers",
@@ -26563,7 +26563,7 @@
           "customerId": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 1",
+            "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "method": "post",
               "path": "connector/google-ads/get-customers",
@@ -26592,7 +26592,7 @@
           "id": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 1",
+            "x-wrtn-placeholder": "1",
             "title": "顧客ID",
             "description": "顧客ごとに固有の価値がある."
           },
@@ -26754,7 +26754,7 @@
           "id": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 1",
+            "x-wrtn-placeholder": "1",
             "title": "キャンペーンID"
           },
           "startDate": {
@@ -26862,7 +26862,7 @@
           "id": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 1",
+            "x-wrtn-placeholder": "1",
             "title": "キャンペーンID"
           },
           "resourceName": {
@@ -27052,7 +27052,7 @@
           "campaignId": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 1",
+            "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "method": "post",
               "path": "connector/google-ads/get-campaigns",
@@ -27071,7 +27071,7 @@
           "customerId": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 1",
+            "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "method": "post",
               "path": "connector/google-ads/get-customers",
@@ -27223,7 +27223,7 @@
           "customerId": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 1",
+            "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "method": "post",
               "path": "connector/google-ads/get-customers",
@@ -27266,7 +27266,7 @@
                 "type": "string",
                 "pattern": "^([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)$",
                 "title": "広告費（マイクロ単位）",
-                "description": " 1/1,000,000で表したKRWの値"
+                "description": "1/1,000,000で表したKRWの値"
               },
               "videoViews": {
                 "type": "string",
@@ -27341,7 +27341,7 @@
           "customerId": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 1",
+            "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "method": "post",
               "path": "connector/google-ads/get-customers",
@@ -27518,7 +27518,7 @@
           "customerId": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 1",
+            "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "method": "post",
               "path": "connector/google-ads/get-customers",
@@ -27573,7 +27573,7 @@
           "customerId": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 1",
+            "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "method": "post",
               "path": "connector/google-ads/get-customers",
@@ -27618,7 +27618,7 @@
           "customerId": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 1",
+            "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "method": "post",
               "path": "connector/google-ads/get-customers",
@@ -27667,7 +27667,7 @@
           "customerId": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 1",
+            "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "method": "post",
               "path": "connector/google-ads/get-customers",
@@ -27872,7 +27872,7 @@
           "customerId": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 1",
+            "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "method": "post",
               "path": "connector/google-ads/get-customers",
@@ -27902,7 +27902,7 @@
           "customerId": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 1",
+            "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "method": "post",
               "path": "connector/google-ads/get-customers",
@@ -27987,7 +27987,7 @@
           "customerId": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 1",
+            "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "method": "post",
               "path": "connector/google-ads/get-customers",
@@ -28042,7 +28042,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 25,
-            "title": "事業名およびブランド名"
+            "title": "事業名とブランド名"
           },
           "landscapeImages": {
             "type": "array",
@@ -28160,7 +28160,7 @@
           "customerId": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 1",
+            "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "method": "post",
               "path": "connector/google-ads/get-customers",
@@ -28218,7 +28218,7 @@
           "customerId": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 1",
+            "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "method": "post",
               "path": "connector/google-ads/get-customers",
@@ -28276,7 +28276,7 @@
           "customerId": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 1",
+            "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "method": "post",
               "path": "connector/google-ads/get-customers",
@@ -28406,7 +28406,7 @@
           "customerId": {
             "type": "string",
             "pattern": "([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)",
-            "x-wrtn-placeholder": " 1",
+            "x-wrtn-placeholder": "1",
             "x-wrtn-prerequisite": {
               "method": "post",
               "path": "connector/google-ads/get-customers",
@@ -28479,7 +28479,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 25,
-            "title": "事業名およびブランド名"
+            "title": "事業名とブランド名"
           },
           "landscapeImages": {
             "type": "array",
@@ -28870,8 +28870,8 @@
               "display",
               "items"
             ],
-            "title": "Naver Cafe検索結果データ",
-            "description": "Naver Cafe検索結果データ."
+            "title": "ネイバーカフェ検索結果データ",
+            "description": "ネイバーカフェ検索結果データ."
           }
         },
         "required": [
@@ -29018,7 +29018,7 @@
           "title": {
             "type": "string",
             "title": "投稿タイトル",
-            "description": "Naverブログ投稿のタイトル."
+            "description": "Naverブログ記事のタイトル."
           },
           "link": {
             "type": "string",
@@ -29374,7 +29374,7 @@
               }
             },
             "title": "csvデータリスト",
-            "description": "csvファイルデータの読み取り."
+            "description": "CSVファイルデータの読み取り."
           }
         },
         "required": [
@@ -29454,7 +29454,7 @@
           "delimiter",
           "values"
         ],
-        "title": " CSVファイルを作成するために必要な情報"
+        "title": "CSVファイルを作成するために必要な情報"
       },
       "ICsv.ICsvToExcelOutput": {
         "type": "object",
@@ -29470,7 +29470,7 @@
         "required": [
           "url"
         ],
-        "title": " CSVファイルからExcelファイルへの変換結果"
+        "title": "CSVファイルからExcelファイルへの変換結果"
       },
       "ICsv.ICsvToExcelInput": {
         "type": "object",
@@ -29610,7 +29610,7 @@
                   "url": {
                     "type": "string",
                     "format": "iri",
-                    "title": " url アップロードしたいファイルのパスを入力できます."
+                    "title": "url アップロードしたいファイルのパスを入力できます."
                   }
                 },
                 "required": [
@@ -31528,7 +31528,7 @@
               "jmesPath": "[].{value:pageId, label:title}"
             },
             "title": "id",
-            "description": "ページ 権限 id ブロックを追加するページを示します。このページの下部に、要求されたオブジェクトに一致するブロックが追加されます。."
+            "description": "ページ 権限 id ブロックを追加するページを示します。このページの下部に、ここで要求されたオブジェクトに一致するブロックが追加されます。."
           },
           "title": {
             "type": "string",
@@ -33757,7 +33757,7 @@
             "oneOf": [
               {
                 "const": "3",
-                "title": " 낮은 가격 순"
+                "title": "낮은 가격 순"
               },
               {
                 "const": "8",
@@ -33866,7 +33866,7 @@
               "oneOf": [
                 {
                   "const": "1",
-                  "title": " 1週間"
+                  "title": "1週間"
                 },
                 {
                   "const": "2",
@@ -34252,7 +34252,7 @@
             "oneOf": [
               {
                 "const": "1",
-                "title": " 왕복"
+                "title": "왕복"
               },
               {
                 "const": "2",
@@ -34480,7 +34480,7 @@
               "path": "/connector/slack/get-channel-histories",
               "jmesPath": "messages[].{value: ts, label: text}"
             },
-            "title": " ts",
+            "title": "ts",
             "description": "マークしたいチャットの「ts」値を意味します"
           },
           "secretKey": {
@@ -34722,7 +34722,7 @@
               "path": "/connector/slack/get-channel-histories",
               "jmesPath": "messages[].{value: ts, label: text}"
             },
-            "title": " ts",
+            "title": "ts",
             "description": "返信したいチャットの「ts」値を意味します"
           },
           "channel": {
@@ -34919,7 +34919,7 @@
           },
           "post_at_date": {
             "type": "string",
-            "title": " post_at の日時形式"
+            "title": "post_at の日時形式"
           }
         },
         "required": [
@@ -35135,7 +35135,7 @@
               }
             ],
             "title": "プロフィール画像",
-            "description": "プロフィール画像は画質ごとに複数ありますが、ここではユーザーが最初にアップロードした画像に基づいて提供します."
+            "description": "プロフィール画像は画質ごとに複数ありますが、ここではユーザーが最初にアップロードした画像に基づいて提供します。."
           },
           "display_name": {
             "oneOf": [
@@ -35332,7 +35332,7 @@
           },
           "ts_date": {
             "type": "string",
-            "title": "`ts`の日付形式これは、現在の時刻値を &#39;ts&#39; で区切って認識しやすくするために ISO 文字列に変更された値です。."
+            "title": "`ts`の日付形式これは、&#39;ts&#39;で区切ることで現在の時刻値を認識しやすくするためにISO文字列に変更された値です。."
           }
         },
         "required": [
@@ -35382,7 +35382,7 @@
               "path": "/connector/slack/get-channel-histories",
               "jmesPath": "messages[].{value: ts, label: text}"
             },
-            "title": " ts",
+            "title": "ts",
             "description": "検索したいチャットの「ts」値を意味します."
           },
           "channel": {
@@ -35552,7 +35552,7 @@
           },
           "ts_date": {
             "type": "string",
-            "title": "`ts`の日付形式これは、現在の時刻値を &#39;ts&#39; で区切って認識しやすくするために ISO 文字列に変更された値です。."
+            "title": "`ts`の日付形式これは、&#39;ts&#39;で区切ることで現在の時刻値を認識しやすくするためにISO文字列に変更された値です。."
           },
           "links": {
             "type": "array",
@@ -35744,7 +35744,7 @@
           },
           "ts_date": {
             "type": "string",
-            "title": "`ts`の日付形式これは、現在の時刻値を &#39;ts&#39; で区切って認識しやすくするために ISO 文字列に変更された値です。."
+            "title": "`ts`の日付形式これは、&#39;ts&#39;で区切ることで現在の時刻値を認識しやすくするためにISO文字列に変更された値です。."
           }
         },
         "required": [
@@ -35973,7 +35973,7 @@
           "url_private_download": {
             "type": "string",
             "format": "iri",
-            "title": " url_private_download"
+            "title": "url_private_download"
           },
           "thumb_1024": {
             "type": "string",
@@ -36389,8 +36389,8 @@
                     }
                   ]
                 },
-                "title": " Jiraのドキュメントは複数のブロックの組み合わせであるため、1つのコメントは配列の形式で表示されます。",
-                "description": " Jiraのドキュメントは複数のブロックの組み合わせであるため、1つのコメントは配列の形で表示されます。配列の各要素を組み合わせることで、コメントの内容全体を理解できます。."
+                "title": "Jiraのドキュメントは複数のブロックの組み合わせであるため、1つのコメントは配列の形式で表示されます。",
+                "description": "Jiraのドキュメントは複数のブロックの組み合わせであるため、1つのコメントは配列の形で表示されます。配列の各要素を組み合わせることで、コメントの内容全体を理解できます。."
               }
             },
             "required": [
@@ -36630,8 +36630,8 @@
                     "default": "percentage"
                   }
                 ],
-                "title": " widthType [オプション] は、幅属性の「単位」を決定します。可能な値はピクセルとパーセンテージです。widthType 属性が定義されていない場合は、パーセンテージにフォールバックします。",
-                "description": " widthType [オプション] は、幅属性の「単位」を決定します。可能な値はピクセルとパーセンテージです。widthType 属性が定義されていない場合は、パーセンテージにフォールバックします。."
+                "title": "widthType [オプション] は、幅属性の「単位」を決定します。可能な値はピクセルとパーセンテージです。widthType 属性が定義されていない場合は、パーセンテージにフォールバックします。",
+                "description": "widthType [オプション] は、幅属性の「単位」を決定します。可能な値はピクセルとパーセンテージです。widthType 属性が定義されていない場合は、パーセンテージにフォールバックします。."
               }
             },
             "required": [
@@ -36654,8 +36654,8 @@
                         "properties": {
                           "width": {
                             "type": "number",
-                            "title": " widthはメディアアイテムの表示幅をピクセル単位で定義します。mediaSingle内で指定しないとメディアは表示されません。",
-                            "description": " widthはメディアアイテムの表示幅をピクセル単位で定義します。mediaSingle内で指定しないとメディアは表示されません。."
+                            "title": "widthはメディアアイテムの表示幅をピクセル単位で定義します。mediaSingle内で指定しないとメディアは表示されません。",
+                            "description": "widthはメディアアイテムの表示幅をピクセル単位で定義します。mediaSingle内で指定しないとメディアは表示されません。."
                           },
                           "height": {
                             "type": "number",
@@ -36664,8 +36664,8 @@
                           },
                           "id": {
                             "type": "string",
-                            "title": " id はメディアサービス ID であり、ファイル名などのメタデータを取得するためにメディアサービス API を照会するために使用されます。ドキュメントのコンシューマーは、常にメディア API を使用して最新のメタデータを取得する必要があります。",
-                            "description": " id はメディアサービス ID であり、ファイル名などのメタデータを取得するためにメディアサービス API を照会するために使用されます。ドキュメントのコンシューマーは、常にメディア API を使用して最新のメタデータを取得する必要があります。."
+                            "title": "id はメディアサービス ID であり、ファイル名などのメタデータを取得するためにメディアサービス API を照会するために使用されます。ドキュメントのコンシューマーは、常にメディア API を使用して最新のメタデータを取得する必要があります。",
+                            "description": "id はメディアサービス ID であり、ファイル名などのメタデータを取得するためにメディアサービス API を照会するために使用されます。ドキュメントのコンシューマーは、常にメディア API を使用して最新のメタデータを取得する必要があります。."
                           },
                           "type": {
                             "oneOf": [
@@ -36729,8 +36729,8 @@
                         "properties": {
                           "width": {
                             "type": "number",
-                            "title": " widthはメディアアイテムの表示幅をピクセル単位で定義します。mediaSingle内で指定しないとメディアは表示されません。",
-                            "description": " widthはメディアアイテムの表示幅をピクセル単位で定義します。mediaSingle内で指定しないとメディアは表示されません。."
+                            "title": "widthはメディアアイテムの表示幅をピクセル単位で定義します。mediaSingle内で指定しないとメディアは表示されません。",
+                            "description": "widthはメディアアイテムの表示幅をピクセル単位で定義します。mediaSingle内で指定しないとメディアは表示されません。."
                           },
                           "height": {
                             "type": "number",
@@ -36739,8 +36739,8 @@
                           },
                           "id": {
                             "type": "string",
-                            "title": " id はメディアサービス ID であり、ファイル名などのメタデータを取得するためにメディアサービス API を照会するために使用されます。ドキュメントのコンシューマーは、常にメディア API を使用して最新のメタデータを取得する必要があります。",
-                            "description": " id はメディアサービス ID であり、ファイル名などのメタデータを取得するためにメディアサービス API を照会するために使用されます。ドキュメントのコンシューマーは、常にメディア API を使用して最新のメタデータを取得する必要があります。."
+                            "title": "id はメディアサービス ID であり、ファイル名などのメタデータを取得するためにメディアサービス API を照会するために使用されます。ドキュメントのコンシューマーは、常にメディア API を使用して最新のメタデータを取得する必要があります。",
+                            "description": "id はメディアサービス ID であり、ファイル名などのメタデータを取得するためにメディアサービス API を照会するために使用されます。ドキュメントのコンシューマーは、常にメディア API を使用して最新のメタデータを取得する必要があります。."
                           },
                           "type": {
                             "const": "external",
@@ -37086,7 +37086,7 @@
                         "color": {
                           "type": "string",
                           "pattern": "^#([0-9A-Fa-f]{6})$",
-                          "title": "色 色は記号(&#39;#&#39;)とRGB値を使って表現できます."
+                          "title": "色は記号(&#39;#&#39;)とRGB値を使って表現できます."
                         }
                       },
                       "required": [
@@ -37221,7 +37221,7 @@
                         "color": {
                           "type": "string",
                           "pattern": "^#([0-9A-Fa-f]{6})$",
-                          "title": "色 色は記号(&#39;#&#39;)とRGB値を使って表現できます."
+                          "title": "色は記号(&#39;#&#39;)とRGB値を使って表現できます."
                         }
                       },
                       "required": [
@@ -37350,7 +37350,7 @@
                 "oneOf": [
                   {
                     "const": 1,
-                    "title": " 1",
+                    "title": "1",
                     "description": "レベル"
                   },
                   {
@@ -37360,22 +37360,22 @@
                   },
                   {
                     "const": 3,
-                    "title": " 3",
+                    "title": "3",
                     "description": "レベル"
                   },
                   {
                     "const": 4,
-                    "title": " 4",
+                    "title": "4",
                     "description": "レベル"
                   },
                   {
                     "const": 5,
-                    "title": " 5",
+                    "title": "5",
                     "description": "レベル"
                   },
                   {
                     "const": 6,
-                    "title": " 6",
+                    "title": "6",
                     "description": "レベル"
                   }
                 ],
@@ -37638,8 +37638,8 @@
                       "properties": {
                         "width": {
                           "type": "number",
-                          "title": " widthはメディアアイテムの表示幅をピクセル単位で定義します。mediaSingle内で指定しないとメディアは表示されません。",
-                          "description": " widthはメディアアイテムの表示幅をピクセル単位で定義します。mediaSingle内で指定しないとメディアは表示されません。."
+                          "title": "widthはメディアアイテムの表示幅をピクセル単位で定義します。mediaSingle内で指定しないとメディアは表示されません。",
+                          "description": "widthはメディアアイテムの表示幅をピクセル単位で定義します。mediaSingle内で指定しないとメディアは表示されません。."
                         },
                         "height": {
                           "type": "number",
@@ -37648,8 +37648,8 @@
                         },
                         "id": {
                           "type": "string",
-                          "title": " id はメディアサービス ID であり、ファイル名などのメタデータを取得するためにメディアサービス API を照会するために使用されます。ドキュメントのコンシューマーは、常にメディア API を使用して最新のメタデータを取得する必要があります。",
-                          "description": " id はメディアサービス ID であり、ファイル名などのメタデータを取得するためにメディアサービス API を照会するために使用されます。ドキュメントのコンシューマーは、常にメディア API を使用して最新のメタデータを取得する必要があります。."
+                          "title": "id はメディアサービス ID であり、ファイル名などのメタデータを取得するためにメディアサービス API を照会するために使用されます。ドキュメントのコンシューマーは、常にメディア API を使用して最新のメタデータを取得する必要があります。",
+                          "description": "id はメディアサービス ID であり、ファイル名などのメタデータを取得するためにメディアサービス API を照会するために使用されます。ドキュメントのコンシューマーは、常にメディア API を使用して最新のメタデータを取得する必要があります。."
                         },
                         "type": {
                           "oneOf": [
@@ -37713,8 +37713,8 @@
                       "properties": {
                         "width": {
                           "type": "number",
-                          "title": " widthはメディアアイテムの表示幅をピクセル単位で定義します。mediaSingle内で指定しないとメディアは表示されません。",
-                          "description": " widthはメディアアイテムの表示幅をピクセル単位で定義します。mediaSingle内で指定しないとメディアは表示されません。."
+                          "title": "widthはメディアアイテムの表示幅をピクセル単位で定義します。mediaSingle内で指定しないとメディアは表示されません。",
+                          "description": "widthはメディアアイテムの表示幅をピクセル単位で定義します。mediaSingle内で指定しないとメディアは表示されません。."
                         },
                         "height": {
                           "type": "number",
@@ -37723,8 +37723,8 @@
                         },
                         "id": {
                           "type": "string",
-                          "title": " id はメディアサービス ID であり、ファイル名などのメタデータを取得するためにメディアサービス API を照会するために使用されます。ドキュメントのコンシューマーは、常にメディア API を使用して最新のメタデータを取得する必要があります。",
-                          "description": " id はメディアサービス ID であり、ファイル名などのメタデータを取得するためにメディアサービス API を照会するために使用されます。ドキュメントのコンシューマーは、常にメディア API を使用して最新のメタデータを取得する必要があります。."
+                          "title": "id はメディアサービス ID であり、ファイル名などのメタデータを取得するためにメディアサービス API を照会するために使用されます。ドキュメントのコンシューマーは、常にメディア API を使用して最新のメタデータを取得する必要があります。",
+                          "description": "id はメディアサービス ID であり、ファイル名などのメタデータを取得するためにメディアサービス API を照会するために使用されます。ドキュメントのコンシューマーは、常にメディア API を使用して最新のメタデータを取得する必要があります。."
                         },
                         "type": {
                           "const": "external",
@@ -38309,7 +38309,7 @@
                   "jmesPath": "issues[].{value:key, label:key}"
                 },
                 "title": "親問題のキー",
-                "description": "場合によっては、問題が別の問題のサブ問題になることがあります。この場合、親問題のキーを指定する必要があります。キーを知りたい場合は、問題リストクエリまたは別のコネクタを使用して問題の詳細を検索します。."
+                "description": "場合によっては、ある問題が別の問題のサブ問題になることがあります。この場合、親問題のキーを指定する必要があります。キーを知りたい場合は、問題リストクエリまたは別のコネクタを使用して問題の詳細を調べます。."
               }
             },
             "required": [
@@ -38548,7 +38548,7 @@
                       "jmesPath": "issues[].{value:key, label:key}"
                     },
                     "title": "親問題のキー",
-                    "description": "場合によっては、問題が別の問題のサブ問題になることがあります。この場合、親問題のキーを指定する必要があります。キーを知りたい場合は、問題リストクエリまたは別のコネクタを使用して問題の詳細を検索します。."
+                    "description": "場合によっては、ある問題が別の問題のサブ問題になることがあります。この場合、親問題のキーを指定する必要があります。キーを知りたい場合は、問題リストクエリまたは別のコネクタを使用して問題の詳細を調べます。."
                   }
                 },
                 "required": [
@@ -38915,8 +38915,8 @@
                     }
                   ]
                 },
-                "title": " Jiraのドキュメントは複数のブロックの組み合わせであるため、1つのコメントは配列の形式で表示されます。",
-                "description": " Jiraのドキュメントは複数のブロックの組み合わせであるため、1つのコメントは配列の形で表示されます。配列の各要素を組み合わせることで、コメントの内容全体を理解できます。."
+                "title": "Jiraのドキュメントは複数のブロックの組み合わせであるため、1つのコメントは配列の形式で表示されます。",
+                "description": "Jiraのドキュメントは複数のブロックの組み合わせであるため、1つのコメントは配列の形で表示されます。配列の各要素を組み合わせることで、コメントの内容全体を理解できます。."
               }
             },
             "required": [
@@ -39374,7 +39374,7 @@
             "items": {
               "$ref": "#/components/schemas/IJira.Project"
             },
-            "title": " Jira プロジェクト リスト"
+            "title": "Jira プロジェクト リスト"
           },
           "isLast": {
             "type": "boolean",
@@ -39842,7 +39842,7 @@
           },
           "name": {
             "type": "string",
-            "title": "ステータス カテゴリの名前"
+            "title": "ステータスカテゴリの名前"
           }
         },
         "required": [
@@ -39885,8 +39885,8 @@
           "related_queries",
           "traffic"
         ],
-        "title": " 구글 데일리 트렌드 조회 결과",
-        "description": " 데일리 트렌드 조회 결과입니다."
+        "title": "구글 데일리 트렌드 조회 결과",
+        "description": "데일리 트렌드 조회 결과입니다."
       },
       "IGoogleTrend.IRequest": {
         "type": "object",
@@ -39898,8 +39898,8 @@
             "description": "데일리 트렌드를 조회할 날짜 입니다。 입력되지 않으면 오늘 날짜를 기준으로 조회합니다。年-月-日 형식의 日付 타입 문자열을 제공해주어야 한다."
           }
         },
-        "title": " 구글 데일리 트렌드 조회를 위한 정보",
-        "description": " 입력한 날짜의 트렌드를 조회합니다。 입력하지 않으면 오늘 날짜를 기준으로 조회합니다。 날짜 형식은 &quot;20241231&quot; 형식입니다."
+        "title": "구글 데일리 트렌드 조회를 위한 정보",
+        "description": "입력한 날짜의 트렌드를 조회합니다。 입력하지 않으면 오늘 날짜를 기준으로 조회합니다。 날짜 형식은 &quot;20241231&quot; 형식입니다."
       },
       "IGoogleMap.IResponse": {
         "type": "object",
@@ -40244,7 +40244,7 @@
           },
           "after": {
             "type": "string",
-            "title": " after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
+            "title": "after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
           },
           "before": {
             "type": "string",
@@ -40295,7 +40295,7 @@
         "properties": {
           "id": {
             "type": "number",
-            "title": " id これはユーザーのIDを意味します."
+            "title": "id これはユーザーのIDを意味します."
           },
           "login": {
             "type": "string",
@@ -40526,7 +40526,7 @@
           },
           "id": {
             "type": "number",
-            "title": " id これはユーザーのIDを意味します."
+            "title": "id これはユーザーのIDを意味します."
           },
           "login": {
             "type": "string",
@@ -40617,7 +40617,7 @@
           },
           "id": {
             "type": "number",
-            "title": " id これはユーザーのIDを意味します."
+            "title": "id これはユーザーのIDを意味します."
           },
           "login": {
             "type": "string",
@@ -40742,7 +40742,7 @@
           },
           "after": {
             "type": "string",
-            "title": " after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
+            "title": "after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
           },
           "before": {
             "type": "string",
@@ -40897,7 +40897,7 @@
           },
           "has_downloads": {
             "type": "boolean",
-            "title": "ダウンロード数"
+            "title": "ダウンロードあり"
           },
           "archived": {
             "type": "boolean",
@@ -41263,7 +41263,7 @@
           },
           "after": {
             "type": "string",
-            "title": " after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
+            "title": "after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
           },
           "before": {
             "type": "string",
@@ -41469,7 +41469,7 @@
           },
           "after": {
             "type": "string",
-            "title": " after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
+            "title": "after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
           },
           "before": {
             "type": "string",
@@ -41607,7 +41607,7 @@
           },
           "has_downloads": {
             "type": "boolean",
-            "title": "ダウンロード数"
+            "title": "ダウンロードあり"
           },
           "archived": {
             "type": "boolean",
@@ -41800,7 +41800,7 @@
           },
           "after": {
             "type": "string",
-            "title": " after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
+            "title": "after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
           },
           "before": {
             "type": "string",
@@ -41870,7 +41870,7 @@
           },
           "id": {
             "type": "number",
-            "title": " id これはユーザーのIDを意味します."
+            "title": "id これはユーザーのIDを意味します."
           },
           "login": {
             "type": "string",
@@ -42661,7 +42661,7 @@
           },
           "after": {
             "type": "string",
-            "title": " after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
+            "title": "after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
           },
           "before": {
             "type": "string",
@@ -42807,7 +42807,7 @@
           },
           "after": {
             "type": "string",
-            "title": " after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
+            "title": "after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
           },
           "before": {
             "type": "string",
@@ -42936,7 +42936,7 @@
           },
           "id": {
             "type": "number",
-            "title": " id これはユーザーのIDを意味します."
+            "title": "id これはユーザーのIDを意味します."
           },
           "login": {
             "type": "string",
@@ -42993,7 +42993,7 @@
               "path": "/connector/github/get-branches",
               "jmesPath": "result[].{value:name, label:name}"
             },
-            "title": " ref このリポジトリのブランチの名前."
+            "title": "ref このリポジトリのブランチの名前."
           },
           "actor": {
             "type": "string",
@@ -43141,7 +43141,7 @@
           },
           "title": {
             "type": "string",
-            "title": " title 新しいプルリクエストのタイトル。問題が指定されていない場合は必須です."
+            "title": "title 新しいプルリクエストのタイトル。問題が指定されていない場合は必須です."
           },
           "owner": {
             "type": "string",
@@ -43231,7 +43231,7 @@
           },
           "title": {
             "type": "string",
-            "title": " title 新しいプルリクエストのタイトル。問題が指定されていない場合は必須です."
+            "title": "title 新しいプルリクエストのタイトル。問題が指定されていない場合は必須です."
           },
           "head": {
             "type": "string",
@@ -43296,7 +43296,7 @@
           },
           "after": {
             "type": "string",
-            "title": " after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
+            "title": "after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
           },
           "before": {
             "type": "string",
@@ -43725,7 +43725,7 @@
           },
           "after": {
             "type": "string",
-            "title": " after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
+            "title": "after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
           },
           "before": {
             "type": "string",
@@ -43813,7 +43813,7 @@
           },
           "in_reply_to_id": {
             "type": "integer",
-            "title": " in_reply_to_id in_reply_to_idは、GitHubのレビューまたはコメントAPIで使用されるフィールドであり、特定のレビューまたはコメントへの返信を書くために使用されます。."
+            "title": "in_reply_to_id in_reply_to_idは、GitHubのレビューまたはコメントAPIで使用されるフィールドであり、特定のレビューまたはコメントへの返信を書くために使用されます。."
           },
           "user": {
             "$ref": "#/components/schemas/IGithub.Collaborator",
@@ -43978,7 +43978,7 @@
           },
           "after": {
             "type": "string",
-            "title": " after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
+            "title": "after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
           },
           "before": {
             "type": "string",
@@ -44335,7 +44335,7 @@
           },
           "after": {
             "type": "string",
-            "title": " after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
+            "title": "after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
           },
           "before": {
             "type": "string",
@@ -44438,7 +44438,7 @@
           "raw_url": {
             "type": "string",
             "format": "iri",
-            "title": " raw_url ファイルの内容を表示できるAPIパス."
+            "title": "raw_url ファイルの内容を表示できるAPIパス."
           },
           "patch": {
             "type": "string",
@@ -44537,7 +44537,7 @@
           },
           "after": {
             "type": "string",
-            "title": " after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
+            "title": "after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
           },
           "before": {
             "type": "string",
@@ -45574,7 +45574,7 @@
               },
               "-1": {
                 "type": "integer",
-                "title": " 「-1」"
+                "title": "「-1」"
               },
               "laugh": {
                 "type": "integer",
@@ -46119,7 +46119,7 @@
           },
           "after": {
             "type": "string",
-            "title": " after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
+            "title": "after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
           },
           "before": {
             "type": "string",
@@ -46175,7 +46175,7 @@
           },
           "id": {
             "type": "number",
-            "title": " id これはユーザーのIDを意味します."
+            "title": "id これはユーザーのIDを意味します."
           },
           "avatar_url": {
             "type": "string",
@@ -46422,7 +46422,7 @@
           },
           "id": {
             "type": "number",
-            "title": " id これはユーザーのIDを意味します."
+            "title": "id これはユーザーのIDを意味します."
           },
           "login": {
             "type": "string",
@@ -46537,7 +46537,7 @@
           },
           "has_downloads": {
             "type": "boolean",
-            "title": "ダウンロード数"
+            "title": "ダウンロードあり"
           },
           "archived": {
             "type": "boolean",
@@ -46766,7 +46766,7 @@
           },
           "after": {
             "type": "string",
-            "title": " after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
+            "title": "after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
           },
           "before": {
             "type": "string",
@@ -46857,7 +46857,7 @@
           },
           "after": {
             "type": "string",
-            "title": " after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
+            "title": "after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
           },
           "before": {
             "type": "string",
@@ -46964,7 +46964,7 @@
         "properties": {
           "ref": {
             "type": "string",
-            "x-wrtn-placeholder": " refs/heads/featureA",
+            "x-wrtn-placeholder": "refs/heads/featureA",
             "title": "参照"
           },
           "object": {
@@ -47001,7 +47001,7 @@
           },
           "ref": {
             "type": "string",
-            "title": " ref 完全修飾参照の名前（例：refs/heads/master）。 &#39;refs&#39; で始まっておらず、少なくとも 2 つのスラッシュがある場合は拒否されます。."
+            "title": "ref 完全修飾参照の名前（例：refs/heads/master）。 &#39;refs&#39; で始まっておらず、少なくとも 2 つのスラッシュがある場合は拒否されます。."
           },
           "sha": {
             "type": "string",
@@ -47010,7 +47010,7 @@
               "path": "/connector/github/get-commit-list",
               "jmesPath": "result[].{value:sha, label: commit.message}"
             },
-            "title": " sha この参照のSHA1値."
+            "title": "sha この参照のSHA1値."
           },
           "secretKey": {
             "type": "string",
@@ -47674,7 +47674,7 @@
           },
           "after": {
             "type": "string",
-            "title": " after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
+            "title": "after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
           },
           "before": {
             "type": "string",
@@ -47877,7 +47877,7 @@
           },
           "after": {
             "type": "string",
-            "title": " after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
+            "title": "after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
           },
           "before": {
             "type": "string",
@@ -47933,7 +47933,7 @@
           },
           "id": {
             "type": "number",
-            "title": " id これはユーザーのIDを意味します."
+            "title": "id これはユーザーのIDを意味します."
           },
           "login": {
             "type": "string",
@@ -48017,7 +48017,7 @@
           },
           "after": {
             "type": "string",
-            "title": " after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
+            "title": "after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
           },
           "before": {
             "type": "string",
@@ -48126,7 +48126,7 @@
           },
           "after": {
             "type": "string",
-            "title": " after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
+            "title": "after これがカーソルベースのページネーションの応答値である場合、次のページのハッシュコードを提供します."
           },
           "before": {
             "type": "string",
@@ -48620,7 +48620,7 @@
           "id": {
             "type": "string",
             "title": "ユジェ グジュウ id",
-            "description": " 유저마다 발급된 고유 ID 입니다."
+            "description": "유저마다 발급된 고유 ID 입니다."
           },
           "username": {
             "type": "string",
@@ -48938,7 +48938,7 @@
           "recipient_id",
           "secretKey"
         ],
-        "title": " DMでお願いします。"
+        "title": "DMでお願いします。"
       },
       "IDiscord.IGuild": {
         "type": "object",
@@ -49178,7 +49178,7 @@
           "name",
           "secretKey"
         ],
-        "title": " 서버 정보를 수정하기 위해 필요한 정보"
+        "title": "서버 정보를 수정하기 위해 필요한 정보"
       },
       "IDiscord.ISecret": {
         "type": "object",
@@ -49203,7 +49203,7 @@
           "name": {
             "type": "string",
             "maxLength": 100,
-            "title": " 채널 이름",
+            "title": "채널 이름",
             "description": "생성할 서버 이름을 입력해주세요."
           },
           "type": {
@@ -49214,7 +49214,7 @@
               },
               {
                 "const": 1,
-                "title": "DM チャット"
+                "title": "DM チャンネル"
               }
             ],
             "title": "ユヘ",
@@ -49223,8 +49223,8 @@
           "topic": {
             "type": "string",
             "maxLength": 1024,
-            "title": " 주제",
-            "description": " 채널 주제를 입력해주세요."
+            "title": "주제",
+            "description": "채널 주제를 입력해주세요."
           },
           "secretKey": {
             "type": "string",
@@ -49241,7 +49241,7 @@
           "type",
           "secretKey"
         ],
-        "title": " 채널을 생성하기 위해 필요한 정보"
+        "title": "채널을 생성하기 위해 필요한 정보"
       },
       "IDiscord.IRemoveGuildMember": {
         "type": "object",
@@ -49270,14 +49270,14 @@
           "userId",
           "secretKey"
         ],
-        "title": " 멤버를 차단 하기 위해 필요한 정보"
+        "title": "멤버를 차단 하기 위해 필요한 정보"
       },
       "IDiscord.IModifyChannelRequest": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
-            "title": "正しいチョンイル",
+            "title": "正しいチョークの絵",
             "description": "수정할 채널 이름을 입력해주세요."
           },
           "channelId": {
@@ -49295,7 +49295,7 @@
           "name",
           "channelId"
         ],
-        "title": " 채널을 수정하기 위해 필요한 정보"
+        "title": "채널을 수정하기 위해 필요한 정보"
       },
       "IDiscord.IDeleteChannelRequest": {
         "type": "object",
@@ -49314,7 +49314,7 @@
         "required": [
           "channelId"
         ],
-        "title": " 채널을 삭제하기 위해 필요한 정보"
+        "title": "채널을 삭제하기 위해 필요한 정보"
       },
       "IDiscord.IMessage": {
         "type": "object",
@@ -49427,7 +49427,7 @@
               },
               {
                 "const": 1,
-                "title": "DM チャット"
+                "title": "DM チャンネル"
               }
             ]
           },
@@ -49793,7 +49793,7 @@
         "required": [
           "channelId"
         ],
-        "title": " 고정된 메세지를 가져오기 위해 필요한 정보"
+        "title": "고정된 메세지를 가져오기 위해 필요한 정보"
       },
       "IDiscord.IPinOrUnpinMessagesRequest": {
         "type": "object",
@@ -49806,7 +49806,7 @@
               "jmesPath": "[].{value:id, label:name}"
             },
             "title": "チョン",
-            "description": " 메세지를 고정 또는 고정 해제할 채널을 선택해주세요."
+            "description": "메세지를 고정 또는 고정 해제할 채널을 선택해주세요."
           },
           "messageId": {
             "type": "string",
@@ -49823,7 +49823,7 @@
           "channelId",
           "messageId"
         ],
-        "title": " 메세지를 고정 또는 고정 해제하기 위해 필요한 정보"
+        "title": "메세지를 고정 또는 고정 해제하기 위해 필요한 정보"
       },
       "IDiscord.IGetChannelMessageHistoriesRequest": {
         "type": "object",
@@ -49842,7 +49842,7 @@
         "required": [
           "channelId"
         ],
-        "title": " 채널의 메세지 목록을 가져오기 위해 필요한 정보"
+        "title": "채널의 메세지 목록을 가져오기 위해 필요한 정보"
       },
       "IDiscord.ICreateMessageRequest": {
         "type": "object",
@@ -49855,7 +49855,7 @@
               "jmesPath": "[].{value:id, label:name}"
             },
             "title": "チョン",
-            "description": " 메세지를 생성할 채널을 선택해주세요."
+            "description": "메세지를 생성할 채널을 선택해주세요."
           },
           "content": {
             "type": "string",
@@ -49867,7 +49867,7 @@
           "channelId",
           "content"
         ],
-        "title": " 메세지를 생성하기 위해 필요한 정보"
+        "title": "메세지를 생성하기 위해 필요한 정보"
       },
       "IDiscord.IEditMessageRequest": {
         "type": "object",
@@ -49880,7 +49880,7 @@
               "jmesPath": "[].{value:id, label:name}"
             },
             "title": "チョン",
-            "description": " 메세지를 수정할 채널을 선택해주세요."
+            "description": "메세지를 수정할 채널을 선택해주세요."
           },
           "messageId": {
             "type": "string",
@@ -49916,7 +49916,7 @@
               "jmesPath": "[].{value:id, label:name}"
             },
             "title": "チョン",
-            "description": " 메세지를 삭제할 채널을 선택해주세요."
+            "description": "메세지를 삭제할 채널을 선택해주세요."
           },
           "messageId": {
             "type": "string",
@@ -49925,15 +49925,15 @@
               "path": "/connector/discord/get-channel-message-histories",
               "jmesPath": "[].{value:id, label:content}"
             },
-            "title": " 삭제할 메세지",
-            "description": " 삭제할 메세지를 선택해주세요"
+            "title": "삭제할 메세지",
+            "description": "삭제할 메세지를 선택해주세요"
           }
         },
         "required": [
           "channelId",
           "messageId"
         ],
-        "title": " 메세지 삭제하기 위해 필요한 정보"
+        "title": "메세지 삭제하기 위해 필요한 정보"
       },
       "IDiscord.IBulkDeleteMessagesRequest": {
         "type": "object",
@@ -49946,7 +49946,7 @@
               "jmesPath": "[].{value:id, label:name}"
             },
             "title": "チョン",
-            "description": " 메세지를 삭제할 채널을 선택해주세요."
+            "description": "메세지를 삭제할 채널을 선택해주세요."
           },
           "messages": {
             "type": "array",
@@ -49958,15 +49958,15 @@
                 "jmesPath": "[].{value:id, label:content}"
               }
             },
-            "title": " 삭제할 메세지들",
-            "description": " 삭제할 메세지들을 선택해주세요"
+            "title": "삭제할 메세지들",
+            "description": "삭제할 메세지들을 선택해주세요"
           }
         },
         "required": [
           "channelId",
           "messages"
         ],
-        "title": " 여러 개의 메세지를 한꺼번에 삭제하기 위해 필요한 정보"
+        "title": "여러 개의 메세지를 한꺼번에 삭제하기 위해 필요한 정보"
       },
       "ICalendly.CreateSchedulingLinkOutput": {
         "type": "object",
@@ -50053,7 +50053,7 @@
               },
               {
                 "type": "string",
-                "x-wrtn-placeholder": " 15分間のミーティング"
+                "x-wrtn-placeholder": "15分間のミーティング"
               }
             ],
             "title": "name イベントタイプ名（人間が読める形式）"
@@ -50077,12 +50077,12 @@
           "scheduling_url": {
             "type": "string",
             "format": "uri",
-            "x-wrtn-placeholder": " https://calendly.com/acmesales",
+            "x-wrtn-placeholder": "https://calendly.com/acmesales",
             "title": "schduling_url 招待者がこのイベント タイプを予約するユーザーのスケジュール サイトの URL"
           },
           "duration": {
             "type": "integer",
-            "x-wrtn-placeholder": " 30",
+            "x-wrtn-placeholder": "30",
             "title": "期間 このイベントタイプで予約されたセッションの長さ"
           },
           "kind": {
@@ -50157,7 +50157,7 @@
                 "$ref": "#/components/schemas/Formatdate-time"
               }
             ],
-            "title": " updated_at イベントタイプが最後に更新された瞬間（例： &quot;2020-01-02T03:04:05.678123Z&quot;）"
+            "title": "updated_at イベントタイプが最後に更新された瞬間（例： &quot;2020-01-02T03:04:05.678123Z&quot;）"
           },
           "internal_note": {
             "oneOf": [
@@ -50168,7 +50168,7 @@
                 "type": "string"
               }
             ],
-            "title": " internal_note イベントタイプに関連付けられる可能性のあるメモの内容"
+            "title": "internal_note イベントタイプに関連付けられる可能性のあるメモの内容"
           },
           "description_plain": {
             "oneOf": [
@@ -50177,7 +50177,7 @@
               },
               {
                 "type": "string",
-                "x-wrtn-placeholder": " 15分間のミーティング"
+                "x-wrtn-placeholder": "15分間のミーティング"
               }
             ],
             "title": "description_plain イベントタイプの説明（フォーマットされていないテキスト）"
@@ -50207,7 +50207,7 @@
           },
           "secret": {
             "type": "boolean",
-            "title": " secret イベントタイプがオーナーのメインスケジュールページで非表示になっているかどうかを示します"
+            "title": "secret イベントタイプがオーナーのメインスケジュールページで非表示になっているかどうかを示します"
           },
           "booking_method": {
             "oneOf": [
@@ -50243,7 +50243,7 @@
           },
           "admin_managed": {
             "type": "boolean",
-            "title": " admin_managed このイベントタイプが組織管理者によって管理されているかどうかを示します"
+            "title": "admin_managed このイベントタイプが組織管理者によって管理されているかどうかを示します"
           },
           "locations": {
             "oneOf": [
@@ -50424,11 +50424,11 @@
             "items": {
               "type": "string"
             },
-            "title": " answer_choices 招待者の選択肢（単一選択または複数選択の回答タイプ）."
+            "title": "answer_choices 招待者の選択肢（単一選択または複数選択の回答タイプ）."
           },
           "include_other": {
             "type": "boolean",
-            "title": " include_other カスタム質問で招待者が単一選択または複数選択タイプの回答に加えて書面による回答を記録できるようにする場合は true、そうでない場合は false."
+            "title": "include_other カスタム質問で招待者が単一選択または複数選択タイプの回答に加えて書面による回答を記録できるようにする場合は true、そうでない場合は false."
           }
         },
         "required": [
@@ -50476,7 +50476,7 @@
             "minimum": 0,
             "maximum": 100,
             "x-wrtn-placeholder": "20",
-            "title": " count 返される行数"
+            "title": "count 返される行数"
           },
           "next_page": {
             "oneOf": [
@@ -50500,7 +50500,7 @@
                 "format": "iri"
               }
             ],
-            "title": " previous_page 順序付きリストの前のページを返す URI (「null」は追加の結果がないことを示します)"
+            "title": "previous_page 順序付きリストの前のページを返す URI (「null」は追加の結果がないことを示します)"
           },
           "next_page_token": {
             "oneOf": [
@@ -50512,7 +50512,7 @@
                 "format": "iri"
               }
             ],
-            "title": " next_page_token 順序付きリストの次のページを返すトークン (「null」は追加の結果がないことを示します)"
+            "title": "next_page_token 順序付きリストの次のページを返すトークン (「null」は追加の結果がないことを示します)"
           },
           "previous_page_token": {
             "oneOf": [
@@ -50540,7 +50540,7 @@
         "properties": {
           "admin_managed": {
             "type": "boolean",
-            "title": " admin_managed true の場合は管理者管理イベント タイプのみを返し、false の場合は管理者管理イベント タイプを除外し、このパラメータが省略されている場合はすべてのイベント タイプを含めます。."
+            "title": "admin_managed true の場合は管理者管理イベント タイプのみを返し、false の場合は管理者管理イベント タイプを除外し、このパラメータが省略されている場合はすべてのイベント タイプを含めます。."
           },
           "organization": {
             "type": "string",
@@ -50573,11 +50573,11 @@
             "minimum": 1,
             "maximum": 100,
             "default": 20,
-            "title": " count 返される行数"
+            "title": "count 返される行数"
           },
           "page_token": {
             "type": "string",
-            "title": " page_token コレクションの次の部分または前の部分を取得するために渡すトークン."
+            "title": "page_token コレクションの次の部分または前の部分を取得するために渡すトークン."
           },
           "sort": {
             "oneOf": [
@@ -50674,7 +50674,7 @@
               },
               {
                 "type": "string",
-                "x-wrtn-placeholder": " 15分間のミーティング"
+                "x-wrtn-placeholder": "15分間のミーティング"
               }
             ],
             "title": "名前",
@@ -50687,7 +50687,7 @@
               },
               {
                 "type": "string",
-                "x-wrtn-placeholder": " 15分間のミーティング"
+                "x-wrtn-placeholder": "15分間のミーティング"
               }
             ],
             "title": "会議メモ",
@@ -50973,7 +50973,7 @@
             "minimum": 1,
             "maximum": 100,
             "default": 20,
-            "title": " count 返される行数."
+            "title": "count 返される行数."
           },
           "who": {
             "oneOf": [
@@ -51035,7 +51035,7 @@
               }
             ],
             "title": "それは誰のイベントですか？",
-            "description": " - 組織の管理者/所有者の場合は、との両方を使用して、組織ユーザー内の特定のユーザーのイベントのリストを取得できます。 - 組織の管理者/所有者の場合は、との両方を使用して、組織グループ内の特定のグループのイベントのリストを取得できます。 - ユーザーはプライベートイベントのリクエストにのみ使用できます。現在または以前所属していたすべての組織内のイベントが返されます。."
+            "description": "- 組織の管理者/所有者の場合は、との両方を使用して、組織ユーザー内の特定のユーザーのイベントのリストを取得できます。 - 組織の管理者/所有者の場合は、との両方を使用して、組織グループ内の特定のグループのイベントのリストを取得できます。 - ユーザーはプライベートイベントのリクエストにのみ使用できます。現在または以前所属していたすべての組織内のイベントが返されます。."
           },
           "organization": {
             "type": "string",
@@ -51053,7 +51053,7 @@
             "type": "string",
             "format": "date-time",
             "title": "最大開始時間",
-            "description": "この時間より前の開始時間のイベントを含めます。この時間には UTC タイムゾーンを使用する必要があります。."
+            "description": "この時間より前の開始時間のイベントを含めます。この時間は UTC タイムゾーンを使用する必要があります."
           },
           "min_start_time": {
             "type": "string",
@@ -51063,7 +51063,7 @@
           },
           "page_token": {
             "type": "string",
-            "title": " page_token コレクションの次の部分または前の部分を取得するために渡すトークン."
+            "title": "page_token コレクションの次の部分または前の部分を取得するために渡すトークン."
           },
           "sort": {
             "oneOf": [
@@ -51393,7 +51393,7 @@
           "reschedule_url": {
             "type": "string",
             "format": "iri",
-            "title": "reschedule_url 招待者のイベントのスケジュール変更へのリンク"
+            "title": "reschedule_url 招待者のイベントを再スケジュールするためのリンク"
           },
           "routing_form_submission": {
             "oneOf": [
@@ -51635,7 +51635,7 @@
           },
           "page_token": {
             "type": "string",
-            "title": " page_token コレクションの次の部分または前の部分を取得するためにページネーションに渡すトークン"
+            "title": "page_token コレクションの次の部分または前の部分を取得するためにページネーションに渡すトークン"
           },
           "sort": {
             "oneOf": [
@@ -51762,7 +51762,7 @@
               "format": "iri"
             },
             "maxItems": 9,
-            "title": " co_hosts 会議の共同主催者のユーザー URI のコレクション"
+            "title": "co_hosts 会議の共同主催者のユーザー URI のコレクション"
           },
           "duration": {
             "type": "integer",
@@ -51791,7 +51791,7 @@
               "end_date": {
                 "type": "string",
                 "format": "date",
-                "title": " end_date 可用性終了 - start_date から 365 日以内の将来の日付である必要があります。形式: YYYY-MM-DD"
+                "title": "end_date 可用性終了 - start_date から 365 日以内の将来の日付である必要があります。形式: YYYY-MM-DD"
               }
             },
             "required": [
@@ -51799,7 +51799,7 @@
               "start_date",
               "end_date"
             ],
-            "title": " date_setting 指定された日付範囲内でのみスケジュールを許可する"
+            "title": "date_setting 指定された日付範囲内でのみスケジュールを許可する"
           },
           "location": {
             "type": "object",
@@ -52460,7 +52460,7 @@
           "url": {
             "type": "string",
             "title": "組織の Crunchbase ページの URL",
-            "description": " Crunchbase 上の組織のプロフィールへのリンク."
+            "description": "Crunchbase 上の組織のプロフィールへのリンク."
           },
           "rank_company": {
             "oneOf": [
@@ -52905,7 +52905,7 @@
           "diversity_investments": {
             "type": "array",
             "items": {},
-            "title": "多様性_投資"
+            "title": "多様性投資"
           },
           "funds": {
             "type": "array",
@@ -53422,7 +53422,7 @@
                 "type": "string"
               }
             ],
-            "title": "株式リンク 株式へのリンクURL."
+            "title": "株式リンク 株式へのURLリンク."
           },
           "stock_symbol": {
             "oneOf": [
@@ -53436,7 +53436,7 @@
             "title": "株式シンボル 株式シンボル（ティッカー）."
           }
         },
-        "title": " IPO 会社のIPO（新規株式公開）に関する情報が含まれています."
+        "title": "IPO 会社のIPO（新規株式公開）に関する情報が含まれています."
       },
       "ICrunchbase.AcquiredBy": {
         "type": "object",
@@ -54128,7 +54128,7 @@
           },
           "siftery_num_products": {
             "type": "number",
-            "title": " siftery_num_products Siftery によると、組織が提供する製品の数."
+            "title": "siftery_num_products Siftery によると、組織が提供する製品の数."
           }
         },
         "title": "テクノロジーのハイライト組織のテクノロジースタックや注目すべき技術的成果に関する情報を提供します."
@@ -54199,7 +54199,7 @@
                   "properties": {
                     "organization_identifier": {
                       "type": "string",
-                      "x-wrtn-placeholder": " wrtnテクノロジー",
+                      "x-wrtn-placeholder": "wrtnテクノロジー",
                       "title": "Crunchbase API の organization_identifier",
                       "description": "組織の一意の識別子"
                     },
