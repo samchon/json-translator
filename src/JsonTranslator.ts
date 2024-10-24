@@ -58,14 +58,26 @@ export class JsonTranslator {
     let bytes: number = 0;
     const execute = async () => {
       if (queue.length) {
-        const [response] = await this.service_.translate(
-          queue.map((p) => p.text),
-          {
-            from,
-            to: props.target,
-            format: "html",
-          },
-        );
+        const complete = (texts: string[]) => {
+          translated.push(...texts);
+          queue = [];
+          bytes = 0;
+        };
+        let response: string[] = [];
+        try {
+          [response] = await this.service_.translate(
+            queue.map((p) => p.text),
+            {
+              from,
+              to: props.target,
+              format: "html",
+            },
+          );
+        } catch (exp) {
+          if (exp instanceof Error && exp.message.includes("Bad language pair"))
+            return complete(queue.map((p) => p.text));
+          throw exp;
+        }
         const expected: number = queue
           .map((p) => p.text.split(SEPARATOR).length)
           .reduce((x, y) => x + y, 0);
@@ -88,10 +100,8 @@ export class JsonTranslator {
             `Mismatched translation count. Delivered ${expected} count string values to the Google Translate API, but received number is ${actual}.`,
           );
         }
-        translated.push(...response);
+        return complete(response);
       }
-      queue = [];
-      bytes = 0;
     };
 
     for (const text of collection.raw) {
